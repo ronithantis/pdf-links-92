@@ -113,6 +113,30 @@ const ScenarioExplorer = () => {
           </Card>
         )}
 
+        {matchedTools.length > 0 && (
+          <Card>
+            <CardContent className="p-5 space-y-3">
+              <h4 className="font-semibold flex items-center gap-2 text-primary">
+                <Wrench className="h-5 w-5" />
+                כלים רלוונטיים באתר
+              </h4>
+              <ul className="space-y-3">
+                {matchedTools.map((tool, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Link
+                      to={tool.path}
+                      className="text-sm font-medium text-primary hover:underline shrink-0"
+                    >
+                      {tool.label} ←
+                    </Link>
+                    <span className="text-sm text-muted-foreground">{tool.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        )}
+
         {relatedResources.length > 0 && (
           <div>
             <h4 className="font-semibold flex items-center gap-2 mb-4">
