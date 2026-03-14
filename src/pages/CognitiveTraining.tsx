@@ -92,7 +92,7 @@ const games: CognitiveGame[] = [
     id: "letter-unscramble",
     title: "האותיות התבלבלו - סדרו בסדר הנכון",
     description: "סדרו אותיות מעורבבות למילה נכונה",
-    url: "https://wordwall.net/resource/107876310/%D7%94%D7%90%D7%95%D7%AA%D7%99%D7%95%D7%AA-%D7%94%D7%AA%D7%91%D7%9C%D7%91%D7%9C%D7%95",
+    url: "https://wordwall.net/embed/62501143208c4e8cb5696f1dfa131d34?themeId=1&templateId=38&fontStackId=0",
     category: "שפה",
     icon: <Puzzle className="h-8 w-8" />,
   },
