@@ -8,6 +8,7 @@ const About = () => {
       {/* Hero */}
       <section className="bg-primary/5 border-b py-12 md:py-16">
         <div className="container text-center">
+          <img src={hub2careLogo} alt="hub2care לוגו" className="h-24 md:h-32 mx-auto mb-4" />
           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">
             אודות hub2care
           </h1>
