@@ -17,6 +17,7 @@ import TechnicalSpec from "./pages/TechnicalSpec";
 import Auth from "./pages/Auth";
 import AdminKnowledge from "./pages/AdminKnowledge";
 import GiveTake from "./pages/GiveTake";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
