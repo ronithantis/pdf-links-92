@@ -168,6 +168,7 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
         summary: parsed.summary,
         actions: parsed.actions,
         relevant_resources: relevantResources,
+        site_tools: parsed.site_tools || [],
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
