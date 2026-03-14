@@ -86,6 +86,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
     ],
   },
+  {
+    keywords: ["קוד סיעודי", "אשפוז", "מוסד סיעודי", "בית אבות", "דיור מוגן", "חלופות מגורים", "השתתפות עצמית", "מוסד"],
+    tools: [
+      { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", reason: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית" },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על חלופות מגורים ואשפוז" },
+      { path: "/services", label: "מפת שירותים", reason: "מוסדות סיעודיים ודיור מוגן באזורך" },
+    ],
+  },
 ];
 
 function applyRulesEngine(message: string, aiTools: any[]): any[] {
@@ -168,6 +176,7 @@ serve(async (req) => {
 - הסבר על חוזה העסקה (/tools#contract-explanation) — פירוט סעיפי החוזה (בתשלום)
 - תאום ציפיות עם עובד זר (/tools#expectations-alignment) — הגדרת תפקידים ומשימות (בתשלום)
 - מדריך להגשת תביעת סיעוד (/tools#nursing-claim-guide) — שלב אחר שלב (בתשלום)
+- מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/) — כלי חיצוני של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית (חינמי)
 
 מיפוי נושאים לכלים — חובה להפנות כשהנושא עולה:
 - צוואה, ירושה, ייפוי כוח, אפוטרופסות, תכנון משפטי → כתיבת צוואה (/tools#will-template, בתשלום) + מדריך ייפוי כוח (/tools#poa-guide, בתשלום) + כלי סנכרון (/tools#family-sync, בתשלום) + מרכז הידע (/knowledge-center) + שאלון הערכה (/tools)
@@ -177,6 +186,7 @@ serve(async (req) => {
 - ציוד רפואי, חיתולים, כסא גלגלים → קח ותן (/give-take)
 - שחיקה, עייפות, לחץ → שאלון הערכה (/tools) + מפת שירותים (/services)
 - זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services) + מדריך תביעת סיעוד (/tools#nursing-claim-guide, בתשלום)
+- אשפוז, מוסד סיעודי, בית אבות, דיור מוגן, חלופות מגורים → מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/, חיצוני) + מרכז הידע (/knowledge-center) + מפת שירותים (/services)
 
 כשמציין כלי בתשלום, סמן אותו עם isPaid: true בתוצאה.
 

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { digitalTools } from "@/lib/modules-data";
-import { Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature, Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase, CalendarDays } from "lucide-react";
+import { Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature, Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase, CalendarDays, ExternalLink } from "lucide-react";
 
 const toolIcons: Record<string, React.ReactNode> = {
   Calculator: <Calculator className="h-8 w-8" />,
@@ -50,14 +50,24 @@ const DigitalTools = () => {
               <div className="flex items-start justify-between">
                 <span className="text-primary">{toolIcons[tool.icon]}</span>
                 {tool.isPaid && <Badge variant="secondary" className="gap-1"><Lock className="h-3 w-3" /> בתשלום</Badge>}
+                {tool.externalUrl && <Badge variant="outline" className="gap-1"><ExternalLink className="h-3 w-3" /> כלי חיצוני</Badge>}
               </div>
               <CardTitle className="text-lg">{tool.title}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
-              <Button disabled className="w-full" variant="outline">
-                {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
-              </Button>
+              {tool.externalUrl ? (
+                <Button asChild className="w-full" variant="outline">
+                  <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 ml-2" />
+                    מעבר לכלי
+                  </a>
+                </Button>
+              ) : (
+                <Button disabled className="w-full" variant="outline">
+                  {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
+                </Button>
+              )}
             </CardContent>
           </Card>
         ))}

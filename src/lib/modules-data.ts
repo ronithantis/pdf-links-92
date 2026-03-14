@@ -383,4 +383,12 @@ export const digitalTools = [
     icon: "BookOpen",
     isPaid: true,
   },
+  {
+    id: "nursing-code-calculator",
+    title: "מחשבון קוד סיעודי",
+    description: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית",
+    icon: "Calculator",
+    isPaid: false,
+    externalUrl: "https://me.health.gov.il/nursing-calculator/",
+  },
 ];

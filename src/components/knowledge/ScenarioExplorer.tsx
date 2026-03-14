@@ -13,6 +13,7 @@ interface SiteTool {
   description: string;
   matchTags: string[];
   isPaid?: boolean;
+  isExternal?: boolean;
 }
 
 const SITE_TOOLS: SiteTool[] = [
@@ -30,6 +31,7 @@ const SITE_TOOLS: SiteTool[] = [
   { path: "/services", label: "מפת שירותים", description: "גורמי טיפול, עמותות וגופים ציבוריים", matchTags: ["גמלת_סיעוד", "ביטוח_לאומי", "זכויות", "דיור_מוגן", "בית_אבות", "שחיקה", "בריאות_נפשית"] },
   { path: "/knowledge-center", label: "מרכז הידע", description: "מצגות, סרטונים, טפסים ומדריכים", matchTags: ["ייפוי_כוח", "אפוטרופסות", "משפטי", "צוואה", "ירושה", "דמנציה", "גמלת_סיעוד", "זכויות"] },
   { path: "/contact", label: "יצירת קשר", description: "פנייה אישית לצוות האתר", matchTags: ["סירוב_טיפול", "אפוטרופסות", "משפטי"] },
+  { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", description: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית", matchTags: ["אשפוז", "דיור_מוגן", "בית_אבות", "מוסד_סיעודי", "גמלת_סיעוד"], isExternal: true },
 ];
 
 const ScenarioExplorer = () => {
@@ -131,16 +133,32 @@ const ScenarioExplorer = () => {
                 {matchedTools.map((tool, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex items-center gap-2 shrink-0">
-                      <Link
-                        to={tool.path}
-                        className="text-sm font-medium text-primary hover:underline"
-                      >
-                        {tool.label} ←
-                      </Link>
+                      {tool.isExternal ? (
+                        <a
+                          href={tool.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-primary hover:underline"
+                        >
+                          {tool.label} ←
+                        </a>
+                      ) : (
+                        <Link
+                          to={tool.path}
+                          className="text-sm font-medium text-primary hover:underline"
+                        >
+                          {tool.label} ←
+                        </Link>
+                      )}
                       {tool.isPaid && (
                         <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
                           <Lock className="h-2.5 w-2.5" />
                           בתשלום
+                        </Badge>
+                      )}
+                      {tool.isExternal && (
+                        <Badge variant="outline" className="gap-1 text-[10px] px-1.5 py-0">
+                          כלי חיצוני
                         </Badge>
                       )}
                     </div>
