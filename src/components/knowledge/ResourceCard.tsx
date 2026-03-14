@@ -15,7 +15,9 @@ interface Resource {
 
 const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isVideo = resource.category === "videos";
+  const isTool = resource.resource_type === "tool";
   const hasUrl = resource.url && resource.url !== "#";
+  const isInternalLink = hasUrl && resource.url!.startsWith("/");
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full max-w-[320px]">
@@ -35,6 +37,10 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Play className="h-10 w-10 mx-auto mb-2 opacity-30" />
             <span className="text-xs">בקרוב</span>
           </div>
+        </div>
+      ) : isTool ? (
+        <div className="bg-muted/30 h-24 flex items-center justify-center">
+          <Wrench className="h-10 w-10 text-primary opacity-50" />
         </div>
       ) : resource.resource_type === "link" && hasUrl ? (
         <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
@@ -58,12 +64,21 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <p className="text-xs text-muted-foreground mb-3">{resource.description}</p>
         )}
         {hasUrl && (
-          <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
-            <a href={resource.url!} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-3 w-3 ml-1" />
-              {isVideo ? "צפייה" : "פתיחה"}
-            </a>
-          </Button>
+          isInternalLink ? (
+            <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
+              <a href={resource.url!}>
+                <Wrench className="h-3 w-3 ml-1" />
+                מעבר לכלי
+              </a>
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
+              <a href={resource.url!} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-3 w-3 ml-1" />
+                {isVideo ? "צפייה" : "פתיחה"}
+              </a>
+            </Button>
+          )
         )}
       </CardContent>
     </Card>
