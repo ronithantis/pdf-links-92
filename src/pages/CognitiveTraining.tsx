@@ -1,11 +1,201 @@
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import CognitiveGameDialog from "@/components/cognitive/CognitiveGameDialog";
+import { Brain, Eye, Puzzle, BookOpen, Music, Calendar, Play } from "lucide-react";
+
+type Category = "זיכרון" | "שפה" | "לוגיקה" | "קשב";
+
+interface CognitiveGame {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  category: Category;
+  icon: React.ReactNode;
+}
+
+const categoryColors: Record<Category, string> = {
+  "זיכרון": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  "שפה": "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+  "לוגיקה": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+  "קשב": "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+};
+
+const games: CognitiveGame[] = [
+  {
+    id: "nostalgia",
+    title: "נוסטלגיה - למה זה משמש?",
+    description: "זיהוי חפצים מהעבר – תרגול זיכרון והיזכרות",
+    url: "https://guess-nostalgia-game.lovable.app/",
+    category: "זיכרון",
+    icon: <Brain className="h-8 w-8" />,
+  },
+  {
+    id: "visual-memory",
+    title: "זיכרון חזותי",
+    description: "תרגול זיכרון חזותי – זכרו מה ראיתם",
+    url: "https://visual-memory-quest.base44.app",
+    category: "זיכרון",
+    icon: <Eye className="h-8 w-8" />,
+  },
+  {
+    id: "image-memory",
+    title: "זיכרון תמונות",
+    description: "מצאו את הזוגות התואמים – משחק זיכרון קלאסי",
+    url: "https://wordwall.net/play/107969/834/798",
+    category: "זיכרון",
+    icon: <Brain className="h-8 w-8" />,
+  },
+  {
+    id: "simon-colors",
+    title: "סימון - זיכרון צבעים וצלילים",
+    description: "חזרו על רצף הצבעים והצלילים – אימון זיכרון עבודה",
+    url: "https://claude.ai/public/artifacts/e540bba9-1593-4c23-9db0-674a65c3d902",
+    category: "קשב",
+    icon: <Music className="h-8 w-8" />,
+  },
+  {
+    id: "sentence-completion",
+    title: "השלמת משפטים",
+    description: "השלימו את המשפט עם המילה המתאימה",
+    url: "https://wordwall.net/resource/107967859/%D7%94%D7%A9%D7%9C%D7%99%D7%9E%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%A9%D7%A4%D7%98",
+    category: "שפה",
+    icon: <BookOpen className="h-8 w-8" />,
+  },
+  {
+    id: "word-guessing",
+    title: "נחשו את המילה",
+    description: "נחשו מהי המילה לפי רמזים – תרגול אוצר מילים",
+    url: "https://wordwall.net/resource/107877338/%D7%A0%D7%97%D7%A9%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%99%D7%9C%D7%94-%D7%91%D7%9B%D7%9E%D7%94-%D7%A0%D7%99%D7%97%D7%95%D7%A9%D7%99%D7%9D",
+    category: "שפה",
+    icon: <BookOpen className="h-8 w-8" />,
+  },
+  {
+    id: "word-ordering",
+    title: "סדרו את המילים למשפט",
+    description: "סדרו מילים מעורבבות למשפט תקין",
+    url: "https://wordwall.net/resource/107877122/%D7%A1%D7%93%D7%A8%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%A9%D7%A4%D7%98",
+    category: "שפה",
+    icon: <BookOpen className="h-8 w-8" />,
+  },
+  {
+    id: "word-naming",
+    title: "שיום - קריאת מילים",
+    description: "קראו את המילה לפי תמונה – תרגול שיום",
+    url: "https://wordwall.net/resource/107877035/%D7%A9%D7%99%D7%95%D7%9D-%D7%9E%D7%99%D7%9C%D7%99%D7%9D-%D7%9C%D7%A4%D7%99-%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%95%D7%9E%D7%99%D7%9C%D7%94",
+    category: "שפה",
+    icon: <BookOpen className="h-8 w-8" />,
+  },
+  {
+    id: "letter-unscramble",
+    title: "האותיות התבלבלו - סדרו בסדר הנכון",
+    description: "סדרו אותיות מעורבבות למילה נכונה",
+    url: "https://wordwall.net/resource/107876310/%D7%94%D7%90%D7%95%D7%AA%D7%99%D7%95%D7%AA-%D7%94%D7%AA%D7%91%D7%9C%D7%91%D7%9C%D7%95",
+    category: "שפה",
+    icon: <Puzzle className="h-8 w-8" />,
+  },
+  {
+    id: "word-family",
+    title: "לאיזו משפחה שייכת המילה?",
+    description: "מיינו מילים לפי קטגוריות – תרגול חשיבה וסיווג",
+    url: "https://gemini.google.com/share/1a9c5b17ef67",
+    category: "שפה",
+    icon: <BookOpen className="h-8 w-8" />,
+  },
+  {
+    id: "daily-routine",
+    title: "מה עושים היום - סדר יום",
+    description: "סדרו את פעולות היום בסדר הנכון",
+    url: "https://gemini.google.com/share/d8b84035c662",
+    category: "קשב",
+    icon: <Calendar className="h-8 w-8" />,
+  },
+  {
+    id: "sliding-puzzle",
+    title: "פאזל 1-12",
+    description: "סדרו את המספרים בסדר הנכון – פאזל הזזה",
+    url: "https://ronithantis.github.io/sliding-puzzle/",
+    category: "לוגיקה",
+    icon: <Puzzle className="h-8 w-8" />,
+  },
+  {
+    id: "sudoku",
+    title: "משחק סודוקו",
+    description: "סודוקו קלאסי – תרגול לוגיקה וריכוז",
+    url: "https://ronithantis.github.io/sudoku/",
+    category: "לוגיקה",
+    icon: <Puzzle className="h-8 w-8" />,
+  },
+];
+
 const CognitiveTraining = () => {
+  const [selectedGame, setSelectedGame] = useState<CognitiveGame | null>(null);
+  const [filterCategory, setFilterCategory] = useState<Category | "הכל">("הכל");
+
+  const categories: (Category | "הכל")[] = ["הכל", "זיכרון", "שפה", "לוגיקה", "קשב"];
+  const filtered = filterCategory === "הכל" ? games : games.filter(g => g.category === filterCategory);
+
   return (
     <div className="container py-10">
       <h1 className="text-3xl font-bold mb-2">תרגול קוגניטיבי</h1>
-      <p className="text-lg text-muted-foreground mb-10">כלים ומשחקים לתרגול קוגניטיבי – בקרוב!</p>
-      <div className="flex items-center justify-center min-h-[300px] rounded-lg border-2 border-dashed border-muted-foreground/30">
-        <p className="text-muted-foreground text-lg">תכנים נוספים יעלו בקרוב...</p>
+      <p className="text-lg text-muted-foreground mb-6">
+        משחקים ותרגילים לשמירה על כושר מנטלי – זיכרון, שפה, לוגיקה וריכוז
+      </p>
+
+      {/* Category filter */}
+      <div className="flex flex-wrap gap-2 mb-8">
+        {categories.map((cat) => (
+          <Button
+            key={cat}
+            variant={filterCategory === cat ? "default" : "outline"}
+            size="lg"
+            className="text-base px-6"
+            onClick={() => setFilterCategory(cat)}
+          >
+            {cat}
+          </Button>
+        ))}
       </div>
+
+      {/* Games grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl">
+        {filtered.map((game) => (
+          <Card
+            key={game.id}
+            className="group cursor-pointer hover:shadow-lg transition-all duration-200 hover:border-primary/50"
+            onClick={() => setSelectedGame(game)}
+          >
+            <CardHeader className="pb-3">
+              <div className="flex items-start justify-between">
+                <span className="text-primary">{game.icon}</span>
+                <Badge className={categoryColors[game.category]} variant="secondary">
+                  {game.category}
+                </Badge>
+              </div>
+              <CardTitle className="text-lg mt-2">{game.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">{game.description}</p>
+              <Button size="lg" className="w-full text-base gap-2">
+                <Play className="h-5 w-5" />
+                שחקו עכשיו
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Game dialog */}
+      {selectedGame && (
+        <CognitiveGameDialog
+          open={!!selectedGame}
+          onOpenChange={(open) => { if (!open) setSelectedGame(null); }}
+          title={selectedGame.title}
+          url={selectedGame.url}
+        />
+      )}
     </div>
   );
 };
