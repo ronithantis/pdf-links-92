@@ -186,6 +186,7 @@ serve(async (req) => {
 - ציוד רפואי, חיתולים, כסא גלגלים → קח ותן (/give-take)
 - שחיקה, עייפות, לחץ → שאלון הערכה (/tools) + מפת שירותים (/services)
 - זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services) + מדריך תביעת סיעוד (/tools#nursing-claim-guide, בתשלום)
+- אשפוז, מוסד סיעודי, בית אבות, דיור מוגן, חלופות מגורים → מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/, חיצוני) + מרכז הידע (/knowledge-center) + מפת שירותים (/services)
 
 כשמציין כלי בתשלום, סמן אותו עם isPaid: true בתוצאה.
 

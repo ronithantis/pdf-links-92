@@ -126,16 +126,32 @@ const SmartAdvisor = () => {
                   {result.site_tools.map((tool, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="flex items-center gap-2 shrink-0">
-                        <Link
-                          to={tool.path}
-                          className="text-sm font-medium text-primary hover:underline"
-                        >
-                          {tool.label} ←
-                        </Link>
+                        {tool.path.startsWith("http") ? (
+                          <a
+                            href={tool.path}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-medium text-primary hover:underline"
+                          >
+                            {tool.label} ←
+                          </a>
+                        ) : (
+                          <Link
+                            to={tool.path}
+                            className="text-sm font-medium text-primary hover:underline"
+                          >
+                            {tool.label} ←
+                          </Link>
+                        )}
                         {tool.isPaid && (
                           <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
                             <Lock className="h-2.5 w-2.5" />
                             בתשלום
+                          </Badge>
+                        )}
+                        {tool.path.startsWith("http") && (
+                          <Badge variant="outline" className="gap-1 text-[10px] px-1.5 py-0">
+                            כלי חיצוני
                           </Badge>
                         )}
                       </div>
