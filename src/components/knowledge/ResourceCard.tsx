@@ -15,7 +15,9 @@ interface Resource {
 
 const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isVideo = resource.category === "videos";
+  const isForm = resource.category === "forms";
   const isTool = resource.resource_type === "tool";
+  const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
 
@@ -38,11 +40,15 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <span className="text-xs">בקרוב</span>
           </div>
         </div>
+      ) : isForm ? (
+        <div className="bg-primary/5 h-28 flex items-center justify-center">
+          <FileText className="h-12 w-12 text-primary opacity-60" />
+        </div>
       ) : isTool ? (
         <div className="bg-muted/30 h-24 flex items-center justify-center">
           <Wrench className="h-10 w-10 text-primary opacity-50" />
         </div>
-      ) : resource.resource_type === "link" && hasUrl ? (
+      ) : isPresentation && hasUrl ? (
         <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
           <iframe
             src={resource.url!}
