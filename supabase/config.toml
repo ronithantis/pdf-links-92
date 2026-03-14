@@ -1,1 +1,4 @@
 project_id = "ioqlzcvzvkidqwhffewv"
+
+[functions.smart-advisor]
+verify_jwt = false

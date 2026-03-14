@@ -58,7 +58,7 @@ const AdminKnowledge = () => {
   const saveResource = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const payload = {
+    const payload: any = {
       title: form.get("title") as string,
       description: form.get("description") as string,
       category: form.get("category") as string,
