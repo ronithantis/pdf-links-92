@@ -137,6 +137,7 @@ const SmartAdvisor = () => {
                 </ul>
               </CardContent>
             </Card>
+          )}
 
           {result.relevant_resources?.length > 0 && (
             <div>
