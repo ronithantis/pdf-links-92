@@ -55,9 +55,18 @@ const DigitalTools = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
-              <Button disabled className="w-full" variant="outline">
-                {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
-              </Button>
+              {tool.externalUrl ? (
+                <Button asChild className="w-full" variant="outline">
+                  <a href={tool.externalUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 ml-2" />
+                    מעבר לכלי
+                  </a>
+                </Button>
+              ) : (
+                <Button disabled className="w-full" variant="outline">
+                  {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
+                </Button>
+              )}
             </CardContent>
           </Card>
         ))}
