@@ -28,7 +28,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
       const { data } = await supabase
         .from("knowledge_resources")
         .select("*")
-        .eq("category", category)
+        .eq("category", category as any)
         .eq("is_published", true)
         .order("sort_order");
       setResources(data || []);
