@@ -101,15 +101,127 @@ export type Database = {
         }
         Relationships: []
       }
+      knowledge_resources: {
+        Row: {
+          category: Database["public"]["Enums"]["knowledge_category"]
+          created_at: string | null
+          description: string | null
+          icon_name: string | null
+          id: string
+          is_published: boolean | null
+          resource_type: string
+          scenario_tags: string[] | null
+          sort_order: number | null
+          subcategory: string | null
+          title: string
+          updated_at: string | null
+          url: string | null
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["knowledge_category"]
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_published?: boolean | null
+          resource_type?: string
+          scenario_tags?: string[] | null
+          sort_order?: number | null
+          subcategory?: string | null
+          title: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["knowledge_category"]
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_published?: boolean | null
+          resource_type?: string
+          scenario_tags?: string[] | null
+          sort_order?: number | null
+          subcategory?: string | null
+          title?: string
+          updated_at?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
+      scenarios: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_published: boolean | null
+          questions: Json | null
+          recommended_actions: Json | null
+          sort_order: number | null
+          tags: string[] | null
+          title: string
+          trigger_phrases: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          questions?: Json | null
+          recommended_actions?: Json | null
+          sort_order?: number | null
+          tags?: string[] | null
+          title: string
+          trigger_phrases?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_published?: boolean | null
+          questions?: Json | null
+          recommended_actions?: Json | null
+          sort_order?: number | null
+          tags?: string[] | null
+          title?: string
+          trigger_phrases?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
+      knowledge_category: "forms" | "presentations" | "videos" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -236,6 +348,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+      knowledge_category: ["forms", "presentations", "videos", "other"],
+    },
   },
 } as const
