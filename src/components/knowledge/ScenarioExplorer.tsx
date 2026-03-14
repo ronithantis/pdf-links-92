@@ -56,8 +56,12 @@ const ScenarioExplorer = () => {
   if (loading) return <div className="text-center py-6 text-muted-foreground">טוען תרחישים...</div>;
 
   if (selected) {
+    const tags = (selected.tags as string[]) || [];
     const questions = (selected.questions as string[]) || [];
     const actions = (selected.recommended_actions as string[]) || [];
+    const matchedTools = SITE_TOOLS.filter(tool =>
+      tool.matchTags.some(mt => tags.includes(mt))
+    );
 
     return (
       <div className="space-y-6">
