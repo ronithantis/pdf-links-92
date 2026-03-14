@@ -40,6 +40,7 @@ const ModulePage = () => {
       case 5: return <Module4Content subId={subId} />;
       case 6: return <Module5Content subId={subId} />;
       case 7: return <Module6Content subId={subId} />;
+      case 8: return <Module9Content subId={subId} />;
       case 9: return <Module8Content subId={subId} />;
       case 10: return <Module10Content subId={subId} />;
       case 11: return <Module11Content subId={subId} />;
