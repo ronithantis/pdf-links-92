@@ -134,6 +134,9 @@ const Header = () => {
           <Link to="/foreign-worker-search" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             חיפוש עובד זר
           </Link>
+          <Link to="/about" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            אודות
+          </Link>
           <Link to="/contact" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             צור קשר
           </Link>
@@ -191,6 +194,9 @@ const Header = () => {
                 </Link>
                 <Link to="/foreign-worker-search" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   חיפוש עובד זר
+                </Link>
+                <Link to="/about" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
+                  אודות
                 </Link>
                 <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   צור קשר
