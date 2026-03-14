@@ -195,6 +195,12 @@ const Header = () => {
                 <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   צור קשר
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin/knowledge" onClick={() => setIsOpen(false)} className="flex items-center gap-1 text-sm font-medium py-2 px-3 hover:bg-muted rounded-md text-primary">
+                    <Shield className="h-3.5 w-3.5" />
+                    ניהול
+                  </Link>
+                )}
               </div>
             </nav>
           </SheetContent>
