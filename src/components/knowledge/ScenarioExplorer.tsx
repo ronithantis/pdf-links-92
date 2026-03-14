@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, HelpCircle, CheckCircle2, BookOpen, Wrench, Lock } from "lucide-react";
+import { ArrowRight, HelpCircle, CheckCircle2, BookOpen, Wrench, Lock, ThumbsUp, ThumbsDown, Lightbulb } from "lucide-react";
 import { Link } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
 
@@ -34,11 +34,81 @@ const SITE_TOOLS: SiteTool[] = [
   { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", description: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית", matchTags: ["אשפוז", "דיור_מוגן", "בית_אבות", "מוסד_סיעודי", "גמלת_סיעוד"], isExternal: true },
 ];
 
+// ─── Conditional Rules Engine ───
+// Maps question keywords to conditional actions that appear when the user answers "no"
+interface ConditionalRule {
+  /** Keywords to match in the question text */
+  questionKeywords: string[];
+  /** Which answer triggers the conditional actions: "no" means actions appear when user says No */
+  triggerOnAnswer: "yes" | "no";
+  /** Actions to inject */
+  actions: string[];
+  /** Optional: additional tools to surface */
+  tools?: Partial<SiteTool>[];
+}
+
+const CONDITIONAL_RULES: ConditionalRule[] = [
+  {
+    questionKeywords: ["גמלת סיעוד מאושרת", "גמלת סיעוד"],
+    triggerOnAnswer: "no",
+    actions: [
+      "הגשת תביעת סיעוד לביטוח לאומי",
+      "בדקו בקופת החולים אם יש לכם זכאות לגמלת סיעוד (חייגו *2700)",
+    ],
+    tools: [
+      { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", description: "מדריך שלב אחר שלב להגשת תביעה לביטוח לאומי" },
+    ],
+  },
+  {
+    questionKeywords: ["ייפוי כוח", "ייפוי כח"],
+    triggerOnAnswer: "no",
+    actions: [
+      "פנו לעורך דין מוסמך לעריכת ייפוי כוח מתמשך בהקדם",
+      "בדקו אם ההורה כשיר עדיין מבחינה קוגניטיבית — תנאי לחתימה",
+    ],
+    tools: [
+      { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", description: "מדריך אינטראקטיבי לעריכת ייפוי כוח מתמשך" },
+    ],
+  },
+  {
+    questionKeywords: ["צוואה"],
+    triggerOnAnswer: "no",
+    actions: [
+      "מומלץ לערוך צוואה בהקדם לפני שהמצב הקוגניטיבי מידרדר",
+      "פנו לעורך דין המתמחה בדיני ירושה",
+    ],
+  },
+  {
+    questionKeywords: ["חברת סיעוד", "העסקה ישירה"],
+    triggerOnAnswer: "no",
+    actions: [
+      "בדקו מהם היתרונות והחסרונות של כל מסלול לפני ההחלטה",
+      "השוו בין עלות חברת סיעוד לעלות העסקה ישירה כולל זכויות סוציאליות",
+    ],
+  },
+  {
+    questionKeywords: ["החזר", "ביטוח לאומי"],
+    triggerOnAnswer: "no",
+    actions: [
+      "בדקו זכאות להחזר חלקי מביטוח לאומי — ייתכן שמגיע לכם",
+      "פנו לסניף ביטוח לאומי הקרוב או חייגו *6050",
+    ],
+  },
+];
+
+function matchRule(questionText: string, rule: ConditionalRule): boolean {
+  return rule.questionKeywords.some(kw =>
+    questionText.includes(kw)
+  );
+}
+
 const ScenarioExplorer = () => {
   const [scenarios, setScenarios] = useState<any[]>([]);
   const [selected, setSelected] = useState<any | null>(null);
   const [relatedResources, setRelatedResources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  // Track user answers: question index → "yes" | "no" | undefined (unanswered)
+  const [answers, setAnswers] = useState<Record<number, "yes" | "no">>({});
 
   useEffect(() => {
     supabase
@@ -54,6 +124,7 @@ const ScenarioExplorer = () => {
 
   const selectScenario = async (scenario: any) => {
     setSelected(scenario);
+    setAnswers({}); // reset answers
     const { data } = await supabase
       .from("knowledge_resources")
       .select("*")
@@ -62,20 +133,65 @@ const ScenarioExplorer = () => {
     setRelatedResources(data || []);
   };
 
+  // Compute conditional actions based on answers
+  const conditionalResults = useMemo(() => {
+    if (!selected) return { actions: [] as string[], toolPaths: new Set<string>() };
+    const questions = (selected.questions as string[]) || [];
+    const extraActions: string[] = [];
+    const extraToolPaths = new Set<string>();
+
+    questions.forEach((q, idx) => {
+      const answer = answers[idx];
+      if (!answer) return; // unanswered, skip
+
+      CONDITIONAL_RULES.forEach(rule => {
+        if (matchRule(q, rule) && answer === rule.triggerOnAnswer) {
+          extraActions.push(...rule.actions);
+          rule.tools?.forEach(t => {
+            if (t.path) extraToolPaths.add(t.path);
+          });
+        }
+      });
+    });
+
+    return { actions: extraActions, toolPaths: extraToolPaths };
+  }, [selected, answers]);
+
+  const toggleAnswer = (idx: number, value: "yes" | "no") => {
+    setAnswers(prev => {
+      if (prev[idx] === value) {
+        // toggle off
+        const next = { ...prev };
+        delete next[idx];
+        return next;
+      }
+      return { ...prev, [idx]: value };
+    });
+  };
+
   if (loading) return <div className="text-center py-6 text-muted-foreground">טוען תרחישים...</div>;
 
   if (selected) {
     const tags = (selected.tags as string[]) || [];
     const questions = (selected.questions as string[]) || [];
     const actions = (selected.recommended_actions as string[]) || [];
+    const allActions = [...actions, ...conditionalResults.actions];
+
     const matchedTools = SITE_TOOLS.filter(tool =>
-      tool.matchTags.some(mt => tags.includes(mt))
+      tool.matchTags.some(mt => tags.includes(mt)) || conditionalResults.toolPaths.has(tool.path)
     );
+
+    // Deduplicate tools by path
+    const uniqueTools = matchedTools.filter((tool, i, arr) =>
+      arr.findIndex(t => t.path === tool.path) === i
+    );
+
+    const hasAnyAnswer = Object.keys(answers).length > 0;
 
     return (
       <div className="space-y-6">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>
+          <Button variant="ghost" size="sm" onClick={() => { setSelected(null); setAnswers({}); }}>
             <ArrowRight className="h-4 w-4 ml-1" />
             חזרה לתרחישים
           </Button>
@@ -89,21 +205,48 @@ const ScenarioExplorer = () => {
                 <HelpCircle className="h-5 w-5" />
                 שאלות לבירור
               </h4>
-              <ul className="space-y-2">
-                {questions.map((q, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                      {i + 1}
-                    </span>
-                    {q}
-                  </li>
-                ))}
+              <p className="text-xs text-muted-foreground">ענו על השאלות כדי לקבל המלצות מותאמות אישית</p>
+              <ul className="space-y-3">
+                {questions.map((q, i) => {
+                  const answer = answers[i];
+                  const hasRule = CONDITIONAL_RULES.some(r => matchRule(q, r));
+                  return (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold shrink-0">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm flex-1">{q}</span>
+                      {hasRule && (
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <Button
+                            size="sm"
+                            variant={answer === "yes" ? "default" : "outline"}
+                            className={`h-7 px-2.5 text-xs ${answer === "yes" ? "" : ""}`}
+                            onClick={() => toggleAnswer(i, "yes")}
+                          >
+                            <ThumbsUp className="h-3 w-3 ml-1" />
+                            כן
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant={answer === "no" ? "destructive" : "outline"}
+                            className="h-7 px-2.5 text-xs"
+                            onClick={() => toggleAnswer(i, "no")}
+                          >
+                            <ThumbsDown className="h-3 w-3 ml-1" />
+                            לא
+                          </Button>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </CardContent>
           </Card>
         )}
 
-        {actions.length > 0 && (
+        {allActions.length > 0 && (
           <Card>
             <CardContent className="p-5 space-y-3">
               <h4 className="font-semibold flex items-center gap-2 text-success">
@@ -112,9 +255,20 @@ const ScenarioExplorer = () => {
               </h4>
               <ul className="space-y-2">
                 {actions.map((a, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm">
+                  <li key={`base-${i}`} className="flex items-start gap-2 text-sm">
                     <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
                     {a}
+                  </li>
+                ))}
+                {conditionalResults.actions.map((a, i) => (
+                  <li key={`cond-${i}`} className="flex items-start gap-2 text-sm animate-in fade-in slide-in-from-top-2 duration-300">
+                    <Lightbulb className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
+                    <span>
+                      {a}
+                      <Badge variant="outline" className="mr-2 text-[10px] px-1.5 py-0 text-amber-600 border-amber-300">
+                        המלצה על בסיס תשובותיכם
+                      </Badge>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -122,7 +276,7 @@ const ScenarioExplorer = () => {
           </Card>
         )}
 
-        {matchedTools.length > 0 && (
+        {uniqueTools.length > 0 && (
           <Card>
             <CardContent className="p-5 space-y-3">
               <h4 className="font-semibold flex items-center gap-2 text-primary">
@@ -130,7 +284,7 @@ const ScenarioExplorer = () => {
                 כלים רלוונטיים באתר
               </h4>
               <ul className="space-y-3">
-                {matchedTools.map((tool, i) => (
+                {uniqueTools.map((tool, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="flex items-center gap-2 shrink-0">
                       {tool.isExternal ? (
