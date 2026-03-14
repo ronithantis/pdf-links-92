@@ -137,6 +137,12 @@ const Header = () => {
           <Link to="/contact" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             צור קשר
           </Link>
+          {isAdmin && (
+            <Link to="/admin/knowledge" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
+              <Shield className="h-3.5 w-3.5" />
+              ניהול
+            </Link>
+          )}
         </div>
 
         {/* Mobile Navigation */}
