@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סדר היום שלי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f8fafc;
+            user-select: none;
+            overflow-x: hidden;
+        }
+        .card-button {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .card-button:hover:not(.selected) {
+            background-color: #f1f5f9;
+            transform: translateY(-2px);
+        }
+        .card-button:active {
+            transform: scale(0.95);
+        }
+        .selected {
+            border: 6px solid #2563eb !important;
+            background-color: #eff6ff !important;
+        }
+        .step-container {
+            display: none;
+        }
+        .step-container.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        input::placeholder {
+            color: #94a3b8;
+        }
+        @media print {
+            @page { size: auto; margin: 20mm; }
+            body { background-color: white !important; padding: 0 !important; margin: 0 !important; }
+            #game-container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+            #progress-container, #nav-buttons, .no-print, button { display: none !important; }
+            .step-container { display: none !important; }
+            #summary-step { display: block !important; visibility: visible !important; position: static !important; }
+            .summary-box { border: 2px solid #000 !important; background: white !important; padding: 20px !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div id="game-container" class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 md:p-8">
+        
+        <div id="progress-container" class="mb-6">
+            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                <span id="step-label">שלב 1 מתוך 19</span>
+                <span id="step-percent">5%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div id="progress-bar" class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 5%"></div>
+            </div>
+        </div>
+
+        <!-- Step 0: Welcome -->
+        <div class="step-container active" id="step-0">
+            <h1 class="text-3xl font-bold text-center text-blue-700 mb-4">☀️ סדר היום שלי</h1>
+            <p class="text-center text-lg text-gray-600 mb-6">ברוכים הבאים! בואו נתכנן את היום שלנו יחד.</p>
+            <div class="text-center">
+                <button onclick="nextStep()" class="bg-blue-600 text-white text-xl font-bold py-3 px-10 rounded-xl hover:bg-blue-700 transition">בואו נתחיל! 🚀</button>
+            </div>
+        </div>
+
+        <!-- Step 1: Name & Avatar -->
+        <div class="step-container" id="step-1">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">👋 שלום!</h2>
+            <div class="mb-4">
+                <label class="block text-lg font-bold mb-2">איך קוראים לי?</label>
+                <input type="text" id="user-name" placeholder="הקלד/י את שמך" class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg focus:border-blue-500 focus:outline-none">
+            </div>
+            <p class="text-lg font-bold mb-3">בחר דמות:</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-6 text-center text-6xl" onclick="selectAvatar(this, '👴')">
+                    👴
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-6 text-center text-6xl" onclick="selectAvatar(this, '👵')">
+                    👵
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Wake up time -->
+        <div class="step-container" id="step-2">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">⏰ מתי קמתי היום?</h2>
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">06:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">06:30</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">07:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">07:30</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">08:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">08:30</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">09:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">אחרי 09:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'wake')">לא ישנתי</div>
+            </div>
+        </div>
+
+        <!-- Step 3: Breakfast -->
+        <div class="step-container" id="step-3">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🍽️ מה אכלתי בבוקר?</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🥣</span><br>דייסה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🥚</span><br>ביצה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🥗</span><br>סלט
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🌾</span><br>דגנים
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🥛</span><br>יוגורט
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'breakfast')">
+                    <span class="text-3xl">🥪</span><br>כריך
+                </div>
+            </div>
+            <input type="text" id="breakfast-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 4: Drink -->
+        <div class="step-container" id="step-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🥤 מה שתיתי?</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'drink')">
+                    <span class="text-3xl">☕</span><br>קפה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'drink')">
+                    <span class="text-3xl">🍵</span><br>תה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'drink')">
+                    <span class="text-3xl">💧</span><br>מים
+                </div>
+            </div>
+            <input type="text" id="drink-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 5: Medicine -->
+        <div class="step-container" id="step-5">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">💊 בריאות בבוקר</h2>
+            <div class="space-y-4 mt-4">
+                <p class="text-lg font-bold">האם לקחת תרופות ובדקת לחץ דם?</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-health')">
+                        <span class="text-3xl">💊</span><br>לקחתי תרופות
+                    </div>
+                    <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-health')">
+                        <span class="text-3xl">🩺</span><br>בדקתי לחץ דם
+                    </div>
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-3 text-center text-base text-gray-500" onclick="selectOne(this, 'no-meds')">אני לא לוקח תרופות כלל</div>
+            </div>
+        </div>
+
+        <!-- Step 6: Morning Activity -->
+        <div class="step-container" id="step-6">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🌤️ מה עשיתי בבוקר?</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">🏘️</span><br>מועדון
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">🌳</span><br>טיול
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">🧘</span><br>פיזיותרפיה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">📺</span><br>טלוויזיה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">😴</span><br>חזרתי לישון
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'morning-activity')">
+                    <span class="text-3xl">🧹</span><br>עבודות בית
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7: Clinic visit? -->
+        <div class="step-container" id="step-7">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🏥 ביקור במרפאה</h2>
+            <div class="space-y-4 mt-4">
+                <p class="text-lg font-bold text-center">האם מתוכנן היום ביקור במרפאה?</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-xl font-bold" onclick="selectClinic(this, true)">כן</div>
+                    <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-xl font-bold" onclick="selectClinic(this, false)">לא</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 8: Clinic details -->
+        <div class="step-container" id="step-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🏥 פרטי ביקור במרפאה</h2>
+            <p class="text-center text-gray-600 mb-4">סמן את הפעולות המתוכננות:</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'clinic')">
+                    <span class="text-3xl">🩺</span><br>לחץ דם
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'clinic')">
+                    <span class="text-3xl">🔬</span><br>מעבדה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'clinic')">
+                    <span class="text-3xl">👨‍⚕️</span><br>רופא
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'clinic')">
+                    <span class="text-3xl">👩‍⚕️</span><br>אחות
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 9: Lunch -->
+        <div class="step-container" id="step-9">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🍽️ ארוחת צהריים</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'lunch')">
+                    <span class="text-3xl">🍲</span><br>מרק
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'lunch')">
+                    <span class="text-3xl">🍗</span><br>בשרי
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'lunch')">
+                    <span class="text-3xl">🐟</span><br>דג
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'lunch')">
+                    <span class="text-3xl">🍚</span><br>תוספת
+                </div>
+            </div>
+            <input type="text" id="lunch-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 10: After lunch -->
+        <div class="step-container" id="step-10">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">😴 מה אחרי הצהריים?</h2>
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'afternoon')">
+                    <span class="text-3xl">😴</span><br>מנוחה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'afternoon')">
+                    <span class="text-3xl">📺</span><br>טלוויזיה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'afternoon')">
+                    <span class="text-3xl">🎲</span><br>תשבצים
+                </div>
+            </div>
+            <input type="text" id="afternoon-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 11: Nap time -->
+        <div class="step-container" id="step-11">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">😴 שעת מנוחה</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'nap')">14:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'nap')">15:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'nap')">16:00</div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg font-bold" onclick="selectOne(this, 'nap')">לא נחתי</div>
+            </div>
+        </div>
+
+        <!-- Step 12: Evening activity -->
+        <div class="step-container" id="step-12">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🌇 פעילות אחר הצהריים</h2>
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'evening-activity')">
+                    <span class="text-3xl">🚶</span><br>טיול
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'evening-activity')">
+                    <span class="text-3xl">🤝</span><br>חברים
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'evening-activity')">
+                    <span class="text-3xl">☕</span><br>בית קפה
+                </div>
+            </div>
+            <input type="text" id="evening-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 13: Dinner -->
+        <div class="step-container" id="step-13">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🍽️ ארוחת ערב</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'dinner')">
+                    <span class="text-3xl">🍗</span><br>בשרי
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'dinner')">
+                    <span class="text-3xl">🍲</span><br>מרק
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'dinner')">
+                    <span class="text-3xl">🥚</span><br>ביצה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'dinner')">
+                    <span class="text-3xl">🥗</span><br>סלט
+                </div>
+            </div>
+            <input type="text" id="dinner-other" placeholder="אחר..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-lg mt-3 focus:border-blue-500 focus:outline-none">
+        </div>
+
+        <!-- Step 14: Evening medicine -->
+        <div class="step-container" id="step-14">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">💊 בריאות בערב</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'evening-health')">
+                    <span class="text-3xl">💊</span><br>לקחתי תרופות
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'evening-health')">
+                    <span class="text-3xl">🩺</span><br>בדקתי לחץ דם
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 15: Shower -->
+        <div class="step-container" id="step-15">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🚿 מקלחת</h2>
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'shower')">
+                    <span class="text-3xl">🧼</span><br>עם חפיפה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'shower')">
+                    <span class="text-3xl">🛁</span><br>ללא חפיפה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'shower')">
+                    <span class="text-3xl">🪥</span><br>צחצוח שיניים
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 16: Before sleep -->
+        <div class="step-container" id="step-16">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">🌙 לפני השינה</h2>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'before-sleep')">
+                    <span class="text-3xl">📞</span><br>טלפון
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'before-sleep')">
+                    <span class="text-3xl">📺</span><br>טלוויזיה
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'before-sleep')">
+                    <span class="text-3xl">🧴</span><br>קרם
+                </div>
+                <div class="card-button border-4 border-gray-200 rounded-2xl p-4 text-center text-lg" onclick="toggleMulti(this, 'before-sleep')">
+                    <span class="text-3xl">👕</span><br>פיג׳מה
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 17: Summary -->
+        <div class="step-container" id="step-17">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">📋 סיכום היום</h2>
+            <div id="summary-content" class="summary-box bg-blue-50 rounded-xl p-4 text-lg space-y-2 border-2 border-blue-200"></div>
+            <p class="text-center text-2xl mt-4">לילה טוב ונעים! 🌙</p>
+            <div class="flex flex-col gap-2 mt-4">
+                <button onclick="printSummary()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-blue-700 transition text-lg">🖨️ הדפס סיכום</button>
+                <button onclick="copySummary()" class="bg-green-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-700 transition text-lg">📋 העתק סיכום</button>
+                <button onclick="resetGame()" class="bg-gray-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-gray-600 transition text-lg">התחל מחדש</button>
+            </div>
+            <p class="text-center text-sm text-gray-400 mt-2">אם חלון ההדפסה לא נפתח, נסה להשתמש בכפתור ה'העתק'.</p>
+        </div>
+
+        <!-- Navigation -->
+        <div id="nav-buttons" class="flex justify-between mt-6">
+            <button id="btn-back" onclick="prevStep()" class="bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-xl hover:bg-gray-400 transition" style="display:none">חזור</button>
+            <button id="btn-next" onclick="nextStep()" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-xl hover:bg-blue-700 transition mr-auto">המשך</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalSteps = 18; // 0-17
+        let skipClinicDetails = false;
+        
+        const data = {
+            name: '', avatar: '', wake: '', breakfast: [], drink: [],
+            'morning-health': [], 'no-meds': '', 'morning-activity': [],
+            clinic: false, clinicDetails: [], lunch: [], afternoon: [],
+            nap: '', 'evening-activity': [], dinner: [], 'evening-health': [],
+            shower: [], 'before-sleep': []
+        };
+
+        function updateProgress() {
+            const pct = Math.round(((currentStep) / (totalSteps - 1)) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('step-percent').textContent = pct + '%';
+            document.getElementById('step-label').textContent = `שלב ${currentStep + 1} מתוך ${totalSteps}`;
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+            
+            document.getElementById('btn-back').style.display = step === 0 ? 'none' : 'inline-block';
+            
+            if (step === 17) {
+                document.getElementById('btn-next').style.display = 'none';
+                document.getElementById('btn-back').style.display = 'none';
+                buildSummary();
+            } else {
+                document.getElementById('btn-next').style.display = 'inline-block';
+            }
+            
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (currentStep === 1) {
+                data.name = document.getElementById('user-name').value || 'אורח';
+            }
+            
+            // Skip clinic details if no clinic visit
+            if (currentStep === 7 && skipClinicDetails) {
+                currentStep = 9;
+                showStep(currentStep);
+                return;
+            }
+            
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep === 9 && skipClinicDetails) {
+                currentStep = 7;
+                showStep(currentStep);
+                return;
+            }
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function selectOne(el, key) {
+            const parent = el.parentElement;
+            parent.querySelectorAll('.card-button').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            data[key] = el.textContent.trim();
+        }
+
+        function selectAvatar(el, avatar) {
+            document.querySelectorAll('#step-1 .card-button').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            data.avatar = avatar;
+        }
+
+        function toggleMulti(el, key) {
+            el.classList.toggle('selected');
+            if (!Array.isArray(data[key])) data[key] = [];
+            const val = el.textContent.trim();
+            if (el.classList.contains('selected')) {
+                data[key].push(val);
+            } else {
+                data[key] = data[key].filter(v => v !== val);
+            }
+        }
+
+        function selectClinic(el, value) {
+            document.querySelectorAll('#step-7 .card-button').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            data.clinic = value;
+            skipClinicDetails = !value;
+        }
+
+        function buildSummary() {
+            const lines = [];
+            const today = new Date().toLocaleDateString('he-IL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            lines.push(`<div class="text-center text-xl font-bold mb-3">${data.avatar} סדר היום של ${data.name}</div>`);
+            lines.push(`<div class="text-center text-gray-500 mb-3">${today}</div>`);
+            lines.push('<hr class="my-2">');
+            
+            if (data.wake) lines.push(`<div>⏰ <strong>קמתי ב:</strong> ${data.wake}</div>`);
+            if (data.breakfast.length) lines.push(`<div>🍽️ <strong>ארוחת בוקר:</strong> ${data.breakfast.join(', ')}</div>`);
+            
+            const breakfastOther = document.getElementById('breakfast-other')?.value;
+            if (breakfastOther) lines.push(`<div>&nbsp;&nbsp;&nbsp;+ ${breakfastOther}</div>`);
+            
+            if (data.drink.length) lines.push(`<div>🥤 <strong>שתייה:</strong> ${data.drink.join(', ')}</div>`);
+            
+            const drinkOther = document.getElementById('drink-other')?.value;
+            if (drinkOther) lines.push(`<div>&nbsp;&nbsp;&nbsp;+ ${drinkOther}</div>`);
+            
+            if (data['morning-health'].length) lines.push(`<div>💊 <strong>בריאות בבוקר:</strong> ${data['morning-health'].join(', ')}</div>`);
+            if (data['no-meds']) lines.push(`<div>💊 ${data['no-meds']}</div>`);
+            if (data['morning-activity'].length) lines.push(`<div>🌤️ <strong>פעילות בוקר:</strong> ${data['morning-activity'].join(', ')}</div>`);
+            
+            if (data.clinic) {
+                lines.push(`<div>🏥 <strong>ביקור במרפאה:</strong> כן</div>`);
+                if (data.clinicDetails && data.clinicDetails.length) {
+                    lines.push(`<div>&nbsp;&nbsp;&nbsp;פעולות: ${data.clinicDetails.join(', ')}</div>`);
+                }
+            }
+            
+            if (data.lunch.length) lines.push(`<div>🍽️ <strong>ארוחת צהריים:</strong> ${data.lunch.join(', ')}</div>`);
+            
+            const lunchOther = document.getElementById('lunch-other')?.value;
+            if (lunchOther) lines.push(`<div>&nbsp;&nbsp;&nbsp;+ ${lunchOther}</div>`);
+            
+            if (data.afternoon.length) lines.push(`<div>😴 <strong>אחר הצהריים:</strong> ${data.afternoon.join(', ')}</div>`);
+            if (data.nap) lines.push(`<div>😴 <strong>מנוחה:</strong> ${data.nap}</div>`);
+            if (data['evening-activity'].length) lines.push(`<div>🌇 <strong>פעילות אחה"צ:</strong> ${data['evening-activity'].join(', ')}</div>`);
+            
+            if (data.dinner.length) lines.push(`<div>🍽️ <strong>ארוחת ערב:</strong> ${data.dinner.join(', ')}</div>`);
+            
+            const dinnerOther = document.getElementById('dinner-other')?.value;
+            if (dinnerOther) lines.push(`<div>&nbsp;&nbsp;&nbsp;+ ${dinnerOther}</div>`);
+            
+            if (data['evening-health'].length) lines.push(`<div>💊 <strong>בריאות בערב:</strong> ${data['evening-health'].join(', ')}</div>`);
+            if (data.shower.length) lines.push(`<div>🚿 <strong>מקלחת:</strong> ${data.shower.join(', ')}</div>`);
+            if (data['before-sleep'].length) lines.push(`<div>🌙 <strong>לפני השינה:</strong> ${data['before-sleep'].join(', ')}</div>`);
+            
+            document.getElementById('summary-content').innerHTML = lines.join('');
+        }
+
+        function printSummary() {
+            window.print();
+        }
+
+        function copySummary() {
+            const el = document.getElementById('summary-content');
+            const text = el.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('הסיכום הועתק! ✅');
+            }).catch(() => {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert('הסיכום הועתק! ✅');
+            });
+        }
+
+        function resetGame() {
+            currentStep = 0;
+            skipClinicDetails = false;
+            Object.keys(data).forEach(k => {
+                if (Array.isArray(data[k])) data[k] = [];
+                else if (typeof data[k] === 'boolean') data[k] = false;
+                else data[k] = '';
+            });
+            document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
+            showStep(0);
+        }
+
+        // Fix clinic data key
+        const origToggleMulti = toggleMulti;
+        // Collect clinic details into clinicDetails array
+        document.addEventListener('click', (e) => {
+            // handled by inline onclick
+        });
+
+        // Initialize
+        showStep(0);
+    </script>
+</body>
+</html>
