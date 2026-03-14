@@ -44,7 +44,7 @@ const games: CognitiveGame[] = [
     id: "image-memory",
     title: "זיכרון תמונות",
     description: "מצאו את הזוגות התואמים – משחק זיכרון קלאסי",
-    url: "https://wordwall.net/play/107969/834/798",
+    url: "https://wordwall.net/embed/1f91b7eb5f7c4c01acdb09615020b050?themeId=64&templateId=23&fontStackId=0",
     category: "זיכרון",
     icon: <Brain className="h-8 w-8" />,
   },
