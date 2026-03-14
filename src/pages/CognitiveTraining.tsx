@@ -76,7 +76,7 @@ const games: CognitiveGame[] = [
     id: "word-ordering",
     title: "סדרו את המילים למשפט",
     description: "סדרו מילים מעורבבות למשפט תקין",
-    url: "https://wordwall.net/resource/107877122/%D7%A1%D7%93%D7%A8%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%A9%D7%A4%D7%98",
+    url: "https://wordwall.net/embed/e4ae89054d0a451ea2ec42438cd15ac6?themeId=62&templateId=72&fontStackId=0",
     category: "שפה",
     icon: <BookOpen className="h-8 w-8" />,
   },
