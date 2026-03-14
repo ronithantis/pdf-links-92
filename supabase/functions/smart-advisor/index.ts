@@ -94,6 +94,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/services", label: "מפת שירותים", reason: "מוסדות סיעודיים ודיור מוגן באזורך" },
     ],
   },
+  {
+    keywords: ["שיקום", "פיזיותרפיה", "ריפוי בעיסוק", "שחרור מבית חולים", "חזרה לתפקוד", "שיקום פיזי"],
+    tools: [
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגת מקיפה על שיקום וחזרה לתפקוד לאחר אשפוז" },
+      { path: "/services", label: "מפת שירותים", reason: "מכוני שיקום ושירותי פיזיותרפיה באזורך" },
+      { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי תוכנית השיקום והמטלות היומיומיות" },
+    ],
+  },
 ];
 
 function applyRulesEngine(message: string, aiTools: any[]): any[] {
