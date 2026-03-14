@@ -26,7 +26,7 @@ const GiveTake = () => {
       .eq("status", "active")
       .order("created_at", { ascending: false });
 
-    if (typeFilter !== "all") query = query.eq("type", typeFilter);
+    if (typeFilter !== "all") query = query.eq("type", typeFilter as "donate" | "request");
     if (categoryFilter !== "all") query = query.eq("category", categoryFilter);
     if (regionFilter !== "all") query = query.eq("region", regionFilter);
 
