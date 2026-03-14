@@ -20,6 +20,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
+  const isPdfForm = isForm && hasUrl && resource.url!.toLowerCase().includes(".pdf");
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full max-w-[320px]">
@@ -39,6 +40,16 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Play className="h-10 w-10 mx-auto mb-2 opacity-30" />
             <span className="text-xs">בקרוב</span>
           </div>
+        </div>
+      ) : isForm && isPdfForm ? (
+        <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
+          <iframe
+            src={resource.url!}
+            className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
+            title={resource.title}
+            loading="lazy"
+          />
+          <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
         </div>
       ) : isForm ? (
         <div className="bg-primary/5 h-28 flex items-center justify-center">
@@ -70,7 +81,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <p className="text-xs text-muted-foreground mb-3">{resource.description}</p>
         )}
         {hasUrl && (
-          isInternalLink ? (
+          isTool && isInternalLink ? (
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!}>
                 <Wrench className="h-3 w-3 ml-1" />
@@ -81,7 +92,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3 ml-1" />
-                {isVideo ? "צפייה" : "פתיחה"}
+                {isVideo ? "צפייה" : isForm ? "פתיחת טופס" : isPresentation ? "פתיחת מצגת" : "פתיחה"}
               </a>
             </Button>
           )
