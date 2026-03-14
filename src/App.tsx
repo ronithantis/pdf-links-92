@@ -16,6 +16,7 @@ import TasksList from "./pages/TasksList";
 import TechnicalSpec from "./pages/TechnicalSpec";
 import Auth from "./pages/Auth";
 import AdminKnowledge from "./pages/AdminKnowledge";
+import GiveTake from "./pages/GiveTake";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/tasks-list" element={<TasksList />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/technical-spec" element={<TechnicalSpec />} />
+            <Route path="/give-take" element={<GiveTake />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
             <Route path="*" element={<NotFound />} />

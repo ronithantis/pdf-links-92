@@ -31,14 +31,29 @@ serve(async (req) => {
       .map((r: any) => `- [${r.id}] ${r.title} (${r.category}${r.subcategory ? " / " + r.subcategory : ""}): ${r.description || ""}`)
       .join("\n");
 
+    // Fetch active donation listings
+    const { data: donations } = await supabase
+      .from("donation_listings")
+      .select("id, type, title, category, other_category, description, region, shipping_available")
+      .eq("status", "active")
+      .limit(50);
+
+    const donationsList = (donations || [])
+      .map((d: any) => `- [${d.type === "donate" ? "תרומה" : "בקשה"}] ${d.title} (${d.category}${d.other_category ? " / " + d.other_category : ""}) — אזור: ${d.region}${d.shipping_available ? " | משלוח אפשרי" : ""}`)
+      .join("\n");
+
     const systemPrompt = `אתה יועץ מומחה לבני משפחה המטפלים בהורים קשישים בישראל.
 המשתמש יתאר מצב או בעיה. תפקידך:
 1. לזהות את הצרכים המרכזיים
 2. להמליץ על 3-5 פעולות מיידיות ברורות
 3. לבחור מתוך רשימת המשאבים שמצורפת רק את אלה שרלוונטיים למצב
+4. אם המשתמש מחפש ציוד (חיתולים, כסא גלגלים, ציוד רפואי וכו'), הפנה אותו ללוח "קח ותן" בכתובת /give-take ואם יש תרומות רלוונטיות ברשימה — ציין אותן
 
 רשימת המשאבים הזמינים:
-${resourcesList}`;
+${resourcesList}
+
+לוח "קח ותן" — תרומות ובקשות פעילות:
+${donationsList || "אין מודעות פעילות כרגע"}`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

@@ -117,6 +117,9 @@ const Header = () => {
           <Link to="/knowledge-center" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             מרכז הידע
           </Link>
+          <Link to="/give-take" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            קח ותן
+          </Link>
           <Link to="/services" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             שירותים וספקים
           </Link>
@@ -165,6 +168,9 @@ const Header = () => {
               <div className="border-t pt-3 space-y-1">
                 <Link to="/knowledge-center" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   מרכז הידע
+                </Link>
+                <Link to="/give-take" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
+                  קח ותן
                 </Link>
                 <Link to="/services" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   שירותים וספקים
