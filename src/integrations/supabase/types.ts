@@ -101,6 +101,60 @@ export type Database = {
         }
         Relationships: []
       }
+      donation_listings: {
+        Row: {
+          category: string
+          contact_email: string
+          contact_phone: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          item_size: string | null
+          other_category: string | null
+          region: string
+          shipping_available: boolean | null
+          status: Database["public"]["Enums"]["listing_status"] | null
+          title: string
+          type: Database["public"]["Enums"]["listing_type"]
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          category: string
+          contact_email: string
+          contact_phone?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          item_size?: string | null
+          other_category?: string | null
+          region: string
+          shipping_available?: boolean | null
+          status?: Database["public"]["Enums"]["listing_status"] | null
+          title: string
+          type: Database["public"]["Enums"]["listing_type"]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          category?: string
+          contact_email?: string
+          contact_phone?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          item_size?: string | null
+          other_category?: string | null
+          region?: string
+          shipping_available?: boolean | null
+          status?: Database["public"]["Enums"]["listing_status"] | null
+          title?: string
+          type?: Database["public"]["Enums"]["listing_type"]
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       knowledge_resources: {
         Row: {
           category: Database["public"]["Enums"]["knowledge_category"]
@@ -222,6 +276,8 @@ export type Database = {
     Enums: {
       app_role: "admin" | "moderator" | "user"
       knowledge_category: "forms" | "presentations" | "videos" | "other"
+      listing_status: "active" | "closed"
+      listing_type: "donate" | "request"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -351,6 +407,8 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "moderator", "user"],
       knowledge_category: ["forms", "presentations", "videos", "other"],
+      listing_status: ["active", "closed"],
+      listing_type: ["donate", "request"],
     },
   },
 } as const
