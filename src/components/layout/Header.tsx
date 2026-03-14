@@ -134,6 +134,9 @@ const Header = () => {
           <Link to="/foreign-worker-search" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             חיפוש עובד זר
           </Link>
+          <Link to="/about" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            אודות
+          </Link>
           <Link to="/contact" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             צור קשר
           </Link>
