@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Target, Lightbulb, Eye, Users, Wrench } from "lucide-react";
+import hub2careLogo from "@/assets/hub2care-logo.png";
 
 const About = () => {
   return (
