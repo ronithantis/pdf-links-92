@@ -88,38 +88,26 @@ const Index = () => {
               מרכז הידע המקיף למשפחות המטפלות בהורים מבוגרים בישראל.
               מידע מקצועי, כלים מעשיים וליווי בכל שלב.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button size="lg" className="text-base px-8" onClick={() => setShowQuestionnaire(true)}>
-                <Sparkles className="h-5 w-5 ml-2" />
-                התחילו כאן - שאלון צרכים
-              </Button>
-              <Button size="lg" variant="outline" className="text-base px-8" asChild>
-                <a href="#modules">
-                  ניווט מהיר לפרקים
-                  <ArrowLeft className="h-5 w-5 mr-2" />
-                </a>
-              </Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button size="lg" variant="secondary" className="text-base px-8">
-                    <Play className="h-5 w-5 ml-2" />
-                    סרטון פתיח
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl p-0 overflow-hidden">
-                  <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-                    <iframe
-                      src="https://player.vimeo.com/video/1159512126?badge=0&autopause=0&player_id=0&app_id=58479"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-                      title="סרטון פתיח"
-                    />
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="sm" variant="outline" className="text-sm mt-2">
+                  <Play className="h-4 w-4 ml-1" />
+                  צפו בסרטון פתיח
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+                  <iframe
+                    src="https://player.vimeo.com/video/1159512126?badge=0&autopause=0&player_id=0&app_id=58479"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                    title="סרטון פתיח"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
