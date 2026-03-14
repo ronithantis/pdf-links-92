@@ -1,16 +1,24 @@
 import { useState } from "react";
-import { Sparkles, Loader2, CheckCircle2, BookOpen } from "lucide-react";
+import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
+
+interface SiteTool {
+  path: string;
+  label: string;
+  reason: string;
+}
 
 interface AdvisorResult {
   summary: string;
   actions: string[];
   relevant_resources: any[];
+  site_tools?: SiteTool[];
 }
 
 const SmartAdvisor = () => {
