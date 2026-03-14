@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink } from "lucide-react";
+import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ interface SiteTool {
   path: string;
   label: string;
   reason: string;
+  isPaid?: boolean;
 }
 
 interface AdvisorResult {
@@ -38,8 +40,6 @@ const SmartAdvisor = () => {
       });
 
       if (error) throw error;
-      
-      // data should contain { summary, actions, relevant_resources }
       setResult(data);
     } catch (err: any) {
       console.error("SmartAdvisor error:", err);
@@ -125,12 +125,20 @@ const SmartAdvisor = () => {
                 <ul className="space-y-3">
                   {result.site_tools.map((tool, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Link
-                        to={tool.path}
-                        className="text-sm font-medium text-primary hover:underline shrink-0"
-                      >
-                        {tool.label} ←
-                      </Link>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <Link
+                          to={tool.path}
+                          className="text-sm font-medium text-primary hover:underline"
+                        >
+                          {tool.label} ←
+                        </Link>
+                        {tool.isPaid && (
+                          <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
+                            <Lock className="h-2.5 w-2.5" />
+                            בתשלום
+                          </Badge>
+                        )}
+                      </div>
                       <span className="text-sm text-muted-foreground">{tool.reason}</span>
                     </li>
                   ))}
