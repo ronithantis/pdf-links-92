@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, LogOut } from "lucide-react";
+import { Plus, Pencil, Trash2, LogOut, ToggleRight } from "lucide-react";
 
 const AdminKnowledge = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
@@ -21,6 +21,7 @@ const AdminKnowledge = () => {
 
   const [resources, setResources] = useState<any[]>([]);
   const [scenarios, setScenarios] = useState<any[]>([]);
+  const [donations, setDonations] = useState<any[]>([]);
   const [editResource, setEditResource] = useState<any>(null);
   const [editScenario, setEditScenario] = useState<any>(null);
   const [resourceDialogOpen, setResourceDialogOpen] = useState(false);
@@ -36,6 +37,7 @@ const AdminKnowledge = () => {
     if (isAdmin) {
       fetchResources();
       fetchScenarios();
+      fetchDonations();
     }
   }, [isAdmin]);
 
@@ -53,6 +55,14 @@ const AdminKnowledge = () => {
       .select("*")
       .order("sort_order");
     setScenarios(data || []);
+  };
+
+  const fetchDonations = async () => {
+    const { data } = await supabase
+      .from("donation_listings")
+      .select("*")
+      .order("created_at", { ascending: false });
+    setDonations(data || []);
   };
 
   const saveResource = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -121,6 +131,22 @@ const AdminKnowledge = () => {
     fetchScenarios();
   };
 
+  const deleteDonation = async (id: string) => {
+    if (!confirm("למחוק מודעה זו?")) return;
+    const { error } = await supabase.from("donation_listings").delete().eq("id", id);
+    if (error) { toast({ title: "שגיאה", description: error.message, variant: "destructive" }); return; }
+    toast({ title: "המודעה נמחקה" });
+    fetchDonations();
+  };
+
+  const toggleDonationStatus = async (id: string, currentStatus: string) => {
+    const newStatus = currentStatus === "active" ? "closed" : "active";
+    const { error } = await supabase.from("donation_listings").update({ status: newStatus }).eq("id", id);
+    if (error) { toast({ title: "שגיאה", description: error.message, variant: "destructive" }); return; }
+    toast({ title: `סטטוס שונה ל-${newStatus === "active" ? "פעיל" : "סגור"}` });
+    fetchDonations();
+  };
+
   if (loading) return <div className="container py-20 text-center">טוען...</div>;
   if (!isAdmin) return null;
 
@@ -138,6 +164,7 @@ const AdminKnowledge = () => {
         <TabsList>
           <TabsTrigger value="resources">משאבים ({resources.length})</TabsTrigger>
           <TabsTrigger value="scenarios">תרחישים ({scenarios.length})</TabsTrigger>
+          <TabsTrigger value="donations">קח ותן ({donations.length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="resources" className="mt-4">
@@ -268,6 +295,55 @@ const AdminKnowledge = () => {
                   </TableCell>
                 </TableRow>
               ))}
+            </TableBody>
+          </Table>
+        </TabsContent>
+
+        <TabsContent value="donations" className="mt-4">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>כותרת</TableHead>
+                <TableHead>סוג</TableHead>
+                <TableHead>קטגוריה</TableHead>
+                <TableHead>אזור</TableHead>
+                <TableHead>סטטוס</TableHead>
+                <TableHead>תאריך</TableHead>
+                <TableHead>פעולות</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {donations.map((d) => (
+                <TableRow key={d.id}>
+                  <TableCell className="font-medium">{d.title}</TableCell>
+                  <TableCell>
+                    <Badge variant={d.type === "donate" ? "default" : "secondary"}>
+                      {d.type === "donate" ? "תרומה" : "בקשה"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{d.category}</TableCell>
+                  <TableCell>{d.region}</TableCell>
+                  <TableCell>
+                    <Badge variant={d.status === "active" ? "default" : "outline"}>
+                      {d.status === "active" ? "פעיל" : "סגור"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-xs">{new Date(d.created_at).toLocaleDateString("he-IL")}</TableCell>
+                  <TableCell className="flex gap-1">
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => toggleDonationStatus(d.id, d.status)} title="שנה סטטוס">
+                      <ToggleRight className="h-3 w-3" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => deleteDonation(d.id)} title="מחק">
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {donations.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center text-muted-foreground py-8">אין מודעות</TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </TabsContent>

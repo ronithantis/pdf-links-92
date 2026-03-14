@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, Search, X, Shield } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules } from "@/lib/modules-data";
@@ -37,6 +38,7 @@ const Header = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   const searchResults = searchQuery.length >= 2
     ? searchIndex.filter(
@@ -135,6 +137,12 @@ const Header = () => {
           <Link to="/contact" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             צור קשר
           </Link>
+          {isAdmin && (
+            <Link to="/admin/knowledge" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
+              <Shield className="h-3.5 w-3.5" />
+              ניהול
+            </Link>
+          )}
         </div>
 
         {/* Mobile Navigation */}
@@ -187,6 +195,12 @@ const Header = () => {
                 <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   צור קשר
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin/knowledge" onClick={() => setIsOpen(false)} className="flex items-center gap-1 text-sm font-medium py-2 px-3 hover:bg-muted rounded-md text-primary">
+                    <Shield className="h-3.5 w-3.5" />
+                    ניהול
+                  </Link>
+                )}
               </div>
             </nav>
           </SheetContent>
