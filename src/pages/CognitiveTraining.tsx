@@ -108,7 +108,7 @@ const games: CognitiveGame[] = [
     id: "daily-routine",
     title: "מה עושים היום - סדר יום",
     description: "סדרו את פעולות היום בסדר הנכון",
-    url: "https://gemini.google.com/share/d8b84035c662",
+    url: "/games/daily-routine.html",
     category: "קשב",
     icon: <Calendar className="h-8 w-8" />,
   },
