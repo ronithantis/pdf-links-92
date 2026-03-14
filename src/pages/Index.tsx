@@ -112,9 +112,67 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Pathway Cards */}
+      <section className="py-12 bg-muted/30">
+        <div className="container">
+          <h2 className="text-2xl font-bold text-center mb-2">איך תרצו להתחיל?</h2>
+          <p className="text-center text-muted-foreground mb-8">בחרו את הדרך המתאימה לכם</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Card 1 - Questionnaire */}
+            <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group" onClick={() => setShowQuestionnaire(true)}>
+              <CardContent className="p-6 text-center flex flex-col items-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <ClipboardCheck className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="font-bold text-lg">שאלון מיפוי צרכים</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  שאלון מקיף שיאפשר להפיק דוח אישי, למקד בצרכים, בפעולות נדרשות ולראות אילו נתונים כבר אספתם
+                </p>
+                <Button size="sm" className="mt-2">התחילו בשאלון</Button>
+              </CardContent>
+            </Card>
+
+            {/* Card 2 - Smart Advisor */}
+            <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group" asChild>
+              <Link to="/knowledge-center">
+                <CardContent className="p-6 text-center flex flex-col items-center gap-3">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <MessageSquare className="h-7 w-7 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-bold text-lg">זיהוי מצב והמלצת פעולה</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    תארו את המצב שלכם בכמה מילים וקבלו המלצות מותאמות אישית, פעולות מומלצות ומשאבים רלוונטיים
+                  </p>
+                  <Button size="sm" variant="secondary" className="mt-2">תארו את המצב</Button>
+                </CardContent>
+              </Link>
+            </Card>
+
+            {/* Card 3 - Self Navigation */}
+            <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group">
+              <a href="#modules">
+                <CardContent className="p-6 text-center flex flex-col items-center gap-3">
+                  <div className="w-14 h-14 rounded-full bg-warm/10 flex items-center justify-center group-hover:bg-warm/20 transition-colors">
+                    <Compass className="h-7 w-7 text-warm" />
+                  </div>
+                  <h3 className="font-bold text-lg">ניווט עצמי באתר</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    דפדפו בין 11 הפרקים, מרכז הידע, כלים דיגיטליים ומידע מקצועי — בקצב שלכם
+                  </p>
+                  <Button size="sm" variant="outline" className="mt-2">
+                    התחילו לחפש
+                    <ArrowLeft className="h-4 w-4 mr-1" />
+                  </Button>
+                </CardContent>
+              </a>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Questionnaire Section */}
       {showQuestionnaire && (
-        <section className="py-12 bg-muted/30">
+        <section className="py-12 bg-background">
           <div className="container">
             <h2 className="text-2xl font-bold text-center mb-2">שאלון מיפוי צרכים</h2>
             <p className="text-center text-muted-foreground mb-2">ענו על מספר שאלות קצרות ונפנה אתכם למידע הרלוונטי ביותר</p>
