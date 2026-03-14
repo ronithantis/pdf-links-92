@@ -68,7 +68,7 @@ const games: CognitiveGame[] = [
     id: "word-guessing",
     title: "נחשו את המילה",
     description: "נחשו מהי המילה לפי רמזים – תרגול אוצר מילים",
-    url: "https://wordwall.net/resource/107877338/%D7%A0%D7%97%D7%A9%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%99%D7%9C%D7%94-%D7%91%D7%9B%D7%9E%D7%94-%D7%A0%D7%99%D7%97%D7%95%D7%A9%D7%99%D7%9D",
+    url: "https://wordwall.net/embed/87fc469efe054e06881eefbc857ab771?themeId=44&templateId=73&fontStackId=0",
     category: "שפה",
     icon: <BookOpen className="h-8 w-8" />,
   },
