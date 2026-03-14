@@ -86,7 +86,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
               <h3 className="text-lg font-semibold mb-4 text-primary">{subcategory}</h3>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
-              {items.map((resource: any) => (
+              {(items as any[]).map((resource: any) => (
                 <ResourceCard key={resource.id} resource={resource} />
               ))}
             </div>
