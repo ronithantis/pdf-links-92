@@ -86,6 +86,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
     ],
   },
+  {
+    keywords: ["קוד סיעודי", "אשפוז", "מוסד סיעודי", "בית אבות", "דיור מוגן", "חלופות מגורים", "השתתפות עצמית", "מוסד"],
+    tools: [
+      { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", reason: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית" },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על חלופות מגורים ואשפוז" },
+      { path: "/services", label: "מפת שירותים", reason: "מוסדות סיעודיים ודיור מוגן באזורך" },
+    ],
+  },
 ];
 
 function applyRulesEngine(message: string, aiTools: any[]): any[] {

@@ -50,6 +50,7 @@ const DigitalTools = () => {
               <div className="flex items-start justify-between">
                 <span className="text-primary">{toolIcons[tool.icon]}</span>
                 {tool.isPaid && <Badge variant="secondary" className="gap-1"><Lock className="h-3 w-3" /> בתשלום</Badge>}
+                {tool.externalUrl && <Badge variant="outline" className="gap-1"><ExternalLink className="h-3 w-3" /> כלי חיצוני</Badge>}
               </div>
               <CardTitle className="text-lg">{tool.title}</CardTitle>
             </CardHeader>

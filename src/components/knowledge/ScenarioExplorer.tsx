@@ -30,6 +30,7 @@ const SITE_TOOLS: SiteTool[] = [
   { path: "/services", label: "מפת שירותים", description: "גורמי טיפול, עמותות וגופים ציבוריים", matchTags: ["גמלת_סיעוד", "ביטוח_לאומי", "זכויות", "דיור_מוגן", "בית_אבות", "שחיקה", "בריאות_נפשית"] },
   { path: "/knowledge-center", label: "מרכז הידע", description: "מצגות, סרטונים, טפסים ומדריכים", matchTags: ["ייפוי_כוח", "אפוטרופסות", "משפטי", "צוואה", "ירושה", "דמנציה", "גמלת_סיעוד", "זכויות"] },
   { path: "/contact", label: "יצירת קשר", description: "פנייה אישית לצוות האתר", matchTags: ["סירוב_טיפול", "אפוטרופסות", "משפטי"] },
+  { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", description: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית", matchTags: ["אשפוז", "דיור_מוגן", "בית_אבות", "מוסד_סיעודי", "גמלת_סיעוד"], isExternal: true },
 ];
 
 const ScenarioExplorer = () => {
