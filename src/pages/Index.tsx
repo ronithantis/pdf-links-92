@@ -133,8 +133,8 @@ const Index = () => {
             </Card>
 
             {/* Card 2 - Smart Advisor */}
-            <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group" asChild>
-              <Link to="/knowledge-center">
+            <Link to="/knowledge-center">
+              <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group">
                 <CardContent className="p-6 text-center flex flex-col items-center gap-3">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                     <MessageSquare className="h-7 w-7 text-accent-foreground" />
@@ -145,8 +145,8 @@ const Index = () => {
                   </p>
                   <Button size="sm" variant="secondary" className="mt-2">תארו את המצב</Button>
                 </CardContent>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
 
             {/* Card 3 - Self Navigation */}
             <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group">
