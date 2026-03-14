@@ -1,9 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, HelpCircle, CheckCircle2, BookOpen, Wrench } from "lucide-react";
+import { ArrowRight, HelpCircle, CheckCircle2, BookOpen, Wrench, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
 
@@ -12,10 +12,17 @@ interface SiteTool {
   label: string;
   description: string;
   matchTags: string[];
+  isPaid?: boolean;
 }
 
 const SITE_TOOLS: SiteTool[] = [
-  { path: "/tools", label: "כלי סנכרון הטיפול המשפחתי", description: "חלוקת תפקידים ותיאום בין בני המשפחה", matchTags: ["משפחה", "קונפליקט", "חלוקת_תפקידים", "שחיקה", "מטפל_משפחתי", "ייפוי_כוח", "אפוטרופסות", "משפטי", "צוואה", "ירושה", "מסמכים"] },
+  { path: "/tools#will-template", label: "כתיבת צוואה", description: "תבנית מובנית לעריכת צוואה עם הנחיות מפורטות", matchTags: ["צוואה", "ירושה", "משפטי"], isPaid: true },
+  { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", description: "מדריך אינטראקטיבי לעריכת ייפוי כוח מתמשך", matchTags: ["ייפוי_כוח", "אפוטרופסות", "משפטי", "דמנציה", "אלצהיימר", "צוואה", "ירושה"], isPaid: true },
+  { path: "/tools#family-sync", label: "כלי סנכרון הטיפול המשפחתי", description: "חלוקת תפקידים ותיאום בין בני המשפחה", matchTags: ["משפחה", "קונפליקט", "חלוקת_תפקידים", "שחיקה", "מטפל_משפחתי", "ייפוי_כוח", "אפוטרופסות", "משפטי", "צוואה", "ירושה", "מסמכים"], isPaid: true },
+  { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", description: "חישוב שכר מדויק כולל זכויות סוציאליות", matchTags: ["עובד_זר", "העסקה", "גמלת_סיעוד"], isPaid: true },
+  { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", description: "פירוט והסבר סעיפי החוזה לעובד זר", matchTags: ["עובד_זר", "העסקה", "חוזה"], isPaid: true },
+  { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", description: "הגדרת תפקידים, שעות ומשימות עם המטפל", matchTags: ["עובד_זר", "העסקה"], isPaid: true },
+  { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", description: "מדריך שלב אחר שלב להגשת תביעה לביטוח לאומי", matchTags: ["גמלת_סיעוד", "ביטוח_לאומי", "זכויות"], isPaid: true },
   { path: "/tasks-list", label: "רשימת משימות אישית", description: "ניהול מטלות הטיפול היומיומיות", matchTags: ["שחיקה", "מטפל_משפחתי", "חלוקת_תפקידים", "אשפוז", "שחרור", "משפטי", "מסמכים", "צוואה", "ייפוי_כוח"] },
   { path: "/give-take", label: 'לוח "קח ותן"', description: "תרומה ובקשה של ציוד סיעודי", matchTags: ["ציוד_רפואי", "חיתולים", "ניידות", "קח_ותן", "בטיחות_בית"] },
   { path: "/foreign-worker-search", label: "חיפוש עובד זר", description: "מנוע חיפוש לעובדי סיעוד זרים", matchTags: ["עובד_זר", "העסקה", "חוזה", "גמלת_סיעוד"] },
@@ -45,7 +52,6 @@ const ScenarioExplorer = () => {
 
   const selectScenario = async (scenario: any) => {
     setSelected(scenario);
-    // Fetch resources whose scenario_tags overlap with scenario tags
     const { data } = await supabase
       .from("knowledge_resources")
       .select("*")
@@ -124,12 +130,20 @@ const ScenarioExplorer = () => {
               <ul className="space-y-3">
                 {matchedTools.map((tool, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Link
-                      to={tool.path}
-                      className="text-sm font-medium text-primary hover:underline shrink-0"
-                    >
-                      {tool.label} ←
-                    </Link>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Link
+                        to={tool.path}
+                        className="text-sm font-medium text-primary hover:underline"
+                      >
+                        {tool.label} ←
+                      </Link>
+                      {tool.isPaid && (
+                        <Badge variant="secondary" className="gap-1 text-[10px] px-1.5 py-0">
+                          <Lock className="h-2.5 w-2.5" />
+                          בתשלום
+                        </Badge>
+                      )}
+                    </div>
                     <span className="text-sm text-muted-foreground">{tool.description}</span>
                   </li>
                 ))}

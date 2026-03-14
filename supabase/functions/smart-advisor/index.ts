@@ -7,6 +7,108 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+// ==================== RULES ENGINE ====================
+interface MandatoryTool {
+  path: string;
+  label: string;
+  reason: string;
+  isPaid?: boolean;
+}
+
+interface KeywordRule {
+  keywords: string[];
+  tools: MandatoryTool[];
+}
+
+const KEYWORD_RULES: KeywordRule[] = [
+  {
+    keywords: ["צוואה", "ירושה", "צוואות"],
+    tools: [
+      { path: "/tools#will-template", label: "כתיבת צוואה", reason: "תבנית מובנית לעריכת צוואה עם הנחיות מפורטות", isPaid: true },
+      { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "חשוב להסדיר ייפוי כוח לצד הצוואה", isPaid: true },
+      { path: "/tools#family-sync", label: "כלי סנכרון הטיפול המשפחתי", reason: "תיאום בין בני משפחה סביב נושאים משפטיים", isPaid: true },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות ומדריכים על תכנון משפטי וצוואות" },
+    ],
+  },
+  {
+    keywords: ["ייפוי כוח", "יפוי כוח", "אפוטרופסות", "אפוטרופוס"],
+    tools: [
+      { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "מדריך אינטראקטיבי לעריכת ייפוי כוח מתמשך", isPaid: true },
+      { path: "/tools#will-template", label: "כתיבת צוואה", reason: "מומלץ להסדיר צוואה במקביל לייפוי כוח", isPaid: true },
+      { path: "/tools#family-sync", label: "כלי סנכרון הטיפול המשפחתי", reason: "תיאום בין בני משפחה סביב החלטות משפטיות", isPaid: true },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות ומדריכים על ייפוי כוח ואפוטרופסות" },
+    ],
+  },
+  {
+    keywords: ["דמנציה", "דמנטית", "דמנט", "אלצהיימר", "שכחה", "ירידה קוגניטיבית", "שיטיון"],
+    tools: [
+      { path: "/cognitive-training", label: "אימון קוגניטיבי", reason: "תרגילים לשימור כושר מנטלי" },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות וסרטונים על התמודדות עם דמנציה" },
+      { path: "/tools", label: "שאלון הערכת מצב", reason: "הערכה מקיפה של צרכי המשפחה המטפלת" },
+      { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "חשוב להסדיר ייפוי כוח בשלבים מוקדמים של דמנציה", isPaid: true },
+      { path: "/tools#will-template", label: "כתיבת צוואה", reason: "חשוב להסדיר צוואה לפני שהמצב הקוגניטיבי מתדרדר", isPaid: true },
+    ],
+  },
+  {
+    keywords: ["עובד זר", "מטפל צמוד", "מטפלת צמודה", "עובדת זרה"],
+    tools: [
+      { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
+      { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "חישוב שכר מדויק כולל זכויות סוציאליות", isPaid: true },
+      { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
+      { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים, שעות ומשימות", isPaid: true },
+    ],
+  },
+  {
+    keywords: ["ציוד", "חיתולים", "כסא גלגלים", "ציוד רפואי", "הליכון", "מיטה סיעודית"],
+    tools: [
+      { path: "/give-take", label: 'לוח "קח ותן"', reason: "תרומה ובקשה של ציוד סיעודי" },
+    ],
+  },
+  {
+    keywords: ["שחיקה", "עייפות", "לחץ", "מותש", "מותשת", "שחוק", "שחוקה", "תשישות"],
+    tools: [
+      { path: "/tools", label: "שאלון הערכת מצב", reason: "הערכה מקיפה של רמת השחיקה והצרכים" },
+      { path: "/services", label: "מפת שירותים", reason: "גורמי תמיכה, עמותות וקבוצות סיוע" },
+    ],
+  },
+  {
+    keywords: ["חוזה העסקה", "חוזה עבודה"],
+    tools: [
+      { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה לעובד זר", isPaid: true },
+      { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים ומשימות", isPaid: true },
+    ],
+  },
+  {
+    keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה"],
+    tools: [
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על זכויות וגמלאות" },
+      { path: "/services", label: "מפת שירותים", reason: "גופים ציבוריים ועמותות שיכולים לסייע" },
+      { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
+    ],
+  },
+];
+
+function applyRulesEngine(message: string, aiTools: any[]): any[] {
+  const lowerMessage = message;
+  const merged = [...aiTools];
+  const existingPaths = new Set(merged.map((t: any) => t.path));
+
+  for (const rule of KEYWORD_RULES) {
+    const matched = rule.keywords.some((kw) => lowerMessage.includes(kw));
+    if (!matched) continue;
+
+    for (const tool of rule.tools) {
+      if (!existingPaths.has(tool.path)) {
+        merged.push(tool);
+        existingPaths.add(tool.path);
+      }
+    }
+  }
+
+  return merged;
+}
+// ==================== END RULES ENGINE ====================
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
@@ -51,7 +153,7 @@ serve(async (req) => {
 5. אם המשתמש מחפש ציוד (חיתולים, כסא גלגלים, ציוד רפואי וכו'), הפנה אותו ללוח "קח ותן" ואם יש תרומות רלוונטיות ברשימה — ציין אותן
 
 כלים ודפים באתר שלנו — הפנה אליהם כשרלוונטי:
-- כלי לסנכרון הטיפול המשפחתי (/tools) — חלוקת תפקידים, תיאום בין אחים, רשימות משימות משותפות. רלוונטי גם כשצריך לתאם בין בני משפחה סביב נושאים כמו צוואה, ייפוי כוח, החלטות רפואיות, ועוד
+- כלי לסנכרון הטיפול המשפחתי (/tools#family-sync) — חלוקת תפקידים, תיאום בין אחים, רשימות משימות משותפות. רלוונטי גם כשצריך לתאם בין בני משפחה סביב נושאים כמו צוואה, ייפוי כוח, החלטות רפואיות, ועוד (בתשלום)
 - רשימת משימות אישית (/tasks-list) — ניהול מטלות הטיפול. רלוונטי כשיש רשימה של דברים לעשות, כמו טפסים, פגישות, מסמכים
 - לוח "קח ותן" (/give-take) — תרומה ובקשה של ציוד סיעודי
 - חיפוש עובד זר (/foreign-worker-search) — מנוע חיפוש לעובדי סיעוד זרים
@@ -60,15 +162,23 @@ serve(async (req) => {
 - מפת שירותים (/services) — גורמי טיפול, עמותות, גופים ציבוריים
 - שאלון הערכת מצב (/tools) — שאלון מקיף להערכת הצרכים של המשפחה המטפלת. רלוונטי כמעט תמיד
 - יצירת קשר (/contact) — לפניות אישיות
+- כתיבת צוואה (/tools#will-template) — תבנית מובנית לעריכת צוואה (בתשלום)
+- מדריך לייפוי כוח מתמשך (/tools#poa-guide) — מדריך אינטראקטיבי לעריכת ייפוי כוח (בתשלום)
+- מחשבון שכר עובד זר (/tools#salary-calculator) — חישוב שכר מדויק (בתשלום)
+- הסבר על חוזה העסקה (/tools#contract-explanation) — פירוט סעיפי החוזה (בתשלום)
+- תאום ציפיות עם עובד זר (/tools#expectations-alignment) — הגדרת תפקידים ומשימות (בתשלום)
+- מדריך להגשת תביעת סיעוד (/tools#nursing-claim-guide) — שלב אחר שלב (בתשלום)
 
 מיפוי נושאים לכלים — חובה להפנות כשהנושא עולה:
-- צוואה, ירושה, ייפוי כוח, אפוטרופסות, תכנון משפטי → כלי סנכרון (/tools) לתיאום בין אחים + מרכז הידע (/knowledge-center) למצגת תכנון משפטי + שאלון הערכה (/tools)
-- חלוקת נטל, קונפליקט משפחתי, תיאום טיפול → כלי סנכרון (/tools) + רשימת משימות (/tasks-list)
-- דמנציה, ירידה קוגניטיבית, שכחה → אימון קוגניטיבי (/cognitive-training) + מרכז הידע (/knowledge-center)
-- עובד זר, מטפל צמוד, סיעוד → חיפוש עובד זר (/foreign-worker-search)
+- צוואה, ירושה, ייפוי כוח, אפוטרופסות, תכנון משפטי → כתיבת צוואה (/tools#will-template, בתשלום) + מדריך ייפוי כוח (/tools#poa-guide, בתשלום) + כלי סנכרון (/tools#family-sync, בתשלום) + מרכז הידע (/knowledge-center) + שאלון הערכה (/tools)
+- חלוקת נטל, קונפליקט משפחתי, תיאום טיפול → כלי סנכרון (/tools#family-sync, בתשלום) + רשימת משימות (/tasks-list)
+- דמנציה, ירידה קוגניטיבית, שכחה → אימון קוגניטיבי (/cognitive-training) + מרכז הידע (/knowledge-center) + מדריך ייפוי כוח (/tools#poa-guide, בתשלום) + כתיבת צוואה (/tools#will-template, בתשלום)
+- עובד זר, מטפל צמוד, סיעוד → חיפוש עובד זר (/foreign-worker-search) + מחשבון שכר (/tools#salary-calculator, בתשלום)
 - ציוד רפואי, חיתולים, כסא גלגלים → קח ותן (/give-take)
 - שחיקה, עייפות, לחץ → שאלון הערכה (/tools) + מפת שירותים (/services)
-- זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services)
+- זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services) + מדריך תביעת סיעוד (/tools#nursing-claim-guide, בתשלום)
+
+כשמציין כלי בתשלום, סמן אותו עם isPaid: true בתוצאה.
 
 רשימת המשאבים הזמינים:
 ${resourcesList}
@@ -113,9 +223,10 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
                     items: {
                       type: "object",
                       properties: {
-                        path: { type: "string", description: "נתיב הדף באתר, למשל /tools" },
+                        path: { type: "string", description: "נתיב הדף באתר, למשל /tools#will-template" },
                         label: { type: "string", description: "שם הכלי בעברית" },
                         reason: { type: "string", description: "למה זה רלוונטי למצב" },
+                        isPaid: { type: "boolean", description: "האם הכלי בתשלום" },
                       },
                       required: ["path", "label", "reason"],
                       additionalProperties: false,
@@ -158,6 +269,10 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
 
     const parsed = JSON.parse(toolCall.function.arguments);
 
+    // ===== RULES ENGINE: merge mandatory tools =====
+    const aiSiteTools = parsed.site_tools || [];
+    const finalSiteTools = applyRulesEngine(message, aiSiteTools);
+
     // Fetch full resource objects for the relevant IDs
     let relevantResources: any[] = [];
     if (parsed.relevant_resource_ids?.length > 0) {
@@ -173,7 +288,7 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
         summary: parsed.summary,
         actions: parsed.actions,
         relevant_resources: relevantResources,
-        site_tools: parsed.site_tools || [],
+        site_tools: finalSiteTools,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
