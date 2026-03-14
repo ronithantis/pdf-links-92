@@ -13,6 +13,7 @@ interface SiteTool {
   description: string;
   matchTags: string[];
   isPaid?: boolean;
+  isExternal?: boolean;
 }
 
 const SITE_TOOLS: SiteTool[] = [
