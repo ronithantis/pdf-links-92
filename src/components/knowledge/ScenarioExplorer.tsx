@@ -1,10 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, HelpCircle, CheckCircle2, BookOpen } from "lucide-react";
+import { ArrowRight, HelpCircle, CheckCircle2, BookOpen, Wrench } from "lucide-react";
+import { Link } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
+
+interface SiteTool {
+  path: string;
+  label: string;
+  description: string;
+  matchTags: string[];
+}
+
+const SITE_TOOLS: SiteTool[] = [
+  { path: "/tools", label: "כלי סנכרון הטיפול המשפחתי", description: "חלוקת תפקידים ותיאום בין בני המשפחה", matchTags: ["משפחה", "קונפליקט", "חלוקת_תפקידים", "שחיקה", "מטפל_משפחתי"] },
+  { path: "/tasks-list", label: "רשימת משימות אישית", description: "ניהול מטלות הטיפול היומיומיות", matchTags: ["שחיקה", "מטפל_משפחתי", "חלוקת_תפקידים", "אשפוז", "שחרור"] },
+  { path: "/give-take", label: 'לוח "קח ותן"', description: "תרומה ובקשה של ציוד סיעודי", matchTags: ["ציוד_רפואי", "חיתולים", "ניידות", "קח_ותן", "בטיחות_בית"] },
+  { path: "/foreign-worker-search", label: "חיפוש עובד זר", description: "מנוע חיפוש לעובדי סיעוד זרים", matchTags: ["עובד_זר", "העסקה", "חוזה", "גמלת_סיעוד"] },
+  { path: "/cognitive-training", label: "אימון קוגניטיבי", description: "תרגילים לשימור כושר מנטלי", matchTags: ["דמנציה", "אלצהיימר", "קוגניטיבי"] },
+  { path: "/services", label: "מפת שירותים", description: "גורמי טיפול, עמותות וגופים ציבוריים", matchTags: ["גמלת_סיעוד", "ביטוח_לאומי", "זכויות", "דיור_מוגן", "בית_אבות", "שחיקה", "בריאות_נפשית"] },
+  { path: "/contact", label: "יצירת קשר", description: "פנייה אישית לצוות האתר", matchTags: ["סירוב_טיפול", "אפוטרופסות", "משפטי"] },
+];
 
 const ScenarioExplorer = () => {
   const [scenarios, setScenarios] = useState<any[]>([]);
@@ -38,8 +56,12 @@ const ScenarioExplorer = () => {
   if (loading) return <div className="text-center py-6 text-muted-foreground">טוען תרחישים...</div>;
 
   if (selected) {
+    const tags = (selected.tags as string[]) || [];
     const questions = (selected.questions as string[]) || [];
     const actions = (selected.recommended_actions as string[]) || [];
+    const matchedTools = SITE_TOOLS.filter(tool =>
+      tool.matchTags.some(mt => tags.includes(mt))
+    );
 
     return (
       <div className="space-y-6">
@@ -84,6 +106,30 @@ const ScenarioExplorer = () => {
                   <li key={i} className="flex items-start gap-2 text-sm">
                     <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
                     {a}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        )}
+
+        {matchedTools.length > 0 && (
+          <Card>
+            <CardContent className="p-5 space-y-3">
+              <h4 className="font-semibold flex items-center gap-2 text-primary">
+                <Wrench className="h-5 w-5" />
+                כלים רלוונטיים באתר
+              </h4>
+              <ul className="space-y-3">
+                {matchedTools.map((tool, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Link
+                      to={tool.path}
+                      className="text-sm font-medium text-primary hover:underline shrink-0"
+                    >
+                      {tool.label} ←
+                    </Link>
+                    <span className="text-sm text-muted-foreground">{tool.description}</span>
                   </li>
                 ))}
               </ul>
