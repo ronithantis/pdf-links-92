@@ -47,7 +47,10 @@ const KnowledgeCenter = () => {
           {selectedCategory ? (
             <ResourceList category={selectedCategory} onBack={() => setSelectedCategory(null)} />
           ) : (
-            <CategoryGrid onSelect={setSelectedCategory} counts={counts} />
+            <div className="space-y-8">
+              <CategoryGrid onSelect={setSelectedCategory} counts={counts} />
+              <ResourceList />
+            </div>
           )}
         </TabsContent>
 

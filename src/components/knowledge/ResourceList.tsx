@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import ResourceCard from "./ResourceCard";
 
 interface ResourceListProps {
-  category: string;
-  onBack: () => void;
+  category?: string | null;
+  onBack?: () => void;
 }
 
-const categoryTitles: Record<string, string> = {
+const categoryLabels: Record<string, string> = {
   presentations: "מצגות",
   videos: "סרטונים",
   forms: "טפסים",
@@ -21,36 +22,48 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
   const [resources, setResources] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState<string | null>(category || null);
 
   useEffect(() => {
     const fetchResources = async () => {
       setLoading(true);
-      const { data } = await supabase
+      let query = supabase
         .from("knowledge_resources")
         .select("*")
-        .eq("category", category as any)
         .eq("is_published", true)
         .order("sort_order");
+
+      if (category) {
+        query = query.eq("category", category as any);
+      }
+
+      const { data } = await query;
       setResources(data || []);
       setLoading(false);
     };
     fetchResources();
   }, [category]);
 
-  const filtered = search
-    ? resources.filter(
-        (r) =>
-          r.title.includes(search) ||
-          r.description?.includes(search) ||
-          r.subcategory?.includes(search)
-      )
-    : resources;
+  const filtered = resources.filter((r) => {
+    const matchesSearch = !search || 
+      r.title.includes(search) ||
+      r.description?.includes(search) ||
+      r.subcategory?.includes(search);
+    const matchesFilter = !activeFilter || r.category === activeFilter;
+    return matchesSearch && matchesFilter;
+  });
 
   // Group by subcategory
   const grouped = filtered.reduce((acc: Record<string, any[]>, r) => {
-    const key = r.subcategory || "כללי";
+    const key = r.subcategory || categoryLabels[r.category] || "כללי";
     if (!acc[key]) acc[key] = [];
     acc[key].push(r);
+    return acc;
+  }, {});
+
+  // Count per category for filter badges
+  const categoryCounts = resources.reduce((acc: Record<string, number>, r) => {
+    acc[r.category] = (acc[r.category] || 0) + 1;
     return acc;
   }, {});
 
@@ -58,11 +71,15 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" onClick={onBack}>
-            <ArrowRight className="h-4 w-4 ml-1" />
-            חזרה
-          </Button>
-          <h2 className="text-2xl font-bold">{categoryTitles[category] || category}</h2>
+          {onBack && (
+            <Button variant="ghost" size="sm" onClick={onBack}>
+              <ArrowRight className="h-4 w-4 ml-1" />
+              חזרה
+            </Button>
+          )}
+          <h2 className="text-2xl font-bold">
+            {category ? categoryLabels[category] || category : "כל המשאבים"}
+          </h2>
         </div>
         <div className="relative w-full max-w-xs">
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -74,6 +91,33 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
           />
         </div>
       </div>
+
+      {/* Category filter pills - only when showing all */}
+      {!category && (
+        <div className="flex flex-wrap gap-2">
+          <Badge
+            variant={activeFilter === null ? "default" : "outline"}
+            className="cursor-pointer text-sm px-3 py-1"
+            onClick={() => setActiveFilter(null)}
+          >
+            הכל ({resources.length})
+          </Badge>
+          {Object.entries(categoryLabels).map(([key, label]) => {
+            const count = categoryCounts[key] || 0;
+            if (count === 0) return null;
+            return (
+              <Badge
+                key={key}
+                variant={activeFilter === key ? "default" : "outline"}
+                className="cursor-pointer text-sm px-3 py-1"
+                onClick={() => setActiveFilter(activeFilter === key ? null : key)}
+              >
+                {label} ({count})
+              </Badge>
+            );
+          })}
+        </div>
+      )}
 
       {loading ? (
         <div className="text-center py-10 text-muted-foreground">טוען...</div>

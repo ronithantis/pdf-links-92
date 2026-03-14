@@ -94,6 +94,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/services", label: "מפת שירותים", reason: "מוסדות סיעודיים ודיור מוגן באזורך" },
     ],
   },
+  {
+    keywords: ["שיקום", "פיזיותרפיה", "ריפוי בעיסוק", "שחרור מבית חולים", "חזרה לתפקוד", "שיקום פיזי"],
+    tools: [
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגת מקיפה על שיקום וחזרה לתפקוד לאחר אשפוז" },
+      { path: "/services", label: "מפת שירותים", reason: "מכוני שיקום ושירותי פיזיותרפיה באזורך" },
+      { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי תוכנית השיקום והמטלות היומיומיות" },
+    ],
+  },
 ];
 
 function applyRulesEngine(message: string, aiTools: any[]): any[] {
@@ -187,6 +195,7 @@ serve(async (req) => {
 - שחיקה, עייפות, לחץ → שאלון הערכה (/tools) + מפת שירותים (/services)
 - זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services) + מדריך תביעת סיעוד (/tools#nursing-claim-guide, בתשלום)
 - אשפוז, מוסד סיעודי, בית אבות, דיור מוגן, חלופות מגורים → מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/, חיצוני) + מרכז הידע (/knowledge-center) + מפת שירותים (/services)
+- שיקום, פיזיותרפיה, ריפוי בעיסוק, שחרור מבית חולים, חזרה לתפקוד → מרכז הידע (/knowledge-center, מצגת שיקום) + מפת שירותים (/services) + רשימת משימות (/tasks-list)
 
 כשמציין כלי בתשלום, סמן אותו עם isPaid: true בתוצאה.
 
