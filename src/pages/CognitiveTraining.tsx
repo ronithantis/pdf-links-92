@@ -84,7 +84,7 @@ const games: CognitiveGame[] = [
     id: "word-naming",
     title: "שיום - קריאת מילים",
     description: "קראו את המילה לפי תמונה – תרגול שיום",
-    url: "https://wordwall.net/resource/107877035/%D7%A9%D7%99%D7%95%D7%9D-%D7%9E%D7%99%D7%9C%D7%99%D7%9D-%D7%9C%D7%A4%D7%99-%D7%AA%D7%9E%D7%95%D7%A0%D7%94-%D7%95%D7%9E%D7%99%D7%9C%D7%94",
+    url: "https://wordwall.net/embed/8227c061defa411aaf1b3101d7b85a1a?themeId=42&templateId=70&fontStackId=0",
     category: "שפה",
     icon: <BookOpen className="h-8 w-8" />,
   },
