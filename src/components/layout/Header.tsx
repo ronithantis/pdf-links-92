@@ -117,6 +117,9 @@ const Header = () => {
           <Link to="/knowledge-center" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             מרכז הידע
           </Link>
+          <Link to="/give-take" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+            קח ותן
+          </Link>
           <Link to="/services" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             שירותים וספקים
           </Link>
