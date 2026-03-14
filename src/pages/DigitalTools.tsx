@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { digitalTools } from "@/lib/modules-data";
-import { Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature, Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase, CalendarDays } from "lucide-react";
+import { Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature, Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase, CalendarDays, ExternalLink } from "lucide-react";
 
 const toolIcons: Record<string, React.ReactNode> = {
   Calculator: <Calculator className="h-8 w-8" />,
