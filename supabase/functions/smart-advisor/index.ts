@@ -103,8 +103,22 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
                     items: { type: "string" },
                     description: "IDs of relevant resources from the list",
                   },
+                  site_tools: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        path: { type: "string", description: "נתיב הדף באתר, למשל /tools" },
+                        label: { type: "string", description: "שם הכלי בעברית" },
+                        reason: { type: "string", description: "למה זה רלוונטי למצב" },
+                      },
+                      required: ["path", "label", "reason"],
+                      additionalProperties: false,
+                    },
+                    description: "כלים ודפים רלוונטיים באתר שלנו",
+                  },
                 },
-                required: ["summary", "actions", "relevant_resource_ids"],
+                required: ["summary", "actions", "relevant_resource_ids", "site_tools"],
                 additionalProperties: false,
               },
             },
