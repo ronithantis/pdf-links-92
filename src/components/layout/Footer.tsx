@@ -18,6 +18,7 @@ const Footer = () => {
               <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">דף הבית</Link></li>
               <li><Link to="/tools" className="text-muted-foreground hover:text-primary transition-colors">כלים דיגיטליים</Link></li>
               <li><Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">שירותים לקשיש עד הבית</Link></li>
+              <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">אודות</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">צור קשר</Link></li>
             </ul>
           </div>

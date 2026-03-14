@@ -195,6 +195,9 @@ const Header = () => {
                 <Link to="/foreign-worker-search" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   חיפוש עובד זר
                 </Link>
+                <Link to="/about" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
+                  אודות
+                </Link>
                 <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   צור קשר
                 </Link>
