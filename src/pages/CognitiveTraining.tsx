@@ -60,7 +60,7 @@ const games: CognitiveGame[] = [
     id: "sentence-completion",
     title: "השלמת משפטים",
     description: "השלימו את המשפט עם המילה המתאימה",
-    url: "https://wordwall.net/resource/107967859/%D7%94%D7%A9%D7%9C%D7%99%D7%9E%D7%95-%D7%90%D7%AA-%D7%94%D7%9E%D7%A9%D7%A4%D7%98",
+    url: "https://wordwall.net/embed/15ea5a7dd57b466bb67f34c58446f272?themeId=54&templateId=36&fontStackId=0",
     category: "שפה",
     icon: <BookOpen className="h-8 w-8" />,
   },
