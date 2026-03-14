@@ -21,13 +21,14 @@ import {
   RefreshCw,
   BookOpen,
   FileSignature,
-  Sparkles,
   Home,
   Moon,
   Heart,
   Building,
   Sunset,
   Play,
+  MessageSquare,
+  Compass,
 } from "lucide-react";
 
 const moduleIcons: Record<string, React.ReactNode> = {
