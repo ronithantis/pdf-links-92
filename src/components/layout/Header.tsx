@@ -38,6 +38,7 @@ const Header = () => {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   const searchResults = searchQuery.length >= 2
     ? searchIndex.filter(
