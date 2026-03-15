@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 interface Resource {
   id: string;
@@ -22,6 +22,60 @@ const normalizePublicPath = (url: string) => {
   return `/${url}`;
 };
 
+const PdfViewer = ({ url, title, isFullscreen }: { url: string; title: string; isFullscreen: boolean }) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    setBlocked(false);
+    const timer = setTimeout(() => {
+      if (!loaded) setBlocked(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [url]);
+
+  const handleLoad = useCallback(() => {
+    setLoaded(true);
+    setBlocked(false);
+  }, []);
+
+  if (blocked) {
+    return (
+      <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-4 p-6 text-center" dir="rtl">
+        <FileText className="h-12 w-12 text-muted-foreground" />
+        <p className="text-sm text-muted-foreground">הדפדפן חוסם תצוגת PDF מוטמעת.</p>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          <Download className="h-4 w-4" />
+          פתח/הורד את הטופס
+        </a>
+        <p className="text-xs text-muted-foreground max-w-xs">
+          נסו לפתוח בלשונית חדשה, או לבטל תוסף חסימה בדפדפן.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <iframe
+      ref={iframeRef}
+      src={url}
+      width="100%"
+      height={isFullscreen ? "100%" : "700px"}
+      style={{ border: "none" }}
+      title={title}
+      onLoad={handleLoad}
+      onError={() => setBlocked(true)}
+    />
+  );
+};
+
 const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isVideo = resource.category === "videos";
   const isForm = resource.category === "forms";
@@ -33,7 +87,6 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [iframeError, setIframeError] = useState(false);
 
   const handlePrint = () => {
     if (!formUrl) return;
@@ -58,13 +111,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             open={formOpen}
             onOpenChange={(open) => {
               setFormOpen(open);
-              if (!open) {
-                setIsFullscreen(false);
-                setIframeError(false);
-              }
+              if (!open) setIsFullscreen(false);
             }}
           >
             <DialogContent
+              aria-describedby="form-dialog-desc"
               className={
                 isFullscreen
                   ? "!fixed !inset-0 !translate-x-0 !translate-y-0 !left-0 !top-0 !max-w-none !w-screen !h-screen !rounded-none p-0 flex flex-col"
@@ -74,11 +125,12 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
               <div className="flex items-center justify-between px-4 py-3 border-b bg-muted/30">
                 <DialogHeader className="flex-1">
                   <DialogTitle className="text-base">{resource.title}</DialogTitle>
+                  <DialogDescription id="form-dialog-desc" className="sr-only">תצוגת טופס</DialogDescription>
                 </DialogHeader>
                 <div className="flex items-center gap-1">
                   {formUrl && (
                     <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" asChild>
-                      <a href={formUrl} download target="_blank" rel="noopener noreferrer">
+                      <a href={formUrl} target="_blank" rel="noopener noreferrer">
                         <Download className="h-3.5 w-3.5 ml-1" />
                         פתח/הורד
                       </a>
@@ -94,37 +146,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
               </div>
 
               <div className="flex-1 overflow-auto bg-background">
-                {formUrl && !iframeError ? (
-                  <iframe
-                    src={formUrl}
-                    width="100%"
-                    height={isFullscreen ? "100%" : "700px"}
-                    style={{ border: "none" }}
-                    title="טופס"
-                    onError={() => setIframeError(true)}
-                  />
-                ) : (
-                  <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-3 p-6 text-center">
-                    <p className="text-sm text-muted-foreground">לא ניתן להציג את הטופס בחלון הפנימי</p>
-                    {formUrl && (
-                      <a
-                        href={formUrl}
-                        download
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                      >
-                        <Download className="h-4 w-4" />
-                        פתח/הורד טופס
-                      </a>
-                    )}
-                  </div>
-                )}
-                {formUrl && (
-                  <div className="border-t px-4 py-2 text-xs text-muted-foreground text-center">
-                    אם הטופס לא מוצג בדפדפן, השתמש בכפתור "פתח/הורד" למעלה.
-                  </div>
-                )}
+                {formUrl && <PdfViewer url={formUrl} title={resource.title} isFullscreen={isFullscreen} />}
               </div>
             </DialogContent>
           </Dialog>
