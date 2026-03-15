@@ -27,8 +27,8 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
     return (
       <a
         href={hasUrl ? resource.url! : undefined}
-        target={hasUrl && !isInternalLink ? "_blank" : undefined}
-        rel={hasUrl && !isInternalLink ? "noopener noreferrer" : undefined}
+        target={hasUrl && (!isInternalLink || isPdfForm) ? "_blank" : undefined}
+        rel={hasUrl && (!isInternalLink || isPdfForm) ? "noopener noreferrer" : undefined}
         className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
       >
         <FileText className="h-5 w-5 text-primary shrink-0" />
