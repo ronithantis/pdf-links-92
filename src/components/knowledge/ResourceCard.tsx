@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2 } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
