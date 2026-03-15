@@ -143,13 +143,36 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                   </Button>
                 </div>
               </div>
-              <div className="flex-1 overflow-hidden">
-                <iframe
-                  ref={iframeRef}
-                  src={resource.url!}
-                  className="w-full h-full border-0"
-                  title={resource.title}
-                />
+              <div className="flex-1 overflow-hidden relative">
+                {pdfLoading && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/70">
+                    <Loader2 className="h-7 w-7 animate-spin text-primary" />
+                  </div>
+                )}
+
+                {pdfLoadError ? (
+                  <div className="h-full flex flex-col items-center justify-center gap-3 p-6 text-center">
+                    <p className="text-sm text-muted-foreground">לא ניתן להציג את הטופס בחלון הפנימי</p>
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={resource.url!} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 ml-1" />
+                        פתיחה בחלון חדש
+                      </a>
+                    </Button>
+                  </div>
+                ) : (
+                  <iframe
+                    ref={iframeRef}
+                    src={pdfBlobUrl ?? resource.url!}
+                    className="w-full h-full border-0"
+                    title={resource.title}
+                    onLoad={() => setPdfLoading(false)}
+                    onError={() => {
+                      setPdfLoadError(true);
+                      setPdfLoading(false);
+                    }}
+                  />
+                )}
               </div>
             </DialogContent>
           </Dialog>
