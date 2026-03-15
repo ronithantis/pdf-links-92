@@ -24,7 +24,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   if (isForm) {
     return (
       <a
-        href={resolvedUrl}
+        href={hasUrl ? resource.url! : undefined}
         target={hasUrl ? "_blank" : undefined}
         rel={hasUrl ? "noopener noreferrer" : undefined}
         className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
