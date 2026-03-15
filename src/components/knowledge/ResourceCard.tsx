@@ -20,10 +20,6 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
-  const isPdfForm = isForm && hasUrl && resource.url!.toLowerCase().includes(".pdf");
-
-  // Compact form card
-  const resolvedUrl = hasUrl ? (isPdfForm ? encodeURI(resource.url!) : resource.url!) : undefined;
 
   if (isForm) {
     return (
