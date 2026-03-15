@@ -18,6 +18,7 @@ import Auth from "./pages/Auth";
 import AdminKnowledge from "./pages/AdminKnowledge";
 import GiveTake from "./pages/GiveTake";
 import About from "./pages/About";
+import FormsPage from "./pages/FormsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
+            <Route path="/forms" element={<FormsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
