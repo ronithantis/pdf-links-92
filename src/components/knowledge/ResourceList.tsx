@@ -146,8 +146,9 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
               )}
             </div>
           );
-        }))
+        })
       )}
+
     </div>
   );
 };
