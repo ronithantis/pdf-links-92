@@ -380,7 +380,7 @@ export const digitalTools = [
     description: "כלי לבחירת 9 ימי חג שנתיים לעובד זר והדפסתם",
     icon: "CalendarDays",
     isPaid: false,
-    toolUrl: "https://ronithantis.github.io/harel-siud-guide/",
+    toolUrl: "https://holiday-helper-multilingual.lovable.app/",
   },
   {
     id: "will-template",
