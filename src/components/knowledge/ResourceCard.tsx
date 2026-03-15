@@ -20,15 +20,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
-  const isPdfForm = isForm && hasUrl && resource.url!.toLowerCase().includes(".pdf");
-
-  // Compact form card
-  const resolvedUrl = hasUrl ? (isPdfForm ? encodeURI(resource.url!) : resource.url!) : undefined;
 
   if (isForm) {
     return (
       <a
-        href={resolvedUrl}
+        href={hasUrl ? resource.url! : undefined}
         target={hasUrl ? "_blank" : undefined}
         rel={hasUrl ? "noopener noreferrer" : undefined}
         className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
