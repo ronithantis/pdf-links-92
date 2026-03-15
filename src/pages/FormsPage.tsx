@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { FileText, Download, Printer, X } from "lucide-react";
 
 interface Form {
   id: string;
@@ -55,10 +56,59 @@ const ALL_FORMS: Form[] = [
 
 const CATEGORIES = [...new Set(ALL_FORMS.map((f) => f.category))];
 
+const PdfViewer = ({ url, title }: { url: string; title: string }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    setBlocked(false);
+    const timer = setTimeout(() => {
+      if (!loaded) setBlocked(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [url]);
+
+  const handleLoad = useCallback(() => {
+    setLoaded(true);
+    setBlocked(false);
+  }, []);
+
+  if (blocked) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full gap-4 text-muted-foreground" dir="rtl">
+        <FileText className="h-12 w-12" />
+        <p className="m-0 text-sm">הדפדפן חוסם תצוגת PDF מוטמעת.</p>
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-md no-underline text-sm font-medium"
+        >
+          <Download className="h-4 w-4" />
+          פתח/הורד את הטופס
+        </a>
+        <p className="text-xs max-w-xs text-center">נסו לפתוח בלשונית חדשה, או לבטל תוסף חסימה בדפדפן.</p>
+      </div>
+    );
+  }
+
+  return (
+    <iframe
+      src={url}
+      title={title}
+      width="100%"
+      height="100%"
+      style={{ border: "none", display: "block" }}
+      onLoad={handleLoad}
+      onError={() => setBlocked(true)}
+    />
+  );
+};
+
 export default function FormsPage() {
   const [search, setSearch] = useState("");
   const [openForm, setOpenForm] = useState<Form | null>(null);
-  const [pdfError, setPdfError] = useState(false);
 
   const filtered = ALL_FORMS.filter(
     (f) => f.title.includes(search) || f.category.includes(search)
@@ -72,10 +122,6 @@ export default function FormsPage() {
     },
     {}
   );
-
-  useEffect(() => {
-    setPdfError(false);
-  }, [openForm]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -157,58 +203,36 @@ export default function FormsPage() {
             <div className="flex items-center justify-between px-5 py-3.5 border-b shrink-0" style={{ direction: "rtl" }}>
               <span className="font-bold text-sm text-foreground">{openForm.title}</span>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={handlePrint}
-                  title="הדפס"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-primary-foreground border-none rounded-md cursor-pointer text-xs"
-                >
-                  🖨️ הדפסה
-                </button>
                 <a
                   href={pdfUrl}
                   target="_blank"
                   rel="noreferrer"
-                  title="פתח בחלון נפרד"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 bg-muted text-foreground border border-border rounded-md cursor-pointer text-xs no-underline"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-primary-foreground border-none rounded-md cursor-pointer text-xs no-underline font-medium"
                 >
-                  ⤢ מסך מלא
+                  <Download className="h-3.5 w-3.5" />
+                  פתח/הורד
                 </a>
+                <button
+                  onClick={handlePrint}
+                  title="הדפס"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-muted text-foreground border border-border rounded-md cursor-pointer text-xs"
+                >
+                  <Printer className="h-3.5 w-3.5" />
+                  הדפסה
+                </button>
                 <button
                   onClick={() => setOpenForm(null)}
                   title="סגור"
-                  className="flex items-center justify-center w-8 h-8 bg-transparent border border-border rounded-md cursor-pointer text-base text-muted-foreground"
+                  className="flex items-center justify-center w-8 h-8 bg-transparent border border-border rounded-md cursor-pointer text-muted-foreground"
                 >
-                  ✕
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
             {/* PDF Viewer */}
             <div className="flex-1 overflow-hidden relative">
-              {!pdfError ? (
-                <iframe
-                  key={openForm.id}
-                  src={pdfUrl}
-                  title={openForm.title}
-                  width="100%"
-                  height="100%"
-                  style={{ border: "none", display: "block" }}
-                  onError={() => setPdfError(true)}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-muted-foreground" style={{ direction: "rtl" }}>
-                  <span className="text-5xl">📄</span>
-                  <p className="m-0 text-sm">לא ניתן להציג את הקובץ בחלון זה</p>
-                  <a
-                    href={pdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-5 py-2.5 bg-primary text-primary-foreground rounded-md no-underline text-sm"
-                  >
-                    פתח את הקובץ ישירות
-                  </a>
-                </div>
-              )}
+              <PdfViewer key={openForm.id} url={pdfUrl} title={openForm.title} />
             </div>
           </div>
         </div>
