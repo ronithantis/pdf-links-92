@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,13 @@ interface Resource {
   subcategory: string | null;
 }
 
+const normalizePublicPath = (url: string) => {
+  if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `/${url}`;
+};
+
 const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isVideo = resource.category === "videos";
   const isForm = resource.category === "forms";
@@ -22,82 +29,15 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
+  const formUrl = hasUrl && resource.url ? normalizePublicPath(resource.url) : null;
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
-  const [pdfLoading, setPdfLoading] = useState(false);
-  const [pdfLoadError, setPdfLoadError] = useState(false);
-
-  useEffect(() => {
-    if (!isForm || !hasUrl || !formOpen || !resource.url) return;
-
-    let cancelled = false;
-    let objectUrl: string | null = null;
-
-    const loadPdf = async () => {
-      setPdfLoading(true);
-      setPdfLoadError(false);
-
-      try {
-        const response = await fetch(resource.url, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(`Failed to load PDF (${response.status})`);
-        }
-
-        const blob = await response.blob();
-        objectUrl = URL.createObjectURL(blob);
-
-        if (cancelled) {
-          URL.revokeObjectURL(objectUrl);
-          return;
-        }
-
-        setPdfBlobUrl(objectUrl);
-      } catch {
-        if (!cancelled) {
-          setPdfLoadError(true);
-          setPdfBlobUrl(null);
-        }
-      } finally {
-        if (!cancelled) {
-          setPdfLoading(false);
-        }
-      }
-    };
-
-    loadPdf();
-
-    return () => {
-      cancelled = true;
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl);
-      }
-    };
-  }, [formOpen, hasUrl, isForm, resource.url]);
+  const [iframeError, setIframeError] = useState(false);
 
   const handlePrint = () => {
-    try {
-      const iframe = iframeRef.current;
-      if (iframe?.contentWindow) {
-        iframe.contentWindow.focus();
-        iframe.contentWindow.print();
-        return;
-      }
-    } catch {
-      // cross-origin or blocked – fallback
-    }
-
-    if (pdfBlobUrl) {
-      window.open(pdfBlobUrl, "_blank", "noopener,noreferrer");
-      return;
-    }
-
-    if (hasUrl) {
-      window.open(resource.url!, "_blank", "noopener,noreferrer");
-    }
+    if (!formUrl) return;
+    window.open(formUrl, "_blank");
   };
 
   if (isForm) {
@@ -114,15 +54,16 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
         </button>
 
         {hasUrl && (
-          <Dialog open={formOpen} onOpenChange={(open) => {
-            setFormOpen(open);
-            if (!open) {
-              setIsFullscreen(false);
-              setPdfLoading(false);
-              setPdfLoadError(false);
-              setPdfBlobUrl(null);
-            }
-          }}>
+          <Dialog
+            open={formOpen}
+            onOpenChange={(open) => {
+              setFormOpen(open);
+              if (!open) {
+                setIsFullscreen(false);
+                setIframeError(false);
+              }
+            }}
+          >
             <DialogContent
               className={
                 isFullscreen
@@ -138,40 +79,38 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                   <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handlePrint} title="הדפסה">
                     <Printer className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setIsFullscreen(!isFullscreen)}>
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setIsFullscreen(!isFullscreen)} title="מסך מלא">
                     {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
                   </Button>
                 </div>
               </div>
-              <div className="flex-1 overflow-hidden relative">
-                {pdfLoading && (
-                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/70">
-                    <Loader2 className="h-7 w-7 animate-spin text-primary" />
-                  </div>
-                )}
 
-                {pdfLoadError ? (
-                  <div className="h-full flex flex-col items-center justify-center gap-3 p-6 text-center">
-                    <p className="text-sm text-muted-foreground">לא ניתן להציג את הטופס בחלון הפנימי</p>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={resource.url!} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 ml-1" />
-                        פתיחה בחלון חדש
-                      </a>
-                    </Button>
-                  </div>
-                ) : (
+              <div className="flex-1 overflow-auto bg-background">
+                {formUrl && !iframeError ? (
                   <iframe
-                    ref={iframeRef}
-                    src={pdfBlobUrl ?? resource.url!}
-                    className="w-full h-full border-0"
-                    title={resource.title}
-                    onLoad={() => setPdfLoading(false)}
-                    onError={() => {
-                      setPdfLoadError(true);
-                      setPdfLoading(false);
-                    }}
+                    src={formUrl}
+                    width="100%"
+                    height={isFullscreen ? "100%" : "700px"}
+                    style={{ border: "none" }}
+                    title="טופס"
+                    onError={() => setIframeError(true)}
                   />
+                ) : (
+                  <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-3 p-6 text-center">
+                    <p className="text-sm text-muted-foreground">לא ניתן להציג את הטופס בחלון הפנימי</p>
+                    {formUrl && (
+                      <a
+                        href={formUrl}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 rounded-md border border-input bg-background px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <Download className="h-4 w-4" />
+                        פתח/הורד טופס
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </DialogContent>
