@@ -27,17 +27,77 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
+  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfLoadError, setPdfLoadError] = useState(false);
+
+  useEffect(() => {
+    if (!isForm || !hasUrl || !formOpen || !resource.url) return;
+
+    let cancelled = false;
+    let objectUrl: string | null = null;
+
+    const loadPdf = async () => {
+      setPdfLoading(true);
+      setPdfLoadError(false);
+
+      try {
+        const response = await fetch(resource.url, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Failed to load PDF (${response.status})`);
+        }
+
+        const blob = await response.blob();
+        objectUrl = URL.createObjectURL(blob);
+
+        if (cancelled) {
+          URL.revokeObjectURL(objectUrl);
+          return;
+        }
+
+        setPdfBlobUrl(objectUrl);
+      } catch {
+        if (!cancelled) {
+          setPdfLoadError(true);
+          setPdfBlobUrl(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setPdfLoading(false);
+        }
+      }
+    };
+
+    loadPdf();
+
+    return () => {
+      cancelled = true;
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
+  }, [formOpen, hasUrl, isForm, resource.url]);
+
   const handlePrint = () => {
     try {
       const iframe = iframeRef.current;
       if (iframe?.contentWindow) {
+        iframe.contentWindow.focus();
         iframe.contentWindow.print();
         return;
       }
     } catch {
       // cross-origin or blocked – fallback
     }
-    if (hasUrl) window.open(resource.url!, "_blank");
+
+    if (pdfBlobUrl) {
+      window.open(pdfBlobUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (hasUrl) {
+      window.open(resource.url!, "_blank", "noopener,noreferrer");
+    }
   };
 
   if (isForm) {
