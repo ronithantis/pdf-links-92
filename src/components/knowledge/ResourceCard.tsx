@@ -76,6 +76,14 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                   <DialogTitle className="text-base">{resource.title}</DialogTitle>
                 </DialogHeader>
                 <div className="flex items-center gap-1">
+                  {formUrl && (
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" asChild>
+                      <a href={formUrl} download target="_blank" rel="noopener noreferrer">
+                        <Download className="h-3.5 w-3.5 ml-1" />
+                        פתח/הורד
+                      </a>
+                    </Button>
+                  )}
                   <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handlePrint} title="הדפסה">
                     <Printer className="h-4 w-4" />
                   </Button>
@@ -110,6 +118,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                         פתח/הורד טופס
                       </a>
                     )}
+                  </div>
+                )}
+                {formUrl && (
+                  <div className="border-t px-4 py-2 text-xs text-muted-foreground text-center">
+                    אם הטופס לא מוצג בדפדפן, השתמש בכפתור "פתח/הורד" למעלה.
                   </div>
                 )}
               </div>
