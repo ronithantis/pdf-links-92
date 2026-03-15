@@ -1,4 +1,4 @@
-import { ExternalLink, Play, FileText, Wrench } from "lucide-react";
+import { ExternalLink, Play, FileText, Wrench, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,22 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
   const isPdfForm = isForm && hasUrl && resource.url!.toLowerCase().includes(".pdf");
 
+  // Compact form card
+  if (isForm) {
+    return (
+      <a
+        href={hasUrl ? resource.url! : undefined}
+        target={hasUrl && !isInternalLink ? "_blank" : undefined}
+        rel={hasUrl && !isInternalLink ? "noopener noreferrer" : undefined}
+        className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
+      >
+        <FileText className="h-5 w-5 text-primary shrink-0" />
+        <span className="font-medium text-sm leading-tight flex-1 text-right">{resource.title}</span>
+        {hasUrl && <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
+      </a>
+    );
+  }
+
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full max-w-[320px]">
       {isVideo && hasUrl ? (
@@ -40,20 +56,6 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Play className="h-10 w-10 mx-auto mb-2 opacity-30" />
             <span className="text-xs">בקרוב</span>
           </div>
-        </div>
-      ) : isForm && isPdfForm ? (
-        <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
-          <iframe
-            src={resource.url!}
-            className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
-            title={resource.title}
-            loading="lazy"
-          />
-          <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
-        </div>
-      ) : isForm ? (
-        <div className="bg-primary/5 h-28 flex items-center justify-center">
-          <FileText className="h-12 w-12 text-primary opacity-60" />
         </div>
       ) : isTool ? (
         <div className="bg-muted/30 h-24 flex items-center justify-center">
@@ -92,7 +94,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="h-3 w-3 ml-1" />
-                {isVideo ? "צפייה" : isForm ? "פתיחת טופס" : isPresentation ? "פתיחת מצגת" : "פתיחה"}
+                {isVideo ? "צפייה" : isPresentation ? "פתיחת מצגת" : "פתיחה"}
               </a>
             </Button>
           )

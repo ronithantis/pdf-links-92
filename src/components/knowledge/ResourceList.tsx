@@ -124,19 +124,31 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
       ) : filtered.length === 0 ? (
         <div className="text-center py-10 text-muted-foreground">לא נמצאו פריטים</div>
       ) : (
-        Object.entries(grouped).map(([subcategory, items]) => (
-          <div key={subcategory}>
-            {Object.keys(grouped).length > 1 && (
-              <h3 className="text-lg font-semibold mb-4 text-primary">{subcategory}</h3>
-            )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
-              {(items as any[]).map((resource: any) => (
-                <ResourceCard key={resource.id} resource={resource} />
-              ))}
+        Object.entries(grouped).map(([subcategory, items]) => {
+          const isFormCategory = category === "forms" || (items as any[])[0]?.category === "forms";
+          return (
+            <div key={subcategory}>
+              {Object.keys(grouped).length > 1 && (
+                <h3 className="text-lg font-semibold mb-4 text-primary">{subcategory}</h3>
+              )}
+              {isFormCategory ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {(items as any[]).map((resource: any) => (
+                    <ResourceCard key={resource.id} resource={resource} />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
+                  {(items as any[]).map((resource: any) => (
+                    <ResourceCard key={resource.id} resource={resource} />
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        ))
+          );
+        })
       )}
+
     </div>
   );
 };
