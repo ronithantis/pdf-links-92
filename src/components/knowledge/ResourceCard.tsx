@@ -114,7 +114,15 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
         </button>
 
         {hasUrl && (
-          <Dialog open={formOpen} onOpenChange={(open) => { setFormOpen(open); if (!open) setIsFullscreen(false); }}>
+          <Dialog open={formOpen} onOpenChange={(open) => {
+            setFormOpen(open);
+            if (!open) {
+              setIsFullscreen(false);
+              setPdfLoading(false);
+              setPdfLoadError(false);
+              setPdfBlobUrl(null);
+            }
+          }}>
             <DialogContent
               className={
                 isFullscreen
