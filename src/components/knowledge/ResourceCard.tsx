@@ -23,17 +23,19 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isPdfForm = isForm && hasUrl && resource.url!.toLowerCase().includes(".pdf");
 
   // Compact form card
+  const resolvedUrl = hasUrl ? (isPdfForm ? encodeURI(resource.url!) : resource.url!) : undefined;
+
   if (isForm) {
     return (
       <a
-        href={hasUrl ? resource.url! : undefined}
-        target={hasUrl && (!isInternalLink || isPdfForm) ? "_blank" : undefined}
-        rel={hasUrl && (!isInternalLink || isPdfForm) ? "noopener noreferrer" : undefined}
+        href={resolvedUrl}
+        target={hasUrl ? "_blank" : undefined}
+        rel={hasUrl ? "noopener noreferrer" : undefined}
         className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
       >
         <FileText className="h-5 w-5 text-primary shrink-0" />
         <span className="font-medium text-sm leading-tight flex-1 text-right">{resource.title}</span>
-        {hasUrl && <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
+        {hasUrl && <Download className="h-4 w-4 text-muted-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
       </a>
     );
   }
