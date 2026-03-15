@@ -195,7 +195,8 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
           </InfoBox>
 
           <div>
-            <h4 className="font-semibold mb-3">טבלת שכר וניכויים (עדכני לפברואר 2026):</h4>
+            <h4 className="font-semibold mb-3">טבלת שכר וניכויים (נכון ל-1 באפריל 2026):</h4>
+            <p className="text-xs text-muted-foreground mb-2">שכר המינימום: 6,443.85 ₪ לחודש | 35.4 ₪ לשעה. מקור: <a href="https://www.kolzchut.org.il/he/%D7%A9%D7%9B%D7%A8_%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%95%D7%9D" target="_blank" rel="noopener noreferrer" className="underline text-primary">כל זכות</a></p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm border-collapse">
                 <thead>
@@ -205,23 +206,23 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border p-2 font-semibold">שכר ברוטו (כולל 4 שבתות)</td><td className="border p-2">6,247.67 ₪</td></tr>
-                  <tr><td className="border p-2">עבודה ביום שבת (4 ימים)</td><td className="border p-2">1,705.40 ₪</td></tr>
+                  <tr><td className="border p-2 font-semibold">שכר ברוטו (כולל 4 שבתות)</td><td className="border p-2">6,443.85 ₪</td></tr>
+                  <tr><td className="border p-2">עבודה ביום שבת (4 ימים)</td><td className="border p-2">1,759.00 ₪</td></tr>
                   <tr><td className="border p-2">מקדמות ששולמו</td><td className="border p-2">400.00 ₪</td></tr>
-                  <tr className="bg-muted/50"><td className="border p-2 font-bold">סה"כ ברוטו לתשלום</td><td className="border p-2 font-bold">7,553.07 ₪</td></tr>
+                  <tr className="bg-muted/50"><td className="border p-2 font-bold">סה"כ ברוטו לתשלום</td><td className="border p-2 font-bold">7,802.85 ₪</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: מגורים (אזור המרכז)</td><td className="border p-2">192.81 ₪−</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: הוצאות נלוות למגורים</td><td className="border p-2">94.34 ₪−</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: ביטוח רפואי (חלק עובד)</td><td className="border p-2">142.00 ₪−</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: כלכלה (אוכל)</td><td className="border p-2">500.00 ₪−</td></tr>
                   <tr className="bg-muted/50"><td className="border p-2 font-bold text-destructive">סה"כ ניכויים מותרים</td><td className="border p-2 font-bold">929.15 ₪−</td></tr>
-                  <tr className="bg-primary/10"><td className="border p-2 font-bold">נטו לתשלום (משוער)</td><td className="border p-2 font-bold">~6,624 ₪</td></tr>
+                  <tr className="bg-primary/10"><td className="border p-2 font-bold">נטו לתשלום (משוער)</td><td className="border p-2 font-bold">~6,874 ₪</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <InfoBox title="📌 עדכון צפוי באפריל 2026" variant="info">
-            <p>שכר המינימום צפוי לעלות לכ-6,443 ₪ (תוספת של כ-200 ₪). עדכנו את חישוביכם בהתאם.</p>
+          <InfoBox title="📌 עדכון שכר מינימום – אפריל 2026" variant="info">
+            <p>החל מ-1 באפריל 2026, שכר המינימום עומד על <strong>6,443.85 ₪ לחודש</strong> (שעתי: <strong>35.4 ₪</strong>). העדכון נובע ממנגנון ההצמדה האוטומטי. על המעסיקים חלה חובה להציג את שכר המינימום המעודכן במקום בולט או בתלוש השכר.</p>
           </InfoBox>
 
           <div>
@@ -623,7 +624,7 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
             <p>הניהול המקצועי של מערך הטיפול הביתי הוא מסע מורכב, אך עם הכלים הנכונים, הידע המעשי והגישה האנושית הנכונה — ניתן לבנות מערכת שמיטיבה עם המטופל, עם העובד ועם כל המשפחה.</p>
           </InfoBox>
 
-          <p className="text-xs text-muted-foreground">* העלויות, השכר, הנהלים וסכומי הניכוי המצוינים במסמך זה נכונים לפברואר 2026 ועשויים להשתנות. מומלץ לאמת נתונים פיננסיים עם רואה חשבון, לשכת עבודה או הביטוח הלאומי.</p>
+          <p className="text-xs text-muted-foreground">* העלויות, השכר, הנהלים וסכומי הניכוי המצוינים במסמך זה נכונים ל-1 באפריל 2026 ועשויים להשתנות. שכר מינימום: 6,443.85 ₪ לחודש / 35.4 ₪ לשעה. מומלץ לאמת נתונים פיננסיים עם רואה חשבון, לשכת עבודה או הביטוח הלאומי.</p>
         </div>
       );
 
