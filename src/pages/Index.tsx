@@ -121,10 +121,10 @@ const Index = () => {
       </section>
 
       {/* Pathway Cards */}
-      <section className="py-12 bg-muted/30">
+      <section id="pathway" className="py-12 bg-muted/30">
         <div className="container">
           <h2 className="text-2xl font-bold text-center mb-2">איך תרצו להתחיל?</h2>
-          <p className="text-center text-muted-foreground mb-8">בחרו את הדרך המתאימה לכם</p>
+          <p className="text-center text-muted-foreground mb-8">בחרו את הנתיב המתאים לכם</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {/* Card 1 - Questionnaire */}
             <Card className="hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group" onClick={() => setShowQuestionnaire(true)}>
