@@ -75,39 +75,47 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="בת מחבקת את הוריה המבוגרים" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-l from-background/95 via-background/70 to-background/30" />
+          <img src={heroImage} alt="בת מחבקת את הוריה המבוגרים" className="w-full h-full object-cover object-[30%_center]" />
+          <div className="absolute inset-0 bg-gradient-to-l from-background/95 via-background/75 to-background/40" />
         </div>
         <div className="relative container py-20 md:py-32">
-          <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight mb-6">
-              כאן מתחילה{" "}
-              <span className="text-primary">העזרה</span>
+          <div className="max-w-2xl mr-auto">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-4">
+              מרכז הידע והכלים{" "}
+              <span className="text-primary">למשפחות מטפלות</span>{" "}
+              בהורה מבוגר
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              מרכז הידע המקיף למשפחות המטפלות בהורים מבוגרים בישראל.
-              מידע מקצועי, כלים מעשיים וליווי בכל שלב.
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
+              מרכז ידע מקיף, זכויות, כלים פרקטיים והכוונה מעשית למשפחות המטפלות בהורה מבוגר.
             </p>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button size="sm" variant="outline" className="text-sm mt-2">
-                  <Play className="h-4 w-4 ml-1" />
-                  צפו בסרטון פתיח
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl p-0 overflow-hidden">
-                <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-                  <iframe
-                    src="https://player.vimeo.com/video/1159512126?badge=0&autopause=0&player_id=0&app_id=58479"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-                    title="סרטון פתיח"
-                  />
-                </div>
-              </DialogContent>
-            </Dialog>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button size="lg" asChild>
+                <a href="#pathway">
+                  התחילו מכאן
+                  <ArrowLeft className="h-4 w-4 mr-1" />
+                </a>
+              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="sm" variant="ghost" className="text-sm text-muted-foreground">
+                    <Play className="h-4 w-4 ml-1" />
+                    צפו בסרטון פתיח
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                  <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+                    <iframe
+                      src="https://player.vimeo.com/video/1159512126?badge=0&autopause=0&player_id=0&app_id=58479"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                      title="סרטון פתיח"
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
           </div>
         </div>
       </section>
