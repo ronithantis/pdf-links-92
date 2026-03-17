@@ -300,7 +300,7 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
                   actions: {
                     type: "array",
                     items: { type: "string" },
-                    description: "3-5 פעולות מיידיות מומלצות",
+                    description: "3-7 פעולות מיידיות מומלצות, ספציפיות לתרחיש",
                   },
                   relevant_resource_ids: {
                     type: "array",
