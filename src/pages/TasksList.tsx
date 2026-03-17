@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface TaskSection {
   id: string;
@@ -151,9 +153,31 @@ const taskSections: TaskSection[] = [
 ];
 
 const TasksList = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="py-12">
       <div className="container max-w-4xl">
+        <div className="flex items-center gap-2 mb-6 text-sm text-muted-foreground">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate(-1)}
+            className="gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowRight className="h-4 w-4" />
+            חזרה
+          </Button>
+          <span>|</span>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/knowledge-center")}
+            className="gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            מרכז הידע
+          </Button>
+        </div>
         <div className="flex items-center justify-center gap-3 mb-3">
           <ClipboardList className="h-8 w-8 text-primary" />
           <h1 className="text-3xl md:text-4xl font-bold text-center">רשימת משימות מנהל הטיפול</h1>
