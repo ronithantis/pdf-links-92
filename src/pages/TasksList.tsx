@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator";
-import { ClipboardList } from "lucide-react";
+import { ClipboardList, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface TaskSection {
   id: string;
