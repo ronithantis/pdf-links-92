@@ -34,9 +34,18 @@ const KEYWORD_RULES: KeywordRule[] = [
     keywords: ["ייפוי כוח", "יפוי כוח", "אפוטרופסות", "אפוטרופוס"],
     tools: [
       { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "מדריך אינטראקטיבי לעריכת ייפוי כוח מתמשך", isPaid: true },
+      { path: "/tools#life-compass", label: "מצפן חיים", reason: "תיעוד רצונות בכתב ובווידאו – חלופה למי שלא עורך ייפוי כוח" },
       { path: "/tools#will-template", label: "כתיבת צוואה", reason: "מומלץ להסדיר צוואה במקביל לייפוי כוח", isPaid: true },
       { path: "/tools#family-sync", label: "כלי סנכרון הטיפול המשפחתי", reason: "תיאום בין בני משפחה סביב החלטות משפטיות", isPaid: true },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות ומדריכים על ייפוי כוח ואפוטרופסות" },
+    ],
+  },
+  {
+    keywords: ["רצונות", "מצפן חיים", "הנחיות מקדימות", "רצון המטופל", "תיעוד רצונות"],
+    tools: [
+      { path: "/tools#life-compass", label: "מצפן חיים", reason: "כלי לתיעוד רצונות בכתב ובווידאו – אינו מסמך משפטי מחייב" },
+      { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "להפיכת הרצונות למסמך משפטי מחייב", isPaid: true },
+      { path: "/tools#will-template", label: "כתיבת צוואה", reason: "השלמת התכנון המשפטי עם צוואה", isPaid: true },
     ],
   },
   {

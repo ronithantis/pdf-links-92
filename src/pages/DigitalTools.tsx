@@ -8,7 +8,7 @@ import { digitalTools } from "@/lib/modules-data";
 import {
   Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature,
   Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase,
-  CalendarDays, ExternalLink, Maximize2, Minimize2, X
+  CalendarDays, ExternalLink, Maximize2, Minimize2, X, Compass
 } from "lucide-react";
 
 const toolIcons: Record<string, React.ReactNode> = {
@@ -23,6 +23,7 @@ const toolIcons: Record<string, React.ReactNode> = {
   CalendarDays: <CalendarDays className="h-8 w-8" />,
   BookOpen: <BookOpen className="h-8 w-8" />,
   FileSignature: <FileSignature className="h-8 w-8" />,
+  Compass: <Compass className="h-8 w-8" />,
 };
 
 const DigitalTools = () => {
