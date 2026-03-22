@@ -407,4 +407,12 @@ export const digitalTools = [
     isExternal: true,
     externalUrl: "https://me.health.gov.il/nursing-calculator/",
   },
+  {
+    id: "life-compass",
+    title: "מצפן חיים",
+    description: "כלי לתיעוד רצונות בכתב ובווידאו – למי שלא עושה ייפוי כוח מתמשך. אינו מהווה מסמך משפטי מחייב.",
+    icon: "Compass",
+    isPaid: false,
+    toolUrl: "https://ronithantis.github.io/Matzpen-chaim/",
+  },
 ];
