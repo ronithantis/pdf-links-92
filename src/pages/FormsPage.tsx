@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { FileText, Download, Printer, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Download, Printer, X } from "lucide-react";
+import PdfViewerComponent from "@/components/PdfViewer";
 
 interface Form {
   id: string;
@@ -56,55 +57,6 @@ const ALL_FORMS: Form[] = [
 
 const CATEGORIES = [...new Set(ALL_FORMS.map((f) => f.category))];
 
-const PdfViewer = ({ url, title }: { url: string; title: string }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [blocked, setBlocked] = useState(false);
-
-  useEffect(() => {
-    setLoaded(false);
-    setBlocked(false);
-    const timer = setTimeout(() => {
-      if (!loaded) setBlocked(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [url]);
-
-  const handleLoad = useCallback(() => {
-    setLoaded(true);
-    setBlocked(false);
-  }, []);
-
-  if (blocked) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full gap-4 text-muted-foreground" dir="rtl">
-        <FileText className="h-12 w-12" />
-        <p className="m-0 text-sm">הדפדפן חוסם תצוגת PDF מוטמעת.</p>
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-md no-underline text-sm font-medium"
-        >
-          <Download className="h-4 w-4" />
-          פתח/הורד את הטופס
-        </a>
-        <p className="text-xs max-w-xs text-center">נסו לפתוח בלשונית חדשה, או לבטל תוסף חסימה בדפדפן.</p>
-      </div>
-    );
-  }
-
-  return (
-    <iframe
-      src={url}
-      title={title}
-      width="100%"
-      height="100%"
-      style={{ border: "none", display: "block" }}
-      onLoad={handleLoad}
-      onError={() => setBlocked(true)}
-    />
-  );
-};
 
 export default function FormsPage() {
   const [search, setSearch] = useState("");
@@ -232,7 +184,7 @@ export default function FormsPage() {
 
             {/* PDF Viewer */}
             <div className="flex-1 overflow-hidden relative">
-              <PdfViewer key={openForm.id} url={pdfUrl} title={openForm.title} />
+              <PdfViewerComponent key={openForm.id} url={pdfUrl} title={openForm.title} />
             </div>
           </div>
         </div>

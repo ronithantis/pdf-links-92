@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import PdfViewer from "@/components/PdfViewer";
 
 interface Resource {
   id: string;
@@ -14,66 +15,11 @@ interface Resource {
   url: string | null;
   subcategory: string | null;
 }
-
 const normalizePublicPath = (url: string) => {
   if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://")) {
     return url;
   }
   return `/${url}`;
-};
-
-const PdfViewer = ({ url, title, isFullscreen }: { url: string; title: string; isFullscreen: boolean }) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [loaded, setLoaded] = useState(false);
-  const [blocked, setBlocked] = useState(false);
-
-  useEffect(() => {
-    setLoaded(false);
-    setBlocked(false);
-    const timer = setTimeout(() => {
-      if (!loaded) setBlocked(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [url]);
-
-  const handleLoad = useCallback(() => {
-    setLoaded(true);
-    setBlocked(false);
-  }, []);
-
-  if (blocked) {
-    return (
-      <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-4 p-6 text-center" dir="rtl">
-        <FileText className="h-12 w-12 text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">הדפדפן חוסם תצוגת PDF מוטמעת.</p>
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          <Download className="h-4 w-4" />
-          פתח/הורד את הטופס
-        </a>
-        <p className="text-xs text-muted-foreground max-w-xs">
-          נסו לפתוח בלשונית חדשה, או לבטל תוסף חסימה בדפדפן.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <iframe
-      ref={iframeRef}
-      src={url}
-      width="100%"
-      height={isFullscreen ? "100%" : "700px"}
-      style={{ border: "none" }}
-      title={title}
-      onLoad={handleLoad}
-      onError={() => setBlocked(true)}
-    />
-  );
 };
 
 const ResourceCard = ({ resource }: { resource: Resource }) => {
