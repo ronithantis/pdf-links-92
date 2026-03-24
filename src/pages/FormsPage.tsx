@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { FileText, Download, Printer, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Download, Printer, X } from "lucide-react";
+import PdfViewerComponent from "@/components/PdfViewer";
 
 interface Form {
   id: string;
