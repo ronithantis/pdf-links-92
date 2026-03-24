@@ -39,9 +39,9 @@ const KnowledgeCenter = () => {
   return (
     <div className="container py-10 space-y-10">
       <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold">מרכז הידע</h1>
+        <h1 className="text-4xl font-bold">{hideResources ? "בואו נתחיל כאן מתיאור המצב" : "מרכז הידע"}</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          מצגות, סרטונים, טפסים וכלים לליווי המשפחה המטפלת
+          {hideResources ? "בחרו מתרחיש נפוץ או תארו תרחיש ליועץ החכם" : "מצגות, סרטונים, טפסים וכלים לליווי המשפחה המטפלת"}
         </p>
       </div>
 
