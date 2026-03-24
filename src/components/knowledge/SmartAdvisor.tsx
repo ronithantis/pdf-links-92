@@ -16,11 +16,18 @@ interface SiteTool {
   isPaid?: boolean;
 }
 
+interface MatchedScenario {
+  id: string;
+  title: string;
+  urgency_level: string;
+}
+
 interface AdvisorResult {
   summary: string;
   actions: string[];
   relevant_resources: any[];
   site_tools?: SiteTool[];
+  matched_scenarios?: MatchedScenario[];
 }
 
 const SmartAdvisor = () => {
