@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { ChevronRight, ChevronLeft, ZoomIn, ZoomOut, Download, FileText, Loader2 } from "lucide-react";
+import { ChevronRight, ChevronLeft, ZoomIn, ZoomOut, Download, Printer, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -11,9 +11,46 @@ interface PdfViewerProps {
   url: string;
   title: string;
   isFullscreen?: boolean;
+  showToolbar?: boolean;
 }
 
-const PdfViewer = ({ url, title, isFullscreen }: PdfViewerProps) => {
+/** Fetch the PDF as a blob and trigger a browser download */
+export const downloadPdf = async (url: string, filename?: string) => {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = filename || url.split("/").pop() || "document.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(blobUrl);
+  } catch {
+    // Last resort: open in new tab
+    window.open(url, "_blank");
+  }
+};
+
+/** Fetch the PDF as a blob and open print dialog */
+export const printPdf = async (url: string) => {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const printWindow = window.open(blobUrl);
+    if (printWindow) {
+      printWindow.onload = () => {
+        printWindow.print();
+      };
+    }
+  } catch {
+    window.open(url, "_blank");
+  }
+};
+
+const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.2);
@@ -34,15 +71,10 @@ const PdfViewer = ({ url, title, isFullscreen }: PdfViewerProps) => {
       <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-4 p-6 text-center" dir="rtl">
         <FileText className="h-12 w-12 text-muted-foreground" />
         <p className="text-sm text-muted-foreground">לא ניתן לטעון את הטופס.</p>
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          <Download className="h-4 w-4" />
-          פתח/הורד את הטופס
-        </a>
+        <Button onClick={() => downloadPdf(url, title + ".pdf")}>
+          <Download className="h-4 w-4 ml-2" />
+          הורד את הטופס
+        </Button>
       </div>
     );
   }
@@ -96,6 +128,28 @@ const PdfViewer = ({ url, title, isFullscreen }: PdfViewerProps) => {
               <ZoomIn className="h-4 w-4" />
             </Button>
           </div>
+          {showToolbar && (
+            <div className="flex items-center gap-1 mr-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 text-xs"
+                onClick={() => downloadPdf(url, title + ".pdf")}
+              >
+                <Download className="h-3.5 w-3.5 ml-1" />
+                הורד
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-2 text-xs"
+                onClick={() => printPdf(url)}
+              >
+                <Printer className="h-3.5 w-3.5 ml-1" />
+                הדפס
+              </Button>
+            </div>
+          )}
         </div>
       )}
 
