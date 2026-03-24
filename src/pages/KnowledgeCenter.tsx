@@ -46,22 +46,24 @@ const KnowledgeCenter = () => {
       </div>
 
       <Tabs defaultValue={defaultTab} dir="rtl">
-        <TabsList className="w-full max-w-md mx-auto grid grid-cols-3">
-          <TabsTrigger value="resources">משאבים</TabsTrigger>
+        <TabsList className={`w-full max-w-md mx-auto grid ${hideResources ? 'grid-cols-2' : 'grid-cols-3'}`}>
+          {!hideResources && <TabsTrigger value="resources">משאבים</TabsTrigger>}
           <TabsTrigger value="scenarios">תרחישים</TabsTrigger>
           <TabsTrigger value="advisor">יועץ חכם</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="resources" className="mt-8">
-          {selectedCategory ? (
-            <ResourceList category={selectedCategory} onBack={() => setSelectedCategory(null)} />
-          ) : (
-            <div className="space-y-8">
-              <CategoryGrid onSelect={setSelectedCategory} counts={counts} />
-              <ResourceList />
-            </div>
-          )}
-        </TabsContent>
+        {!hideResources && (
+          <TabsContent value="resources" className="mt-8">
+            {selectedCategory ? (
+              <ResourceList category={selectedCategory} onBack={() => setSelectedCategory(null)} />
+            ) : (
+              <div className="space-y-8">
+                <CategoryGrid onSelect={setSelectedCategory} counts={counts} />
+                <ResourceList />
+              </div>
+            )}
+          </TabsContent>
+        )}
 
         <TabsContent value="scenarios" className="mt-8">
           <ScenarioExplorer initialScenarioId={scenarioId || undefined} />
