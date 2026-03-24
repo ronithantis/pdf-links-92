@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import PdfViewer from "@/components/PdfViewer";
+import PdfViewer, { downloadPdf, printPdf } from "@/components/PdfViewer";
 
 interface Resource {
   id: string;
@@ -36,7 +36,12 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
 
   const handlePrint = () => {
     if (!formUrl) return;
-    window.open(formUrl, "_blank");
+    printPdf(formUrl);
+  };
+
+  const handleDownload = () => {
+    if (!formUrl) return;
+    downloadPdf(formUrl, resource.title + ".pdf");
   };
 
   if (isForm) {
@@ -75,11 +80,9 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                 </DialogHeader>
                 <div className="flex items-center gap-1">
                   {formUrl && (
-                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" asChild>
-                      <a href={formUrl} target="_blank" rel="noopener noreferrer">
-                        <Download className="h-3.5 w-3.5 ml-1" />
-                        פתח/הורד
-                      </a>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" onClick={handleDownload}>
+                      <Download className="h-3.5 w-3.5 ml-1" />
+                      הורד
                     </Button>
                   )}
                   <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handlePrint} title="הדפסה">
