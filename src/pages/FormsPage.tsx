@@ -87,7 +87,12 @@ export default function FormsPage() {
 
   const handlePrint = () => {
     if (!openForm) return;
-    window.open(pdfUrl, "_blank");
+    printPdf(pdfUrl);
+  };
+
+  const handleDownload = () => {
+    if (!openForm) return;
+    downloadPdf(pdfUrl, openForm.title + ".pdf");
   };
 
   return (
