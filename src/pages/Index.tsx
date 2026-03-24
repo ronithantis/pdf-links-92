@@ -78,7 +78,7 @@ const Index = () => {
           <img src={heroImage} alt="בת מחבקת את הוריה המבוגרים" className="w-full h-full object-cover object-[30%_center]" />
           <div className="absolute inset-0 bg-gradient-to-l from-background/95 via-background/75 to-background/40" />
         </div>
-        <div className="relative container py-36 md:py-48">
+        <div className="relative container pt-48 pb-20 md:pt-64 md:pb-24">
           <div className="max-w-2xl mr-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-4">
               מרכז הידע והכלים
