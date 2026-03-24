@@ -81,6 +81,8 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי פעולות הטיפול לאחר נפילה" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על מניעת נפילות ובטיחות בבית" },
       { path: "/services", label: "מפת שירותים", reason: "שירותי פיזיותרפיה ושיקום באזורך" },
+      { path: "/ad-elai", label: "ספקי ציוד ושירותים", reason: "ספקים להתקנת ידיות אחיזה, מאחזים, ציוד בטיחות" },
+      { path: "/give-take", label: 'לוח "קח ותן"', reason: "ציוד עזר לניידות — אולי יש תרומות זמינות" },
     ],
   },
   {
@@ -99,7 +101,7 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["ציוד", "חיתולים", "כסא גלגלים", "ציוד רפואי", "הליכון", "מיטה סיעודית"],
+    keywords: ["ציוד", "חיתולים", "כסא גלגלים", "ציוד רפואי", "הליכון", "מיטה סיעודית", "ידיות אחיזה", "מאחזים", "כסא רחצה"],
     tools: [
       { path: "/give-take", label: 'לוח "קח ותן"', reason: "תרומה ובקשה של ציוד סיעודי" },
       { path: "/ad-elai", label: "עד אלי – שירותים וציוד", reason: "ספקי ציוד רפואי וסיעודי – השכרה ומכירה" },
@@ -148,6 +150,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגת מקיפה על שיקום וחזרה לתפקוד לאחר אשפוז" },
       { path: "/services", label: "מפת שירותים", reason: "מכוני שיקום ושירותי פיזיותרפיה באזורך" },
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי תוכנית השיקום והמטלות היומיומיות" },
+      { path: "/ad-elai", label: "ספקי ציוד ושירותים", reason: "ספקי ציוד שיקומי ועזר" },
     ],
   },
 ];
@@ -171,6 +174,36 @@ function applyRulesEngine(message: string, aiTools: any[]): any[] {
 
   return merged;
 }
+
+// ==================== SCENARIO MATCHING ====================
+interface ScenarioMatch {
+  id: string;
+  title: string;
+  urgency_level: string;
+}
+
+function matchScenarios(message: string, scenarios: any[]): ScenarioMatch[] {
+  const matches: ScenarioMatch[] = [];
+  for (const s of scenarios) {
+    const tags = (s.tags || []) as string[];
+    const triggerPhrases = (s.trigger_phrases || []) as string[];
+    const title = (s.title || "") as string;
+
+    // Match by trigger phrases
+    const phraseMatch = triggerPhrases.some((p: string) => message.includes(p));
+    // Match by tags (at least 2 tag keywords present)
+    const tagHits = tags.filter((t: string) => message.includes(t)).length;
+    // Match by title keywords
+    const titleWords = title.split(/\s+/).filter((w: string) => w.length > 2);
+    const titleMatch = titleWords.filter((w: string) => message.includes(w)).length >= 2;
+
+    if (phraseMatch || tagHits >= 2 || titleMatch) {
+      matches.push({ id: s.id, title: s.title, urgency_level: s.urgency_level || "medium" });
+    }
+  }
+  return matches;
+}
+
 // ==================== END RULES ENGINE ====================
 
 serve(async (req) => {
@@ -187,114 +220,143 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Fetch all published resources
-    const { data: resources } = await supabase
-      .from("knowledge_resources")
-      .select("id, category, title, description, url, subcategory, scenario_tags")
-      .eq("is_published", true);
+    // Fetch resources, scenarios, and donations in parallel
+    const [resourcesRes, scenariosRes, donationsRes] = await Promise.all([
+      supabase
+        .from("knowledge_resources")
+        .select("id, category, title, description, url, subcategory, scenario_tags")
+        .eq("is_published", true),
+      supabase
+        .from("scenarios")
+        .select("*")
+        .eq("is_published", true)
+        .order("sort_order"),
+      supabase
+        .from("donation_listings")
+        .select("id, type, title, category, other_category, description, region, shipping_available")
+        .eq("status", "active")
+        .limit(50),
+    ]);
 
-    const resourcesList = (resources || [])
+    const resources = resourcesRes.data || [];
+    const scenarios = scenariosRes.data || [];
+    const donations = donationsRes.data || [];
+
+    const resourcesList = resources
       .map((r: any) => `- [${r.id}] ${r.title} (${r.category}${r.subcategory ? " / " + r.subcategory : ""}): ${r.description || ""}`)
       .join("\n");
 
-    // Fetch active donation listings
-    const { data: donations } = await supabase
-      .from("donation_listings")
-      .select("id, type, title, category, other_category, description, region, shipping_available")
-      .eq("status", "active")
-      .limit(50);
-
-    const donationsList = (donations || [])
+    const donationsList = donations
       .map((d: any) => `- [${d.type === "donate" ? "תרומה" : "בקשה"}] ${d.title} (${d.category}${d.other_category ? " / " + d.other_category : ""}) — אזור: ${d.region}${d.shipping_available ? " | משלוח אפשרי" : ""}`)
       .join("\n");
+
+    // Build scenarios knowledge block
+    const scenariosKnowledge = scenarios.map((s: any) => {
+      const parts = [`### תרחיש: ${s.title} (דחיפות: ${s.urgency_level || "medium"})`];
+      if (s.actions_now?.length) parts.push(`פעולות מיידיות: ${(s.actions_now as string[]).join("; ")}`);
+      if (s.actions_24h?.length) parts.push(`פעולות 24 שעות: ${(s.actions_24h as string[]).join("; ")}`);
+      if (s.actions_week?.length) parts.push(`פעולות שבוע: ${(s.actions_week as string[]).join("; ")}`);
+      if (s.what_to_prepare?.length) parts.push(`מה להכין: ${(s.what_to_prepare as string[]).join("; ")}`);
+      if (s.who_to_contact?.length) parts.push(`עם מי לדבר: ${(s.who_to_contact as string[]).join("; ")}`);
+      return parts.join("\n");
+    }).join("\n\n");
+
+    // Match scenarios to user message
+    const matchedScenarios = matchScenarios(message, scenarios);
 
     const systemPrompt = `אתה יועץ מומחה לבני משפחה המטפלים בהורים קשישים בישראל.
 המשתמש יתאר מצב או בעיה. תפקידך:
 1. לזהות את הצרכים המרכזיים
 2. להמליץ על 3-7 פעולות מיידיות ברורות ופרקטיות, מותאמות לתרחיש הספציפי
-3. לבחור מתוך רשימת המשאבים שמצורפת רק את אלה שרלוונטיים למצב — היה נדיב בהפניות, אם משאב קשור אפילו בעקיפין, כלול אותו
-4. להפנות לכלים ודפים רלוונטיים באתר שלנו (ראה רשימה למטה) — חובה להפנות לפחות ל-2 כלים רלוונטיים
-5. אם המשתמש מחפש ציוד (חיתולים, כסא גלגלים, ציוד רפואי וכו'), הפנה אותו ללוח "קח ותן" ואם יש תרומות רלוונטיות ברשימה — ציין אותן
+3. **חשוב** — ארגן את הפעולות לפי דחיפות: מה לעשות עכשיו, מה ב-24 שעות, מה בשבוע הקרוב
+4. לבחור מתוך רשימת המשאבים שמצורפת רק את אלה שרלוונטיים למצב — היה נדיב בהפניות
+5. להפנות לכלים ודפים רלוונטיים באתר שלנו — חובה להפנות לפחות ל-2 כלים רלוונטיים
+6. אם המשתמש מחפש ציוד, הפנה ללוח "קח ותן" ולעד אלי (ספקים)
+7. **חשוב** — אם יש תרחיש מפורט שמתאים למצב, הפנה אליו. התרחישים מכילים תוכניות פעולה מפורטות לפי זמנים
 
 כלים ודפים באתר שלנו — הפנה אליהם כשרלוונטי:
-- כלי לסנכרון הטיפול המשפחתי (/tools#family-sync) — חלוקת תפקידים, תיאום בין אחים, רשימות משימות משותפות. רלוונטי גם כשצריך לתאם בין בני משפחה סביב נושאים כמו צוואה, ייפוי כוח, החלטות רפואיות, ועוד (בתשלום)
-- רשימת משימות אישית (/tasks-list) — ניהול מטלות הטיפול. רלוונטי כשיש רשימה של דברים לעשות, כמו טפסים, פגישות, מסמכים
+- כלי לסנכרון הטיפול המשפחתי (/tools#family-sync) — חלוקת תפקידים, תיאום בין אחים (בתשלום)
+- רשימת משימות אישית (/tasks-list) — ניהול מטלות הטיפול
 - לוח "קח ותן" (/give-take) — תרומה ובקשה של ציוד סיעודי בין משפחות
-- עד אלי – שירותים וציוד (/ad-elai) — מאגר ספקי שירותים וציוד בתשלום לגיל השלישי
+- עד אלי – שירותים וציוד (/ad-elai) — מאגר ספקי שירותים וציוד בתשלום לגיל השלישי (פיזיותרפיה, ציוד רפואי, ידיות אחיזה, שירותי בית ועוד)
 - חיפוש עובד זר (/foreign-worker-search) — מנוע חיפוש לעובדי סיעוד זרים
-- אימון קוגניטיבי (/cognitive-training) — תרגילים לשימור כושר מנטלי של ההורה
-- מרכז הידע (/knowledge-center) — מצגות, סרטונים, טפסים ומדריכים. יש בו מצגות על תכנון משפטי, צוואות, ייפוי כוח, דמנציה, זכויות, ועוד
+- אימון קוגניטיבי (/cognitive-training) — תרגילים לשימור כושר מנטלי
+- מרכז הידע (/knowledge-center) — מצגות, סרטונים, טפסים ומדריכים
 - מפת שירותים (/services) — גורמי טיפול, עמותות, גופים ציבוריים
-- שאלון הערכת מצב (/tools) — שאלון מקיף להערכת הצרכים של המשפחה המטפלת. רלוונטי כמעט תמיד
+- שאלון הערכת מצב (/tools) — שאלון מקיף להערכת הצרכים
 - יצירת קשר (/contact) — לפניות אישיות
-- כתיבת צוואה (/tools#will-template) — תבנית מובנית לעריכת צוואה (בתשלום)
-- מדריך לייפוי כוח מתמשך (/tools#poa-guide) — מדריך אינטראקטיבי לעריכת ייפוי כוח (בתשלום)
+- כתיבת צוואה (/tools#will-template) — תבנית מובנית (בתשלום)
+- מדריך לייפוי כוח מתמשך (/tools#poa-guide) — מדריך אינטראקטיבי (בתשלום)
+- מצפן חיים (/tools#life-compass) — תיעוד רצונות בכתב ובווידאו
 - מחשבון שכר עובד זר (/tools#salary-calculator) — חישוב שכר מדויק (בתשלום)
 - הסבר על חוזה העסקה (/tools#contract-explanation) — פירוט סעיפי החוזה (בתשלום)
-- תאום ציפיות עם עובד זר (/tools#expectations-alignment) — הגדרת תפקידים ומשימות (בתשלום)
+- תאום ציפיות עם עובד זר (/tools#expectations-alignment) — הגדרת תפקידים (בתשלום)
 - מדריך להגשת תביעת סיעוד (/tools#nursing-claim-guide) — שלב אחר שלב (בתשלום)
-- מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/) — כלי חיצוני של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית (חינמי)
+- מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/) — כלי חיצוני של משרד הבריאות
 
 מיפוי נושאים לכלים — חובה להפנות כשהנושא עולה:
-- צוואה, ירושה, ייפוי כוח, אפוטרופסות, תכנון משפטי → כתיבת צוואה (/tools#will-template, בתשלום) + מדריך ייפוי כוח (/tools#poa-guide, בתשלום) + כלי סנכרון (/tools#family-sync, בתשלום) + מרכז הידע (/knowledge-center) + שאלון הערכה (/tools)
-- חלוקת נטל, קונפליקט משפחתי, תיאום טיפול → כלי סנכרון (/tools#family-sync, בתשלום) + רשימת משימות (/tasks-list)
-- דמנציה, ירידה קוגניטיבית, שכחה → אימון קוגניטיבי (/cognitive-training) + מרכז הידע (/knowledge-center) + מדריך ייפוי כוח (/tools#poa-guide, בתשלום) + כתיבת צוואה (/tools#will-template, בתשלום)
-- עובד זר, מטפל צמוד, סיעוד → חיפוש עובד זר (/foreign-worker-search) + מחשבון שכר (/tools#salary-calculator, בתשלום)
-- ציוד רפואי, חיתולים, כסא גלגלים → קח ותן (/give-take) + עד אלי (/ad-elai)
-- פיזיותרפיה, אחות, ספקי שירות, שירותי בית → עד אלי (/ad-elai) + מפת שירותים (/services)
-- שחיקה, עייפות, לחץ → שאלון הערכה (/tools) + מפת שירותים (/services)
-- זכויות, גמלאות, ביטוח לאומי → מרכז הידע (/knowledge-center) + מפת שירותים (/services) + מדריך תביעת סיעוד (/tools#nursing-claim-guide, בתשלום)
-- אשפוז, מוסד סיעודי, בית אבות, דיור מוגן, חלופות מגורים, מעון, תשושים → מרכז הידע (/knowledge-center, מצגת מקיפה על דיור מוגן בתי אבות ואשפוז) + מחשבון קוד סיעודי (https://me.health.gov.il/nursing-calculator/, חיצוני) + מפת שירותים (/services)
-- שיקום, פיזיותרפיה, ריפוי בעיסוק, שחרור מבית חולים, חזרה לתפקוד → מרכז הידע (/knowledge-center, מצגת שיקום) + מפת שירותים (/services) + רשימת משימות (/tasks-list)
+- צוואה, ירושה, ייפוי כוח, אפוטרופסות → כתיבת צוואה + מדריך ייפוי כוח + כלי סנכרון + מרכז הידע
+- חלוקת נטל, קונפליקט משפחתי → כלי סנכרון + רשימת משימות
+- דמנציה, ירידה קוגניטיבית → אימון קוגניטיבי + מרכז הידע + מדריך ייפוי כוח + צוואה
+- עובד זר, מטפל צמוד → חיפוש עובד זר + מחשבון שכר + חוזה + תאום ציפיות
+- ציוד רפואי, חיתולים, כסא גלגלים, ידיות אחיזה → קח ותן + עד אלי
+- נפילה, בטיחות בבית → עד אלי (ספקי ידיות אחיזה, מאחזים) + קח ותן (ציוד) + מפת שירותים
+- פיזיותרפיה, ספקי שירות → עד אלי + מפת שירותים
+- שחיקה, עייפות → שאלון הערכה + מפת שירותים
+- זכויות, גמלאות → מרכז הידע + מפת שירותים + מדריך תביעת סיעוד
+- בית אבות, דיור מוגן, חלופות מגורים → מרכז הידע (מצגת דיור) + מחשבון קוד סיעודי + מפת שירותים
+- שיקום, שחרור מאשפוז → מרכז הידע + מפת שירותים + עד אלי (ציוד שיקום) + רשימת משימות
 
-הנחיות לפעולות לפי תרחישים ספציפיים — כשהנושא עולה, חובה לכלול פעולות אלו:
+=== תרחישים מפורטים ===
+השתמש בידע הזה כדי לתת תשובות מדויקות ומבוססות. אם המצב של המשתמש מתאים לתרחיש, ציטט פעולות ספציפיות ממנו:
+
+${scenariosKnowledge}
+
+=== הנחיות נוספות לפי תרחישים ===
 
 כשהמטפל/ת חולה / לא הגיע/ה / עזב/ה:
-- לוודא רשימת תרופות עדכנית ומלאי מספיק לימים הקרובים
-- לסנכרן את הטיפול והמשימות בין בני המשפחה (מי עושה מה)
+- לוודא רשימת תרופות עדכנית ומלאי מספיק
+- לסנכרן את הטיפול והמשימות בין בני המשפחה
 - לבדוק גיבוי מטפל דרך תאגיד/חברת סיעוד
-- לוודא שההורה לא נשאר/ת ללא פיקוח — במיוחד תרופות ומזון
-- לעדכן את בני המשפחה על המצב ולחלק משימות
+- לוודא שההורה לא נשאר/ת ללא פיקוח
 
 כשיש נפילה / סיכון בטיחותי:
 - לבדוק אם יש חשד לשבר ולפנות לרופא/מיון
 - לבצע סריקת בטיחות בבית: מפגעים, תאורה, מאחזים
 - לבדוק לחצן חירום/שעון בטיחות
 - לתעד את הנפילה ולדווח לרופא המשפחה
+- להפנות לספקים להתקנת ידיות אחיזה ומאחזים (עד אלי)
 
 כששחררו מבית חולים:
 - לאסוף סיכום מחלה ורשימת תרופות מעודכנת
 - לתאם שיקום/פיזיותרפיה
-- להתאים את הבית למצב החדש (ציוד, נגישות)
+- להתאים את הבית למצב החדש
 - לוודא מלאי תרופות חדשות ומרשמים
 
 כשיש קונפליקט משפחתי / עומס על מטפל אחד:
 - לתעד את כל המשימות ולחלק בין בני המשפחה
 - לקבוע פגישה משפחתית לחלוקת תפקידים
-- לבדוק אפשרות לסיוע חיצוני (מתנדבים, שירותים)
-- לבדוק רמת שחיקה אישית
+- לבדוק אפשרות לסיוע חיצוני
 
 כשיש בלבול / חשד לדמנציה:
 - לתעד שינויים בהתנהגות עם תאריכים
 - לקבוע תור לנוירולוג / גריאטר
-- לוודא סביבה בטוחה (גז, יציאה מהבית, תרופות)
+- לוודא סביבה בטוחה
 - לבדוק ייפוי כוח מתמשך בשלב מוקדם
 
-כששואלים על בית אבות / דיור מוגן / חלופות מגורים / מוסד סיעודי:
-- להסביר את ההבדל בין סוגי המסגרות: דיור מוגן (עצמאי), בית אבות לתשושים, מחלקה סיעודית, מחלקת דמנציה, שיקום גריאטרי
-- להסביר מי ממן כל סוג: משרד השיכון, משרד הרווחה, משרד הבריאות (קוד סיעודי), קופת חולים
-- להמליץ על ביקור פיזי במספר מוסדות לפני החלטה
-- להפנות למצגת המקיפה "מדריך למשפחה – דיור מוגן, בתי אבות ואשפוז" במרכז הידע
-- להפנות למחשבון הקוד הסיעודי של משרד הבריאות
-- לציין שחשוב לבדוק את רמת הפיקוח, יחס כוח אדם לדיירים, ותנאי החוזה
+כששואלים על בית אבות / דיור מוגן:
+- להסביר ההבדל בין סוגי מסגרות
+- להסביר מי ממן כל סוג
+- להמליץ על ביקור פיזי לפני החלטה
+- להפנות למצגת המקיפה במרכז הידע ולמחשבון הקוד הסיעודי
 
 כשיש בעיית תרופות:
 - לעדכן רשימת תרופות מול רופא המשפחה
 - לבדוק מלאי ולחדש מרשמים
 - לסדר קופסאות תרופות לפי ימים/שעות
-- לבדוק תופעות לוואי ואינטראקציות
 
 כשמציין כלי בתשלום, סמן אותו עם isPaid: true בתוצאה.
+${matchedScenarios.length > 0 ? `\nהמשתמש מתאר מצב שמתאים לתרחישים הבאים באתר: ${matchedScenarios.map(s => `"${s.title}"`).join(", ")}. הפנה אותו לתרחיש המתאים לקבלת תוכנית פעולה מפורטת.` : ""}
 
 רשימת המשאבים הזמינים:
 ${resourcesList}
@@ -327,7 +389,7 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
                   actions: {
                     type: "array",
                     items: { type: "string" },
-                    description: "3-7 פעולות מיידיות מומלצות, ספציפיות לתרחיש",
+                    description: "3-7 פעולות מיידיות מומלצות, מסודרות לפי דחיפות: עכשיו, 24 שעות, שבוע",
                   },
                   relevant_resource_ids: {
                     type: "array",
@@ -349,6 +411,11 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
                     },
                     description: "כלים ודפים רלוונטיים באתר שלנו",
                   },
+                  matched_scenario_ids: {
+                    type: "array",
+                    items: { type: "string" },
+                    description: "IDs of matching scenarios to recommend to the user",
+                  },
                 },
                 required: ["summary", "actions", "relevant_resource_ids", "site_tools"],
                 additionalProperties: false,
@@ -364,14 +431,12 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
       const status = response.status;
       if (status === 429) {
         return new Response(JSON.stringify({ error: "יותר מדי בקשות, נסו שוב בעוד כמה שניות" }), {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       if (status === 402) {
         return new Response(JSON.stringify({ error: "נדרש טעינת קרדיטים" }), {
-          status: 402,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       const errText = await response.text();
@@ -389,7 +454,32 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
     const aiSiteTools = parsed.site_tools || [];
     const finalSiteTools = applyRulesEngine(message, aiSiteTools);
 
-    // Fetch full resource objects for the relevant IDs
+    // Add scenario referrals from both AI and keyword matching
+    const scenarioIds = new Set<string>([
+      ...(parsed.matched_scenario_ids || []),
+      ...matchedScenarios.map(s => s.id),
+    ]);
+    const matchedScenarioDetails = scenarios
+      .filter((s: any) => scenarioIds.has(s.id))
+      .map((s: any) => ({ id: s.id, title: s.title, urgency_level: s.urgency_level || "medium" }));
+
+    // If we matched scenarios, add a tool referral for them
+    if (matchedScenarioDetails.length > 0) {
+      const existingPaths = new Set(finalSiteTools.map((t: any) => t.path));
+      for (const sc of matchedScenarioDetails) {
+        const path = `/knowledge-center?scenario=${sc.id}`;
+        if (!existingPaths.has(path)) {
+          finalSiteTools.unshift({
+            path,
+            label: `תרחיש: ${sc.title}`,
+            reason: "תוכנית פעולה מפורטת עם פעולות לפי זמנים, מה להכין ועם מי לדבר",
+          });
+          existingPaths.add(path);
+        }
+      }
+    }
+
+    // Fetch full resource objects
     let relevantResources: any[] = [];
     if (parsed.relevant_resource_ids?.length > 0) {
       const { data } = await supabase
@@ -405,6 +495,7 @@ ${donationsList || "אין מודעות פעילות כרגע"}`;
         actions: parsed.actions,
         relevant_resources: relevantResources,
         site_tools: finalSiteTools,
+        matched_scenarios: matchedScenarioDetails,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
