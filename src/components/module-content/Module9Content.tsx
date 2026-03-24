@@ -196,8 +196,9 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
 
           <div>
             <h4 className="font-semibold mb-3">טבלת שכר וניכויים (נכון ל-1 באפריל 2026):</h4>
-            <p className="text-xs text-muted-foreground mb-2">שכר המינימום: 6,443.85 ₪ לחודש | 35.4 ₪ לשעה. מקור: <a href="https://www.kolzchut.org.il/he/%D7%A9%D7%9B%D7%A8_%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%95%D7%9D" target="_blank" rel="noopener noreferrer" className="underline text-primary">כל זכות</a></p>
-            <div className="overflow-x-auto">
+            <p className="text-xs text-muted-foreground mb-2">שכר המינימום: 6,443.85 ₪ לחודש | ערך יום מנוחה/חג: 439.74 ₪ | ערך יום חופשה: 257.75 ₪. מקור: <a href="https://www.kolzchut.org.il/he/%D7%A9%D7%9B%D7%A8_%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%95%D7%9D" target="_blank" rel="noopener noreferrer" className="underline text-primary">כל זכות</a></p>
+            
+            <div className="overflow-x-auto mb-4">
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="bg-muted">
@@ -207,18 +208,60 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
                 </thead>
                 <tbody>
                   <tr><td className="border p-2 font-semibold">שכר ברוטו (כולל 4 שבתות)</td><td className="border p-2">6,443.85 ₪</td></tr>
-                  <tr><td className="border p-2">עבודה ביום שבת (4 ימים)</td><td className="border p-2">1,759.00 ₪</td></tr>
+                  <tr><td className="border p-2">עבודה ביום שבת/חג (4 ימים)</td><td className="border p-2">1,759.00 ₪</td></tr>
                   <tr><td className="border p-2">מקדמות ששולמו</td><td className="border p-2">400.00 ₪</td></tr>
                   <tr className="bg-muted/50"><td className="border p-2 font-bold">סה"כ ברוטו לתשלום</td><td className="border p-2 font-bold">7,802.85 ₪</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: מגורים (אזור המרכז)</td><td className="border p-2">192.81 ₪−</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: הוצאות נלוות למגורים</td><td className="border p-2">94.34 ₪−</td></tr>
-                  <tr><td className="border p-2 text-destructive">ניכוי: ביטוח רפואי (חלק עובד)</td><td className="border p-2">142.00 ₪−</td></tr>
+                  <tr><td className="border p-2 text-destructive">ניכוי: ביטוח רפואי (חלק עובד, עד)</td><td className="border p-2">168.80 ₪−</td></tr>
                   <tr><td className="border p-2 text-destructive">ניכוי: כלכלה (אוכל)</td><td className="border p-2">500.00 ₪−</td></tr>
-                  <tr className="bg-muted/50"><td className="border p-2 font-bold text-destructive">סה"כ ניכויים מותרים</td><td className="border p-2 font-bold">929.15 ₪−</td></tr>
-                  <tr className="bg-primary/10"><td className="border p-2 font-bold">נטו לתשלום (משוער)</td><td className="border p-2 font-bold">~6,874 ₪</td></tr>
+                  <tr className="bg-muted/50"><td className="border p-2 font-bold text-destructive">סה"כ ניכויים מותרים</td><td className="border p-2 font-bold">955.95 ₪−</td></tr>
+                  <tr className="bg-primary/10"><td className="border p-2 font-bold">נטו לתשלום (משוער)</td><td className="border p-2 font-bold">~6,847 ₪</td></tr>
                 </tbody>
               </table>
             </div>
+
+            <h4 className="font-semibold mb-3">זכויות סוציאליות (על בסיס שכר 6,443.85 ₪):</h4>
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-muted">
+                    <th className="border p-2 text-right">רכיב</th>
+                    <th className="border p-2 text-right">שיעור</th>
+                    <th className="border p-2 text-right">סכום</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border p-2">גמל (הפרשת מעסיק)</td><td className="border p-2">6.5%</td><td className="border p-2">418.85 ₪</td></tr>
+                  <tr><td className="border p-2">פיצויי פיטורים</td><td className="border p-2">8.33%</td><td className="border p-2">536.77 ₪</td></tr>
+                  <tr><td className="border p-2">פיצויים למתפטר (אחרי שנה)</td><td className="border p-2">6%</td><td className="border p-2">386.63 ₪</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 className="font-semibold mb-3">ניכויים מותרים לפי אזור גאוגרפי:</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-muted">
+                    <th className="border p-2 text-right">אזור</th>
+                    <th className="border p-2 text-right">מגורים שאינם בבעלות המעסיק</th>
+                    <th className="border p-2 text-right">מגורים בבעלות המעסיק</th>
+                    <th className="border p-2 text-right">שכר חודשי (ללא מגורים בבעלות)</th>
+                    <th className="border p-2 text-right">שכר חודשי (מגורים בבעלות)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border p-2">ירושלים</td><td className="border p-2">508.62 ₪</td><td className="border p-2">254.31 ₪</td><td className="border p-2">5,028 ₪</td><td className="border p-2">5,282 ₪</td></tr>
+                  <tr><td className="border p-2">תל-אביב</td><td className="border p-2">578.36 ₪</td><td className="border p-2">289.18 ₪</td><td className="border p-2">4,958 ₪</td><td className="border p-2">5,247 ₪</td></tr>
+                  <tr><td className="border p-2">חיפה והמרכז</td><td className="border p-2">385.61 ₪</td><td className="border p-2">192.81 ₪</td><td className="border p-2">5,151 ₪</td><td className="border p-2">5,344 ₪</td></tr>
+                  <tr><td className="border p-2">צפון</td><td className="border p-2">315.41 ₪</td><td className="border p-2">157.71 ₪</td><td className="border p-2">5,221 ₪</td><td className="border p-2">5,379 ₪</td></tr>
+                  <tr><td className="border p-2">דרום</td><td className="border p-2">342.80 ₪</td><td className="border p-2">171.40 ₪</td><td className="border p-2">5,194 ₪</td><td className="border p-2">5,365 ₪</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">* הוצאות נלוות למגורים: 94.34 ₪ | השתתפות בביטוח בריאות: עד 168.80 ₪ (מחצית מהעלות או הסכום בטבלה — הנמוך מביניהם) | כלכלה: עד 644.39 ₪</p>
+            <p className="text-xs text-muted-foreground">* אם ניתנו מקדמות שבועיות ("דמי כיס") — הן יופחתו מהשכר. תשלום עבור עבודה ביום מנוחה/חג: 439.74 ₪.</p>
           </div>
 
           <InfoBox title="📌 עדכון שכר מינימום – אפריל 2026" variant="info">
@@ -569,7 +612,7 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
           <div>
             <h4 className="font-semibold mb-3">תמיכה בעובד — השקעה שמשתלמת:</h4>
             <BulletList items={[
-              "ביטוח בריאות פרטי — חובה חוקית, כ-168 ₪ לחודש",
+              "ביטוח בריאות פרטי — חובה חוקית, עד 168.80 ₪ לחודש (חלק עובד)",
               "ליווי לרופא אם העובד חולה — מניעת הדבקה ושמירה על כושר עבודה",
               "עידוד שימוש מלא בשעות המנוחה — יציאה, מפגשים, מנוחה אמיתית",
               "פרטיות לשיחות טלפון עם המשפחה",
