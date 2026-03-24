@@ -36,7 +36,12 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
 
   const handlePrint = () => {
     if (!formUrl) return;
-    window.open(formUrl, "_blank");
+    printPdf(formUrl);
+  };
+
+  const handleDownload = () => {
+    if (!formUrl) return;
+    downloadPdf(formUrl, resource.title + ".pdf");
   };
 
   if (isForm) {
