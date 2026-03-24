@@ -7,12 +7,20 @@ import "react-pdf/dist/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
+const PRINT_ROOT_ID = "pdf-print-root";
+const PRINT_BODY_CLASS = "pdf-printing";
+
 interface PdfViewerProps {
   url: string;
   title: string;
   isFullscreen?: boolean;
   showToolbar?: boolean;
 }
+
+const clearPrintRoot = () => {
+  document.body.classList.remove(PRINT_BODY_CLASS);
+  document.getElementById(PRINT_ROOT_ID)?.remove();
+};
 
 /** Fetch the PDF as a blob and trigger a browser download */
 export const downloadPdf = async (url: string, filename?: string) => {
@@ -28,48 +36,63 @@ export const downloadPdf = async (url: string, filename?: string) => {
     document.body.removeChild(a);
     URL.revokeObjectURL(blobUrl);
   } catch {
-    // Last resort: open in new tab
     window.open(url, "_blank");
   }
 };
 
-/** Fetch the PDF as a blob and open print dialog */
+/** Render all PDF pages to canvases and print the current page, avoiding popups and blocked tabs */
 export const printPdf = async (url: string) => {
   try {
+    clearPrintRoot();
+
     const res = await fetch(url);
-    const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    
-    // Use a hidden iframe to print without opening a new tab
-    const iframe = document.createElement("iframe");
-    iframe.style.position = "fixed";
-    iframe.style.top = "-10000px";
-    iframe.style.left = "-10000px";
-    iframe.style.width = "1px";
-    iframe.style.height = "1px";
-    iframe.src = blobUrl;
-    document.body.appendChild(iframe);
-    
-    iframe.onload = () => {
-      try {
-        iframe.contentWindow?.print();
-      } catch {
-        // If print fails, download instead
-        downloadPdf(url, "document.pdf");
-      }
-      // Clean up after a delay
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-        URL.revokeObjectURL(blobUrl);
-      }, 5000);
+    const data = await res.arrayBuffer();
+    const pdf = await pdfjs.getDocument({ data }).promise;
+
+    const printRoot = document.createElement("div");
+    printRoot.id = PRINT_ROOT_ID;
+    printRoot.className = "pdf-print-root";
+    document.body.appendChild(printRoot);
+
+    for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+      const page = await pdf.getPage(pageNumber);
+      const viewport = page.getViewport({ scale: 1.8 });
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      if (!context) continue;
+
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+      canvas.className = "pdf-print-page";
+
+      await page.render({ canvasContext: context, viewport }).promise;
+
+      const pageWrapper = document.createElement("div");
+      pageWrapper.className = "pdf-print-page-wrapper";
+      pageWrapper.appendChild(canvas);
+      printRoot.appendChild(pageWrapper);
+    }
+
+    const cleanup = () => {
+      window.removeEventListener("afterprint", cleanup);
+      clearPrintRoot();
     };
+
+    window.addEventListener("afterprint", cleanup, { once: true });
+    document.body.classList.add(PRINT_BODY_CLASS);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.print();
+      });
+    });
   } catch {
-    // Fallback: just download
     downloadPdf(url, "document.pdf");
   }
 };
 
-const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerProps) => {
+const PdfViewer = ({ url, title, showToolbar = true }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.2);
@@ -90,7 +113,7 @@ const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerPr
       <div className="h-full min-h-[320px] flex flex-col items-center justify-center gap-4 p-6 text-center" dir="rtl">
         <FileText className="h-12 w-12 text-muted-foreground" />
         <p className="text-sm text-muted-foreground">לא ניתן לטעון את הטופס.</p>
-        <Button onClick={() => downloadPdf(url, title + ".pdf")}>
+        <Button onClick={() => downloadPdf(url, `${title}.pdf`)}>
           <Download className="h-4 w-4 ml-2" />
           הורד את הטופס
         </Button>
@@ -100,7 +123,6 @@ const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerPr
 
   return (
     <div className="flex flex-col h-full">
-      {/* Controls */}
       {numPages > 0 && (
         <div className="flex items-center justify-center gap-2 py-2 px-4 border-b bg-muted/30 shrink-0 flex-wrap" dir="rtl">
           <div className="flex items-center gap-1">
@@ -153,7 +175,7 @@ const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerPr
                 variant="ghost"
                 size="sm"
                 className="h-8 px-2 text-xs"
-                onClick={() => downloadPdf(url, title + ".pdf")}
+                onClick={() => downloadPdf(url, `${title}.pdf`)}
               >
                 <Download className="h-3.5 w-3.5 ml-1" />
                 הורד
@@ -172,7 +194,6 @@ const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerPr
         </div>
       )}
 
-      {/* PDF Content */}
       <div className="flex-1 overflow-auto flex justify-center bg-muted/20 p-4">
         <Document
           file={url}
@@ -188,8 +209,8 @@ const PdfViewer = ({ url, title, isFullscreen, showToolbar = true }: PdfViewerPr
           <Page
             pageNumber={pageNumber}
             scale={scale}
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
+            renderTextLayer
+            renderAnnotationLayer
           />
         </Document>
       </div>
