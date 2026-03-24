@@ -188,6 +188,17 @@ const ScenarioExplorer = ({ initialScenarioId }: { initialScenarioId?: string })
       });
   }, []);
 
+  // Auto-select scenario from URL param
+  useEffect(() => {
+    if (initialScenarioId && scenarios.length > 0 && !initialLoaded) {
+      const match = scenarios.find(s => s.id === initialScenarioId);
+      if (match) {
+        selectScenario(match);
+        setInitialLoaded(true);
+      }
+    }
+  }, [initialScenarioId, scenarios, initialLoaded]);
+
   const selectScenario = async (scenario: any) => {
     setSelected(scenario);
     setAnswers({});
