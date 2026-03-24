@@ -81,7 +81,8 @@ const Index = () => {
         <div className="relative container py-20 md:py-32">
           <div className="max-w-2xl mr-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-4">
-              מרכז הידע והכלים{" "}
+              מרכז הידע והכלים
+              <br />
               <span className="text-primary">למשפחות מטפלות</span>{" "}
               בהורה מבוגר
             </h1>
