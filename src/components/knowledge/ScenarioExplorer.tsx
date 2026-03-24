@@ -167,13 +167,14 @@ const InfoListBlock = ({ icon: Icon, title, items, iconColor = "text-primary" }:
   );
 };
 
-const ScenarioExplorer = () => {
+const ScenarioExplorer = ({ initialScenarioId }: { initialScenarioId?: string }) => {
   const [scenarios, setScenarios] = useState<any[]>([]);
   const [selected, setSelected] = useState<any | null>(null);
   const [relatedResources, setRelatedResources] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState<Record<number, "yes" | "no">>({});
   const printRef = useRef<HTMLDivElement>(null);
+  const [initialLoaded, setInitialLoaded] = useState(false);
 
   useEffect(() => {
     supabase
@@ -186,6 +187,17 @@ const ScenarioExplorer = () => {
         setLoading(false);
       });
   }, []);
+
+  // Auto-select scenario from URL param
+  useEffect(() => {
+    if (initialScenarioId && scenarios.length > 0 && !initialLoaded) {
+      const match = scenarios.find(s => s.id === initialScenarioId);
+      if (match) {
+        selectScenario(match);
+        setInitialLoaded(true);
+      }
+    }
+  }, [initialScenarioId, scenarios, initialLoaded]);
 
   const selectScenario = async (scenario: any) => {
     setSelected(scenario);

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import CategoryGrid from "@/components/knowledge/CategoryGrid";
@@ -9,6 +10,11 @@ import SmartAdvisor from "@/components/knowledge/SmartAdvisor";
 const KnowledgeCenter = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [searchParams] = useSearchParams();
+
+  // If ?scenario=ID is in URL, default to scenarios tab
+  const scenarioId = searchParams.get("scenario");
+  const defaultTab = scenarioId ? "scenarios" : "resources";
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -36,7 +42,7 @@ const KnowledgeCenter = () => {
         </p>
       </div>
 
-      <Tabs defaultValue="resources" dir="rtl">
+      <Tabs defaultValue={defaultTab} dir="rtl">
         <TabsList className="w-full max-w-md mx-auto grid grid-cols-3">
           <TabsTrigger value="resources">משאבים</TabsTrigger>
           <TabsTrigger value="scenarios">תרחישים</TabsTrigger>
@@ -55,7 +61,7 @@ const KnowledgeCenter = () => {
         </TabsContent>
 
         <TabsContent value="scenarios" className="mt-8">
-          <ScenarioExplorer />
+          <ScenarioExplorer initialScenarioId={scenarioId || undefined} />
         </TabsContent>
 
         <TabsContent value="advisor" className="mt-8">
