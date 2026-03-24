@@ -151,9 +151,9 @@ const Index = () => {
                   </div>
                   <h3 className="font-bold text-lg">זיהוי מצב והמלצת פעולה</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    תארו את המצב שלכם בכמה מילים וקבלו המלצות מותאמות אישית, פעולות מומלצות ומשאבים רלוונטיים
+                    בחרו תרחיש או תארו את המצב ליועץ החכם וקבלו המלצות מותאמות אישית ופעולות מומלצות
                   </p>
-                  <Button size="sm" variant="secondary" className="mt-2">תארו את המצב</Button>
+                  <Button size="sm" variant="secondary" className="mt-2">זהו את המצב</Button>
                 </CardContent>
               </Card>
             </Link>
