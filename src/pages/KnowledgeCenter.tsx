@@ -16,6 +16,7 @@ const KnowledgeCenter = () => {
   // If ?tab=scenarios or ?tab=advisor, use that
   const scenarioId = searchParams.get("scenario");
   const tabParam = searchParams.get("tab");
+  const hideResources = tabParam === "scenarios" || tabParam === "advisor" || !!scenarioId;
   const defaultTab = scenarioId ? "scenarios" : tabParam === "advisor" ? "advisor" : tabParam === "scenarios" ? "scenarios" : "resources";
 
   useEffect(() => {
