@@ -39,14 +39,33 @@ export const printPdf = async (url: string) => {
     const res = await fetch(url);
     const blob = await res.blob();
     const blobUrl = URL.createObjectURL(blob);
-    const printWindow = window.open(blobUrl);
-    if (printWindow) {
-      printWindow.onload = () => {
-        printWindow.print();
-      };
-    }
+    
+    // Use a hidden iframe to print without opening a new tab
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "fixed";
+    iframe.style.top = "-10000px";
+    iframe.style.left = "-10000px";
+    iframe.style.width = "1px";
+    iframe.style.height = "1px";
+    iframe.src = blobUrl;
+    document.body.appendChild(iframe);
+    
+    iframe.onload = () => {
+      try {
+        iframe.contentWindow?.print();
+      } catch {
+        // If print fails, download instead
+        downloadPdf(url, "document.pdf");
+      }
+      // Clean up after a delay
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+        URL.revokeObjectURL(blobUrl);
+      }, 5000);
+    };
   } catch {
-    window.open(url, "_blank");
+    // Fallback: just download
+    downloadPdf(url, "document.pdf");
   }
 };
 
