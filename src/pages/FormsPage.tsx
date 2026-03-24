@@ -57,7 +57,6 @@ const ALL_FORMS: Form[] = [
 
 const CATEGORIES = [...new Set(ALL_FORMS.map((f) => f.category))];
 
-};
 
 export default function FormsPage() {
   const [search, setSearch] = useState("");
