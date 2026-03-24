@@ -107,3 +107,51 @@
     @apply bg-background text-foreground font-heebo;
   }
 }
+
+.pdf-print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body.pdf-printing > *:not(.pdf-print-root) {
+    display: none !important;
+  }
+
+  body.pdf-printing {
+    background: hsl(var(--background));
+  }
+
+  body.pdf-printing .pdf-print-root {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    background: hsl(var(--background));
+  }
+
+  body.pdf-printing .pdf-print-page-wrapper {
+    display: flex;
+    justify-content: center;
+    break-after: page;
+    page-break-after: always;
+    margin: 0 0 8mm;
+  }
+
+  body.pdf-printing .pdf-print-page-wrapper:last-child {
+    break-after: auto;
+    page-break-after: auto;
+    margin-bottom: 0;
+  }
+
+  body.pdf-printing .pdf-print-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+}
