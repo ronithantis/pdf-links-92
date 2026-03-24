@@ -160,15 +160,13 @@ export default function FormsPage() {
             <div className="flex items-center justify-between px-5 py-3.5 border-b shrink-0" style={{ direction: "rtl" }}>
               <span className="font-bold text-sm text-foreground">{openForm.title}</span>
               <div className="flex items-center gap-2">
-                <a
-                  href={pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-primary-foreground border-none rounded-md cursor-pointer text-xs no-underline font-medium"
+                <button
+                  onClick={handleDownload}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary text-primary-foreground border-none rounded-md cursor-pointer text-xs font-medium"
                 >
                   <Download className="h-3.5 w-3.5" />
-                  פתח/הורד
-                </a>
+                  הורד
+                </button>
                 <button
                   onClick={handlePrint}
                   title="הדפס"
