@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { checklistItems } from "@/lib/modules-data";
-import { FileText, Shield, Home, Heart, Users, Printer, ExternalLink } from "lucide-react";
+import { checklistItems, digitalTools, type ChecklistItem } from "@/lib/modules-data";
+import { FileText, Shield, Home, Heart, Users, Printer, ExternalLink, ArrowLeft } from "lucide-react";
 
 const iconMap: Record<string, React.ReactNode> = {
   FileText: <FileText className="h-5 w-5" />,
@@ -24,6 +25,23 @@ const categoryAnchorMap: Record<string, string> = {
   "advance-directives": "#section-12",
 };
 
+const resolveToolUrl = (item: ChecklistItem): { url: string; isExternal: boolean } | null => {
+  if (item.externalUrl) return { url: item.externalUrl, isExternal: true };
+  if (item.serviceLink && item.servicePath) return { url: item.servicePath, isExternal: false };
+  if (item.toolId) {
+    const tool = digitalTools.find(t => t.id === item.toolId);
+    if (tool) {
+      if ((tool as any).isExternal && (tool as any).externalUrl) {
+        return { url: (tool as any).externalUrl, isExternal: true };
+      }
+      if (tool.toolUrl) return { url: tool.toolUrl, isExternal: true };
+    }
+    // Fallback to /tools#toolId
+    return { url: `/tools#${item.toolId}`, isExternal: false };
+  }
+  return null;
+};
+
 const ChecklistSection = () => {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
 
@@ -37,7 +55,7 @@ const ChecklistSection = () => {
         const isChecked = !!checked[`${category.id}-${i}`];
         return `<li style="margin-bottom:6px;color:${isChecked ? '#888' : '#222'}">
           <span style="font-size:16px;margin-left:6px">${isChecked ? '☑' : '☐'}</span>
-          <span style="${isChecked ? 'text-decoration:line-through' : ''}">${item}</span>
+          <span style="${isChecked ? 'text-decoration:line-through' : ''}">${item.text}</span>
         </li>`;
       }).join('');
       const completedCount = category.items.filter((_, i) => checked[`${category.id}-${i}`]).length;
@@ -48,13 +66,13 @@ const ChecklistSection = () => {
     }).join('');
 
     const html = `<!DOCTYPE html><html dir="rtl" lang="he"><head><meta charset="UTF-8">
-      <title>צ׳קליסט - סניורסנס</title>
+      <title>צ׳קליסט - מרכז הידע והכלים</title>
       <style>body{font-family:Heebo,Arial,sans-serif;padding:40px;max-width:700px;margin:0 auto}
       h1{text-align:center;color:#1a7a8a;margin-bottom:8px}
       .subtitle{text-align:center;color:#666;margin-bottom:32px;font-size:14px}
       @media print{body{padding:20px}}</style></head>
       <body><h1>צ׳קליסט מטפל משפחתי</h1>
-      <p class="subtitle">הודפס מאתר סניורסנס • ${new Date().toLocaleDateString('he-IL')}</p>
+      <p class="subtitle">הודפס מאתר מרכז הידע והכלים • ${new Date().toLocaleDateString('he-IL')}</p>
       ${printContent}</body></html>`;
 
     const printWindow = window.open('', '_blank');
@@ -97,20 +115,45 @@ const ChecklistSection = () => {
                 <ul className="space-y-3 pr-8">
                   {category.items.map((item, i) => {
                     const key = `${category.id}-${i}`;
+                    const toolLink = resolveToolUrl(item);
                     return (
                       <li key={i} className="flex items-start gap-3">
                         <Checkbox
                           id={key}
                           checked={!!checked[key]}
                           onCheckedChange={() => toggleItem(key)}
-                          aria-label={item}
+                          aria-label={item.text}
                         />
-                        <label
-                          htmlFor={key}
-                          className={`text-sm cursor-pointer leading-relaxed ${checked[key] ? "line-through text-muted-foreground" : ""}`}
-                        >
-                          {item}
-                        </label>
+                        <div className="flex-1 min-w-0">
+                          <label
+                            htmlFor={key}
+                            className={`text-sm cursor-pointer leading-relaxed ${checked[key] ? "line-through text-muted-foreground" : ""}`}
+                          >
+                            {item.text}
+                          </label>
+                          {toolLink && item.toolLabel && (
+                            toolLink.isExternal ? (
+                              <a
+                                href={toolLink.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1 text-xs text-primary hover:underline mt-0.5"
+                              >
+                                <ArrowLeft className="h-3 w-3" />
+                                {item.toolLabel}
+                                <ExternalLink className="h-2.5 w-2.5" />
+                              </a>
+                            ) : (
+                              <Link
+                                to={toolLink.url}
+                                className="flex items-center gap-1 text-xs text-primary hover:underline mt-0.5"
+                              >
+                                <ArrowLeft className="h-3 w-3" />
+                                {item.toolLabel}
+                              </Link>
+                            )
+                          )}
+                        </div>
                       </li>
                     );
                   })}
