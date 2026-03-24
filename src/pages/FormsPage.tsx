@@ -184,7 +184,7 @@ export default function FormsPage() {
 
             {/* PDF Viewer */}
             <div className="flex-1 overflow-hidden relative">
-              <PdfViewer key={openForm.id} url={pdfUrl} title={openForm.title} />
+              <PdfViewerComponent key={openForm.id} url={pdfUrl} title={openForm.title} />
             </div>
           </div>
         </div>
