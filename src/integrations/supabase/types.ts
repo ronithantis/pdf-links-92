@@ -205,6 +205,9 @@ export type Database = {
       }
       scenarios: {
         Row: {
+          actions_24h: Json | null
+          actions_now: Json | null
+          actions_week: Json | null
           created_at: string | null
           id: string
           is_published: boolean | null
@@ -215,8 +218,14 @@ export type Database = {
           title: string
           trigger_phrases: string[] | null
           updated_at: string | null
+          urgency_level: string | null
+          what_to_prepare: Json | null
+          who_to_contact: Json | null
         }
         Insert: {
+          actions_24h?: Json | null
+          actions_now?: Json | null
+          actions_week?: Json | null
           created_at?: string | null
           id?: string
           is_published?: boolean | null
@@ -227,8 +236,14 @@ export type Database = {
           title: string
           trigger_phrases?: string[] | null
           updated_at?: string | null
+          urgency_level?: string | null
+          what_to_prepare?: Json | null
+          who_to_contact?: Json | null
         }
         Update: {
+          actions_24h?: Json | null
+          actions_now?: Json | null
+          actions_week?: Json | null
           created_at?: string | null
           id?: string
           is_published?: boolean | null
@@ -239,6 +254,9 @@ export type Database = {
           title?: string
           trigger_phrases?: string[] | null
           updated_at?: string | null
+          urgency_level?: string | null
+          what_to_prepare?: Json | null
+          who_to_contact?: Json | null
         }
         Relationships: []
       }
