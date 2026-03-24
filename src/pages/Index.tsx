@@ -141,7 +141,7 @@ const Index = () => {
             </Card>
 
             {/* Card 2 - Smart Advisor */}
-            <Link to="/knowledge-center">
+            <Link to="/knowledge-center?tab=scenarios">
               <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer group">
                 <CardContent className="p-6 text-center flex flex-col items-center gap-3">
                   <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
