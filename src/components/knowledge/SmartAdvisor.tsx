@@ -103,6 +103,35 @@ const SmartAdvisor = () => {
             </Card>
           )}
 
+          {result.matched_scenarios && result.matched_scenarios.length > 0 && (
+            <Card className="border-primary/30 bg-primary/5">
+              <CardContent className="p-5 space-y-3">
+                <h4 className="font-semibold flex items-center gap-2 text-primary">
+                  <AlertTriangle className="h-5 w-5" />
+                  תרחיש מפורט מתאים למצב שלכם
+                </h4>
+                <p className="text-xs text-muted-foreground">לחצו כדי לקבל תוכנית פעולה מפורטת עם פעולות לפי זמנים, מה להכין ועם מי לדבר</p>
+                <div className="space-y-2">
+                  {result.matched_scenarios.map((sc) => (
+                    <Link
+                      key={sc.id}
+                      to={`/knowledge-center?scenario=${sc.id}`}
+                      className="flex items-center justify-between p-3 rounded-md border bg-background hover:bg-accent transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        <ArrowLeft className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium">{sc.title}</span>
+                      </div>
+                      {sc.urgency_level === "high" && (
+                        <Badge variant="destructive" className="text-[10px]">דחוף</Badge>
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {result.actions?.length > 0 && (
             <Card>
               <CardContent className="p-5 space-y-3">
