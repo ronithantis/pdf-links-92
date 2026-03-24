@@ -17,6 +17,7 @@ import TechnicalSpec from "./pages/TechnicalSpec";
 import Auth from "./pages/Auth";
 import AdminKnowledge from "./pages/AdminKnowledge";
 import GiveTake from "./pages/GiveTake";
+import AdElai from "./pages/AdElai";
 import About from "./pages/About";
 import FormsPage from "./pages/FormsPage";
 import NotFound from "./pages/NotFound";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/technical-spec" element={<TechnicalSpec />} />
             <Route path="/give-take" element={<GiveTake />} />
+            <Route path="/ad-elai" element={<AdElai />} />
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
