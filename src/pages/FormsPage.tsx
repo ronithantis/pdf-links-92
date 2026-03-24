@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Download, Printer, X } from "lucide-react";
-import PdfViewerComponent from "@/components/PdfViewer";
+import PdfViewerComponent, { downloadPdf, printPdf } from "@/components/PdfViewer";
 
 interface Form {
   id: string;

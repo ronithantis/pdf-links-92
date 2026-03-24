@@ -80,11 +80,9 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                 </DialogHeader>
                 <div className="flex items-center gap-1">
                   {formUrl && (
-                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" asChild>
-                      <a href={formUrl} target="_blank" rel="noopener noreferrer">
-                        <Download className="h-3.5 w-3.5 ml-1" />
-                        פתח/הורד
-                      </a>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs" onClick={handleDownload}>
+                      <Download className="h-3.5 w-3.5 ml-1" />
+                      הורד
                     </Button>
                   )}
                   <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handlePrint} title="הדפסה">
