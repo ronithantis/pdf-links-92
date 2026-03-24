@@ -15,6 +15,12 @@ interface Resource {
   url: string | null;
   subcategory: string | null;
 }
+const normalizePublicPath = (url: string) => {
+  if (url.startsWith("/") || url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `/${url}`;
+};
 
 const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isVideo = resource.category === "videos";
