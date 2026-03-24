@@ -194,8 +194,23 @@ const Index = () => {
 
       {/* Quick Navigation - Modules */}
       <section id="modules" className="py-16 container">
-        <h2 className="text-3xl font-bold text-center mb-3">11 פרקים</h2>
-        <p className="text-center text-muted-foreground mb-10">מידע מקצועי מאורגן בצורה ברורה ונגישה</p>
+        <h2 className="text-3xl font-bold text-center mb-3">בחרו הפרק הרלוונטי לכם כדי להרחיב את הידע</h2>
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+          <span className="text-muted-foreground">או עברו ל</span>
+          <Link to="/#checklist">
+            <Button variant="outline" size="sm" className="gap-2">
+              <ClipboardCheck className="h-4 w-4" />
+              צעדים ראשונים
+            </Button>
+          </Link>
+          <span className="text-muted-foreground">או</span>
+          <Link to="/tools">
+            <Button variant="outline" size="sm" className="gap-2">
+              <Compass className="h-4 w-4" />
+              כלים יישומיים
+            </Button>
+          </Link>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {modules.map((mod) => (
             <Link key={mod.id} to={`/module/${mod.id}`}>
