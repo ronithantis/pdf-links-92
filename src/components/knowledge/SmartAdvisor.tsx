@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink, Lock } from "lucide-react";
+import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink, Lock, AlertTriangle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
