@@ -86,6 +86,16 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
+    keywords: ["פיטורין", "פיטורים", "לפטר", "פיטרתי", "שימוע", "סיום העסקה", "עוזבת", "עוזב", "להחליף עובד", "גמר חשבון"],
+    tools: [
+      { path: "/forms/form-19-hearing-protocol-hebrew.pdf", label: "פרוטוקול שימוע לעובד זר (עברית)", reason: "טופס חובה לפני פיטורין — תיעוד השימוע" },
+      { path: "/forms/form-24-hearing-protocol-english.pdf", label: "פרוטוקול שימוע (אנגלית)", reason: "גרסה באנגלית לעובד/ת" },
+      { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "לחישוב גמר חשבון: פיצויים, חופשה, הבראה", isPaid: true },
+      { path: "/tools#family-sync", label: "כלי סנכרון הטיפול המשפחתי", reason: "תיאום בין האחים מי יהיה עם ההורה עד כניסת מחליף/ה", isPaid: true },
+      { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "להתחלת חיפוש מיידי אחר עובד/ת חלופיים" },
+    ],
+  },
+  {
     keywords: ["תרופות", "תרופה", "מרשם", "מרשמים", "תרופתי"],
     tools: [
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי רשימת תרופות, מלאי ותזכורות" },
