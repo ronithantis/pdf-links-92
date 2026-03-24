@@ -71,8 +71,8 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="HUB2CARE" className="h-9 w-9 object-contain" />
           <div className="flex flex-col">
-            <span className="text-base font-bold text-primary leading-tight">מרכז הידע</span>
-            <span className="hidden text-xs text-muted-foreground sm:block">למשפחות מטפלות</span>
+            <span className="text-base font-bold text-primary leading-tight">מרכז הידע והכלים</span>
+            <span className="hidden text-xs text-muted-foreground sm:block">למשפחות מטפלות בהורה מבוגר</span>
           </div>
         </Link>
 
