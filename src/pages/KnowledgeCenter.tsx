@@ -13,8 +13,10 @@ const KnowledgeCenter = () => {
   const [searchParams] = useSearchParams();
 
   // If ?scenario=ID is in URL, default to scenarios tab
+  // If ?tab=scenarios or ?tab=advisor, use that
   const scenarioId = searchParams.get("scenario");
-  const defaultTab = scenarioId ? "scenarios" : "resources";
+  const tabParam = searchParams.get("tab");
+  const defaultTab = scenarioId ? "scenarios" : tabParam === "advisor" ? "advisor" : tabParam === "scenarios" ? "scenarios" : "resources";
 
   useEffect(() => {
     const fetchCounts = async () => {
