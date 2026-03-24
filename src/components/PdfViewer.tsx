@@ -66,7 +66,7 @@ export const printPdf = async (url: string) => {
       canvas.height = Math.ceil(viewport.height);
       canvas.className = "pdf-print-page";
 
-      await page.render({ canvasContext: context, viewport }).promise;
+      await page.render({ canvas, canvasContext: context, viewport }).promise;
 
       const pageWrapper = document.createElement("div");
       pageWrapper.className = "pdf-print-page-wrapper";
