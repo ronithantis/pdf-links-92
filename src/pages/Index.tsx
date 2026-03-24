@@ -233,7 +233,7 @@ const Index = () => {
       </section>
 
       {/* Checklist Section */}
-      <section className="py-16 bg-muted/30">
+      <section id="checklist" className="py-16 bg-muted/30">
         <div className="container">
           <div className="flex items-center justify-center gap-3 mb-3">
             <ClipboardCheck className="h-7 w-7 text-primary" />
