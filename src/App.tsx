@@ -7,7 +7,7 @@ import Layout from "@/components/layout/Layout";
 import Index from "./pages/Index";
 import ModulePage from "./pages/ModulePage";
 import DigitalTools from "./pages/DigitalTools";
-import Services from "./pages/Services";
+
 import Contact from "./pages/Contact";
 import KnowledgeCenter from "./pages/KnowledgeCenter";
 import ForeignWorkerSearch from "./pages/ForeignWorkerSearch";
