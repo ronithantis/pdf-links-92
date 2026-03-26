@@ -128,9 +128,6 @@ const Header = () => {
           <Link to="/ad-elai" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             שירותים וציוד
           </Link>
-          <Link to="/services" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            שירותים וספקים
-          </Link>
           <Link to="/tools" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             כלים דיגיטליים
           </Link>
