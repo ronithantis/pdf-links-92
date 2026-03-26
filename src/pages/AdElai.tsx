@@ -21,9 +21,9 @@ import {
   type Provider,
 } from "@/lib/ad-elai-data";
 
-const TEAL = "#1B7A78";
-const TEAL_DARK = "#135f5d";
-const TEAL_LIGHT = "#eaf4f4";
+const TEAL = "hsl(195, 60%, 36%)";
+const TEAL_DARK = "hsl(195, 60%, 26%)";
+const TEAL_LIGHT = "hsl(195, 40%, 94%)";
 
 // ── Rating Stars ──
 const RatingStars = ({ rating, reviewCount }: { rating: number; reviewCount: number }) => {
