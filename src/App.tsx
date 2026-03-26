@@ -7,7 +7,7 @@ import Layout from "@/components/layout/Layout";
 import Index from "./pages/Index";
 import ModulePage from "./pages/ModulePage";
 import DigitalTools from "./pages/DigitalTools";
-import Services from "./pages/Services";
+
 import Contact from "./pages/Contact";
 import KnowledgeCenter from "./pages/KnowledgeCenter";
 import ForeignWorkerSearch from "./pages/ForeignWorkerSearch";
@@ -35,7 +35,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/module/:moduleId" element={<ModulePage />} />
-            <Route path="/services" element={<Services />} />
+            
             <Route path="/tools" element={<DigitalTools />} />
             <Route path="/knowledge-center" element={<KnowledgeCenter />} />
             <Route path="/foreign-worker-search" element={<ForeignWorkerSearch />} />

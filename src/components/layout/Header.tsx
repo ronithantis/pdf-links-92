@@ -128,9 +128,6 @@ const Header = () => {
           <Link to="/ad-elai" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             שירותים וציוד
           </Link>
-          <Link to="/services" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            שירותים וספקים
-          </Link>
           <Link to="/tools" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             כלים דיגיטליים
           </Link>
@@ -194,9 +191,6 @@ const Header = () => {
                 </Link>
                 <Link to="/ad-elai" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   שירותים וציוד
-                </Link>
-                <Link to="/services" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  שירותים וספקים
                 </Link>
                 <Link to="/tools" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   כלים דיגיטליים
