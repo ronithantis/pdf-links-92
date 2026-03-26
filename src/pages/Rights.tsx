@@ -224,7 +224,7 @@ const Rights = () => {
               <strong>חודשי:</strong> {D.min_wage_monthly} ₪ &nbsp;|&nbsp; <strong>יומי:</strong> {D.min_wage_daily} ₪ &nbsp;|&nbsp; <strong>שעתי:</strong> {D.min_wage_hourly} ₪
             </Callout>
 
-            <ToolLink title="מחשבון שכר לעובד זר" description="חישוב מדויק לפי ימי עבודה, ותק, ניכויים ותוספות" linkText="← למחשבון השכר" to="/tools" />
+            <ToolLink title="מחשבון שכר לעובד זר" description="חישוב מדויק לפי ימי עבודה, ותק, ניכויים ותוספות" linkText="← למחשבון השכר" to="/tools#salary-calculator" />
 
             <SubSection title="א. זכויות עבודה בסיסיות" />
             <CheckList items={[
