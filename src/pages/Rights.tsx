@@ -48,7 +48,7 @@ const Rights = () => {
               משפחות מתמקדות בגמלת הסיעוד ומחמיצות גמלת ניידות, קצבת שאירים, הנחות ארנונה ותחבורה, זכויות בריאות, וכלים להגנה משפטית על הקשיש.
             </Callout>
 
-            <ToolLink title="כיצד מגישים תביעת סיעוד?" description="מדריך שלב-אחר-שלב, מה לצרף ומה לצפות" linkText="← למדריך הגשת תביעה" to="/module/5" />
+            <ToolLink title="כיצד מגישים תביעת סיעוד?" description="מדריך שלב-אחר-שלב, מה לצרף ומה לצפות" linkText="← למדריך הגשת תביעה" to="/tools#nursing-claim-guide" />
 
             <SubSection title="א. גמלת סיעוד — תנאי זכאות" />
             <CheckList items={[
@@ -224,7 +224,7 @@ const Rights = () => {
               <strong>חודשי:</strong> {D.min_wage_monthly} ₪ &nbsp;|&nbsp; <strong>יומי:</strong> {D.min_wage_daily} ₪ &nbsp;|&nbsp; <strong>שעתי:</strong> {D.min_wage_hourly} ₪
             </Callout>
 
-            <ToolLink title="מחשבון שכר לעובד זר" description="חישוב מדויק לפי ימי עבודה, ותק, ניכויים ותוספות" linkText="← למחשבון השכר" to="/tools" />
+            <ToolLink title="מחשבון שכר לעובד זר" description="חישוב מדויק לפי ימי עבודה, ותק, ניכויים ותוספות" linkText="← למחשבון השכר" to="/tools#salary-calculator" />
 
             <SubSection title="א. זכויות עבודה בסיסיות" />
             <CheckList items={[
