@@ -35,7 +35,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/module/:moduleId" element={<ModulePage />} />
-            <Route path="/services" element={<Services />} />
+            
             <Route path="/tools" element={<DigitalTools />} />
             <Route path="/knowledge-center" element={<KnowledgeCenter />} />
             <Route path="/foreign-worker-search" element={<ForeignWorkerSearch />} />
