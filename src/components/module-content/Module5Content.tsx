@@ -82,11 +82,11 @@ export const Module5Content = ({ subId }: SubModuleContentProps) => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <tbody className="text-muted-foreground">
-                <tr><td className="border p-2 font-medium text-foreground">שכר בסיס</td><td className="border p-2">~₪5,300</td></tr>
+                <tr><td className="border p-2 font-medium text-foreground">שכר בסיס (מינימום)</td><td className="border p-2">₪6,443.85</td></tr>
                 <tr><td className="border p-2 font-medium text-foreground">דמי ביטוח</td><td className="border p-2">~₪660</td></tr>
                 <tr><td className="border p-2 font-medium text-foreground">תאגיד</td><td className="border p-2">~₪70</td></tr>
                 <tr><td className="border p-2 font-medium text-foreground">ביטוח רפואי</td><td className="border p-2">~₪1,370</td></tr>
-                <tr className="bg-muted/50"><td className="border p-2 font-bold text-foreground">סה"כ חודשי</td><td className="border p-2 font-bold">~₪7,400</td></tr>
+                <tr className="bg-muted/50"><td className="border p-2 font-bold text-foreground">סה"כ חודשי</td><td className="border p-2 font-bold">~₪8,544</td></tr>
               </tbody>
             </table>
           </div>
