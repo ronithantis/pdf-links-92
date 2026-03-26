@@ -20,6 +20,7 @@ import GiveTake from "./pages/GiveTake";
 import AdElai from "./pages/AdElai";
 import About from "./pages/About";
 import FormsPage from "./pages/FormsPage";
+import Rights from "./pages/Rights";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
             <Route path="/forms" element={<FormsPage />} />
+            <Route path="/rights" element={<Rights />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
