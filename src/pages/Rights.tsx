@@ -234,18 +234,14 @@ const Rights = () => {
               <StatCard title="מצב יוצא דופן" value="יום 1" desc="אם לעובד קיים ביטוח פנסיוני פעיל — חובת ההפרשה מתחילה מהיום הראשון." />
             </div>
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>רכיב</TableHead><TableHead>שיעור</TableHead><TableHead>מתי מתחיל</TableHead><TableHead>אופן התשלום</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell><strong>הפרשה פנסיונית (מעסיק)</strong></TableCell><TableCell>6.5% מהשכר המבוטח</TableCell><TableCell>חודש 7 (או יום 1 אם יש פנסיה פעילה)</TableCell><TableCell>משולם <strong>ישירות לעובד</strong> בסיום ההעסקה</TableCell></TableRow>
-                  <TableRow><TableCell><strong>פיצויי פיטורים</strong></TableCell><TableCell>8.33% לשנה</TableCell><TableCell>לאחר שנה רצופה</TableCell><TableCell>רק אם פוטר — לא אם התפטר</TableCell></TableRow>
-                  <TableRow><TableCell><strong>ביטוח לאומי (מעסיק)</strong></TableCell><TableCell>{D.btl_rate}%</TableCell><TableCell>מיום הראשון</TableCell><TableCell><strong>אסור לנכות מהשכר</strong></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["רכיב", "שיעור", "מתי מתחיל", "אופן התשלום"]}
+              rows={[
+                ["הפרשה פנסיונית (מעסיק)", "6.5% מהשכר המבוטח", "חודש 7 (או יום 1 אם יש פנסיה פעילה)", "משולם ישירות לעובד בסיום ההעסקה"],
+                ["פיצויי פיטורים", "8.33% לשנה", "לאחר שנה רצופה", "רק אם פוטר — לא אם התפטר"],
+                [`ביטוח לאומי (מעסיק)`, `${D.btl_rate}%`, "מיום הראשון", "אסור לנכות מהשכר"],
+              ]}
+            />
 
             <Callout variant="warning" title="נקודות מרכזיות שחשוב לדעת">
               <ul className="list-disc list-inside space-y-1 text-sm">
