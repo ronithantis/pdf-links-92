@@ -58,33 +58,25 @@ const Rights = () => {
               { bold: "קשיים ב-5 פעולות", text: "— ניידות, הלבשה, רחצה, אכילה, הפרשות" },
             ]} />
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>מצב משפחתי</TableHead><TableHead>גמלה מלאה</TableHead><TableHead>גמלה מופחתת 50%</TableHead><TableHead>אין זכאות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>יחיד/ה</TableCell><TableCell>עד <strong>{D.nursing_single_full}</strong> ₪</TableCell><TableCell>{D.nursing_single_full} – {D.nursing_single_partial} ₪</TableCell><TableCell>מעל {D.nursing_single_partial} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג</TableCell><TableCell>עד <strong>{D.nursing_couple_full}</strong> ₪</TableCell><TableCell>{D.nursing_couple_full} – {D.nursing_couple_partial} ₪</TableCell><TableCell>מעל {D.nursing_couple_partial} ₪</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["מצב משפחתי", "גמלה מלאה", "גמלה מופחתת 50%", "אין זכאות"]}
+              rows={[
+                ["יחיד/ה", `עד ${D.nursing_single_full} ₪`, `${D.nursing_single_full} – ${D.nursing_single_partial} ₪`, `מעל ${D.nursing_single_partial} ₪`],
+                ["זוג", `עד ${D.nursing_couple_full} ₪`, `${D.nursing_couple_full} – ${D.nursing_couple_partial} ₪`, `מעל ${D.nursing_couple_partial} ₪`],
+              ]}
+            />
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>רמה</TableHead><TableHead>נקודות תלות</TableHead><TableHead>מטפל ישראלי (שעות/שבוע)</TableHead><TableHead>עובד זר (שעות/שבוע)</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>1</TableCell><TableCell>1–1.5</TableCell><TableCell>9.75</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>2</TableCell><TableCell>2–2.5</TableCell><TableCell>14</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>3</TableCell><TableCell>3–3.5</TableCell><TableCell>18.5</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>4</TableCell><TableCell>4–5</TableCell><TableCell>22</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>5</TableCell><TableCell>6–8.5</TableCell><TableCell>26</TableCell><TableCell>22</TableCell></TableRow>
-                  <TableRow><TableCell className="font-bold">6</TableCell><TableCell className="font-bold">9.5–10.5</TableCell><TableCell className="font-bold">30</TableCell><TableCell className="font-bold">26</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["רמה", "נקודות תלות", "מטפל ישראלי (שעות/שבוע)", "עובד זר (שעות/שבוע)"]}
+              rows={[
+                ["1", "1–1.5", "9.75", "—"],
+                ["2", "2–2.5", "14", "—"],
+                ["3", "3–3.5", "18.5", "—"],
+                ["4", "4–5", "22", "—"],
+                ["5", "6–8.5", "26", "22"],
+                ["6", "9.5–10.5", "30", "26"],
+              ]}
+            />
 
             <SubSection title="ב. קצבאות מביטוח לאומי (2026)" />
             <div className="overflow-x-auto">
