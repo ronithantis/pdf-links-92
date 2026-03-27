@@ -68,7 +68,7 @@ const DigitalTools = () => {
           const isExternal = !!(tool as any).isExternal;
 
           return (
-            <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md">
+            <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md flex flex-col">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <span className="text-primary">{toolIcons[tool.icon]}</span>
@@ -87,8 +87,8 @@ const DigitalTools = () => {
                 </div>
                 <CardTitle className="text-lg">{tool.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
+              <CardContent className="flex flex-col flex-1">
+                <p className="text-sm text-muted-foreground mb-4 flex-1">{tool.description}</p>
                 {isExternal ? (
                   <Button
                     onClick={() => handleOpenTool(tool)}
