@@ -182,6 +182,17 @@ const TasksList = () => {
           <ClipboardList className="h-8 w-8 text-primary" />
           <h1 className="text-3xl md:text-4xl font-bold text-center">רשימת משימות מנהל הטיפול</h1>
         </div>
+        <div className="flex justify-center mb-3 print:hidden">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => window.print()}
+            className="gap-1.5"
+          >
+            <Printer className="h-4 w-4" />
+            הדפסת הדף
+          </Button>
+        </div>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
           סיכום כולל ומאוחד של מטלות בני משפחה המטפלים בקשיש/ה סיעודי/ת – לניהול יומיומי ותכנון מראש
         </p>
