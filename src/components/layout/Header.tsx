@@ -117,7 +117,7 @@ const Header = () => {
             )}
           </div>
           <Link to="/rights" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            זכויותיכם
+            זכויות וחובות
           </Link>
           <Link to="/knowledge-center" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             מרכז הידע
