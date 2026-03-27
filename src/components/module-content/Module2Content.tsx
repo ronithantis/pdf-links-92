@@ -319,6 +319,21 @@ export const Module2Content = ({ subId }: SubModuleContentProps) => {
               <p className="text-muted-foreground text-xs">קופסת תרופות, לוח על המקרר, שעון תזכורת פשוט</p>
             </InfoBox>
           </div>
+
+          <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <p className="font-semibold text-sm flex items-center gap-2 mb-2">
+              <Pill className="h-4 w-4 text-primary" />
+              כלי מעקב תרופות דיגיטלי
+            </p>
+            <p className="text-xs text-muted-foreground mb-3">
+              מערכת מעקב יומי למתן תרופות — הגדרת תרופות, סימון מתן, לוח שנה, דוחות ושליחה לבני משפחה.
+            </p>
+            <Link to="/med-tracker" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+              <ExternalLink className="h-3.5 w-3.5" />
+              פתח את כלי מעקב התרופות
+            </Link>
+          </div>
+
           <InfoBox variant="info">
             <p className="text-xs text-muted-foreground">
               <strong>💡 טיפ חשוב:</strong> אם המבוגר מתקשה עם סמארטפון – עדיף פתרון פיזי. בכל מקרה, לא סומכים רק על תזכורת – מוסיפים "בדיקת בקרה" (שיחה קצרה יומית / סימון בטבלה).

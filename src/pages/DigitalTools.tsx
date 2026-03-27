@@ -47,7 +47,9 @@ const DigitalTools = () => {
   }, [location.hash]);
 
   const handleOpenTool = (tool: typeof digitalTools[0]) => {
-    if (tool.isExternal && tool.externalUrl) {
+    if ((tool as any).isInternal && tool.toolUrl) {
+      navigate(tool.toolUrl);
+    } else if (tool.isExternal && tool.externalUrl) {
       window.open(tool.externalUrl, "_blank");
     } else if (tool.toolUrl) {
       setOpenTool(tool);
