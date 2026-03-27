@@ -1,4 +1,5 @@
-import { Users, FileText, Shield, Heart, Smartphone, Home, AlertTriangle, Camera, Wallet } from "lucide-react";
+import { Users, FileText, Shield, Heart, Smartphone, Home, AlertTriangle, Camera, Wallet, ExternalLink, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface SubModuleContentProps {
   subId: string;
