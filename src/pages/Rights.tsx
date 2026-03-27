@@ -426,19 +426,15 @@ const Rights = () => {
               כל קופה מציעה ביטוח סיעודי קבוצתי. <strong>זהו ביטוח נוסף מעבר לגמלת סיעוד</strong> — כדאי לבדוק מה יש לקשיש ולשקול רכישה לפני גיל הזקנה.
             </Callout>
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>קופה</TableHead><TableHead>שם ביטוח סיעודי משלים</TableHead><TableHead>מוקד טלפון</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>כללית</TableCell><TableCell>כללית סיעוד / כללית סיעוד פלוס</TableCell><TableCell><a href="tel:*2700" className="text-primary font-bold">*2700</a></TableCell></TableRow>
-                  <TableRow><TableCell>מכבי</TableCell><TableCell>מכבי סיעוד / מכבי סיעוד זהב</TableCell><TableCell><a href="tel:*3555" className="text-primary font-bold">*3555</a></TableCell></TableRow>
-                  <TableRow><TableCell>מאוחדת</TableCell><TableCell>מאוחדת סיעוד מושלם</TableCell><TableCell><a href="tel:*3833" className="text-primary font-bold">*3833</a></TableCell></TableRow>
-                  <TableRow><TableCell>לאומית</TableCell><TableCell>לאומית סיעוד מקיף</TableCell><TableCell><a href="tel:*507" className="text-primary font-bold">*507</a></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["קופה", "שם ביטוח סיעודי משלים", "מוקד טלפון"]}
+              rows={[
+                ["כללית", "כללית סיעוד / כללית סיעוד פלוס", "*2700"],
+                ["מכבי", "מכבי סיעוד / מכבי סיעוד זהב", "*3555"],
+                ["מאוחדת", "מאוחדת סיעוד מושלם", "*3833"],
+                ["לאומית", "לאומית סיעוד מקיף", "*507"],
+              ]}
+            />
 
             <SubSection title="📞 מוקדי קופות החולים" />
             <ContactGrid contacts={[
