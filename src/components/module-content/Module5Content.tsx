@@ -1,4 +1,5 @@
-import { Users, FileText, Shield, Heart, Smartphone, Home, AlertTriangle, Camera, Wallet } from "lucide-react";
+import { Users, FileText, Shield, Heart, Smartphone, Home, AlertTriangle, Camera, Wallet, ExternalLink, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface SubModuleContentProps {
   subId: string;
@@ -315,14 +316,35 @@ export const Module5Content = ({ subId }: SubModuleContentProps) => {
               { title: "📡 סנסורים", desc: "זיהוי נפילות ותנועה" },
               { title: "📹 מצלמות לניטור", desc: "בהסכמה ובאזורים משותפים בלבד" },
               { title: "🏠 בית חכם", desc: "גלאי גז אוטומטי, תאורה חכמה" },
-              { title: "💊 אפליקציות תרופות", desc: "תזכורות ומעקב נטילה" },
             ].map((item, i) => (
               <div key={i} className="bg-muted/50 rounded-md p-3 border">
                 <p className="font-medium text-xs">{item.title}</p>
                 <p className="text-muted-foreground text-xs">{item.desc}</p>
               </div>
             ))}
+            <div className="bg-primary/10 rounded-md p-3 border border-primary/30">
+              <p className="font-medium text-xs">💊 אפליקציות תרופות</p>
+              <p className="text-muted-foreground text-xs mb-2">תזכורות ומעקב נטילה</p>
+              <div className="flex flex-wrap gap-1.5">
+                <Link to="/tools#daily-care" className="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+                  <ExternalLink className="h-3 w-3" />
+                  מעקב ודיווח יומי
+                </Link>
+                <span className="text-muted-foreground text-xs">|</span>
+                <span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-medium">
+                  ניהול תרופות (בקרוב)
+                </span>
+              </div>
+            </div>
           </div>
+
+          <Link
+            to="/ad-elai"
+            className="flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground rounded-lg py-3 px-4 text-sm font-semibold hover:bg-primary/90 transition-colors"
+          >
+            <ShoppingCart className="h-4 w-4" />
+            להזמנת ציוד וטכנולוגיה מסייעת
+          </Link>
 
           <InfoBox variant="tip">
             <p className="font-medium mb-1">💡 עיקרון מנחה</p>
