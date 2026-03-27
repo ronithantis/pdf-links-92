@@ -1,4 +1,5 @@
-import { AlertTriangle, Pill, Stethoscope, Brain, Activity, Heart } from "lucide-react";
+import { AlertTriangle, Pill, Stethoscope, Brain, Activity, Heart, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface SubModuleContentProps {
   subId: string;

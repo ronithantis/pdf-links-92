@@ -456,4 +456,13 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/Matzpen-chaim/",
   },
+  {
+    id: "med-tracker",
+    title: "ניהול ומעקב מתן תרופות",
+    description: "מערכת מעקב יומי למתן תרופות – הגדרת תרופות, סימון מתן, לוח שנה, דוחות ושליחה לבני משפחה",
+    icon: "ClipboardList",
+    isPaid: false,
+    toolUrl: "/med-tracker",
+    isInternal: true,
+  },
 ];
