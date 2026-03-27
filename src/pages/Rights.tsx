@@ -279,19 +279,15 @@ const Rights = () => {
             </div>
 
             <SubSection title="ד. ניכויים מותרים מהשכר" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סוג ניכוי</TableHead><TableHead>תקרה מרבית</TableHead><TableHead>הערות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>ביטוח רפואי פרטי</TableCell><TableCell>{D.deduct_insurance} ₪ / חודש</TableCell><TableCell>עד מחצית ההוצאה בפועל</TableCell></TableRow>
-                  <TableRow><TableCell>מגורים + נלוות (בבית המעסיק)</TableCell><TableCell>{D.deduct_housing} ₪ / חודש</TableCell><TableCell>בבית המטופל בלבד</TableCell></TableRow>
-                  <TableRow><TableCell>אוכל</TableCell><TableCell>עד 10% משכר המינימום</TableCell><TableCell>רק בהסכם כתוב מובן לעובד</TableCell></TableRow>
-                  <TableRow><TableCell>ביטוח לאומי</TableCell><TableCell>לא מנוכה</TableCell><TableCell>{D.btl_rate}% — המעסיק משלם, <strong>אסור לנכות</strong></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סוג ניכוי", "תקרה מרבית", "הערות"]}
+              rows={[
+                ["ביטוח רפואי פרטי", `${D.deduct_insurance} ₪ / חודש`, "עד מחצית ההוצאה בפועל"],
+                ["מגורים + נלוות (בבית המעסיק)", `${D.deduct_housing} ₪ / חודש`, "בבית המטופל בלבד"],
+                ["אוכל", "עד 10% משכר המינימום", "רק בהסכם כתוב מובן לעובד"],
+                ["ביטוח לאומי", "לא מנוכה", `${D.btl_rate}% — המעסיק משלם, אסור לנכות`],
+              ]}
+            />
 
             <SubSection title="ה. הגנה מניצול ואכיפת זכויות" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
