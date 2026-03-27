@@ -19,6 +19,7 @@ import AdminKnowledge from "./pages/AdminKnowledge";
 import GiveTake from "./pages/GiveTake";
 import AdElai from "./pages/AdElai";
 import About from "./pages/About";
+import MedTracker from "./pages/MedTracker";
 import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
 import NotFound from "./pages/NotFound";
