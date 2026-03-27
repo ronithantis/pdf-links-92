@@ -442,6 +442,29 @@ const Rights = () => {
   );
 };
 
+const StyledTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) => (
+  <div className="overflow-x-auto rounded-lg border border-border">
+    <table className="w-full text-sm">
+      <thead>
+        <tr className="bg-primary text-primary-foreground">
+          {headers.map((h, i) => (
+            <th key={i} className="px-4 py-3 text-right font-bold whitespace-nowrap">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, ri) => (
+          <tr key={ri} className={ri % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+            {row.map((cell, ci) => (
+              <td key={ci} className={`px-4 py-3 ${ci === 0 ? "font-semibold text-foreground" : "text-primary font-medium"}`}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
 // ── Sub-components ──
 
 const SectionHeader = ({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) => (
