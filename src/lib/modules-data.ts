@@ -283,7 +283,7 @@ export const checklistItems: ChecklistCategory[] = [
     title: "ניהול רפואי",
     icon: "Heart",
     items: [
-      { text: "עדכון רשימת תרופות מלאה", toolId: "daily-care", toolLabel: "מעקב ודיווח יומי" },
+      { text: "עדכון רשימת תרופות מלאה", toolId: "med-tracker", toolLabel: "ניהול ומעקב תרופות" },
       { text: "קביעת רופא אחראי / גריאטר" },
       { text: "תיאום בין רופאים מטפלים" },
       { text: "סידור קופסת תרופות שבועית" },
