@@ -68,7 +68,7 @@ const DigitalTools = () => {
           const isExternal = !!(tool as any).isExternal;
 
           return (
-            <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md">
+            <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md flex flex-col">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <span className="text-primary">{toolIcons[tool.icon]}</span>
