@@ -160,20 +160,16 @@ const Rights = () => {
             </Callout>
 
             <SubSection title="א. ימי מחלה לפי סוג הטיפול" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סיבת ההיעדרות</TableHead><TableHead>ימים לשנה</TableHead><TableHead>תשלום</TableHead><TableHead>הערות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell><strong>הורה חולה</strong></TableCell><TableCell>עד 6 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>גם הורה של בן/בת הזוג</TableCell></TableRow>
-                  <TableRow><TableCell><strong>בן/בת זוג חולה</strong></TableCell><TableCell>עד 6 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>חולי ממושך — ייתכן יותר</TableCell></TableRow>
-                  <TableRow><TableCell><strong>ילד חולה (עד גיל 16)</strong></TableCell><TableCell>עד 8 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>רק אם שני ההורים עובדים</TableCell></TableRow>
-                  <TableRow><TableCell><strong>הורה / ילד עם מוגבלות</strong></TableCell><TableCell>עד 18 ימים</TableCell><TableCell>ממחלה/חופשה לבחירה</TableCell><TableCell>עד 36 ימים במקרים מיוחדים</TableCell></TableRow>
-                  <TableRow><TableCell><strong>סיוע לילד עם מוגבלות</strong></TableCell><TableCell>52 שעות</TableCell><TableCell><strong>ללא ניכוי שכר</strong></TableCell><TableCell>עד 104 שעות במקרים מסוימים</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סיבת ההיעדרות", "ימים לשנה", "תשלום", "הערות"]}
+              rows={[
+                ["הורה חולה", "עד 6 ימים", "כמו ימי מחלה", "גם הורה של בן/בת הזוג"],
+                ["בן/בת זוג חולה", "עד 6 ימים", "כמו ימי מחלה", "חולי ממושך — ייתכן יותר"],
+                ["ילד חולה (עד גיל 16)", "עד 8 ימים", "כמו ימי מחלה", "רק אם שני ההורים עובדים"],
+                ["הורה / ילד עם מוגבלות", "עד 18 ימים", "ממחלה/חופשה לבחירה", "עד 36 ימים במקרים מיוחדים"],
+                ["סיוע לילד עם מוגבלות", "52 שעות", "ללא ניכוי שכר", "עד 104 שעות במקרים מסוימים"],
+              ]}
+            />
 
             <Callout variant="success" title="⭐ חשוב — 52 שעות ללא ניכוי שכר">
               הורה לילד עם מוגבלות זכאי ל-52 שעות העדרות בשנה — <strong>ללא כל ניכוי</strong> משכרו. זכות שרבים לא מודעים אליה.
