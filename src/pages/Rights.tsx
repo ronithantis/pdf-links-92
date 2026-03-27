@@ -84,14 +84,16 @@ const Rights = () => {
                   <TableHead>סוג</TableHead><TableHead>סכום</TableHead>
                 </TableRow></TableHeader>
                 <TableBody>
-                  <TableRow><TableCell>קצבת אזרח ותיק — יחיד/ה</TableCell><TableCell>{D.senior_single} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>יחיד/ה גיל 80+</TableCell><TableCell>{D.senior_single_80} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג</TableCell><TableCell>{D.senior_couple} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>יחיד + השלמת הכנסה</TableCell><TableCell>{D.senior_single_plus} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג + השלמת הכנסה</TableCell><TableCell>{D.senior_couple_plus} ₪</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סוג", "סכום"]}
+              rows={[
+                ["קצבת אזרח ותיק — יחיד/ה", `${D.senior_single} ₪`],
+                ["יחיד/ה גיל 80+", `${D.senior_single_80} ₪`],
+                ["זוג", `${D.senior_couple} ₪`],
+                ["יחיד + השלמת הכנסה", `${D.senior_single_plus} ₪`],
+                ["זוג + השלמת הכנסה", `${D.senior_couple_plus} ₪`],
+              ]}
+            />
 
             <SubSection title="ג. קצבאות נוספות לבדוק" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
