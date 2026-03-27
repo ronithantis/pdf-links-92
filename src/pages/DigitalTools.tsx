@@ -28,6 +28,7 @@ const toolIcons: Record<string, React.ReactNode> = {
 
 const DigitalTools = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [openTool, setOpenTool] = useState<typeof digitalTools[0] | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
