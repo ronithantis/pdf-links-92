@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { ClipboardList, ArrowRight } from "lucide-react";
+import { ClipboardList, ArrowRight, Printer } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
