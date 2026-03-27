@@ -78,12 +78,6 @@ const Rights = () => {
             />
 
             <SubSection title="ב. קצבאות מביטוח לאומי (2026)" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סוג</TableHead><TableHead>סכום</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
             <StyledTable
               headers={["סוג", "סכום"]}
               rows={[
