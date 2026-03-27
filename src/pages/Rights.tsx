@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Users, Home, Heart, Activity, Phone, Shield, FileText, Zap, Bus, Star, Clock, DollarSign, AlertTriangle, CheckCircle, Info, Building } from "lucide-react";
 import { RIGHTS_DATA as D } from "@/lib/rights-data";
