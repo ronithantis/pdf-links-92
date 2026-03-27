@@ -283,7 +283,7 @@ export const checklistItems: ChecklistCategory[] = [
     title: "ניהול רפואי",
     icon: "Heart",
     items: [
-      { text: "עדכון רשימת תרופות מלאה", toolId: "daily-care", toolLabel: "מעקב ודיווח יומי" },
+      { text: "עדכון רשימת תרופות מלאה", toolId: "med-tracker", toolLabel: "ניהול ומעקב תרופות" },
       { text: "קביעת רופא אחראי / גריאטר" },
       { text: "תיאום בין רופאים מטפלים" },
       { text: "סידור קופסת תרופות שבועית" },
@@ -455,5 +455,14 @@ export const digitalTools = [
     icon: "Compass",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/Matzpen-chaim/",
+  },
+  {
+    id: "med-tracker",
+    title: "ניהול ומעקב מתן תרופות",
+    description: "מערכת מעקב יומי למתן תרופות – הגדרת תרופות, סימון מתן, לוח שנה, דוחות ושליחה לבני משפחה",
+    icon: "ClipboardList",
+    isPaid: false,
+    toolUrl: "/med-tracker",
+    isInternal: true,
   },
 ];

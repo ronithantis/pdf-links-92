@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,7 @@ const toolIcons: Record<string, React.ReactNode> = {
 
 const DigitalTools = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [openTool, setOpenTool] = useState<typeof digitalTools[0] | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -46,7 +47,9 @@ const DigitalTools = () => {
   }, [location.hash]);
 
   const handleOpenTool = (tool: typeof digitalTools[0]) => {
-    if (tool.isExternal && tool.externalUrl) {
+    if ((tool as any).isInternal && tool.toolUrl) {
+      navigate(tool.toolUrl);
+    } else if (tool.isExternal && tool.externalUrl) {
       window.open(tool.externalUrl, "_blank");
     } else if (tool.toolUrl) {
       setOpenTool(tool);
