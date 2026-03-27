@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Users, Home, Heart, Activity, Phone, Shield, FileText, Zap, Bus, Star, Clock, DollarSign, AlertTriangle, CheckCircle, Info, Building } from "lucide-react";
 import { RIGHTS_DATA as D } from "@/lib/rights-data";
@@ -58,49 +57,37 @@ const Rights = () => {
               { bold: "קשיים ב-5 פעולות", text: "— ניידות, הלבשה, רחצה, אכילה, הפרשות" },
             ]} />
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>מצב משפחתי</TableHead><TableHead>גמלה מלאה</TableHead><TableHead>גמלה מופחתת 50%</TableHead><TableHead>אין זכאות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>יחיד/ה</TableCell><TableCell>עד <strong>{D.nursing_single_full}</strong> ₪</TableCell><TableCell>{D.nursing_single_full} – {D.nursing_single_partial} ₪</TableCell><TableCell>מעל {D.nursing_single_partial} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג</TableCell><TableCell>עד <strong>{D.nursing_couple_full}</strong> ₪</TableCell><TableCell>{D.nursing_couple_full} – {D.nursing_couple_partial} ₪</TableCell><TableCell>מעל {D.nursing_couple_partial} ₪</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["מצב משפחתי", "גמלה מלאה", "גמלה מופחתת 50%", "אין זכאות"]}
+              rows={[
+                ["יחיד/ה", `עד ${D.nursing_single_full} ₪`, `${D.nursing_single_full} – ${D.nursing_single_partial} ₪`, `מעל ${D.nursing_single_partial} ₪`],
+                ["זוג", `עד ${D.nursing_couple_full} ₪`, `${D.nursing_couple_full} – ${D.nursing_couple_partial} ₪`, `מעל ${D.nursing_couple_partial} ₪`],
+              ]}
+            />
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>רמה</TableHead><TableHead>נקודות תלות</TableHead><TableHead>מטפל ישראלי (שעות/שבוע)</TableHead><TableHead>עובד זר (שעות/שבוע)</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>1</TableCell><TableCell>1–1.5</TableCell><TableCell>9.75</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>2</TableCell><TableCell>2–2.5</TableCell><TableCell>14</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>3</TableCell><TableCell>3–3.5</TableCell><TableCell>18.5</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>4</TableCell><TableCell>4–5</TableCell><TableCell>22</TableCell><TableCell>—</TableCell></TableRow>
-                  <TableRow><TableCell>5</TableCell><TableCell>6–8.5</TableCell><TableCell>26</TableCell><TableCell>22</TableCell></TableRow>
-                  <TableRow><TableCell className="font-bold">6</TableCell><TableCell className="font-bold">9.5–10.5</TableCell><TableCell className="font-bold">30</TableCell><TableCell className="font-bold">26</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["רמה", "נקודות תלות", "מטפל ישראלי (שעות/שבוע)", "עובד זר (שעות/שבוע)"]}
+              rows={[
+                ["1", "1–1.5", "9.75", "—"],
+                ["2", "2–2.5", "14", "—"],
+                ["3", "3–3.5", "18.5", "—"],
+                ["4", "4–5", "22", "—"],
+                ["5", "6–8.5", "26", "22"],
+                ["6", "9.5–10.5", "30", "26"],
+              ]}
+            />
 
             <SubSection title="ב. קצבאות מביטוח לאומי (2026)" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סוג</TableHead><TableHead>סכום</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>קצבת אזרח ותיק — יחיד/ה</TableCell><TableCell>{D.senior_single} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>יחיד/ה גיל 80+</TableCell><TableCell>{D.senior_single_80} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג</TableCell><TableCell>{D.senior_couple} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>יחיד + השלמת הכנסה</TableCell><TableCell>{D.senior_single_plus} ₪</TableCell></TableRow>
-                  <TableRow><TableCell>זוג + השלמת הכנסה</TableCell><TableCell>{D.senior_couple_plus} ₪</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סוג", "סכום"]}
+              rows={[
+                ["קצבת אזרח ותיק — יחיד/ה", `${D.senior_single} ₪`],
+                ["יחיד/ה גיל 80+", `${D.senior_single_80} ₪`],
+                ["זוג", `${D.senior_couple} ₪`],
+                ["יחיד + השלמת הכנסה", `${D.senior_single_plus} ₪`],
+                ["זוג + השלמת הכנסה", `${D.senior_couple_plus} ₪`],
+              ]}
+            />
 
             <SubSection title="ג. קצבאות נוספות לבדוק" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -167,20 +154,16 @@ const Rights = () => {
             </Callout>
 
             <SubSection title="א. ימי מחלה לפי סוג הטיפול" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סיבת ההיעדרות</TableHead><TableHead>ימים לשנה</TableHead><TableHead>תשלום</TableHead><TableHead>הערות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell><strong>הורה חולה</strong></TableCell><TableCell>עד 6 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>גם הורה של בן/בת הזוג</TableCell></TableRow>
-                  <TableRow><TableCell><strong>בן/בת זוג חולה</strong></TableCell><TableCell>עד 6 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>חולי ממושך — ייתכן יותר</TableCell></TableRow>
-                  <TableRow><TableCell><strong>ילד חולה (עד גיל 16)</strong></TableCell><TableCell>עד 8 ימים</TableCell><TableCell>כמו ימי מחלה</TableCell><TableCell>רק אם שני ההורים עובדים</TableCell></TableRow>
-                  <TableRow><TableCell><strong>הורה / ילד עם מוגבלות</strong></TableCell><TableCell>עד 18 ימים</TableCell><TableCell>ממחלה/חופשה לבחירה</TableCell><TableCell>עד 36 ימים במקרים מיוחדים</TableCell></TableRow>
-                  <TableRow><TableCell><strong>סיוע לילד עם מוגבלות</strong></TableCell><TableCell>52 שעות</TableCell><TableCell><strong>ללא ניכוי שכר</strong></TableCell><TableCell>עד 104 שעות במקרים מסוימים</TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סיבת ההיעדרות", "ימים לשנה", "תשלום", "הערות"]}
+              rows={[
+                ["הורה חולה", "עד 6 ימים", "כמו ימי מחלה", "גם הורה של בן/בת הזוג"],
+                ["בן/בת זוג חולה", "עד 6 ימים", "כמו ימי מחלה", "חולי ממושך — ייתכן יותר"],
+                ["ילד חולה (עד גיל 16)", "עד 8 ימים", "כמו ימי מחלה", "רק אם שני ההורים עובדים"],
+                ["הורה / ילד עם מוגבלות", "עד 18 ימים", "ממחלה/חופשה לבחירה", "עד 36 ימים במקרים מיוחדים"],
+                ["סיוע לילד עם מוגבלות", "52 שעות", "ללא ניכוי שכר", "עד 104 שעות במקרים מסוימים"],
+              ]}
+            />
 
             <Callout variant="success" title="⭐ חשוב — 52 שעות ללא ניכוי שכר">
               הורה לילד עם מוגבלות זכאי ל-52 שעות העדרות בשנה — <strong>ללא כל ניכוי</strong> משכרו. זכות שרבים לא מודעים אליה.
@@ -251,18 +234,14 @@ const Rights = () => {
               <StatCard title="מצב יוצא דופן" value="יום 1" desc="אם לעובד קיים ביטוח פנסיוני פעיל — חובת ההפרשה מתחילה מהיום הראשון." />
             </div>
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>רכיב</TableHead><TableHead>שיעור</TableHead><TableHead>מתי מתחיל</TableHead><TableHead>אופן התשלום</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell><strong>הפרשה פנסיונית (מעסיק)</strong></TableCell><TableCell>6.5% מהשכר המבוטח</TableCell><TableCell>חודש 7 (או יום 1 אם יש פנסיה פעילה)</TableCell><TableCell>משולם <strong>ישירות לעובד</strong> בסיום ההעסקה</TableCell></TableRow>
-                  <TableRow><TableCell><strong>פיצויי פיטורים</strong></TableCell><TableCell>8.33% לשנה</TableCell><TableCell>לאחר שנה רצופה</TableCell><TableCell>רק אם פוטר — לא אם התפטר</TableCell></TableRow>
-                  <TableRow><TableCell><strong>ביטוח לאומי (מעסיק)</strong></TableCell><TableCell>{D.btl_rate}%</TableCell><TableCell>מיום הראשון</TableCell><TableCell><strong>אסור לנכות מהשכר</strong></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["רכיב", "שיעור", "מתי מתחיל", "אופן התשלום"]}
+              rows={[
+                ["הפרשה פנסיונית (מעסיק)", "6.5% מהשכר המבוטח", "חודש 7 (או יום 1 אם יש פנסיה פעילה)", "משולם ישירות לעובד בסיום ההעסקה"],
+                ["פיצויי פיטורים", "8.33% לשנה", "לאחר שנה רצופה", "רק אם פוטר — לא אם התפטר"],
+                [`ביטוח לאומי (מעסיק)`, `${D.btl_rate}%`, "מיום הראשון", "אסור לנכות מהשכר"],
+              ]}
+            />
 
             <Callout variant="warning" title="נקודות מרכזיות שחשוב לדעת">
               <ul className="list-disc list-inside space-y-1 text-sm">
@@ -290,19 +269,15 @@ const Rights = () => {
             </div>
 
             <SubSection title="ד. ניכויים מותרים מהשכר" />
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>סוג ניכוי</TableHead><TableHead>תקרה מרבית</TableHead><TableHead>הערות</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>ביטוח רפואי פרטי</TableCell><TableCell>{D.deduct_insurance} ₪ / חודש</TableCell><TableCell>עד מחצית ההוצאה בפועל</TableCell></TableRow>
-                  <TableRow><TableCell>מגורים + נלוות (בבית המעסיק)</TableCell><TableCell>{D.deduct_housing} ₪ / חודש</TableCell><TableCell>בבית המטופל בלבד</TableCell></TableRow>
-                  <TableRow><TableCell>אוכל</TableCell><TableCell>עד 10% משכר המינימום</TableCell><TableCell>רק בהסכם כתוב מובן לעובד</TableCell></TableRow>
-                  <TableRow><TableCell>ביטוח לאומי</TableCell><TableCell>לא מנוכה</TableCell><TableCell>{D.btl_rate}% — המעסיק משלם, <strong>אסור לנכות</strong></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["סוג ניכוי", "תקרה מרבית", "הערות"]}
+              rows={[
+                ["ביטוח רפואי פרטי", `${D.deduct_insurance} ₪ / חודש`, "עד מחצית ההוצאה בפועל"],
+                ["מגורים + נלוות (בבית המעסיק)", `${D.deduct_housing} ₪ / חודש`, "בבית המטופל בלבד"],
+                ["אוכל", "עד 10% משכר המינימום", "רק בהסכם כתוב מובן לעובד"],
+                ["ביטוח לאומי", "לא מנוכה", `${D.btl_rate}% — המעסיק משלם, אסור לנכות`],
+              ]}
+            />
 
             <SubSection title="ה. הגנה מניצול ואכיפת זכויות" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -441,19 +416,15 @@ const Rights = () => {
               כל קופה מציעה ביטוח סיעודי קבוצתי. <strong>זהו ביטוח נוסף מעבר לגמלת סיעוד</strong> — כדאי לבדוק מה יש לקשיש ולשקול רכישה לפני גיל הזקנה.
             </Callout>
 
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader><TableRow>
-                  <TableHead>קופה</TableHead><TableHead>שם ביטוח סיעודי משלים</TableHead><TableHead>מוקד טלפון</TableHead>
-                </TableRow></TableHeader>
-                <TableBody>
-                  <TableRow><TableCell>כללית</TableCell><TableCell>כללית סיעוד / כללית סיעוד פלוס</TableCell><TableCell><a href="tel:*2700" className="text-primary font-bold">*2700</a></TableCell></TableRow>
-                  <TableRow><TableCell>מכבי</TableCell><TableCell>מכבי סיעוד / מכבי סיעוד זהב</TableCell><TableCell><a href="tel:*3555" className="text-primary font-bold">*3555</a></TableCell></TableRow>
-                  <TableRow><TableCell>מאוחדת</TableCell><TableCell>מאוחדת סיעוד מושלם</TableCell><TableCell><a href="tel:*3833" className="text-primary font-bold">*3833</a></TableCell></TableRow>
-                  <TableRow><TableCell>לאומית</TableCell><TableCell>לאומית סיעוד מקיף</TableCell><TableCell><a href="tel:*507" className="text-primary font-bold">*507</a></TableCell></TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <StyledTable
+              headers={["קופה", "שם ביטוח סיעודי משלים", "מוקד טלפון"]}
+              rows={[
+                ["כללית", "כללית סיעוד / כללית סיעוד פלוס", "*2700"],
+                ["מכבי", "מכבי סיעוד / מכבי סיעוד זהב", "*3555"],
+                ["מאוחדת", "מאוחדת סיעוד מושלם", "*3833"],
+                ["לאומית", "לאומית סיעוד מקיף", "*507"],
+              ]}
+            />
 
             <SubSection title="📞 מוקדי קופות החולים" />
             <ContactGrid contacts={[
@@ -470,6 +441,29 @@ const Rights = () => {
     </div>
   );
 };
+
+const StyledTable = ({ headers, rows }: { headers: string[]; rows: string[][] }) => (
+  <div className="overflow-x-auto rounded-lg border border-border">
+    <table className="w-full text-sm">
+      <thead>
+        <tr className="bg-primary text-primary-foreground">
+          {headers.map((h, i) => (
+            <th key={i} className="px-4 py-3 text-right font-bold whitespace-nowrap">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, ri) => (
+          <tr key={ri} className={ri % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+            {row.map((cell, ci) => (
+              <td key={ci} className={`px-4 py-3 ${ci === 0 ? "font-semibold text-foreground" : "text-primary font-medium"}`}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 
 // ── Sub-components ──
 
