@@ -212,7 +212,7 @@ const AdElai = () => {
   return (
     <div className="min-h-screen" style={{ background: "#f5fafa" }}>
       {/* Nav Tabs */}
-      <div className="bg-background border-b flex items-center justify-between px-4 md:px-9 h-16 sticky top-0 z-40" style={{ borderColor: "#d4e4e4" }}>
+      <div className="bg-background border-b flex items-center justify-between px-4 md:px-9 h-16" style={{ borderColor: "#d4e4e4" }}>
         <div className="flex items-center gap-2 text-xl font-black" style={{ color: TEAL }}>
           <Home className="h-6 w-6" />
           עַד אֵלַי
