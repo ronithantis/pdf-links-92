@@ -24,17 +24,17 @@ const Rights = () => {
       {/* Tabs */}
       <div className="container max-w-4xl py-6">
         <Tabs defaultValue="elderly" dir="rtl">
-          <TabsList className="w-full h-auto flex-wrap gap-1 bg-muted/50 p-1.5">
-            <TabsTrigger value="elderly" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px]">
+          <TabsList className="w-full h-auto flex-wrap gap-1.5 bg-muted/50 p-2">
+            <TabsTrigger value="elderly" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px] py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all">
               <Users className="h-4 w-4" /> זכויות הקשיש
             </TabsTrigger>
-            <TabsTrigger value="family" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px]">
+            <TabsTrigger value="family" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px] py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all">
               <Home className="h-4 w-4" /> משפחה מטפלת
             </TabsTrigger>
-            <TabsTrigger value="worker" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px]">
+            <TabsTrigger value="worker" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px] py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all">
               <Heart className="h-4 w-4" /> עובד זר
             </TabsTrigger>
-            <TabsTrigger value="hmo" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px]">
+            <TabsTrigger value="hmo" className="flex items-center gap-2 text-xs sm:text-sm flex-1 min-w-[120px] py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all">
               <Activity className="h-4 w-4" /> קופות חולים
             </TabsTrigger>
           </TabsList>
