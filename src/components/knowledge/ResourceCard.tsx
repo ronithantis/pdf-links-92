@@ -117,7 +117,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           />
         </div>
       ) : isVideo ? (
-        <div className="bg-muted/50 h-48 flex items-center justify-center">
+        <div className="bg-muted/50 h-32 flex items-center justify-center">
           <div className="text-center text-muted-foreground">
             <Play className="h-10 w-10 mx-auto mb-2 opacity-30" />
             <span className="text-xs">בקרוב</span>
