@@ -54,6 +54,8 @@ const App = () => (
             <Route path="/forms" element={<FormsPage />} />
             <Route path="/med-tracker" element={<MedTracker />} />
             <Route path="/rights" element={<Rights />} />
+            <Route path="/terms" element={<TermsOfUsePage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

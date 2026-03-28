@@ -20,6 +20,8 @@ const Footer = () => {
               <li><Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">שירותים לקשיש עד הבית</Link></li>
               <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">אודות</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">צור קשר</Link></li>
+              <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">תנאי שימוש</Link></li>
+              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">מדיניות פרטיות</Link></li>
             </ul>
           </div>
           <div>
