@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import ResourceCard from "./ResourceCard";
+import { digitalTools } from "@/lib/modules-data";
 
 interface ResourceListProps {
   category?: string | null;
@@ -116,7 +117,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
                   className="cursor-pointer text-sm px-3 py-1"
                   onClick={() => navigate("/tools")}
                 >
-                  {label} ({count})
+                  {label} ({digitalTools.length})
                 </Badge>
               );
             }
