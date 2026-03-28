@@ -117,7 +117,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
                   className="cursor-pointer text-sm px-3 py-1"
                   onClick={() => navigate("/tools")}
                 >
-                  {label} ({count})
+                  {label} ({digitalTools.length})
                 </Badge>
               );
             }
