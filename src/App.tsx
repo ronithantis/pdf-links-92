@@ -22,6 +22,8 @@ import About from "./pages/About";
 import MedTracker from "./pages/MedTracker";
 import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
+import TermsOfUsePage from "./pages/TermsOfUsePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +54,8 @@ const App = () => (
             <Route path="/forms" element={<FormsPage />} />
             <Route path="/med-tracker" element={<MedTracker />} />
             <Route path="/rights" element={<Rights />} />
+            <Route path="/terms" element={<TermsOfUsePage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

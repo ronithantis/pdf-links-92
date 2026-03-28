@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { modules, digitalTools } from "@/lib/modules-data";
 import NeedsQuestionnaire from "@/components/NeedsQuestionnaire";
 import ChecklistSection from "@/components/ChecklistSection";
+import ConsentModal from "@/components/ConsentModal";
 import heroImage from "@/assets/hero-family.jpg";
 import {
   ArrowLeft,
@@ -72,6 +73,7 @@ const Index = () => {
 
   return (
     <div>
+      <ConsentModal />
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
