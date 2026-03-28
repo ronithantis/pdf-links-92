@@ -20,6 +20,7 @@ const categoryLabels: Record<string, string> = {
 };
 
 const ResourceList = ({ category, onBack }: ResourceListProps) => {
+  const navigate = useNavigate();
   const [resources, setResources] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
