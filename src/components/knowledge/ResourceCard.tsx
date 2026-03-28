@@ -105,9 +105,9 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow w-full max-w-[320px]">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
       {isVideo && hasUrl ? (
-        <div className="relative h-48 bg-muted/30 overflow-hidden">
+        <div className="relative h-32 bg-muted/30 overflow-hidden">
           <iframe
             src={`${resource.url}?badge=0&autopause=0`}
             frameBorder="0"
@@ -117,7 +117,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           />
         </div>
       ) : isVideo ? (
-        <div className="bg-muted/50 h-48 flex items-center justify-center">
+        <div className="bg-muted/50 h-32 flex items-center justify-center">
           <div className="text-center text-muted-foreground">
             <Play className="h-10 w-10 mx-auto mb-2 opacity-30" />
             <span className="text-xs">בקרוב</span>
@@ -128,7 +128,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <Wrench className="h-10 w-10 text-primary opacity-50" />
         </div>
       ) : isPresentation && hasUrl ? (
-        <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
+        <div className="relative w-full h-32 bg-muted/30 overflow-hidden">
           <iframe
             src={resource.url!}
             className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
@@ -138,7 +138,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
         </div>
       ) : null}
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex items-start justify-between mb-2">
           <h4 className="font-bold text-sm leading-tight">{resource.title}</h4>
           {resource.subcategory && (
