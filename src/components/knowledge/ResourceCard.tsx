@@ -138,7 +138,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
         </div>
       ) : null}
-      <CardContent className="p-4">
+      <CardContent className="p-3">
         <div className="flex items-start justify-between mb-2">
           <h4 className="font-bold text-sm leading-tight">{resource.title}</h4>
           {resource.subcategory && (
