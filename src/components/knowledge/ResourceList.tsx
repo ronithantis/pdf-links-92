@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ const categoryLabels: Record<string, string> = {
 };
 
 const ResourceList = ({ category, onBack }: ResourceListProps) => {
+  const navigate = useNavigate();
   const [resources, setResources] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -45,6 +47,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
   }, [category]);
 
   const filtered = resources.filter((r) => {
+    if (!category && r.category === "other") return false;
     const matchesSearch = !search || 
       r.title.includes(search) ||
       r.description?.includes(search) ||
@@ -105,6 +108,18 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
           {Object.entries(categoryLabels).map(([key, label]) => {
             const count = categoryCounts[key] || 0;
             if (count === 0) return null;
+            if (key === "other") {
+              return (
+                <Badge
+                  key={key}
+                  variant="outline"
+                  className="cursor-pointer text-sm px-3 py-1"
+                  onClick={() => navigate("/tools")}
+                >
+                  {label} ({count})
+                </Badge>
+              );
+            }
             return (
               <Badge
                 key={key}
