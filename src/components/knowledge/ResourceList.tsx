@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import ResourceCard from "./ResourceCard";
+import { digitalTools } from "@/lib/modules-data";
 
 interface ResourceListProps {
   category?: string | null;
