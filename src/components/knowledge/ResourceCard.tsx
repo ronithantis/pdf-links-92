@@ -107,7 +107,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
       {isVideo && hasUrl ? (
-        <div className="relative h-48 bg-muted/30 overflow-hidden">
+        <div className="relative h-32 bg-muted/30 overflow-hidden">
           <iframe
             src={`${resource.url}?badge=0&autopause=0`}
             frameBorder="0"
