@@ -104,7 +104,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
             className="cursor-pointer text-sm px-3 py-1"
             onClick={() => setActiveFilter(null)}
           >
-            הכל ({resources.length})
+            הכל ({resources.filter(r => r.category !== "other").length + digitalTools.length})
           </Badge>
           {Object.entries(categoryLabels).map(([key, label]) => {
             const count = categoryCounts[key] || 0;
