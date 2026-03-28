@@ -47,6 +47,7 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
   }, [category]);
 
   const filtered = resources.filter((r) => {
+    if (!category && r.category === "other") return false;
     const matchesSearch = !search || 
       r.title.includes(search) ||
       r.description?.includes(search) ||
