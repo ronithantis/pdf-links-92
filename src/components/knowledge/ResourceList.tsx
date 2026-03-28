@@ -107,6 +107,18 @@ const ResourceList = ({ category, onBack }: ResourceListProps) => {
           {Object.entries(categoryLabels).map(([key, label]) => {
             const count = categoryCounts[key] || 0;
             if (count === 0) return null;
+            if (key === "other") {
+              return (
+                <Badge
+                  key={key}
+                  variant="outline"
+                  className="cursor-pointer text-sm px-3 py-1"
+                  onClick={() => navigate("/tools")}
+                >
+                  {label} ({count})
+                </Badge>
+              );
+            }
             return (
               <Badge
                 key={key}
