@@ -128,7 +128,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           <Wrench className="h-10 w-10 text-primary opacity-50" />
         </div>
       ) : isPresentation && hasUrl ? (
-        <div className="relative w-full h-48 bg-muted/30 overflow-hidden">
+        <div className="relative w-full h-32 bg-muted/30 overflow-hidden">
           <iframe
             src={resource.url!}
             className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
