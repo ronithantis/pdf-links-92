@@ -22,6 +22,8 @@ import About from "./pages/About";
 import MedTracker from "./pages/MedTracker";
 import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
+import TermsOfUsePage from "./pages/TermsOfUsePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
