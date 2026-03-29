@@ -73,7 +73,7 @@ const Index = () => {
 
   return (
     <div>
-      <ConsentModal />
+      
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
