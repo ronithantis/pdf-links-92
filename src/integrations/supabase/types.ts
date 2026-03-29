@@ -260,6 +260,102 @@ export type Database = {
         }
         Relationships: []
       }
+      suppliers: {
+        Row: {
+          admin_checklist: Json | null
+          business_name: string | null
+          business_number: string | null
+          created_at: string
+          description: string | null
+          digital_link: string | null
+          digital_presence: string[] | null
+          email: string
+          first_name: string
+          has_insurance: string | null
+          has_insurance_declaration: boolean
+          id: string
+          id_number: string
+          last_name: string
+          phone: string
+          price_list: Json | null
+          referral_1_name: string
+          referral_1_phone: string
+          referral_2_name: string
+          referral_2_phone: string
+          referral_verification_consent: boolean
+          region: string[]
+          service_type: string[]
+          services_detail: string | null
+          status: string
+          trust_score: number | null
+          unhappy_client_policy: string | null
+          user_id: string | null
+          years_experience: string | null
+        }
+        Insert: {
+          admin_checklist?: Json | null
+          business_name?: string | null
+          business_number?: string | null
+          created_at?: string
+          description?: string | null
+          digital_link?: string | null
+          digital_presence?: string[] | null
+          email: string
+          first_name: string
+          has_insurance?: string | null
+          has_insurance_declaration?: boolean
+          id?: string
+          id_number: string
+          last_name: string
+          phone: string
+          price_list?: Json | null
+          referral_1_name: string
+          referral_1_phone: string
+          referral_2_name: string
+          referral_2_phone: string
+          referral_verification_consent?: boolean
+          region?: string[]
+          service_type?: string[]
+          services_detail?: string | null
+          status?: string
+          trust_score?: number | null
+          unhappy_client_policy?: string | null
+          user_id?: string | null
+          years_experience?: string | null
+        }
+        Update: {
+          admin_checklist?: Json | null
+          business_name?: string | null
+          business_number?: string | null
+          created_at?: string
+          description?: string | null
+          digital_link?: string | null
+          digital_presence?: string[] | null
+          email?: string
+          first_name?: string
+          has_insurance?: string | null
+          has_insurance_declaration?: boolean
+          id?: string
+          id_number?: string
+          last_name?: string
+          phone?: string
+          price_list?: Json | null
+          referral_1_name?: string
+          referral_1_phone?: string
+          referral_2_name?: string
+          referral_2_phone?: string
+          referral_verification_consent?: boolean
+          region?: string[]
+          service_type?: string[]
+          services_detail?: string | null
+          status?: string
+          trust_score?: number | null
+          unhappy_client_policy?: string | null
+          user_id?: string | null
+          years_experience?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string

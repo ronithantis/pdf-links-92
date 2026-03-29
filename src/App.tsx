@@ -16,6 +16,7 @@ import TasksList from "./pages/TasksList";
 import TechnicalSpec from "./pages/TechnicalSpec";
 import Auth from "./pages/Auth";
 import AdminKnowledge from "./pages/AdminKnowledge";
+import AdminSuppliers from "./pages/AdminSuppliers";
 import GiveTake from "./pages/GiveTake";
 import AdElai from "./pages/AdElai";
 import About from "./pages/About";
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
+            <Route path="/admin/suppliers" element={<AdminSuppliers />} />
             <Route path="/forms" element={<FormsPage />} />
             <Route path="/med-tracker" element={<MedTracker />} />
             <Route path="/rights" element={<Rights />} />
