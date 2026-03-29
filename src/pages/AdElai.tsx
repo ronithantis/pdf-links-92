@@ -1,22 +1,21 @@
-import { useState, useMemo } from "react";
-import { Search, Star, MapPin, Phone, Users, Package, Check, Shield, AlertTriangle, Lock, X, Plus, Minus, ChevronLeft, ChevronRight, ExternalLink, Home, Heart, Smile, Wrench, Coffee, UserCheck, CircleAlert, Accessibility, Smartphone, Info } from "lucide-react";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { Search, Star, MapPin, Phone, Users, Package, Check, Shield, AlertTriangle, Lock, X, Plus, ChevronLeft, ChevronRight, Home, Info, CircleAlert, Globe, Facebook, Instagram, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import {
-  serviceProviders,
-  equipProviders,
   serviceCategories,
   equipCategories,
   regions,
   wizardServiceChips,
   wizardEquipChips,
-  truvifyCheckItems,
   legalTerms,
   type Provider,
 } from "@/lib/ad-elai-data";
@@ -46,8 +45,21 @@ const RatingStars = ({ rating, reviewCount }: { rating: number; reviewCount: num
   );
 };
 
+// ── Trust Score Bar ──
+const TrustScoreBar = ({ score }: { score: number }) => {
+  const color = score >= 80 ? "#16a34a" : score >= 50 ? "#f59e0b" : "#dc2626";
+  return (
+    <div className="flex items-center gap-2 mt-2">
+      <span className="text-xs font-bold" style={{ color }}>ציון אמינות: {score}%</span>
+      <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
+        <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: color }} />
+      </div>
+    </div>
+  );
+};
+
 // ── Provider Card ──
-const ProviderCard = ({ provider, onContact, onTruvify }: { provider: Provider; onContact: () => void; onTruvify: () => void }) => (
+const ProviderCard = ({ provider, onContact }: { provider: Provider; onContact: () => void }) => (
   <Card className="relative hover:-translate-y-1 hover:shadow-lg transition-all duration-200 border-[hsl(var(--border))]">
     <CardContent className="p-6">
       {provider.recommended && (
@@ -60,17 +72,6 @@ const ProviderCard = ({ provider, onContact, onTruvify }: { provider: Provider; 
       <div className="text-xs font-bold mb-1.5 flex items-center gap-1.5" style={{ color: TEAL }}>
         {provider.categoryLabel}
       </div>
-
-      {provider.truvifyVerified && (
-        <button
-          onClick={onTruvify}
-          className="inline-flex items-center gap-1.5 text-xs font-bold px-2.5 py-1 rounded-full mb-2.5 border cursor-pointer transition-colors"
-          style={{ background: "#0f172a", color: "#fff", borderColor: "#334155" }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#22d3ee" }} />
-          TRUVIFY ✓ אומת
-        </button>
-      )}
 
       <h3 className="text-lg font-extrabold mb-2">{provider.name}</h3>
       <p className="text-sm text-muted-foreground leading-relaxed mb-3">{provider.description}</p>
@@ -86,6 +87,10 @@ const ProviderCard = ({ provider, onContact, onTruvify }: { provider: Provider; 
       )}
 
       <RatingStars rating={provider.rating} reviewCount={provider.reviewCount} />
+
+      {provider.trust_score !== undefined && provider.trust_score > 0 && (
+        <TrustScoreBar score={provider.trust_score} />
+      )}
 
       <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1.5">
         <MapPin className="h-3.5 w-3.5" style={{ color: TEAL }} />
@@ -129,6 +134,24 @@ const CategoryChips = ({ categories, active, onSelect }: { categories: { id: str
   </div>
 );
 
+// ── Trust Score Calculator ──
+const calculateTrustScore = (formData: Record<string, any>): number => {
+  let score = 0;
+  if (formData.years_experience) {
+    const map: Record<string, number> = { "10+": 20, "5-10": 16, "3-5": 12, "1-3": 8, "less-1": 4 };
+    score += map[formData.years_experience] || 0;
+  }
+  if (formData.has_insurance === "yes") score += 20;
+  else if (formData.has_insurance === "in-process") score += 10;
+  if (formData.unhappy_client_policy && formData.unhappy_client_policy.length > 20) score += 10;
+  if (formData.digital_presence?.length > 0) score += Math.min(formData.digital_presence.length * 5, 15);
+  if (formData.digital_link) score += 5;
+  if (formData.referral_1_name && formData.referral_1_phone) score += 10;
+  if (formData.referral_2_name && formData.referral_2_phone) score += 10;
+  if (formData.referral_verification_consent) score += 10;
+  return Math.min(score, 100);
+};
+
 // ── Main Page ──
 const AdElai = () => {
   const [view, setView] = useState<"search" | "register">("search");
@@ -137,10 +160,15 @@ const AdElai = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [regionFilter, setRegionFilter] = useState("");
   const [ratingFilter, setRatingFilter] = useState("");
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  // DB suppliers
+  const [dbSuppliers, setDbSuppliers] = useState<Provider[]>([]);
+  const [loadingSuppliers, setLoadingSuppliers] = useState(true);
 
   // Modals
   const [contactOpen, setContactOpen] = useState(false);
-  const [truvifyOpen, setTruvifyOpen] = useState(false);
   const [legalOpen, setLegalOpen] = useState(false);
 
   // Wizard
@@ -149,9 +177,66 @@ const AdElai = () => {
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [pricingRows, setPricingRows] = useState([{ id: 1, desc: "", regular: "", discounted: "", variable: false }]);
   const [nextRowId, setNextRowId] = useState(2);
+  const [submitting, setSubmitting] = useState(false);
+
+  // Form data
+  const [formData, setFormData] = useState<Record<string, any>>({
+    first_name: "", last_name: "", business_name: "", phone: "", email: "",
+    id_number: "", business_number: "", description: "", services_detail: "",
+    years_experience: "", has_insurance: "", unhappy_client_policy: "",
+    digital_presence: [] as string[], digital_link: "",
+    referral_1_name: "", referral_1_phone: "", referral_2_name: "", referral_2_phone: "",
+    referral_verification_consent: false, has_insurance_declaration: false,
+    agree_terms: false, agree_contact: false, agree_insurance: false, agree_professional: false,
+  });
+
+  const updateForm = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const toggleDigitalPresence = (item: string) => {
+    setFormData(prev => {
+      const arr = prev.digital_presence as string[];
+      return { ...prev, digital_presence: arr.includes(item) ? arr.filter((s: string) => s !== item) : [...arr, item] };
+    });
+  };
+
+  const trustScore = useMemo(() => calculateTrustScore(formData), [formData]);
+
+  // Load approved suppliers from DB
+  useEffect(() => {
+    const loadSuppliers = async () => {
+      setLoadingSuppliers(true);
+      const { data, error } = await supabase
+        .from('suppliers')
+        .select('*')
+        .eq('status', 'approved');
+
+      if (!error && data) {
+        const mapped: Provider[] = data.map((s: any) => ({
+          id: s.id,
+          name: s.business_name || `${s.first_name} ${s.last_name}`,
+          category: s.service_type?.[0] || "אחר",
+          categoryLabel: s.service_type?.[0] || "אחר",
+          description: s.description || "",
+          region: s.region?.[0] || "",
+          rating: 0,
+          reviewCount: 0,
+          phone: s.phone,
+          recommended: (s.trust_score || 0) >= 80,
+          serviceTags: s.service_type || [],
+          type: "service" as const,
+          trust_score: s.trust_score || 0,
+        }));
+        setDbSuppliers(mapped);
+      }
+      setLoadingSuppliers(false);
+    };
+    loadSuppliers();
+  }, []);
 
   // Filter logic
-  const providers = activeType === "services" ? serviceProviders : equipProviders;
+  const providers = dbSuppliers;
   const categories = activeType === "services" ? serviceCategories : equipCategories;
 
   const filtered = useMemo(() => {
@@ -199,13 +284,85 @@ const AdElai = () => {
   };
 
   const goToStep = (step: number) => { setWizardStep(step); window.scrollTo(0, 0); };
-  const submitForm = () => { setWizardStep(6); window.scrollTo(0, 0); };
+
+  const submitForm = async () => {
+    // Validate required fields
+    if (!formData.first_name || !formData.last_name || !formData.phone || !formData.email) {
+      toast({ title: "שגיאה", description: "נא למלא את כל שדות החובה בשלב 1", variant: "destructive" });
+      return;
+    }
+    if (!formData.id_number || formData.id_number.length !== 9 || !/^\d{9}$/.test(formData.id_number)) {
+      toast({ title: "שגיאה", description: "תעודת זהות חייבת להכיל 9 ספרות", variant: "destructive" });
+      return;
+    }
+    if (!formData.referral_1_name || !formData.referral_1_phone || !formData.referral_2_name || !formData.referral_2_phone) {
+      toast({ title: "שגיאה", description: "נא למלא את פרטי שני הממליצים", variant: "destructive" });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      const supplierData = {
+        user_id: user?.id || null,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        business_name: formData.business_name || null,
+        phone: formData.phone,
+        email: formData.email,
+        id_number: formData.id_number,
+        business_number: formData.business_number || null,
+        service_type: selectedServices,
+        region: selectedRegions,
+        description: formData.description || null,
+        services_detail: formData.services_detail || null,
+        years_experience: formData.years_experience || null,
+        has_insurance: formData.has_insurance || null,
+        unhappy_client_policy: formData.unhappy_client_policy || null,
+        digital_presence: formData.digital_presence || [],
+        digital_link: formData.digital_link || null,
+        referral_1_name: formData.referral_1_name,
+        referral_1_phone: formData.referral_1_phone,
+        referral_2_name: formData.referral_2_name,
+        referral_2_phone: formData.referral_2_phone,
+        referral_verification_consent: formData.referral_verification_consent,
+        price_list: pricingRows.filter(r => r.desc).map(r => ({
+          service: r.desc, regular_price: r.regular, discount_price: r.discounted
+        })),
+        has_insurance_declaration: formData.has_insurance_declaration,
+        trust_score: trustScore,
+        status: 'pending',
+      };
+
+      const { error } = await supabase.from('suppliers').insert(supplierData);
+      if (error) throw error;
+
+      setWizardStep(6);
+      window.scrollTo(0, 0);
+      toast({ title: "הבקשה נשלחה בהצלחה!", description: "הצוות שלנו יבחן את הבקשה." });
+    } catch (err: any) {
+      toast({ title: "שגיאה", description: err.message || "שגיאה בשליחת הטופס", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const resetForm = () => {
     setSelectedServices([]);
     setSelectedRegions([]);
     setPricingRows([{ id: 1, desc: "", regular: "", discounted: "", variable: false }]);
     setNextRowId(2);
-    setWizardStep(2);
+    setFormData({
+      first_name: "", last_name: "", business_name: "", phone: "", email: "",
+      id_number: "", business_number: "", description: "", services_detail: "",
+      years_experience: "", has_insurance: "", unhappy_client_policy: "",
+      digital_presence: [], digital_link: "",
+      referral_1_name: "", referral_1_phone: "", referral_2_name: "", referral_2_phone: "",
+      referral_verification_consent: false, has_insurance_declaration: false,
+      agree_terms: false, agree_contact: false, agree_insurance: false, agree_professional: false,
+    });
+    setWizardStep(1);
     window.scrollTo(0, 0);
   };
 
@@ -323,17 +480,21 @@ const AdElai = () => {
           </div>
 
           {/* Cards Grid */}
-          {filtered.length > 0 ? (
+          {loadingSuppliers ? (
+            <div className="text-center py-14 text-muted-foreground">
+              <p className="text-lg">טוען ספקים...</p>
+            </div>
+          ) : filtered.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 md:px-9 pb-12 pt-3">
               {filtered.map((p) => (
-                <ProviderCard key={p.id} provider={p} onContact={() => setContactOpen(true)} onTruvify={() => setTruvifyOpen(true)} />
+                <ProviderCard key={p.id} provider={p} onContact={() => setContactOpen(true)} />
               ))}
             </div>
           ) : (
             <div className="text-center py-14 text-muted-foreground">
               <Search className="h-12 w-12 mx-auto mb-3 opacity-30" />
               <p className="text-lg font-semibold">לא נמצאו תוצאות</p>
-              <p className="text-base mt-2">נסו לשנות את הסינון</p>
+              <p className="text-base mt-2">טרם אושרו ספקים במאגר או שאין תוצאות לסינון הנוכחי</p>
             </div>
           )}
         </>
@@ -385,7 +546,7 @@ const AdElai = () => {
                           {s < wizardStep ? "✓" : s}
                         </div>
                         <span className="text-[11px] text-muted-foreground absolute top-10 whitespace-nowrap">
-                          {["פרטים", "שירות/ציוד", "אזור", "מחיר", "אישור"][s - 1]}
+                          {["פרטים", "שירות/ציוד", "אזור", "מחיר", "אמינות ואישור"][s - 1]}
                         </span>
                       </div>
                     ))}
@@ -394,22 +555,39 @@ const AdElai = () => {
               )}
 
               <div className="px-6 md:px-9 pb-9 pt-4">
-                {/* Step 1 */}
+                {/* Step 1 - Personal Details */}
                 {wizardStep === 1 && (
                   <div>
                     <h3 className="text-xl font-extrabold mb-1">פרטים אישיים ועסקיים</h3>
                     <p className="text-sm text-muted-foreground mb-6">כיצד תרצו להופיע במאגר?</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div><Label>שם פרטי *</Label><Input placeholder="מרים" className="mt-1.5" /></div>
-                      <div><Label>שם משפחה *</Label><Input placeholder="לוי" className="mt-1.5" /></div>
-                      <div className="md:col-span-2"><Label>שם העסק / המותג</Label><Input placeholder="למשל: מדיקר ישראל" className="mt-1.5" /></div>
-                      <div><Label>טלפון *</Label><Input type="tel" placeholder="050-0000000" className="mt-1.5" /></div>
-                      <div><Label>אימייל *</Label><Input type="email" placeholder="name@email.com" className="mt-1.5" /></div>
-                      <div className="md:col-span-2"><Label>תיאור קצר</Label><Textarea placeholder="ספרו על הניסיון, ההתמחות והגישה שלכם..." className="mt-1.5" /></div>
+                      <div><Label>שם פרטי *</Label><Input placeholder="מרים" className="mt-1.5" value={formData.first_name} onChange={(e) => updateForm("first_name", e.target.value)} /></div>
+                      <div><Label>שם משפחה *</Label><Input placeholder="לוי" className="mt-1.5" value={formData.last_name} onChange={(e) => updateForm("last_name", e.target.value)} /></div>
+                      <div className="md:col-span-2"><Label>שם העסק / המותג</Label><Input placeholder="למשל: מדיקר ישראל" className="mt-1.5" value={formData.business_name} onChange={(e) => updateForm("business_name", e.target.value)} /></div>
+                      <div><Label>טלפון *</Label><Input type="tel" placeholder="050-0000000" className="mt-1.5" value={formData.phone} onChange={(e) => updateForm("phone", e.target.value)} /></div>
+                      <div><Label>אימייל *</Label><Input type="email" placeholder="name@email.com" className="mt-1.5" value={formData.email} onChange={(e) => updateForm("email", e.target.value)} /></div>
+                      <div>
+                        <Label>תעודת זהות * <span className="text-xs text-muted-foreground">(9 ספרות)</span></Label>
+                        <Input
+                          placeholder="000000000"
+                          className="mt-1.5"
+                          maxLength={9}
+                          value={formData.id_number}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, "").slice(0, 9);
+                            updateForm("id_number", val);
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <Label>מספר עוסק / ח.פ. <span className="text-xs text-muted-foreground">(אופציונלי)</span></Label>
+                        <Input placeholder="מספר עוסק מורשה" className="mt-1.5" value={formData.business_number} onChange={(e) => updateForm("business_number", e.target.value)} />
+                      </div>
+                      <div className="md:col-span-2"><Label>תיאור קצר</Label><Textarea placeholder="ספרו על הניסיון, ההתמחות והגישה שלכם..." className="mt-1.5" value={formData.description} onChange={(e) => updateForm("description", e.target.value)} /></div>
                     </div>
                     <div className="flex items-start gap-2 mt-4 p-3 rounded-lg text-sm" style={{ background: "#fffbf0", border: "1.5px solid #f4a261", color: "#78520a" }}>
                       <Info className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#f4a261" }} />
-                      <span>פרטי הקשר שלכם <strong>לא יופיעו לגולשים לא רשומים</strong>. רק משתמשים מאומתים יוכלו לראותם.</span>
+                      <span>תעודת הזהות משמשת לאימות זהות בלבד ולא תוצג לגולשים. כל הפרטים מוגנים בהתאם לתיקון 13.</span>
                     </div>
                     <div className="flex justify-end mt-7 pt-5 border-t">
                       <Button style={{ background: TEAL }} className="text-white font-bold px-8" onClick={() => goToStep(2)}>הבא ←</Button>
@@ -417,7 +595,7 @@ const AdElai = () => {
                   </div>
                 )}
 
-                {/* Step 2 */}
+                {/* Step 2 - Services */}
                 {wizardStep === 2 && (
                   <div>
                     <h3 className="text-xl font-extrabold mb-1">מה אתם מציעים?</h3>
@@ -425,16 +603,8 @@ const AdElai = () => {
                     <p className="text-sm font-bold mb-2" style={{ color: TEAL }}>שירותים אישיים</p>
                     <div className="flex flex-wrap gap-2 mb-5">
                       {wizardServiceChips.map((chip) => (
-                        <button
-                          key={chip}
-                          onClick={() => toggleChip(chip)}
-                          className="px-4 py-2 rounded-full text-sm font-medium border transition-all"
-                          style={
-                            selectedServices.includes(chip)
-                              ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 }
-                              : { background: "#fff", borderColor: "hsl(var(--border))", color: "hsl(var(--foreground))" }
-                          }
-                        >
+                        <button key={chip} onClick={() => toggleChip(chip)} className="px-4 py-2 rounded-full text-sm font-medium border transition-all"
+                          style={selectedServices.includes(chip) ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 } : { background: "#fff", borderColor: "hsl(var(--border))", color: "hsl(var(--foreground))" }}>
                           {chip}
                         </button>
                       ))}
@@ -442,16 +612,8 @@ const AdElai = () => {
                     <p className="text-sm font-bold mb-2" style={{ color: TEAL }}>ציוד ומוצרים</p>
                     <div className="flex flex-wrap gap-2 mb-5">
                       {wizardEquipChips.map((chip) => (
-                        <button
-                          key={chip}
-                          onClick={() => toggleChip(chip)}
-                          className="px-4 py-2 rounded-full text-sm font-medium border transition-all"
-                          style={
-                            selectedServices.includes(chip)
-                              ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 }
-                              : { background: "#fff", borderColor: "hsl(var(--border))", color: "hsl(var(--foreground))" }
-                          }
-                        >
+                        <button key={chip} onClick={() => toggleChip(chip)} className="px-4 py-2 rounded-full text-sm font-medium border transition-all"
+                          style={selectedServices.includes(chip) ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 } : { background: "#fff", borderColor: "hsl(var(--border))", color: "hsl(var(--foreground))" }}>
                           {chip}
                         </button>
                       ))}
@@ -459,7 +621,7 @@ const AdElai = () => {
                     <div>
                       <Label>פירוט השירותים הניתנים – חשוב מאוד!</Label>
                       <p className="text-xs text-muted-foreground mb-1.5">ככל שתפרטו יותר – כך המידע יוצג טוב יותר למחפש השירות.</p>
-                      <Textarea className="min-h-[120px]" placeholder="פרטו כאן את השירותים שלכם..." />
+                      <Textarea className="min-h-[120px]" placeholder="פרטו כאן את השירותים שלכם..." value={formData.services_detail} onChange={(e) => updateForm("services_detail", e.target.value)} />
                     </div>
                     <div className="flex justify-between mt-7 pt-5 border-t">
                       <Button variant="outline" onClick={() => goToStep(1)}>← חזרה</Button>
@@ -468,30 +630,18 @@ const AdElai = () => {
                   </div>
                 )}
 
-                {/* Step 3 */}
+                {/* Step 3 - Region */}
                 {wizardStep === 3 && (
                   <div>
                     <h3 className="text-xl font-extrabold mb-1">אזור הפעילות</h3>
                     <p className="text-sm text-muted-foreground mb-5">בחרו את כל האזורים בהם אתם נותנים שירות</p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                       {regions.map((r) => (
-                        <button
-                          key={r}
-                          onClick={() => toggleRegion(r)}
-                          className="py-3 px-4 rounded-lg text-sm font-medium border text-center transition-all"
-                          style={
-                            selectedRegions.includes(r)
-                              ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 }
-                              : { background: "#fff", borderColor: "hsl(var(--border))" }
-                          }
-                        >
+                        <button key={r} onClick={() => toggleRegion(r)} className="py-3 px-4 rounded-lg text-sm font-medium border text-center transition-all"
+                          style={selectedRegions.includes(r) ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL, fontWeight: 700 } : { background: "#fff", borderColor: "hsl(var(--border))" }}>
                           {r}
                         </button>
                       ))}
-                    </div>
-                    <div className="mt-5">
-                      <Label>שעות פעילות / זמני אספקה</Label>
-                      <Input className="mt-1.5" placeholder="למשל: א'–ה' 08:00–20:00 | משלוח: 2–3 ימי עסקים" />
                     </div>
                     <div className="flex justify-between mt-7 pt-5 border-t">
                       <Button variant="outline" onClick={() => goToStep(2)}>← חזרה</Button>
@@ -500,7 +650,7 @@ const AdElai = () => {
                   </div>
                 )}
 
-                {/* Step 4 */}
+                {/* Step 4 - Pricing */}
                 {wizardStep === 4 && (
                   <div>
                     <h3 className="text-xl font-extrabold mb-1">תמחור והתחייבות</h3>
@@ -510,7 +660,6 @@ const AdElai = () => {
                       <p className="text-sm text-muted-foreground">כל מחיר שתציינו דרך המאגר יהיה נמוך ב-<strong>לפחות 10%</strong> ממחירכם הרגיל.</p>
                     </div>
 
-                    {/* Pricing Header */}
                     <div className="grid grid-cols-[1fr_100px_100px_36px] gap-2 mb-2 px-1 text-xs font-bold text-muted-foreground">
                       <span>תיאור השירות</span>
                       <span className="text-center">מחיר רגיל (₪)</span>
@@ -553,11 +702,117 @@ const AdElai = () => {
                   </div>
                 )}
 
-                {/* Step 5 */}
+                {/* Step 5 - Trust Questionnaire & Confirmation */}
                 {wizardStep === 5 && (
                   <div>
-                    <h3 className="text-xl font-extrabold mb-1">אישור ושליחה</h3>
-                    <p className="text-sm text-muted-foreground mb-5">קראו ואשרו את ההצהרות להשלמת הרישום</p>
+                    <h3 className="text-xl font-extrabold mb-1">שאלון אמינות ואישור</h3>
+                    <p className="text-sm text-muted-foreground mb-5">מלאו את השאלון וציון האמינות שלכם יתעדכן בזמן אמת</p>
+
+                    {/* Trust Score Bar - Real time */}
+                    <div className="rounded-xl p-5 mb-6" style={{ background: "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)", border: "1.5px solid #10b981" }}>
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-base font-extrabold" style={{ color: "#065f46" }}>ציון אמינות נוכחי</h4>
+                        <span className="text-2xl font-black" style={{ color: trustScore >= 80 ? "#16a34a" : trustScore >= 50 ? "#f59e0b" : "#dc2626" }}>{trustScore}%</span>
+                      </div>
+                      <div className="h-3 rounded-full bg-white overflow-hidden">
+                        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${trustScore}%`, background: trustScore >= 80 ? "#16a34a" : trustScore >= 50 ? "#f59e0b" : "#dc2626" }} />
+                      </div>
+                      <p className="text-xs mt-2" style={{ color: "#065f46" }}>
+                        {trustScore >= 80 ? "מצוין! ציון אמינות גבוה" : trustScore >= 50 ? "טוב, ניתן לשפר על ידי מילוי שדות נוספים" : "מלאו שדות נוספים כדי לשפר את הציון"}
+                      </p>
+                    </div>
+
+                    {/* Trust Questionnaire */}
+                    <div className="space-y-4 mb-6">
+                      <div>
+                        <Label>שנות ניסיון בתחום *</Label>
+                        <select className="w-full mt-1.5 px-3 py-2 rounded-md border text-sm bg-background" value={formData.years_experience} onChange={(e) => updateForm("years_experience", e.target.value)}>
+                          <option value="">בחרו...</option>
+                          <option value="less-1">פחות משנה</option>
+                          <option value="1-3">1–3 שנים</option>
+                          <option value="3-5">3–5 שנים</option>
+                          <option value="5-10">5–10 שנים</option>
+                          <option value="10+">10+ שנים</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <Label>האם יש ביטוח אחריות מקצועית? *</Label>
+                        <select className="w-full mt-1.5 px-3 py-2 rounded-md border text-sm bg-background" value={formData.has_insurance} onChange={(e) => updateForm("has_insurance", e.target.value)}>
+                          <option value="">בחרו...</option>
+                          <option value="yes">כן, בתוקף</option>
+                          <option value="in-process">בתהליך הוצאה</option>
+                          <option value="no">אין</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <Label>מה קורה אם הלקוח לא מרוצה?</Label>
+                        <Textarea className="mt-1.5 min-h-[80px]" placeholder="תארו את מדיניות השירות שלכם..." value={formData.unhappy_client_policy} onChange={(e) => updateForm("unhappy_client_policy", e.target.value)} />
+                      </div>
+
+                      <div>
+                        <Label>נוכחות דיגיטלית</Label>
+                        <div className="flex flex-wrap gap-2 mt-1.5">
+                          {[
+                            { id: "website", label: "אתר אינטרנט", icon: Globe },
+                            { id: "facebook", label: "פייסבוק", icon: Facebook },
+                            { id: "google-reviews", label: "ביקורות גוגל", icon: Star },
+                            { id: "instagram", label: "אינסטגרם", icon: Instagram },
+                            { id: "none", label: "אין", icon: X },
+                          ].map((item) => (
+                            <label key={item.id} className="flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer text-sm transition-all"
+                              style={(formData.digital_presence as string[]).includes(item.id) ? { background: TEAL_LIGHT, borderColor: TEAL, color: TEAL } : {}}>
+                              <input type="checkbox" className="accent-[#1B7A78]" checked={(formData.digital_presence as string[]).includes(item.id)}
+                                onChange={() => toggleDigitalPresence(item.id)} />
+                              <item.icon className="h-3.5 w-3.5" />
+                              {item.label}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label>קישור לפרופיל דיגיטלי</Label>
+                        <Input type="url" placeholder="https://..." className="mt-1.5" value={formData.digital_link} onChange={(e) => updateForm("digital_link", e.target.value)} />
+                      </div>
+                    </div>
+
+                    {/* References */}
+                    <div className="rounded-lg p-4 mb-4" style={{ background: TEAL_LIGHT, border: `1.5px solid ${TEAL}` }}>
+                      <h4 className="text-base font-bold mb-3" style={{ color: TEAL_DARK }}>ממליצים (חובה)</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label>ממליץ ראשון – שם *</Label>
+                          <Input placeholder="דורית כהן" className="mt-1.5" value={formData.referral_1_name} onChange={(e) => updateForm("referral_1_name", e.target.value)} />
+                        </div>
+                        <div>
+                          <Label>ממליץ ראשון – טלפון *</Label>
+                          <Input type="tel" placeholder="050-1111111" className="mt-1.5" value={formData.referral_1_phone} onChange={(e) => updateForm("referral_1_phone", e.target.value)} />
+                        </div>
+                        <div>
+                          <Label>ממליץ שני – שם *</Label>
+                          <Input placeholder="יוסי לוי" className="mt-1.5" value={formData.referral_2_name} onChange={(e) => updateForm("referral_2_name", e.target.value)} />
+                        </div>
+                        <div>
+                          <Label>ממליץ שני – טלפון *</Label>
+                          <Input type="tel" placeholder="052-2222222" className="mt-1.5" value={formData.referral_2_phone} onChange={(e) => updateForm("referral_2_phone", e.target.value)} />
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <Label>האם מסכים לאימות טלפוני של הממליצים?</Label>
+                        <div className="flex gap-4 mt-1.5">
+                          <label className="flex items-center gap-2 text-sm cursor-pointer">
+                            <input type="radio" name="referral_consent" className="accent-[#1B7A78]" checked={formData.referral_verification_consent === true} onChange={() => updateForm("referral_verification_consent", true)} />
+                            כן
+                          </label>
+                          <label className="flex items-center gap-2 text-sm cursor-pointer">
+                            <input type="radio" name="referral_consent" className="accent-[#1B7A78]" checked={formData.referral_verification_consent === false} onChange={() => updateForm("referral_verification_consent", false)} />
+                            עדיף לא
+                          </label>
+                        </div>
+                      </div>
+                    </div>
 
                     {/* Platform disclaimer */}
                     <div className="rounded-lg p-5 mb-4" style={{ background: "#1a1a2e" }}>
@@ -566,14 +821,8 @@ const AdElai = () => {
                         <span className="text-sm font-extrabold" style={{ color: "#22d3ee" }}>הצהרת הפלטפורמה</span>
                       </div>
                       <p className="text-sm leading-relaxed" style={{ color: "#e2e8f0" }}>
-                        <strong className="text-white">עַד אֵלַי היא פלטפורמה מנגישה בלבד.</strong> אנו משתדלים להציג ספקים אמינים ומקצועיים, אך <strong style={{ color: "#fbbf24" }}>אין לנו כל אחריות</strong> לאיכות השירות, לנזקים, לתאונות, או לכל תוצאה של ההתקשרות.
+                        <strong className="text-white">עַד אֵלַי היא פלטפורמה מנגישה בלבד.</strong> אנו משתדלים להציג ספקים אמינים ומקצועיים, אך <strong style={{ color: "#fbbf24" }}>אין לנו כל אחריות</strong> לאיכות השירות.
                       </p>
-                    </div>
-
-                    {/* Privacy info */}
-                    <div className="flex items-start gap-2 p-3 rounded-lg text-sm mb-4" style={{ background: "#fffbf0", border: "1.5px solid #f4a261", color: "#78520a" }}>
-                      <Lock className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: "#f4a261" }} />
-                      <span><strong>הגנת פרטיות:</strong> פרטי הקשר ישמשו לחיבור עם לקוחות מאומתים בלבד ולא יועברו לצד שלישי.</span>
                     </div>
 
                     {/* Insurance */}
@@ -584,52 +833,32 @@ const AdElai = () => {
                       <p className="text-sm leading-relaxed" style={{ color: "#7c3e1a" }}>
                         אני מצהיר/ה שברשותי ביטוח אחריות מקצועית בתוקף. ידוע לי כי פלטפורמת "עַד אֵלַי" אינה אחראית לכל נזק במהלך מתן השירות.
                       </p>
-                    </div>
-
-                    {/* Truvify opt-in */}
-                    <div className="rounded-lg p-4 mb-4" style={{ background: "#f0f9ff", border: "1.5px solid #0284c7" }}>
-                      <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
-                        <h4 className="text-base font-extrabold flex items-center gap-2" style={{ color: "#075985" }}>
-                          <span className="text-xs font-black px-2 py-1 rounded" style={{ background: "#0f172a", color: "#22d3ee", fontFamily: "monospace" }}>TRUVIFY</span>
-                          תג אמינות – רשות
-                        </h4>
-                        <a href="https://truvify.com/" target="_blank" rel="noopener noreferrer" className="text-xs underline flex items-center gap-1" style={{ color: "#0284c7" }}>
-                          <ExternalLink className="h-3 w-3" />אתר Truvify
-                        </a>
-                      </div>
-                      <p className="text-sm mb-3" style={{ color: "#0c4a6e" }}>
-                        Truvify סורקת מיליוני רשומות ציבוריות. ספקים שיעברו את הבדיקה יקבלו <strong>תג TRUVIFY בולט</strong> על הפרופיל.
-                      </p>
-                      <label className="flex items-start gap-3 p-3 rounded-lg border cursor-pointer hover:border-primary transition-colors bg-background">
-                        <input type="checkbox" className="mt-0.5 accent-[#1B7A78]" />
-                        <span className="text-sm"><strong>אני מעוניין/ת לבצע בדיקת Truvify (₪50 חד פעמי)</strong></span>
+                      <label className="flex items-start gap-3 mt-2 cursor-pointer">
+                        <input type="checkbox" className="mt-0.5 accent-[#1B7A78]" checked={formData.has_insurance_declaration} onChange={(e) => updateForm("has_insurance_declaration", e.target.checked)} />
+                        <span className="text-sm font-bold" style={{ color: "#9a3412" }}>אני מאשר/ת את הצהרת הביטוח</span>
                       </label>
                     </div>
 
                     {/* Checkboxes */}
                     <div className="space-y-2.5">
                       {[
-                        "קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות",
-                        "פרטי הקשר שלי יוצגו למשתמשים רשומים בלבד",
-                        "אני מצהיר/ה שיש לי ביטוח בתוקף ומקבל/ת על עצמי אחריות מלאה",
-                        "אני מתחייב/ת לאמינות ומקצועיות",
-                      ].map((text) => (
-                        <label key={text} className="flex items-start gap-3 p-3 rounded-lg border cursor-pointer hover:border-primary transition-colors">
-                          <input type="checkbox" className="mt-0.5 accent-[#1B7A78]" />
-                          <span className="text-sm">{text}</span>
+                        { key: "agree_terms", text: "קראתי ואני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות" },
+                        { key: "agree_contact", text: "פרטי הקשר שלי יוצגו למשתמשים רשומים בלבד" },
+                        { key: "agree_insurance", text: "אני מצהיר/ה שיש לי ביטוח בתוקף ומקבל/ת על עצמי אחריות מלאה" },
+                        { key: "agree_professional", text: "אני מתחייב/ת לאמינות ומקצועיות" },
+                      ].map((item) => (
+                        <label key={item.key} className="flex items-start gap-3 p-3 rounded-lg border cursor-pointer hover:border-primary transition-colors">
+                          <input type="checkbox" className="mt-0.5 accent-[#1B7A78]" checked={formData[item.key]} onChange={(e) => updateForm(item.key, e.target.checked)} />
+                          <span className="text-sm">{item.text}</span>
                         </label>
                       ))}
                     </div>
 
-                    {/* References */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                      <div><Label>המלצה ראשונה (שם + טלפון)</Label><Input placeholder="דורית כהן 050-1111111" className="mt-1.5" /></div>
-                      <div><Label>המלצה שנייה (שם + טלפון)</Label><Input placeholder="יוסי לוי 052-2222222" className="mt-1.5" /></div>
-                    </div>
-
                     <div className="flex justify-between mt-7 pt-5 border-t">
                       <Button variant="outline" onClick={() => goToStep(4)}>← חזרה</Button>
-                      <Button className="text-white font-bold px-8 bg-green-600 hover:bg-green-700" onClick={submitForm}>שלחו בקשת הצטרפות ✓</Button>
+                      <Button className="text-white font-bold px-8 bg-green-600 hover:bg-green-700" onClick={submitForm} disabled={submitting}>
+                        {submitting ? "שולח..." : "שלחו בקשת הצטרפות ✓"}
+                      </Button>
                     </div>
                   </div>
                 )}
@@ -683,46 +912,8 @@ const AdElai = () => {
           </DialogHeader>
           <p className="text-sm text-muted-foreground mb-5">כדי לצפות בפרטי הקשר, יש להירשם. ההרשמה חינמית ומגינה על פרטיות כלל הצדדים.</p>
           <div className="flex gap-3 justify-center">
-            <Button style={{ background: TEAL }} className="text-white" onClick={() => setContactOpen(false)}>הרשמה חינמית</Button>
+            <Button style={{ background: TEAL }} className="text-white" onClick={() => { setContactOpen(false); navigate("/auth"); }}>הרשמה חינמית</Button>
             <Button variant="outline" onClick={() => setContactOpen(false)}>לא עכשיו</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Truvify Modal */}
-      <Dialog open={truvifyOpen} onOpenChange={setTruvifyOpen}>
-        <DialogContent className="max-w-md text-right">
-          <DialogHeader>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="rounded-lg px-3 py-1.5" style={{ background: "#0f172a" }}>
-                <span className="font-black text-sm" style={{ color: "#22d3ee", fontFamily: "monospace", letterSpacing: "1px" }}>TRUVIFY</span>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">מה זה אומר?</p>
-                <DialogTitle className="text-lg">ספק זה עבר הערכת אמינות</DialogTitle>
-              </div>
-            </div>
-          </DialogHeader>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-            Truvify היא חברה ישראלית המפעילה טכנולוגיה מתקדמת לסריקת מיליוני פריטי מידע ציבוריים. הספק הסכים לבדיקה ועבר אותה בהצלחה.
-          </p>
-          <p className="text-sm font-bold mb-2">הבדיקה כוללת:</p>
-          <ul className="space-y-2">
-            {truvifyCheckItems.map((item) => (
-              <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground pb-2 border-b last:border-b-0">
-                <Check className="h-3.5 w-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-3 p-3 rounded-lg text-xs leading-relaxed" style={{ background: "#fff7ed", border: "1.5px solid #f59e0b", color: "#78350f" }}>
-            <strong>⚠️ הגבלת אחריות:</strong> בדיקת Truvify מהווה מידע ציבורי בנקודת זמן מסוימת ואינה ערבות לאיכות השירות.
-          </div>
-          <a href="https://truvify.com/" target="_blank" rel="noopener noreferrer" className="text-xs underline flex items-center gap-1 mt-2" style={{ color: TEAL }}>
-            <ExternalLink className="h-3 w-3" />למידע נוסף על Truvify
-          </a>
-          <div className="text-center mt-4">
-            <Button style={{ background: TEAL }} className="text-white" onClick={() => setTruvifyOpen(false)}>הבנתי, סגור</Button>
           </div>
         </DialogContent>
       </Dialog>
