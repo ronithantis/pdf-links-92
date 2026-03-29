@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import AccessibilityMenu from "@/components/AccessibilityMenu";
+import ConsentModal from "@/components/ConsentModal";
 
 interface LayoutProps {
   children: ReactNode;
