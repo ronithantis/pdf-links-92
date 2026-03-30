@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules } from "@/lib/modules-data";
 import logo from "@/assets/logo.png";
+import NewsNavButton from "@/components/news/NewsNavButton";
 
 const parts = [
   { number: 1, title: "המציאות החדשה", modules: modules.filter((m) => m.partNumber === 1) },
@@ -79,6 +80,7 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-1">
           {/* Quick Search */}
           <div ref={searchRef} className="relative">
+            <NewsNavButton />
             {searchOpen ? (
               <div className="flex items-center gap-1">
                 <input
@@ -180,6 +182,9 @@ const Header = () => {
                 </div>
               ))}
               <div className="border-t pt-3 space-y-1">
+                <Link to="/news" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
+                  עדכונים וחדשות
+                </Link>
                 <Link to="/rights" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   זכויות וחובות
                 </Link>

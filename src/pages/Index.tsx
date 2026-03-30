@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { modules, digitalTools } from "@/lib/modules-data";
 import NeedsQuestionnaire from "@/components/NeedsQuestionnaire";
 import ChecklistSection from "@/components/ChecklistSection";
+import NewsFeed from "@/components/news/NewsFeed";
 
 import heroImage from "@/assets/hero-family.jpg";
 import {
@@ -123,6 +124,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* News Feed */}
+      <NewsFeed />
 
       {/* Pathway Cards */}
       <section id="pathway" className="py-12 bg-muted/30">

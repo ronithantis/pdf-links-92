@@ -25,6 +25,7 @@ import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
 import TermsOfUsePage from "./pages/TermsOfUsePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import NewsPage from "./pages/NewsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/rights" element={<Rights />} />
             <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/news" element={<NewsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
