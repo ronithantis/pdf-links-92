@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules } from "@/lib/modules-data";
 import logo from "@/assets/logo.png";
+import NewsNavButton from "@/components/news/NewsNavButton";
 
 const parts = [
   { number: 1, title: "המציאות החדשה", modules: modules.filter((m) => m.partNumber === 1) },
