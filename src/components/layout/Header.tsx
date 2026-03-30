@@ -80,6 +80,7 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-1">
           {/* Quick Search */}
           <div ref={searchRef} className="relative">
+            <NewsNavButton />
             {searchOpen ? (
               <div className="flex items-center gap-1">
                 <input
