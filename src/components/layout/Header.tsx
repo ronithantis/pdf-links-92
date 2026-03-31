@@ -131,7 +131,7 @@ const Header = () => {
             שירותים וציוד
           </Link>
           <Link to="/organizations" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            עזרה ועמותות
+            סיוע מעמותות
           </Link>
           <Link to="/tools" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             כלים דיגיטליים
