@@ -19,6 +19,7 @@ import AdminKnowledge from "./pages/AdminKnowledge";
 import AdminSuppliers from "./pages/AdminSuppliers";
 import GiveTake from "./pages/GiveTake";
 import AdElai from "./pages/AdElai";
+import OrganizationsSearch from "./pages/OrganizationsSearch";
 import About from "./pages/About";
 import MedTracker from "./pages/MedTracker";
 import FormsPage from "./pages/FormsPage";
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/technical-spec" element={<TechnicalSpec />} />
             <Route path="/give-take" element={<GiveTake />} />
             <Route path="/ad-elai" element={<AdElai />} />
+            <Route path="/organizations" element={<OrganizationsSearch />} />
             <Route path="/about" element={<About />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/knowledge" element={<AdminKnowledge />} />
