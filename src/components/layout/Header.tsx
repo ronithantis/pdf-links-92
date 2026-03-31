@@ -201,7 +201,7 @@ const Header = () => {
                   שירותים וציוד
                 </Link>
                 <Link to="/organizations" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  עזרה ועמותות
+                  סיוע מעמותות
                 </Link>
                 <Link to="/tools" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   כלים דיגיטליים
