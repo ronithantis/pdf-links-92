@@ -6,6 +6,9 @@ import CategoryGrid from "@/components/knowledge/CategoryGrid";
 import ResourceList from "@/components/knowledge/ResourceList";
 import ScenarioExplorer from "@/components/knowledge/ScenarioExplorer";
 import SmartAdvisor from "@/components/knowledge/SmartAdvisor";
+import { useNavigate } from "react-router-dom";
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const KnowledgeCenter = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
