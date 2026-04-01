@@ -105,6 +105,13 @@ const Header = () => {
                   ref={inputRef}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && searchResults.length > 0) {
+                      navigate(searchResults[0].url);
+                      setSearchOpen(false);
+                      setSearchQuery("");
+                    }
+                  }}
                   placeholder="חיפוש מהיר..."
                   className="h-8 w-52 rounded-md border border-input bg-background px-3 text-sm outline-none focus:ring-1 focus:ring-ring"
                 />
