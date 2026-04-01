@@ -22,15 +22,34 @@ const parts = [
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
 ];
 
-// Build search index from all modules and sub-modules
-const searchIndex = modules.flatMap((mod) => [
-  { label: mod.title, description: mod.description, url: `/module/${mod.id}` },
-  ...mod.subModules.map((sub) => ({
-    label: `${sub.title}`,
-    description: sub.description,
-    url: `/module/${mod.id}?section=${sub.id}`,
-  })),
-]);
+// Build search index from all modules, sub-modules, and site pages
+const sitePages = [
+  { label: "מרכז הידע והכלים", description: "משאבים, תרחישים ויועץ חכם", url: "/knowledge-center" },
+  { label: "זכויות וחובות", description: "מידע על זכויות סוציאליות וחובות", url: "/rights" },
+  { label: "שירותים וציוד", description: "מדריך שירותים וספקים", url: "/services" },
+  { label: "סיוע מעמותות", description: "חיפוש עמותות וארגוני סיוע", url: "/organizations" },
+  { label: "כלים דיגיטליים", description: "מחשבונים, מעקב תרופות וכלים נוספים", url: "/digital-tools" },
+  { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take" },
+  { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training" },
+  { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search" },
+  { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms" },
+  { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker" },
+  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news" },
+  { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact" },
+  { label: "אודות", description: "אודות האתר והצוות", url: "/about" },
+];
+
+const searchIndex = [
+  ...sitePages,
+  ...modules.flatMap((mod) => [
+    { label: mod.title, description: mod.description, url: `/module/${mod.id}` },
+    ...mod.subModules.map((sub) => ({
+      label: `${sub.title}`,
+      description: sub.description,
+      url: `/module/${mod.id}?section=${sub.id}`,
+    })),
+  ]),
+];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +105,13 @@ const Header = () => {
                   ref={inputRef}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && searchResults.length > 0) {
+                      navigate(searchResults[0].url);
+                      setSearchOpen(false);
+                      setSearchQuery("");
+                    }
+                  }}
                   placeholder="חיפוש מהיר..."
                   className="h-8 w-52 rounded-md border border-input bg-background px-3 text-sm outline-none focus:ring-1 focus:ring-ring"
                 />
