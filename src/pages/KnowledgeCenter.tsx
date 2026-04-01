@@ -6,8 +6,12 @@ import CategoryGrid from "@/components/knowledge/CategoryGrid";
 import ResourceList from "@/components/knowledge/ResourceList";
 import ScenarioExplorer from "@/components/knowledge/ScenarioExplorer";
 import SmartAdvisor from "@/components/knowledge/SmartAdvisor";
+import { useNavigate } from "react-router-dom";
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const KnowledgeCenter = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [searchParams] = useSearchParams();
@@ -51,6 +55,18 @@ const KnowledgeCenter = () => {
           <TabsTrigger value="scenarios">תרחישים</TabsTrigger>
           <TabsTrigger value="advisor">יועץ חכם</TabsTrigger>
         </TabsList>
+
+        <div className="flex justify-center mt-3">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => navigate("/glossary")}
+          >
+            <BookOpen className="h-4 w-4" />
+            מילון מושגים
+          </Button>
+        </div>
 
         {!hideResources && (
           <TabsContent value="resources" className="mt-8">
