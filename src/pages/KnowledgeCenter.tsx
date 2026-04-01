@@ -11,6 +11,7 @@ import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const KnowledgeCenter = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [searchParams] = useSearchParams();
