@@ -56,6 +56,18 @@ const KnowledgeCenter = () => {
           <TabsTrigger value="advisor">יועץ חכם</TabsTrigger>
         </TabsList>
 
+        <div className="flex justify-center mt-3">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => navigate("/glossary")}
+          >
+            <BookOpen className="h-4 w-4" />
+            מילון מושגים
+          </Button>
+        </div>
+
         {!hideResources && (
           <TabsContent value="resources" className="mt-8">
             {selectedCategory ? (
