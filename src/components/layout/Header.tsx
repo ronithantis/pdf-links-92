@@ -85,13 +85,21 @@ const Header = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
 
-  const searchResults = searchQuery.length >= 2
-    ? searchIndex.filter(
-        (item) =>
-          item.label.includes(searchQuery) ||
-          item.description.includes(searchQuery)
-      ).slice(0, 8)
-    : [];
+  const searchResults = useMemo(() => {
+    if (searchQuery.length < 2) return [];
+    const q = searchQuery.trim();
+    // Score: 0 = label starts with query, 1 = label contains, 2 = description contains
+    const scored = searchIndex
+      .map((item) => {
+        if (item.label.startsWith(q)) return { ...item, score: 0 };
+        if (item.label.includes(q)) return { ...item, score: 1 };
+        if (item.description.includes(q)) return { ...item, score: 2 };
+        return null;
+      })
+      .filter(Boolean) as (SearchItem & { score: number })[];
+    scored.sort((a, b) => a.score - b.score);
+    return scored.slice(0, 10);
+  }, [searchQuery]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
