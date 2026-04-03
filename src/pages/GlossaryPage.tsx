@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search, X, ArrowRight, BookOpen } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -42,9 +42,20 @@ function highlightText(text: string, query: string) {
 
 const GlossaryPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+
+  // Auto-search from URL query param (from global search)
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) {
+      setQuery(q);
+      setActiveCategory(null);
+      setShowAll(false);
+    }
+  }, [searchParams]);
 
   const categories = useMemo(() => glossaryData.map((c) => c.category), []);
 

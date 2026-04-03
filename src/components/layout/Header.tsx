@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X, Shield } from "lucide-react";
+import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules } from "@/lib/modules-data";
+import { glossaryData } from "@/lib/glossary-data";
 import logo from "@/assets/logo.png";
 import NewsNavButton from "@/components/news/NewsNavButton";
 
@@ -22,33 +23,57 @@ const parts = [
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
 ];
 
-// Build search index from all modules, sub-modules, and site pages
-const sitePages = [
-  { label: "מרכז הידע והכלים", description: "משאבים, תרחישים ויועץ חכם", url: "/knowledge-center" },
-  { label: "זכויות וחובות", description: "מידע על זכויות סוציאליות וחובות", url: "/rights" },
-  { label: "שירותים וציוד", description: "מדריך שירותים וספקים", url: "/services" },
-  { label: "סיוע מעמותות", description: "חיפוש עמותות וארגוני סיוע", url: "/organizations" },
-  { label: "כלים דיגיטליים", description: "מחשבונים, מעקב תרופות וכלים נוספים", url: "/digital-tools" },
-  { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take" },
-  { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training" },
-  { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search" },
-  { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms" },
-  { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker" },
-  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news" },
-  { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact" },
-  { label: "אודות", description: "אודות האתר והצוות", url: "/about" },
+type SearchSource = "page" | "module" | "glossary";
+
+interface SearchItem {
+  label: string;
+  description: string;
+  url: string;
+  source: SearchSource;
+  sourceLabel: string;
+}
+
+// Build search index from all modules, sub-modules, site pages, and glossary
+const sitePages: SearchItem[] = [
+  { label: "מרכז הידע והכלים", description: "משאבים, תרחישים ויועץ חכם", url: "/knowledge-center", source: "page", sourceLabel: "דף באתר" },
+  { label: "זכויות וחובות", description: "מידע על זכויות סוציאליות וחובות", url: "/rights", source: "page", sourceLabel: "דף באתר" },
+  { label: "שירותים וציוד", description: "מדריך שירותים וספקים", url: "/services", source: "page", sourceLabel: "דף באתר" },
+  { label: "סיוע מעמותות", description: "חיפוש עמותות וארגוני סיוע", url: "/organizations", source: "page", sourceLabel: "דף באתר" },
+  { label: "כלים דיגיטליים", description: "מחשבונים, מעקב תרופות וכלים נוספים", url: "/digital-tools", source: "page", sourceLabel: "דף באתר" },
+  { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take", source: "page", sourceLabel: "דף באתר" },
+  { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training", source: "page", sourceLabel: "דף באתר" },
+  { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
+  { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
+  { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
+  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news", source: "page", sourceLabel: "דף באתר" },
+  { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
+  { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },
+  { label: "מילון מושגים", description: "הסבר מהיר למושגים בסיעוד וגיל שלישי", url: "/glossary", source: "page", sourceLabel: "דף באתר" },
 ];
 
-const searchIndex = [
+const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
+  cat.terms.map((term) => ({
+    label: term.name,
+    description: term.definition.length > 80 ? term.definition.slice(0, 80) + "…" : term.definition,
+    url: `/glossary?q=${encodeURIComponent(term.name)}`,
+    source: "glossary" as SearchSource,
+    sourceLabel: `מילון מושגים · ${cat.category}`,
+  }))
+);
+
+const searchIndex: SearchItem[] = [
   ...sitePages,
   ...modules.flatMap((mod) => [
-    { label: mod.title, description: mod.description, url: `/module/${mod.id}` },
+    { label: mod.title, description: mod.description, url: `/module/${mod.id}`, source: "module" as SearchSource, sourceLabel: "פרק לימוד" },
     ...mod.subModules.map((sub) => ({
-      label: `${sub.title}`,
+      label: sub.title,
       description: sub.description,
       url: `/module/${mod.id}?section=${sub.id}`,
+      source: "module" as SearchSource,
+      sourceLabel: "פרק לימוד",
     })),
   ]),
+  ...glossaryIndex,
 ];
 
 const Header = () => {
@@ -60,13 +85,21 @@ const Header = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
 
-  const searchResults = searchQuery.length >= 2
-    ? searchIndex.filter(
-        (item) =>
-          item.label.includes(searchQuery) ||
-          item.description.includes(searchQuery)
-      ).slice(0, 8)
-    : [];
+  const searchResults = useMemo(() => {
+    if (searchQuery.length < 2) return [];
+    const q = searchQuery.trim();
+    // Score: 0 = label starts with query, 1 = label contains, 2 = description contains
+    const scored = searchIndex
+      .map((item) => {
+        if (item.label.startsWith(q)) return { ...item, score: 0 };
+        if (item.label.includes(q)) return { ...item, score: 1 };
+        if (item.description.includes(q)) return { ...item, score: 2 };
+        return null;
+      })
+      .filter(Boolean) as (SearchItem & { score: number })[];
+    scored.sort((a, b) => a.score - b.score);
+    return scored.slice(0, 10);
+  }, [searchQuery]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -118,22 +151,42 @@ const Header = () => {
                 <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}>
                   <X className="h-4 w-4" />
                 </Button>
-                {searchResults.length > 0 && (
-                  <div className="absolute top-10 left-0 right-0 w-80 bg-popover border rounded-md shadow-lg z-50 max-h-72 overflow-y-auto">
-                    {searchResults.map((result, i) => (
-                      <button
-                        key={i}
-                        className="w-full text-right px-3 py-2 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
-                        onClick={() => {
-                          navigate(result.url);
-                          setSearchOpen(false);
-                          setSearchQuery("");
-                        }}
-                      >
-                        <div className="font-medium">{result.label}</div>
-                        <div className="text-xs text-muted-foreground truncate">{result.description}</div>
-                      </button>
-                    ))}
+                {searchQuery.length >= 2 && (
+                  <div className="absolute top-10 left-0 right-0 w-96 bg-popover border rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
+                    {searchResults.length === 0 ? (
+                      <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+                        לא נמצאו תוצאות עבור "{searchQuery}"
+                      </div>
+                    ) : (
+                      searchResults.map((result, i) => (
+                        <button
+                          key={i}
+                          className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
+                          onClick={() => {
+                            navigate(result.url);
+                            setSearchOpen(false);
+                            setSearchQuery("");
+                          }}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
+                              result.source === "glossary" 
+                                ? "bg-accent/20 text-accent-foreground" 
+                                : result.source === "module" 
+                                ? "bg-primary/10 text-primary" 
+                                : "bg-muted text-muted-foreground"
+                            }`}>
+                              {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
+                              {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
+                              {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
+                              {result.sourceLabel}
+                            </span>
+                          </div>
+                          <div className="font-medium mt-0.5">{result.label}</div>
+                          <div className="text-xs text-muted-foreground truncate">{result.description}</div>
+                        </button>
+                      ))
+                    )}
                   </div>
                 )}
               </div>
