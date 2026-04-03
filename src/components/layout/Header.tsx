@@ -23,7 +23,7 @@ const parts = [
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
 ];
 
-type SearchSource = "page" | "module" | "glossary";
+type SearchSource = "page" | "module" | "glossary" | "tool";
 
 interface SearchItem {
   label: string;
