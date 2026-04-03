@@ -151,22 +151,42 @@ const Header = () => {
                 <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}>
                   <X className="h-4 w-4" />
                 </Button>
-                {searchResults.length > 0 && (
-                  <div className="absolute top-10 left-0 right-0 w-80 bg-popover border rounded-md shadow-lg z-50 max-h-72 overflow-y-auto">
-                    {searchResults.map((result, i) => (
-                      <button
-                        key={i}
-                        className="w-full text-right px-3 py-2 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
-                        onClick={() => {
-                          navigate(result.url);
-                          setSearchOpen(false);
-                          setSearchQuery("");
-                        }}
-                      >
-                        <div className="font-medium">{result.label}</div>
-                        <div className="text-xs text-muted-foreground truncate">{result.description}</div>
-                      </button>
-                    ))}
+                {searchQuery.length >= 2 && (
+                  <div className="absolute top-10 left-0 right-0 w-96 bg-popover border rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
+                    {searchResults.length === 0 ? (
+                      <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+                        לא נמצאו תוצאות עבור "{searchQuery}"
+                      </div>
+                    ) : (
+                      searchResults.map((result, i) => (
+                        <button
+                          key={i}
+                          className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
+                          onClick={() => {
+                            navigate(result.url);
+                            setSearchOpen(false);
+                            setSearchQuery("");
+                          }}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
+                              result.source === "glossary" 
+                                ? "bg-accent/20 text-accent-foreground" 
+                                : result.source === "module" 
+                                ? "bg-primary/10 text-primary" 
+                                : "bg-muted text-muted-foreground"
+                            }`}>
+                              {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
+                              {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
+                              {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
+                              {result.sourceLabel}
+                            </span>
+                          </div>
+                          <div className="font-medium mt-0.5">{result.label}</div>
+                          <div className="text-xs text-muted-foreground truncate">{result.description}</div>
+                        </button>
+                      ))
+                    )}
                   </div>
                 )}
               </div>
