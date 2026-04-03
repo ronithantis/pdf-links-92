@@ -183,11 +183,14 @@ const Header = () => {
                                 ? "bg-accent/20 text-accent-foreground" 
                                 : result.source === "module" 
                                 ? "bg-primary/10 text-primary" 
+                                : result.source === "tool"
+                                ? "bg-warm/10 text-warm"
                                 : "bg-muted text-muted-foreground"
                             }`}>
                               {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
                               {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
                               {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
+                              {result.source === "tool" && <Wrench className="h-2.5 w-2.5" />}
                               {result.sourceLabel}
                             </span>
                           </div>
