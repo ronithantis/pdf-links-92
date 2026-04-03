@@ -24,6 +24,7 @@ const toolIcons: Record<string, React.ReactNode> = {
   BookOpen: <BookOpen className="h-8 w-8" />,
   FileSignature: <FileSignature className="h-8 w-8" />,
   Compass: <Compass className="h-8 w-8" />,
+  FolderOpen: <FolderOpen className="h-8 w-8" />,
 };
 
 const DigitalTools = () => {
