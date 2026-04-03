@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X, Shield } from "lucide-react";
+import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules } from "@/lib/modules-data";
+import { glossaryData } from "@/lib/glossary-data";
 import logo from "@/assets/logo.png";
 import NewsNavButton from "@/components/news/NewsNavButton";
 
@@ -22,33 +23,57 @@ const parts = [
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
 ];
 
-// Build search index from all modules, sub-modules, and site pages
-const sitePages = [
-  { label: "מרכז הידע והכלים", description: "משאבים, תרחישים ויועץ חכם", url: "/knowledge-center" },
-  { label: "זכויות וחובות", description: "מידע על זכויות סוציאליות וחובות", url: "/rights" },
-  { label: "שירותים וציוד", description: "מדריך שירותים וספקים", url: "/services" },
-  { label: "סיוע מעמותות", description: "חיפוש עמותות וארגוני סיוע", url: "/organizations" },
-  { label: "כלים דיגיטליים", description: "מחשבונים, מעקב תרופות וכלים נוספים", url: "/digital-tools" },
-  { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take" },
-  { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training" },
-  { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search" },
-  { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms" },
-  { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker" },
-  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news" },
-  { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact" },
-  { label: "אודות", description: "אודות האתר והצוות", url: "/about" },
+type SearchSource = "page" | "module" | "glossary";
+
+interface SearchItem {
+  label: string;
+  description: string;
+  url: string;
+  source: SearchSource;
+  sourceLabel: string;
+}
+
+// Build search index from all modules, sub-modules, site pages, and glossary
+const sitePages: SearchItem[] = [
+  { label: "מרכז הידע והכלים", description: "משאבים, תרחישים ויועץ חכם", url: "/knowledge-center", source: "page", sourceLabel: "דף באתר" },
+  { label: "זכויות וחובות", description: "מידע על זכויות סוציאליות וחובות", url: "/rights", source: "page", sourceLabel: "דף באתר" },
+  { label: "שירותים וציוד", description: "מדריך שירותים וספקים", url: "/services", source: "page", sourceLabel: "דף באתר" },
+  { label: "סיוע מעמותות", description: "חיפוש עמותות וארגוני סיוע", url: "/organizations", source: "page", sourceLabel: "דף באתר" },
+  { label: "כלים דיגיטליים", description: "מחשבונים, מעקב תרופות וכלים נוספים", url: "/digital-tools", source: "page", sourceLabel: "דף באתר" },
+  { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take", source: "page", sourceLabel: "דף באתר" },
+  { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training", source: "page", sourceLabel: "דף באתר" },
+  { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
+  { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
+  { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
+  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news", source: "page", sourceLabel: "דף באתר" },
+  { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
+  { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },
+  { label: "מילון מושגים", description: "הסבר מהיר למושגים בסיעוד וגיל שלישי", url: "/glossary", source: "page", sourceLabel: "דף באתר" },
 ];
 
-const searchIndex = [
+const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
+  cat.terms.map((term) => ({
+    label: term.name,
+    description: term.definition.length > 80 ? term.definition.slice(0, 80) + "…" : term.definition,
+    url: `/glossary?q=${encodeURIComponent(term.name)}`,
+    source: "glossary" as SearchSource,
+    sourceLabel: `מילון מושגים · ${cat.category}`,
+  }))
+);
+
+const searchIndex: SearchItem[] = [
   ...sitePages,
   ...modules.flatMap((mod) => [
-    { label: mod.title, description: mod.description, url: `/module/${mod.id}` },
+    { label: mod.title, description: mod.description, url: `/module/${mod.id}`, source: "module" as SearchSource, sourceLabel: "פרק לימוד" },
     ...mod.subModules.map((sub) => ({
-      label: `${sub.title}`,
+      label: sub.title,
       description: sub.description,
       url: `/module/${mod.id}?section=${sub.id}`,
+      source: "module" as SearchSource,
+      sourceLabel: "פרק לימוד",
     })),
   ]),
+  ...glossaryIndex,
 ];
 
 const Header = () => {
