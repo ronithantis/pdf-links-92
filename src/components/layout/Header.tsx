@@ -4,7 +4,7 @@ import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap, Wre
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { modules } from "@/lib/modules-data";
+import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
 import logo from "@/assets/logo.png";
 import NewsNavButton from "@/components/news/NewsNavButton";
