@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap } from "lucide-react";
+import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap, Wrench } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { modules } from "@/lib/modules-data";
+import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
 import logo from "@/assets/logo.png";
 import NewsNavButton from "@/components/news/NewsNavButton";
@@ -23,7 +23,7 @@ const parts = [
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
 ];
 
-type SearchSource = "page" | "module" | "glossary";
+type SearchSource = "page" | "module" | "glossary" | "tool";
 
 interface SearchItem {
   label: string;
@@ -61,6 +61,14 @@ const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
   }))
 );
 
+const toolsIndex: SearchItem[] = digitalTools.map((tool) => ({
+  label: tool.title,
+  description: tool.description,
+  url: (tool as any).isInternal ? tool.toolUrl! : `/tools#${tool.id}`,
+  source: "tool" as SearchSource,
+  sourceLabel: "כלי דיגיטלי",
+}));
+
 const searchIndex: SearchItem[] = [
   ...sitePages,
   ...modules.flatMap((mod) => [
@@ -74,6 +82,7 @@ const searchIndex: SearchItem[] = [
     })),
   ]),
   ...glossaryIndex,
+  ...toolsIndex,
 ];
 
 const Header = () => {
@@ -174,11 +183,14 @@ const Header = () => {
                                 ? "bg-accent/20 text-accent-foreground" 
                                 : result.source === "module" 
                                 ? "bg-primary/10 text-primary" 
+                                : result.source === "tool"
+                                ? "bg-warm/10 text-warm"
                                 : "bg-muted text-muted-foreground"
                             }`}>
                               {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
                               {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
                               {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
+                              {result.source === "tool" && <Wrench className="h-2.5 w-2.5" />}
                               {result.sourceLabel}
                             </span>
                           </div>
