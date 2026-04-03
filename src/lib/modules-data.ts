@@ -465,4 +465,12 @@ export const digitalTools = [
     toolUrl: "/med-tracker",
     isInternal: true,
   },
+  {
+    id: "blue-folder",
+    title: "תיק כחול",
+    description: "ניהול כל המסמכים והתשלומים במקום אחד – תיק דיגיטלי מסודר למשפחה המטפלת",
+    icon: "FolderOpen",
+    isPaid: false,
+    toolUrl: "https://effulgent-liger-ffb340.netlify.app/",
+  },
 ];
