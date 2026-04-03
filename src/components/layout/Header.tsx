@@ -61,6 +61,14 @@ const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
   }))
 );
 
+const toolsIndex: SearchItem[] = digitalTools.map((tool) => ({
+  label: tool.title,
+  description: tool.description,
+  url: (tool as any).isInternal ? tool.toolUrl! : `/tools#${tool.id}`,
+  source: "tool" as SearchSource,
+  sourceLabel: "כלי דיגיטלי",
+}));
+
 const searchIndex: SearchItem[] = [
   ...sitePages,
   ...modules.flatMap((mod) => [
@@ -74,6 +82,7 @@ const searchIndex: SearchItem[] = [
     })),
   ]),
   ...glossaryIndex,
+  ...toolsIndex,
 ];
 
 const Header = () => {
