@@ -1,0 +1,1 @@
+UPDATE knowledge_resources SET url = 'https://drive.google.com/file/d/1gROvPEM0b6Rc9i8bsK-cGY7ZhyrKxiOm/preview' WHERE id = 'f6f31792-1871-4c3f-8136-a49460199910';
