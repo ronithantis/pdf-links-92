@@ -108,8 +108,8 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
       {isVideo && hasUrl ? (
         <div className="relative h-32 bg-muted/30 overflow-hidden">
-          <iframe
-            src={`${resource.url}?badge=0&autopause=0`}
+        <iframe
+            src={resource.url!.includes('drive.google.com') ? resource.url! : `${resource.url}?badge=0&autopause=0`}
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture"
             className="absolute top-0 left-0 w-full h-full"
