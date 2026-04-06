@@ -127,16 +127,32 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
         <div className="bg-muted/30 h-24 flex items-center justify-center">
           <Wrench className="h-10 w-10 text-primary opacity-50" />
         </div>
-      ) : isPresentation && hasUrl ? (
-        <div className="relative w-full h-32 bg-muted/30 overflow-hidden">
-          <iframe
-            src={resource.url!}
-            className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
-            title={resource.title}
-            loading="lazy"
-          />
-          <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
-        </div>
+    ) : isPresentation && hasUrl ? (
+        (() => {
+          const isDriveUrl = resource.url!.includes('drive.google.com');
+          const driveFileId = isDriveUrl ? resource.url!.match(/\/d\/([^/]+)/)?.[1] : null;
+          const thumbnailUrl = driveFileId ? `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w800` : null;
+          return (
+            <div className="relative w-full h-32 bg-muted/30 overflow-hidden">
+              {thumbnailUrl ? (
+                <img
+                  src={thumbnailUrl}
+                  alt={resource.title}
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <iframe
+                  src={resource.url!}
+                  className="absolute top-0 left-0 w-[250%] h-[250%] origin-top-left scale-[0.4] pointer-events-none"
+                  title={resource.title}
+                  loading="lazy"
+                />
+              )}
+              <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
+            </div>
+          );
+        })()
       ) : null}
       <CardContent className="p-3">
         <div className="flex items-start justify-between mb-2">
