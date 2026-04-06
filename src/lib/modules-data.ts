@@ -473,4 +473,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://effulgent-liger-ffb340.netlify.app/",
   },
+  {
+    id: "emergency-protocol",
+    title: "פרוטוקול חירום",
+    description: "כרטיס מטופל דיגיטלי – מצב רפואי, תפקודי ונתונים חיוניים למצב חירום",
+    icon: "ShieldAlert",
+    isPaid: false,
+    toolUrl: "https://astonishing-pony-0b9a51.netlify.app/",
+  },
 ];
