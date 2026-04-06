@@ -84,6 +84,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/services", label: "מפת שירותים", reason: "שירותי פיזיותרפיה ושיקום באזורך" },
       { path: "/ad-elai", label: "ספקי ציוד ושירותים", reason: "ספקים להתקנת ידיות אחיזה, מאחזים, ציוד בטיחות" },
       { path: "/give-take", label: 'לוח "קח ותן"', reason: "ציוד עזר לניידות — אולי יש תרומות זמינות" },
+      { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי עם מידע חיוני למקרה חירום" },
     ],
   },
   {
