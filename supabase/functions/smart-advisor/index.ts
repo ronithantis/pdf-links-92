@@ -143,11 +143,12 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה"],
+    keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה", "תביעת סיעוד"],
     tools: [
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על זכויות וגמלאות" },
       { path: "/services", label: "מפת שירותים", reason: "גופים ציבוריים ועמותות שיכולים לסייע" },
       { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
+      { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי – מרכז נתונים רפואיים ותפקודיים הנדרשים לתביעה" },
     ],
   },
   {
