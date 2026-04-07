@@ -61,9 +61,10 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["עובד זר", "מטפל צמוד", "מטפלת צמודה", "עובדת זרה", "גייסנו עובד", "עובד חדש"],
+    keywords: ["עובד זר", "מטפל צמוד", "מטפלת צמודה", "עובדת זרה", "גייסנו עובד", "עובד חדש", "קשיי שפה", "תקשורת עם עובד", "לא מבין", "לא מבינה", "שפה משותפת", "תרגום"],
     tools: [
       { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
+      { path: "/tools#caregiver-communicator", label: "תקשורת מטפל-מטופל", reason: "כלי תקשורת חזותי כשיש קשיי שפה בין המטפל למטופל" },
       { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "חישוב שכר מדויק כולל זכויות סוציאליות", isPaid: true },
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
       { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים, שעות ומשימות", isPaid: true },

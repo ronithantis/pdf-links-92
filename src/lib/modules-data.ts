@@ -481,4 +481,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://astonishing-pony-0b9a51.netlify.app/",
   },
+  {
+    id: "caregiver-communicator",
+    title: "תקשורת מטפל-מטופל",
+    description: "כלי תקשורת חזותי בין מטפל למטופל כשיש קשיי שפה — תמונות, סמלים ומשפטים מוכנים בכמה שפות",
+    icon: "Handshake",
+    isPaid: false,
+    toolUrl: "https://effortless-empanada-30cdf9.netlify.app/",
+  },
 ];
