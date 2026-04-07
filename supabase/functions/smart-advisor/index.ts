@@ -49,10 +49,12 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["דמנציה", "דמנטית", "דמנט", "אלצהיימר", "שכחה", "ירידה קוגניטיבית", "שיטיון"],
+    keywords: ["דמנציה", "דמנטית", "דמנט", "דמנטיים", "אלצהיימר", "שכחה", "ירידה קוגניטיבית", "שיטיון", "הזיות", "התקפות זעם", "בלבול", "אגרסיביות", "התמודדות בבית"],
     tools: [
+      { path: "https://drive.google.com/file/d/1k_kfvnmM5M1lJA_SapxOmjs4bnKNN_ud/preview", label: "מצגת: התמודדות עם דמנציה בבית", reason: "טכניקות מעשיות לטיפול יומיומי בדמנציה — הזיות, זעם, בלבול ועוד" },
       { path: "/cognitive-training", label: "אימון קוגניטיבי", reason: "תרגילים לשימור כושר מנטלי" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות וסרטונים על התמודדות עם דמנציה" },
+      { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי עם מידע חיוני למצבי חירום" },
       { path: "/tools", label: "שאלון הערכת מצב", reason: "הערכה מקיפה של צרכי המשפחה המטפלת" },
       { path: "/tools#poa-guide", label: "מדריך לייפוי כוח מתמשך", reason: "חשוב להסדיר ייפוי כוח בשלבים מוקדמים של דמנציה", isPaid: true },
       { path: "/tools#will-template", label: "כתיבת צוואה", reason: "חשוב להסדיר צוואה לפני שהמצב הקוגניטיבי מתדרדר", isPaid: true },
