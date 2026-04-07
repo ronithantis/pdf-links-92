@@ -133,8 +133,9 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["שחיקה", "עייפות", "לחץ", "מותש", "מותשת", "שחוק", "שחוקה", "תשישות"],
+    keywords: ["שחיקה", "עייפות", "לחץ", "מותש", "מותשת", "שחוק", "שחוקה", "תשישות", "שחיקת מטפלים"],
     tools: [
+      { path: "https://drive.google.com/file/d/1o5HdCkgtlHePo8iKcUtOhiPZlOgrt3Za/preview", label: "סרטון: שיחת משפחה – איך מתנהלים נכון", reason: "כלים לחלוקת העומס בין בני המשפחה והפחתת שחיקה" },
       { path: "/tools", label: "שאלון הערכת מצב", reason: "הערכה מקיפה של רמת השחיקה והצרכים" },
       { path: "/services", label: "מפת שירותים", reason: "גורמי תמיכה, עמותות וקבוצות סיוע" },
     ],
