@@ -193,7 +193,7 @@ body { font-family: 'Heebo', Arial, sans-serif; }
 `;
 
 // ─── APP ──────────────────────────────────────────────────────────────────────
-const PrintableCalendar = () {
+const PrintableCalendar = () => {
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth() + 1);
