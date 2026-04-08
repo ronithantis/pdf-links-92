@@ -69,6 +69,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
       { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים, שעות ומשימות", isPaid: true },
       { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי עם נתונים חיוניים למסירה לעובד החדש" },
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "תכנון לוח עבודה חודשי ותיעוד ימי חופשה ותשלומים לעובד" },
     ],
   },
   {
