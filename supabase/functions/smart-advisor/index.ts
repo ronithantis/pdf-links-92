@@ -107,6 +107,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#daily-care", label: "מעקב ודיווח יומי", reason: "מערכת מעקב ודיווח כללי על משימות הטיפול" },
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי רשימת תרופות, מלאי ותזכורות" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על ניהול תרופתי בטוח" },
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "תכנון ותיעוד מועדי ביקורי רופא, חידוש מרשמים ומעקב תרופתי" },
     ],
   },
   {
