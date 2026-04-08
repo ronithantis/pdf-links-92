@@ -22,6 +22,7 @@ import AdElai from "./pages/AdElai";
 import OrganizationsSearch from "./pages/OrganizationsSearch";
 import About from "./pages/About";
 import MedTracker from "./pages/MedTracker";
+import PrintableCalendar from "./pages/PrintableCalendar";
 import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
 import TermsOfUsePage from "./pages/TermsOfUsePage";
