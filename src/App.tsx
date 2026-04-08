@@ -22,6 +22,7 @@ import AdElai from "./pages/AdElai";
 import OrganizationsSearch from "./pages/OrganizationsSearch";
 import About from "./pages/About";
 import MedTracker from "./pages/MedTracker";
+import PrintableCalendar from "./pages/PrintableCalendar";
 import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
 import TermsOfUsePage from "./pages/TermsOfUsePage";
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/admin/suppliers" element={<AdminSuppliers />} />
             <Route path="/forms" element={<FormsPage />} />
             <Route path="/med-tracker" element={<MedTracker />} />
+            <Route path="/printable-calendar" element={<PrintableCalendar />} />
             <Route path="/rights" element={<Rights />} />
             <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />

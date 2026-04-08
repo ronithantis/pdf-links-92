@@ -489,4 +489,13 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://effortless-empanada-30cdf9.netlify.app/",
   },
+  {
+    id: "printable-calendar",
+    title: "לוח חודשי להדפסה",
+    description: "עריכה והדפסה של לוח חודשי עברי-לועזי עם אירועים, תזכורות ומידע חשוב",
+    icon: "CalendarDays",
+    isPaid: false,
+    toolUrl: "/printable-calendar",
+    isInternal: true,
+  },
 ];

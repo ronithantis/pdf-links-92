@@ -69,6 +69,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
       { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים, שעות ומשימות", isPaid: true },
       { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי עם נתונים חיוניים למסירה לעובד החדש" },
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "תכנון לוח עבודה חודשי ותיעוד ימי חופשה ותשלומים לעובד" },
     ],
   },
   {
@@ -107,6 +108,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#daily-care", label: "מעקב ודיווח יומי", reason: "מערכת מעקב ודיווח כללי על משימות הטיפול" },
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי רשימת תרופות, מלאי ותזכורות" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על ניהול תרופתי בטוח" },
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "תכנון ותיעוד מועדי ביקורי רופא, חידוש מרשמים ומעקב תרופתי" },
     ],
   },
   {
@@ -181,6 +183,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי – מצב רפואי, תפקודי ונתונים חיוניים למצב חירום" },
       { path: "/tools#blue-folder", label: "תיק כחול", reason: "ניהול כל המסמכים הרפואיים והמשפטיים במקום אחד" },
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי פעולות שבוצעו ומשימות דחופות" },
+    ],
+  },
+  {
+    keywords: ["לוח", "תכנון חודשי", "מעקב אירועים", "תזכורות", "מערך טיפול", "תשלומים לעובד", "ניהול הטיפול", "תיעוד אירועים", "טיפול ביתי", "לוח שנה"],
+    tools: [
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "לוח חודשי עברי-לועזי להדפסה עם אירועים, תזכורות ומידע חשוב" },
+      { path: "/tools#daily-care", label: "מעקב ודיווח יומי", reason: "מערכת מעקב ודיווח כללי על משימות הטיפול" },
+      { path: "/tasks-list", label: "רשימת משימות אישית", reason: "ניהול ומעקב משימות הטיפול" },
     ],
   },
 ];
