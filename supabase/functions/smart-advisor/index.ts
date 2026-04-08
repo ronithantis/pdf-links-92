@@ -185,6 +185,14 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/tasks-list", label: "רשימת משימות אישית", reason: "מעקב אחרי פעולות שבוצעו ומשימות דחופות" },
     ],
   },
+  {
+    keywords: ["לוח", "תכנון חודשי", "מעקב אירועים", "תזכורות", "מערך טיפול", "תשלומים לעובד", "ניהול הטיפול", "תיעוד אירועים", "טיפול ביתי", "לוח שנה"],
+    tools: [
+      { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "לוח חודשי עברי-לועזי להדפסה עם אירועים, תזכורות ומידע חשוב" },
+      { path: "/tools#daily-care", label: "מעקב ודיווח יומי", reason: "מערכת מעקב ודיווח כללי על משימות הטיפול" },
+      { path: "/tasks-list", label: "רשימת משימות אישית", reason: "ניהול ומעקב משימות הטיפול" },
+    ],
+  },
 ];
 
 function applyRulesEngine(message: string, aiTools: any[]): any[] {
