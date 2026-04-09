@@ -331,9 +331,10 @@ export const Module5Content = ({ subId }: SubModuleContentProps) => {
                   מעקב ודיווח יומי
                 </Link>
                 <span className="text-muted-foreground text-xs">|</span>
-                <span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-medium">
-                  ניהול תרופות (בקרוב)
-                </span>
+                <Link to="/med-tracker" className="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+                  <ExternalLink className="h-3 w-3" />
+                  ניהול ומעקב מתן תרופות
+                </Link>
               </div>
             </div>
           </div>
