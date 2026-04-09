@@ -276,9 +276,6 @@ const Header = () => {
                 </div>
               ))}
               <div className="border-t pt-3 space-y-1">
-                <Link to="/news" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  עדכונים וחדשות
-                </Link>
                 <Link to="/rights" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   זכויות וחובות
                 </Link>
