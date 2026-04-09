@@ -14,6 +14,7 @@ import { Module8Content } from "@/components/module-content/Module8Content";
 import { Module9Content } from "@/components/module-content/Module9Content";
 import { Module10Content } from "@/components/module-content/Module10Content";
 import { Module11Content } from "@/components/module-content/Module11Content";
+import ModuleDigitalTools from "@/components/module-content/ModuleDigitalTools";
 
 const ModulePage = () => {
   const { moduleId } = useParams<{ moduleId: string }>();
