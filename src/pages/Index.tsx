@@ -125,8 +125,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* News Feed */}
-      <NewsFeed />
 
       {/* Pathway Cards */}
       <section id="pathway" className="py-12 bg-muted/30">

@@ -45,7 +45,7 @@ const sitePages: SearchItem[] = [
   { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
   { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
-  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news", source: "page", sourceLabel: "דף באתר" },
+  
   { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
   { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },
   { label: "מילון מושגים", description: "הסבר מהיר למושגים בסיעוד וגיל שלישי", url: "/glossary", source: "page", sourceLabel: "דף באתר" },
