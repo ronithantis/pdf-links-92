@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
 import logo from "@/assets/logo.png";
-import NewsNavButton from "@/components/news/NewsNavButton";
+
 
 const parts = [
   { number: 1, title: "המציאות החדשה", modules: modules.filter((m) => m.partNumber === 1) },
@@ -45,7 +45,7 @@ const sitePages: SearchItem[] = [
   { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
   { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
-  { label: "עדכונים וחדשות", description: "חדשות ועדכונים רלוונטיים", url: "/news", source: "page", sourceLabel: "דף באתר" },
+  
   { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
   { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },
   { label: "מילון מושגים", description: "הסבר מהיר למושגים בסיעוד וגיל שלישי", url: "/glossary", source: "page", sourceLabel: "דף באתר" },
@@ -208,7 +208,7 @@ const Header = () => {
               </Button>
             )}
           </div>
-          <NewsNavButton />
+          
           <Link to="/rights" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
             זכויות וחובות
           </Link>
@@ -276,9 +276,6 @@ const Header = () => {
                 </div>
               ))}
               <div className="border-t pt-3 space-y-1">
-                <Link to="/news" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  עדכונים וחדשות
-                </Link>
                 <Link to="/rights" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
                   זכויות וחובות
                 </Link>
