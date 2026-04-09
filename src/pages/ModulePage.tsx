@@ -88,6 +88,8 @@ const ModulePage = () => {
         ))}
       </Accordion>
 
+      <ModuleDigitalTools chapterId={mod.id} />
+
       {/* Navigation between modules */}
       <div className="flex justify-between mt-10 pt-6 border-t">
         {(() => {
