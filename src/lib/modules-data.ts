@@ -313,6 +313,7 @@ export const checklistItems: ChecklistCategory[] = [
     title: "ניהול מטפל/ת שכיר/ה",
     icon: "Users",
     items: [
+      { text: "הכנה לראיון עובד/ת זר/ה — שאלות מומלצות ונקודות לבדיקה", toolId: "interview-manager", toolLabel: "ניהול ראיון לעובד זר" },
       { text: "בחירת מודל העסקה — תאגיד / חברת סיעוד / מטפל פרטי" },
       { text: "חתימה על חוזה העסקה תקני", toolId: "contract-explanation", toolLabel: "מדריך חוזה העסקה" },
       { text: "ביצוע חפיפה בבית — שגרה, תרופות, כללי בית" },
