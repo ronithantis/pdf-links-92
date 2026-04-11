@@ -499,4 +499,12 @@ export const digitalTools = [
     toolUrl: "/printable-calendar",
     isInternal: true,
   },
+  {
+    id: "interview-manager",
+    title: "ניהול ראיון לגיוס עובד זר",
+    description: "כלי להכנה וניהול ראיון עבודה עם מועמד/ת לתפקיד מטפל/ת – שאלות מומלצות, הערכה ותיעוד",
+    icon: "ClipboardList",
+    isPaid: false,
+    toolUrl: "https://nimble-cocada-fef0f0.netlify.app/",
+  },
 ];
