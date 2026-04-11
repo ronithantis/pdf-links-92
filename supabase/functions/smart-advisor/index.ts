@@ -61,15 +61,25 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["עובד זר", "מטפל צמוד", "מטפלת צמודה", "עובדת זרה", "גייסנו עובד", "עובד חדש", "קשיי שפה", "תקשורת עם עובד", "לא מבין", "לא מבינה", "שפה משותפת", "תרגום"],
+    keywords: ["עובד זר", "מטפל צמוד", "מטפלת צמודה", "עובדת זרה", "גייסנו עובד", "עובד חדש", "קשיי שפה", "תקשורת עם עובד", "לא מבין", "לא מבינה", "שפה משותפת", "תרגום", "ראיון עבודה", "גיוס עובד", "גיוס מטפל"],
     tools: [
       { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
+      { path: "/tools#interview-manager", label: "ניהול ראיון לגיוס עובד זר", reason: "כלי להכנה וניהול ראיון עבודה עם מועמד/ת לתפקיד מטפל/ת" },
       { path: "/tools#caregiver-communicator", label: "תקשורת מטפל-מטופל", reason: "כלי תקשורת חזותי כשיש קשיי שפה בין המטפל למטופל" },
       { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "חישוב שכר מדויק כולל זכויות סוציאליות", isPaid: true },
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
       { path: "/tools#expectations-alignment", label: "תאום ציפיות עם עובד זר", reason: "הגדרת תפקידים, שעות ומשימות", isPaid: true },
       { path: "/tools#emergency-protocol", label: "פרוטוקול חירום", reason: "כרטיס מטופל דיגיטלי עם נתונים חיוניים למסירה לעובד החדש" },
       { path: "/printable-calendar", label: "לוח חודשי להדפסה", reason: "תכנון לוח עבודה חודשי ותיעוד ימי חופשה ותשלומים לעובד" },
+    ],
+  },
+  {
+    keywords: ["ויזה", "הומניטרית", "ויזה הומניטרית", "ללא ויזה", "בלי ויזה", "אשרה", "אשרת עבודה", "שהייה לא חוקית", "ללא אשרה"],
+    tools: [
+      { path: "https://drive.google.com/file/d/1gE8KrUe7Cj40GhRQCXv-nI1CH56j2bPe/preview", label: "מצגת: הגשת בקשה לויזה הומניטרית", reason: "מדריך מפורט להגשת בקשה לויזה הומניטרית – תנאים, מסמכים ותהליך" },
+      { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
+      { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט סעיפי החוזה לעובד זר", isPaid: true },
+      { path: "/knowledge-center", label: "מרכז הידע", reason: "מצגות ומדריכים בנושא כוח אדם וטיפול ביתי" },
     ],
   },
   {
