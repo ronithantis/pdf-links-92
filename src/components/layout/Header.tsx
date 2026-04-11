@@ -43,6 +43,7 @@ const sitePages: SearchItem[] = [
   { label: "תן וקח", description: "לוח תרומות וציוד יד שנייה", url: "/give-take", source: "page", sourceLabel: "דף באתר" },
   { label: "תרגול קוגניטיבי", description: "משחקים ותרגילים לחיזוק הזיכרון", url: "/cognitive-training", source: "page", sourceLabel: "דף באתר" },
   { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
+  { label: "מתווה שאלות לראיון עובד זר", description: "טופס מובנה עם שאלות מומלצות לראיון מועמד/ת לתפקיד מטפל/ת", url: "/forms", source: "page", sourceLabel: "טופס" },
   { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
   
