@@ -65,6 +65,7 @@ const KEYWORD_RULES: KeywordRule[] = [
     tools: [
       { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
       { path: "/tools#interview-manager", label: "ניהול ראיון לגיוס עובד זר", reason: "כלי להכנה וניהול ראיון עבודה עם מועמד/ת לתפקיד מטפל/ת" },
+      { path: "/forms", label: "מתווה שאלות לראיון עובד זר", reason: "טופס מובנה עם שאלות מומלצות לראיון מועמד/ת – להורדה והדפסה" },
       { path: "/tools#caregiver-communicator", label: "תקשורת מטפל-מטופל", reason: "כלי תקשורת חזותי כשיש קשיי שפה בין המטפל למטופל" },
       { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "חישוב שכר מדויק כולל זכויות סוציאליות", isPaid: true },
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
