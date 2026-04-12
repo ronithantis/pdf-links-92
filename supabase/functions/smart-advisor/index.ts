@@ -66,6 +66,7 @@ const KEYWORD_RULES: KeywordRule[] = [
       { path: "/foreign-worker-search", label: "חיפוש עובד זר", reason: "מנוע חיפוש לעובדי סיעוד זרים" },
       { path: "/tools#interview-manager", label: "ניהול ראיון לגיוס עובד זר", reason: "כלי להכנה וניהול ראיון עבודה עם מועמד/ת לתפקיד מטפל/ת" },
       { path: "/forms", label: "מתווה שאלות לראיון עובד זר", reason: "טופס מובנה עם שאלות מומלצות לראיון מועמד/ת – להורדה והדפסה" },
+      { path: "/tools#foreign-worker-rights", label: "זכויות עובד זר – מחשבון ומדריך", reason: "כלי אינטראקטיבי לבדיקת זכויות עובד זר — שכר, חופשות, פנסיה ועוד" },
       { path: "/tools#caregiver-communicator", label: "תקשורת מטפל-מטופל", reason: "כלי תקשורת חזותי כשיש קשיי שפה בין המטפל למטופל" },
       { path: "/tools#salary-calculator", label: "מחשבון שכר עובד זר", reason: "חישוב שכר מדויק כולל זכויות סוציאליות", isPaid: true },
       { path: "/tools#contract-explanation", label: "הסבר על חוזה העסקה", reason: "פירוט והסבר סעיפי החוזה", isPaid: true },
@@ -161,8 +162,9 @@ const KEYWORD_RULES: KeywordRule[] = [
     ],
   },
   {
-    keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה", "תביעת סיעוד"],
+    keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה", "תביעת סיעוד", "זכויות עובד", "שכר מינימום", "חופשה שנתית", "פנסיה לעובד זר", "פיצויים"],
     tools: [
+      { path: "/tools#foreign-worker-rights", label: "זכויות עובד זר – מחשבון ומדריך", reason: "כלי אינטראקטיבי לבדיקת זכויות עובד זר — שכר, חופשות, פנסיה ועוד" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על זכויות וגמלאות" },
       { path: "/services", label: "מפת שירותים", reason: "גופים ציבוריים ועמותות שיכולים לסייע" },
       { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
