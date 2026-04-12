@@ -5,7 +5,8 @@ export const RIGHTS_DATA = {
   // שכר מינימום
   min_wage_monthly: "6,443.85",
   min_wage_daily: "257.75",
-  min_wage_hourly: "34.64",
+  min_wage_hourly: "35.40",
+  min_wage_hours_note: "לפי משרה מלאה של 182 שעות בחודש",
   min_wage_date: "1.4.2026",
 
   // גמלת סיעוד — מבחן הכנסות
