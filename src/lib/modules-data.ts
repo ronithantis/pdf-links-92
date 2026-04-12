@@ -320,6 +320,7 @@ export const checklistItems: ChecklistCategory[] = [
       { text: "הסדרת גיבוי להיעדרות / חופשה / עזיבה פתאומית" },
       { text: "הגדרת תאום ציפיות בכתב", toolId: "expectations-alignment", toolLabel: "תאום ציפיות" },
       { text: "חישוב שכר ריאלי כולל זכויות סוציאליות", toolId: "salary-calculator", toolLabel: "מחשבון שכר" },
+      { text: "בדיקת זכויות עובד זר — שכר, חופשות, פנסיה ופיצויים", toolId: "foreign-worker-rights", toolLabel: "זכויות עובד זר" },
       { text: "בחירת ימי חג שנתיים לעובד/ת", toolId: "holiday-selector", toolLabel: "בחירת ימי חג" },
       { text: "הכנת חדר מגורים מתאים לעובד/ת (אם רלוונטי)" },
     ],
