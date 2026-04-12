@@ -28,7 +28,7 @@ const chapterToolMap: Record<string, string[]> = {
     "will-template", "poa-guide", "life-compass",
   ],
   "chapter-5": [
-    "expense-tracker", "nursing-claim-guide",
+    "expense-tracker", "nursing-claim-guide", "foreign-worker-rights",
   ],
   "chapter-6": [
     "contract-explanation", "daily-care", "holiday-selector",
