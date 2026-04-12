@@ -246,6 +246,7 @@ const RightsView = () => (
       </Callout>
 
       <ToolLink title="מחשבון שכר לעובד זר" description="חישוב מדויק לפי ימי עבודה, ותק, ניכויים ותוספות" linkText="← למחשבון השכר" to="/tools#salary-calculator" />
+      <ToolLink title="זכויות עובד זר — מחשבון ומדריך" description="כלי אינטראקטיבי לבדיקת זכויות: שכר, חופשות, פנסיה, פיצויים ועוד" linkText="← לכלי זכויות עובד זר" to="/tools#foreign-worker-rights" />
 
       <SubSection title="א. זכויות עבודה בסיסיות" />
       <CheckList items={[
