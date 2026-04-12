@@ -508,4 +508,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://nimble-cocada-fef0f0.netlify.app/",
   },
+  {
+    id: "foreign-worker-rights",
+    title: "זכויות עובד זר – מחשבון ומדריך",
+    description: "כלי אינטראקטיבי לבדיקת זכויות עובד זר בסיעוד — שכר, חופשות, פנסיה, פיצויים ועוד",
+    icon: "ShieldCheck",
+    isPaid: false,
+    toolUrl: "https://charming-duckanoo-b30851.netlify.app/",
+  },
 ];

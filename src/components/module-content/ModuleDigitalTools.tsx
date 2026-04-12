@@ -16,7 +16,7 @@ const toolIcons: Record<string, React.ElementType> = {
 const chapterToolMap: Record<string, string[]> = {
   "chapter-1": [
     "nursing-claim-guide", "will-template", "life-compass",
-    "blue-folder", "emergency-protocol", "printable-calendar", "interview-manager",
+    "blue-folder", "emergency-protocol", "printable-calendar", "interview-manager", "foreign-worker-rights",
   ],
   "chapter-2": [
     "daily-care", "med-tracker", "blue-folder", "emergency-protocol",
@@ -32,7 +32,7 @@ const chapterToolMap: Record<string, string[]> = {
   ],
   "chapter-6": [
     "contract-explanation", "daily-care", "holiday-selector",
-    "med-tracker", "blue-folder", "caregiver-communicator", "printable-calendar", "interview-manager",
+    "med-tracker", "blue-folder", "caregiver-communicator", "printable-calendar", "interview-manager", "foreign-worker-rights",
   ],
   "chapter-7": [
     "emergency-protocol",
@@ -41,7 +41,7 @@ const chapterToolMap: Record<string, string[]> = {
     "salary-calculator", "expense-tracker", "final-settlement-calc",
     "expectations-alignment", "family-sync", "contract-explanation",
     "daily-care", "holiday-selector", "med-tracker", "blue-folder",
-    "emergency-protocol", "caregiver-communicator", "printable-calendar", "interview-manager",
+    "emergency-protocol", "caregiver-communicator", "printable-calendar", "interview-manager", "foreign-worker-rights",
   ],
   "chapter-9": [
     "emergency-protocol",
