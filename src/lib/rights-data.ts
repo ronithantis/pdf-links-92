@@ -28,6 +28,13 @@ export const RIGHTS_DATA = {
   deduct_housing: "94.34",
   btl_rate: "3.6",
 
+  // גמלת סיעוד — סכום הקצבה המקסימלי למעסיק מטפל (החל מ-01.04.2026)
+  nursing_level_1: "1,705",
+  nursing_level_2: "2,480",
+  nursing_level_3: "3,472",
+  nursing_level_4: "4,464",
+  nursing_level_5: "5,456",
+
   // פנסיה
   pension_employer: "6.5",
   pension_worker: "5.5",
