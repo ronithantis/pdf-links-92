@@ -140,8 +140,7 @@ export const Module4Content = ({ subId }: SubModuleContentProps) => {
             </table>
           </div>
 
-
-            <p className="font-medium mb-1">⚠️ חשוב לדעת</p>
+          <InfoBox variant="warning">
             <p className="text-muted-foreground text-xs">
               ברשת מסתובבות טבלאות ישנות (למשל 34.5 שעות ברמה 6). הנתונים הקובעים הם מה שמופיע באתר ביטוח לאומי, כולל התאמות והחרגות.
             </p>
