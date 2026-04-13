@@ -122,7 +122,25 @@ export const Module4Content = ({ subId }: SubModuleContentProps) => {
             </table>
           </div>
 
-          <InfoBox variant="warning">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-muted/50">
+                  <th className="border p-2.5 text-start font-medium">רמת זכאות</th>
+                  <th className="border p-2.5 text-start font-medium">סכום הקצבה המקסימלי למעסיק מטפל (החל מ-01.04.2026)</th>
+                </tr>
+              </thead>
+              <tbody className="text-muted-foreground">
+                <tr><td className="border p-2.5 font-medium text-foreground">1</td><td className="border p-2.5">1,705 ש״ח</td></tr>
+                <tr><td className="border p-2.5 font-medium text-foreground">2</td><td className="border p-2.5">2,480 ש״ח</td></tr>
+                <tr><td className="border p-2.5 font-medium text-foreground">3</td><td className="border p-2.5">3,472 ש״ח</td></tr>
+                <tr><td className="border p-2.5 font-medium text-foreground">4</td><td className="border p-2.5">4,464 ש״ח</td></tr>
+                <tr><td className="border p-2.5 font-medium text-foreground">5</td><td className="border p-2.5">5,456 ש״ח</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
             <p className="font-medium mb-1">⚠️ חשוב לדעת</p>
             <p className="text-muted-foreground text-xs">
               ברשת מסתובבות טבלאות ישנות (למשל 34.5 שעות ברמה 6). הנתונים הקובעים הם מה שמופיע באתר ביטוח לאומי, כולל התאמות והחרגות.
