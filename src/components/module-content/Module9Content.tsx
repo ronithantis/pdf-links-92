@@ -1,4 +1,5 @@
-import { CheckCircle, AlertTriangle, Shield, Users, Home, Smartphone, FileText, Heart } from "lucide-react";
+import { CheckCircle, AlertTriangle, Shield, Users, Home, Smartphone, FileText, Heart, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Module9ContentProps {
   subId: string;
@@ -170,23 +171,146 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3">תהליך ההעסקה — שלב אחר שלב:</h4>
-            <div className="space-y-3">
-              {[
-                { step: 1, title: "בדיקת זכאות", desc: "ווידוא שיקירכם עומד בקריטריונים הנדרשים" },
-                { step: 2, title: "הגשת בקשה", desc: "מילוי והגשת הטפסים הנדרשים לרשות האוכלוסין וההגירה" },
-                { step: 3, title: "קבלת היתר", desc: "אישור רשמי להעסקת עובד זר, תקף לרוב ל-4 שנים ולעתים לצמיתות" },
-                { step: 4, title: "גיוס עובד", desc: "איתור עובד מתאים דרך תאגיד מורשה, ראיונות ובדיקת רקע" },
-                { step: 5, title: "קליטה", desc: "חתימה על חוזה, קבלת פנים והסתגלות העובד לבית" },
-              ].map((s) => (
-                <div key={s.step} className="flex items-start gap-3 border rounded-lg p-3 bg-card">
-                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">{s.step}</div>
+            <h4 className="font-semibold mb-4">תהליך ההעסקה — שלב אחר שלב:</h4>
+            <div className="space-y-6">
+              {/* שלב 1 */}
+              <div className="border rounded-lg p-4 bg-card">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">1</div>
                   <div>
-                    <h5 className="font-semibold text-sm">{s.title}</h5>
-                    <p className="text-xs text-muted-foreground">{s.desc}</p>
+                    <h5 className="font-bold">בדיקת זכאות</h5>
+                    <p className="text-xs text-muted-foreground">ווידוא שיקירכם עומד בקריטריונים הנדרשים</p>
                   </div>
                 </div>
-              ))}
+                <p className="text-sm mb-2">השלב הראשון והבסיסי הוא הבנת מעמדו של המטופל ומידת הזדקקותו לעזרה. יש לוודא שהמטופל עומד בקריטריונים הנדרשים מטעם המוסד לביטוח לאומי (כגון מבחן תלות — ADL) או מטעם ועדות רפואיות אחרות.</p>
+                <p className="text-sm mb-2">בדיקה זו מתייחסת לרמת התפקוד היומיומית, גיל המטופל והצורך בהשגחה צמודה.</p>
+                <InfoBox title="💡 המלצה" variant="tip">
+                  <p>מומלץ לאסוף בשלב זה את כל התיעוד הרפואי העדכני המעיד על ההכרח בטיפול סיעודי צמוד.</p>
+                </InfoBox>
+              </div>
+
+              {/* שלב 2 */}
+              <div className="border rounded-lg p-4 bg-card">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">2</div>
+                  <div>
+                    <h5 className="font-bold">הגשת בקשה</h5>
+                    <p className="text-xs text-muted-foreground">מילוי והגשת הטפסים הנדרשים לרשות האוכלוסין וההגירה</p>
+                  </div>
+                </div>
+                <p className="text-sm mb-2">לאחר שווידאתם עמידה בקריטריונים, יש להגיש בקשה מסודרת לרשות האוכלוסין וההגירה. תהליך זה כולל מילוי טפסים ייעודיים, צירוף מסמכים רפואיים, חוות דעת מקצועיות (למשל מעובדת סוציאלית או רופא גריאטרי), ותשלום אגרת בקשה.</p>
+                <InfoBox title="📌 חשוב" variant="warning">
+                  <p>ביצוע קפדני ומדויק של שלב זה ימנע עיכובים מיותרים בבירוקרטיה.</p>
+                </InfoBox>
+              </div>
+
+              {/* שלב 3 */}
+              <div className="border rounded-lg p-4 bg-card">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">3</div>
+                  <div>
+                    <h5 className="font-bold">קבלת היתר</h5>
+                    <p className="text-xs text-muted-foreground">אישור רשמי להעסקת עובד זר, תקף לרוב ל-4 שנים ולעתים לצמיתות</p>
+                  </div>
+                </div>
+                <p className="text-sm mb-3">לאחר בחינת הבקשה, רשות האוכלוסין מנפיקה היתר רשמי להעסקת עובד זר. היתר זה ניתן למטופל (המעסיק) ותקף לרוב ל-4 שנים, עם אפשרויות הארכה בהמשך בתנאים מסוימים.</p>
+
+                <InfoBox title="💰 חלוקת תשלומים ואגרות" variant="info">
+                  <div className="space-y-2">
+                    <p>חשוב לעשות סדר בכל הנוגע לעלויות בשלב זה:</p>
+                    <ul className="space-y-1.5 pr-4 text-sm">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <span><strong>אגרת היתר ההעסקה</strong> — חלה אך ורק על המעסיק. חל <strong>איסור מוחלט</strong> על פי חוק לנכות סכום זה משכרו של העובד הזר.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <span><strong>אגרת אשרת עבודה (ויזה) ואינטר-ויזה</strong> — חלות על העובד הזר עצמו. מכיוון שנדרש כרטיס אשראי ישראלי, מקובל שהמעסיק משלם מראש ומקזז מהמשכורת (מומלץ לעגן בהסכמה כתובה מראש).</span>
+                      </li>
+                    </ul>
+                  </div>
+                </InfoBox>
+              </div>
+
+              {/* שלב 4 */}
+              <div className="border rounded-lg p-4 bg-card">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">4</div>
+                  <div>
+                    <h5 className="font-bold">גיוס עובד</h5>
+                    <p className="text-xs text-muted-foreground">איתור עובד מתאים דרך תאגיד מורשה, ראיונות ובדיקת רקע</p>
+                  </div>
+                </div>
+                <p className="text-sm mb-2">זהו שלב האיתור וההתאמה (Matching). התהליך מחויב להתבצע דרך תאגיד כוח אדם מורשה (לשכה פרטית), המפקח על כך שמדובר בעובדים חוקיים שעברו סינון.</p>
+                <p className="text-sm mb-3">מעבר לבדיקות הרקע המקצועיות, זה הזמן לראיין את המועמדים ולוודא התאמה מיטבית. חשוב להתאים את מידותיו הפיזיות של העובד, ניסיונו הרפואי, והמזג שלו לאופיו ולצרכיו הספציפיים של המטופל (למשל: צורך להרים מטופל כבד, ניסיון קודם עם ירידה קוגניטיבית, וכדומה).</p>
+                <div className="flex flex-wrap gap-2">
+                  <Link to="/tools#interview-manager" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium bg-primary/5 rounded-md px-3 py-1.5">
+                    <ExternalLink className="h-3.5 w-3.5" />
+                    ניהול ראיון לעובד זר
+                  </Link>
+                </div>
+              </div>
+
+              {/* שלב 5 */}
+              <div className="border rounded-lg p-4 bg-card">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">5</div>
+                  <div>
+                    <h5 className="font-bold">קליטה, הסתגלות ובניית אמון</h5>
+                    <p className="text-xs text-muted-foreground">השלב המכריע — חתימה על חוזה, קבלת פנים והסתגלות העובד לבית</p>
+                  </div>
+                </div>
+                <p className="text-sm mb-4">שלב הקליטה אינו מסתכם בחתימה על חוזה עבודה מוסדר. זהו תהליך רגשי ומעשי מורכב של בניית אמון בין המטופל לעובד, הדורש מעורבות פעילה, סבלנות והכנה מוקדמת מצד המשפחה.</p>
+
+                <div className="space-y-4">
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">🤝 שהייה משותפת וגישור בימים הראשונים</h6>
+                    <p className="text-sm text-muted-foreground">המפגש הראשוני מלווה לרוב בחששות כבדים — הן של המטופל שנדרש להכניס אדם זר למרחבו האישי והאינטימי, והן של העובד המגיע לסביבה לא מוכרת. <strong>נוכחות רציפה של בן משפחה ביומיים-שלושה הראשונים היא קריטית.</strong> בן המשפחה משמש כ"גשר" המרכך את החיכוך, מדגים בפועל את שגרת הטיפול, ומעניק למטופל תחושת ביטחון.</p>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">📞 מינוי "גורם מסייע" מרכזי</h6>
+                    <p className="text-sm text-muted-foreground">מומלץ להגדיר בן משפחה אחד שיהיה איש הקשר הישיר והברור לכל שאלה, התלבטות או מצוקה של העובד הזר. כתובת אחת מרכזית מונעת בלבול או קבלת הנחיות סותרות מבני משפחה שונים.</p>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">🗺️ סיור היכרות והתמצאות בסביבה</h6>
+                    <p className="text-sm text-muted-foreground">בימיו הראשונים של העובד, צאו איתו לסיור רגלי מודרך בשכונה. הראו לו היכן ממוקמים הסופרמרקט או המכולת, בית המרקחת, קופת החולים, הגינה הציבורית, ותחנות האוטובוס הרלוונטיות. היכרות פיזית עם המרחב מעניקה תחושת עצמאות ומפחיתה חרדה באופן ניכר.</p>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">💬 גישור על פערי שפה באמצעות עזרים חזותיים</h6>
+                    <p className="text-sm text-muted-foreground">קשיי תקשורת הם מהמכשולים הגדולים ביותר בתחילת הדרך. כדי למנוע טעויות בטיפול, כדאי מאוד להיעזר במילון חזותי או בכלי תקשורת דיגיטלי הכולל תמונות ברורות של תרחישי יומיום, חפצים ומצבים רפואיים, ולצידם תרגום קצר לאנגלית או לשפות האם של המטפלים.</p>
+                    <Link to="/tools#caregiver-communicator" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      כלי תקשורת מטפל-מטופל
+                    </Link>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">📋 תיאום ציפיות מדויק וסדר יום מובנה</h6>
+                    <p className="text-sm text-muted-foreground">אי-הבנות צומחות באזורים אפורים. מעבר להגדרת שעות המנוחה כחוק, נסחו בצורה ברורה אילו משימות הן באחריות העובד (טיפול אישי, בישול בסיסי, ניקיון סביבת המטופל בלבד) ואילו אינן באחריותו. יצירת לוח זמנים יומי קבוע וברור מספקת לעובד מסגרת בטוחה של ודאות.</p>
+                    <Link to="/tools#expectations-alignment" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      כלי תיאום ציפיות עם עובד זר
+                    </Link>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">🏠 יצירת מרחב אישי וחיבור אינטרנט</h6>
+                    <p className="text-sm text-muted-foreground">העובד עוזב את עולמו כדי לשהות בביתכם 24/7. הקצאת חדר פרטי ומכבד, יחד עם הדרכה סבלנית על הפעלת מכשירי החשמל בבית, הם תנאי בסיס. חשוב מכל — <strong>דאגו לחיבור אינטרנט זמין (Wi-Fi)</strong>. זהו צינור החמצן של העובד לשמירת קשר עם משפחתו בחו"ל, ומרכיב הכרחי לשמירה על חוסנו הנפשי.</p>
+                  </div>
+
+                  <div className="border-r-4 border-primary/30 pr-3">
+                    <h6 className="font-semibold text-sm mb-1">📖 מדריך לעובד זר</h6>
+                    <p className="text-sm text-muted-foreground">מומלץ להשתמש במדריך ייעודי לעובד הזר — כלי שיסביר לו כל מה שצריך בהגיעו לארץ ויסייע להסתגלותו: זכויות, חובות, שגרה, תרבות ושפה.</p>
+                    <Link to="/tools#worker-guide" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline font-medium mt-2">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                      מדריך לעובד זר חדש
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
