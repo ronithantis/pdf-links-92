@@ -517,4 +517,13 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://charming-duckanoo-b30851.netlify.app/",
   },
+  {
+    id: "worker-guide",
+    title: "מדריך לעובד זר חדש",
+    description: "כלי שמסביר לעובד הזר כל מה שצריך לדעת בהגיעו לארץ — זכויות, חובות, שגרה, תרבות ושפה",
+    icon: "BookOpen",
+    isPaid: false,
+    toolUrl: "",
+    comingSoon: true,
+  },
 ];
