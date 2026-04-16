@@ -523,7 +523,6 @@ export const digitalTools = [
     description: "כלי שמסביר לעובד הזר כל מה שצריך לדעת בהגיעו לארץ — זכויות, חובות, שגרה, תרבות ושפה",
     icon: "BookOpen",
     isPaid: false,
-    toolUrl: "",
-    comingSoon: true,
+    toolUrl: "/tools/worker-guide.html",
   },
 ];
