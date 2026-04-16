@@ -507,7 +507,7 @@ export const digitalTools = [
     description: "כלי להכנה וניהול ראיון עבודה עם מועמד/ת לתפקיד מטפל/ת – שאלות מומלצות, הערכה ותיעוד",
     icon: "ClipboardList",
     isPaid: false,
-    toolUrl: "https://nimble-cocada-fef0f0.netlify.app/",
+    toolUrl: "/tools/interview-manager.html",
   },
   {
     id: "foreign-worker-rights",
