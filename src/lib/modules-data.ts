@@ -508,7 +508,6 @@ export const digitalTools = [
     icon: "ClipboardList",
     isPaid: false,
     toolUrl: "/tools/interview-manager.html",
-    isInternal: true,
   },
   {
     id: "foreign-worker-rights",
