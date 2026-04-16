@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://www.genspark.ai/api/page_private?id=vojnjdna -->
+<html lang="he" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ראיון עבודה – גיוס מטפל/ת זר/ה בסיעוד</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./ראיון גיוס עובד זר_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --green: #16a34a;
+      --yellow: #d97706;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ===== LAYOUT ===== */
+    .page { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 32px 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent);
+      text-align: center;
+    }
+    .header h1 { font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+    .header p { color: var(--muted); margin-top: 4px; font-size: 14px; }
+
+    /* ===== INTRO BOX ===== */
+    .intro-box {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .intro-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; cursor: pointer;
+      background: #f8fafc; border-bottom: 1px solid transparent;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .intro-toggle:hover { background: #f1f5fd; }
+    .intro-toggle.open { border-bottom-color: var(--border); }
+    .intro-toggle-left { display: flex; align-items: center; gap: 10px; }
+    .intro-toggle-left span { font-size: 15px; font-weight: 700; color: var(--accent); }
+    .intro-toggle-right { display: flex; align-items: center; gap: 8px; }
+    .intro-badge {
+      font-size: 11px; font-weight: 700; background: var(--accent-light);
+      color: var(--accent); border: 1px solid #bfdbfe;
+      border-radius: 20px; padding: 2px 10px;
+    }
+    .intro-arrow { color: var(--muted); font-size: 11px; transition: transform 0.2s; }
+    .intro-arrow.open { transform: rotate(180deg); }
+    .intro-body { display: none; padding: 22px 24px; }
+    .intro-body.open { display: block; }
+
+    .intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-bottom: 18px;
+    }
+    @media(max-width:580px){ .intro-grid { grid-template-columns: 1fr; } }
+
+    .intro-tile {
+      background: #f8fafc; border: 1px solid var(--border);
+      border-radius: 11px; padding: 14px 16px;
+    }
+    .intro-tile h4 {
+      font-size: 13px; font-weight: 700; color: var(--accent);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .intro-tile ul { list-style: none; }
+    .intro-tile ul li {
+      font-size: 13px; color: #374151;
+      padding: 3px 0 3px 0;
+      padding-right: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .intro-tile ul li::before {
+      content: '·'; position: absolute; right: 4px;
+      color: var(--accent); font-size: 16px; top: 1px; font-weight: 700;
+    }
+
+    .privacy-bar {
+      background: #f0f9ff; border: 1px solid #bae6fd;
+      border-radius: 10px; padding: 12px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .privacy-bar .privacy-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .privacy-bar .privacy-text { font-size: 12.5px; color: #0c4a6e; line-height: 1.6; }
+    .privacy-bar .privacy-text strong { font-weight: 700; }
+
+    .disclaimer-bar {
+      background: #fffbeb; border: 1px solid #fde68a;
+      border-radius: 10px; padding: 12px 16px; margin-top: 10px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .disclaimer-bar .disclaimer-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .disclaimer-bar .disclaimer-text { font-size: 12.5px; color: #78350f; line-height: 1.6; }
+    .disclaimer-bar .disclaimer-text strong { font-weight: 700; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+      overflow: hidden;
+    }
+    .card.flagged { border-color: var(--red); }
+
+    /* ===== CANDIDATE FORM ===== */
+    .card-body { padding: 24px; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2 .full { grid-column: span 2; }
+    @media(max-width:560px){ .grid-2 { grid-template-columns: 1fr; } .grid-2 .full { grid-column: span 1; } }
+
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: #fafbfc;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 72px; }
+
+    /* ===== ACCORDION ===== */
+    .acc-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #fafbfd;
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .acc-header:hover { background: #f1f5fd; }
+    .flagged .acc-header { background: var(--red-light); }
+
+    .acc-left { display: flex; align-items: center; gap: 12px; }
+    .acc-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(37,99,235,0.3);
+    }
+    .acc-title { font-weight: 700; font-size: 15px; color: var(--text); }
+    .acc-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+    .acc-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .badge-score {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid #bfdbfe;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .badge-flag {
+      background: #fee2e2;
+      color: var(--red);
+      border: 1px solid #fca5a5;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .arrow { color: var(--muted); font-size: 11px; transition: transform 0.2s; }
+    .arrow.open { transform: rotate(180deg); }
+
+    /* ===== ACCORDION BODY ===== */
+    .acc-body { display: none; padding: 0 20px 22px; border-top: 1px solid var(--border); }
+    .acc-body.open { display: block; }
+
+    .questions-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+    .questions-box h4 { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .questions-box ul { list-style: none; }
+    .questions-box ul li {
+      padding: 5px 4px 5px 0;
+      padding-right: 22px;
+      font-size: 14px;
+      color: #374151;
+      border-bottom: 1px dashed #e9ecef;
+      position: relative;
+    }
+    .questions-box ul li:last-child { border-bottom: none; }
+    .questions-box ul li::before {
+      content: '◈';
+      position: absolute;
+      right: 3px;
+      color: var(--accent);
+      font-size: 10px;
+      top: 9px;
+    }
+
+    /* ===== SCORE BUTTONS ===== */
+    .score-row { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+    .score-label { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .score-btns { display: flex; gap: 6px; }
+    .score-btn {
+      width: 44px; height: 44px; border-radius: 10px;
+      border: 2px solid var(--border);
+      background: #fff;
+      font-family: 'Heebo', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .score-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .score-btn.active-1 { background: #fee2e2; border-color: #f87171; color: #dc2626; }
+    .score-btn.active-2 { background: #fef3c7; border-color: #fcd34d; color: #b45309; }
+    .score-btn.active-3 { background: #fef9c3; border-color: #fde047; color: #854d0e; }
+    .score-btn.active-4 { background: #dcfce7; border-color: #86efac; color: #15803d; }
+    .score-btn.active-5 { background: #d1fae5; border-color: #34d399; color: #065f46; }
+
+    /* ===== FLAG CHECKBOX ===== */
+    .flag-row {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 14px; border-radius: 10px;
+      border: 2px solid var(--border); cursor: pointer;
+      transition: all 0.15s; background: #fff;
+    }
+    .flag-row:hover { border-color: var(--red); background: var(--red-light); }
+    .flag-row.active { border-color: var(--red); background: var(--red-light); }
+    .flag-row input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--red); cursor: pointer; }
+    .flag-row span { font-size: 13px; font-weight: 600; color: var(--muted); }
+    .flag-row.active span { color: var(--red); }
+
+    .row-controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+
+    /* ===== REFS ===== */
+    .ref-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+    .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    @media(max-width:480px){ .ref-grid { grid-template-columns: 1fr; } }
+
+    /* ===== SUMMARY ===== */
+    .summary-card {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 28px 24px;
+      color: #f1f5f9;
+      box-shadow: var(--shadow-md);
+      margin-top: 6px;
+    }
+    .summary-title { font-size: 18px; font-weight: 800; color: #93c5fd; margin-bottom: 22px; border-bottom: 1px solid #1e293b; padding-bottom: 14px; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 24px; }
+    @media(max-width:560px){ .summary-grid { grid-template-columns: 1fr 1fr; } }
+
+    .sum-box { background: #1e293b; border-radius: 12px; padding: 18px 14px; text-align: center; }
+    .sum-box .sum-lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: #94a3b8; margin-bottom: 8px; }
+    .sum-box .sum-val { font-size: 32px; font-weight: 800; color: #f1f5f9; }
+    .sum-box .sum-val span { font-size: 15px; color: #64748b; }
+    .sum-box .sum-verdict { font-size: 18px; font-weight: 800; }
+    .sum-box.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.4); }
+    .sum-box.danger .sum-val { color: #f87171; }
+
+    .verdict-green  { color: #4ade80; }
+    .verdict-yellow { color: #fbbf24; }
+    .verdict-red    { color: #f87171; }
+    .verdict-gray   { color: #94a3b8; }
+
+    /* progress bar */
+    .progress-wrap { margin: 18px 0; }
+    .progress-lbl { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+    .progress-bar { height: 8px; background: #1e293b; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease, background 0.4s ease; }
+
+    /* flags list */
+    .flags-list { background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.25); border-radius: 12px; padding: 16px 18px; margin-bottom: 18px; }
+    .flags-list h3 { font-size: 14px; font-weight: 700; color: #f87171; margin-bottom: 10px; }
+    .flags-list ul { list-style: none; }
+    .flags-list ul li { padding: 5px 0; font-size: 13px; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .flags-list ul li:last-child { border-bottom: none; }
+    .flags-list ul li strong { color: #f1f5f9; }
+    .flags-list ul li em { color: #94a3b8; font-style: normal; }
+
+    /* decision buttons */
+    .decision-wrap h3 { font-size: 14px; font-weight: 700; color: #cbd5e1; margin-bottom: 12px; }
+    .decision-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .dec-btn {
+      flex: 1; min-width: 140px; padding: 11px 14px;
+      border-radius: 10px; border: 2px solid #334155;
+      background: #1e293b; color: #94a3b8;
+      font-family: 'Heebo', sans-serif;
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: all 0.15s; text-align: center;
+    }
+    .dec-btn:hover { background: #334155; color: #f1f5f9; }
+    .dec-btn.active-continue { background: #065f46; border-color: #10b981; color: #d1fae5; }
+    .dec-btn.active-careful  { background: #78350f; border-color: #f59e0b; color: #fef3c7; }
+    .dec-btn.active-reject   { background: #7f1d1d; border-color: #ef4444; color: #fee2e2; }
+
+    /* footer */
+    .summary-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      margin-top: 24px; padding-top: 18px;
+      border-top: 1px solid #1e293b;
+    }
+    .interviewer-sig { font-size: 13px; color: #94a3b8; }
+    .interviewer-sig strong { color: #f1f5f9; }
+
+    .print-btn {
+      padding: 9px 20px; background: #1e293b; color: #93c5fd;
+      border: 1px solid #334155; border-radius: 9px;
+      font-family: 'Heebo', sans-serif; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .print-btn:hover { background: #334155; }
+
+    /* ===== CONSENT OVERLAY ===== */
+    .consent-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .consent-overlay.hidden { display: none; }
+
+    .consent-modal {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 620px; width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .consent-header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      padding: 26px 28px 22px;
+      text-align: center;
+    }
+    .consent-header .consent-icon { font-size: 40px; margin-bottom: 10px; }
+    .consent-header h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .consent-header p  { font-size: 13px; color: #bfdbfe; }
+
+    .consent-body { padding: 22px 26px; }
+
+    .consent-section { margin-bottom: 16px; }
+    .consent-section h3 {
+      font-size: 12px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.7px; color: var(--muted); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .consent-section p {
+      font-size: 13px; color: #374151; line-height: 1.65;
+      background: #f8fafc; border-radius: 9px;
+      padding: 11px 14px; border: 1px solid var(--border);
+    }
+    .consent-section p strong { color: var(--text); }
+
+    .consent-divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+    .consent-checks { margin-bottom: 20px; }
+    .consent-check-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px; border-radius: 10px;
+      border: 2px solid var(--border); margin-bottom: 10px;
+      cursor: pointer; transition: all 0.15s; background: #fafbfc;
+    }
+    .consent-check-item:hover { border-color: var(--accent); background: var(--accent-light); }
+    .consent-check-item.checked { border-color: #10b981; background: #f0fdf4; }
+    .consent-check-item input[type=checkbox] {
+      width: 20px; height: 20px; flex-shrink: 0;
+      accent-color: #10b981; cursor: pointer; margin-top: 1px;
+    }
+    .consent-check-item .check-label {
+      font-size: 13px; color: #374151; line-height: 1.55; cursor: pointer;
+    }
+    .consent-check-item .check-label strong { color: var(--text); font-weight: 700; }
+
+    .consent-btn {
+      width: 100%; padding: 14px;
+      background: #d1d5db; color: #9ca3af;
+      border: none; border-radius: 11px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px; font-weight: 800;
+      cursor: not-allowed; transition: all 0.2s;
+    }
+    .consent-btn.ready {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(16,185,129,0.35);
+    }
+    .consent-btn.ready:hover {
+      background: linear-gradient(135deg, #047857, #059669);
+      transform: translateY(-1px);
+    }
+    .consent-timestamp {
+      text-align: center; font-size: 11px; color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* lock the page behind overlay */
+    body.consent-locked { overflow: hidden; }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: #fff; }
+      .page { padding: 10px; }
+      .acc-body { display: block !important; }
+      .arrow { display: none; }
+      .score-btns .score-btn:not(.active-1):not(.active-2):not(.active-3):not(.active-4):not(.active-5) { display: none; }
+      .summary-card { background: #1e293b !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .print-btn { display: none; }
+    }
+  </style>
+</head>
+<body class="consent-locked">
+<!-- ===== CONSENT OVERLAY ===== -->
+<div class="consent-overlay" id="consent-overlay">
+  <div class="consent-modal">
+
+    <div class="consent-header">
+      <div class="consent-icon">📋</div>
+      <h2>תנאי שימוש והסכמה</h2>
+      <p>יש לקרוא ולאשר לפני השימוש בכלי</p>
+    </div>
+
+    <div class="consent-body">
+
+      <div class="consent-section">
+        <h3>🎯 מטרת הכלי</h3>
+        <p>
+          כלי זה נועד <strong>לסייע למראיינים בתהליך גיוס מטפל/ת זר/ה בסיעוד</strong> בלבד.
+          הוא מספק מסגרת עבודה, שאלות מנחות וניתוח אוטומטי להתרשמות ראשונית —
+          <strong>ואינו מהווה בשום אופן ייעוץ משפטי, תעסוקתי, רפואי או אחר.</strong>
+        </p>
+      </div>
+
+      <div class="consent-section">
+        <h3>🔒 פרטיות ואבטחת מידע</h3>
+        <p>
+          בהתאם לתיקון 13 לחוק הגנת הפרטיות (התשמ"א–1981):
+          כל הנתונים מעובדים ונשמרים <strong>בדפדפן שלך בלבד</strong>, אינם נשלחים לשום שרת
+          ואינם מועברים לצד שלישי כלשהו. סגירת הדף מוחקת את הכל לצמיתות.
+          <strong>האחריות לשמירת המידע, הגנתו ואופן שימושו מוטלת עליך כמשתמש בלבד.</strong>
+        </p>
+      </div>
+
+      <div class="consent-section">
+        <h3>⚠️ הגבלת אחריות</h3>
+        <p>
+          מפתחי הכלי <strong>אינם אחראים</strong> לכל נזק, הפסד, החלטת העסקה שגויה,
+          פרשנות שגויה של תוצאות, או כל תוצאה אחרת הנובעת מהשימוש בכלי.
+          הניתוח האוטומטי מבוסס <strong>אך ורק</strong> על הנתונים שהוזנו ידנית ואינו מחליף
+          בדיקה עצמאית, ייעוץ עם גורמים מקצועיים, או בדיקת מסמכים מול רשות האוכלוסין.
+        </p>
+      </div>
+
+      <div class="consent-divider"></div>
+
+      <div class="consent-checks" id="consent-checks">
+
+        <label class="consent-check-item" id="ci-1" onclick="updateCheckState()">
+          <input type="checkbox" id="cb-1" onchange="updateCheckState()">
+          <span class="check-label">
+            קראתי והבנתי את <strong>מטרת הכלי</strong> — אני מודע/ת שהוא כלי עזר בלבד ואינו מהווה ייעוץ מקצועי מכל סוג.
+          </span>
+        </label>
+
+        <label class="consent-check-item" id="ci-2" onclick="updateCheckState()">
+          <input type="checkbox" id="cb-2" onchange="updateCheckState()">
+          <span class="check-label">
+            הבנתי את <strong>מדיניות הפרטיות</strong> — הנתונים נשמרים בדפדפן שלי בלבד, ואני אחראי/ת לאופן שמירתם.
+          </span>
+        </label>
+
+        <label class="consent-check-item" id="ci-3" onclick="updateCheckState()">
+          <input type="checkbox" id="cb-3" onchange="updateCheckState()">
+          <span class="check-label">
+            אני <strong>מקבל/ת על עצמי את האחריות המלאה</strong> לכל החלטה שתתקבל בעקבות השימוש בכלי זה,
+            ומאשר/ת כי מפתחי הכלי פטורים מכל אחריות לתוצאות.
+          </span>
+        </label>
+
+      </div>
+
+      <button class="consent-btn" id="consent-btn" onclick="acceptConsent()" disabled="">
+        אשר את התנאים והתחל בראיון
+      </button>
+      <div class="consent-timestamp" id="consent-timestamp">יש לסמן את כל שלושת האישורים כדי להמשיך</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="page" id="app">
+
+  <!-- ===== כותרת ===== -->
+  <div class="header">
+    <h1>🩺 ראיון עבודה — גיוס מטפל/ת זר/ה בסיעוד</h1>
+    <p>מלאו את הטופס במהלך הראיון • הכלי יסכם ויציג ציון והמלצה אוטומטית</p>
+  </div>
+
+  <!-- ===== הקדמה ===== -->
+  <div class="intro-box">
+    <div class="intro-toggle" id="intro-toggle" onclick="toggleIntro()">
+      <div class="intro-toggle-left">
+        <span>💡 איך משתמשים בכלי זה?</span>
+      </div>
+      <div class="intro-toggle-right">
+        <span class="intro-badge">מומלץ לקרוא</span>
+        <span class="intro-arrow" id="intro-arrow">▼</span>
+      </div>
+    </div>
+    <div class="intro-body" id="intro-body">
+      <div class="intro-grid">
+
+        <div class="intro-tile">
+          <h4>🎯 מה הכלי עושה</h4>
+          <ul>
+            <li>מלווה את המראיין לאורך כל שלבי הראיון</li>
+            <li>מציג שאלות מנחות לכל נושא — לא שאלון קשיח</li>
+            <li>מאפשר לדרג כל סעיף, לסמן דגלים ולרשום הערות</li>
+            <li>מחשב ציון כולל ומייצר המלצה אוטומטית בסיום</li>
+            <li>בודק אוטומטית את סטטוס הויזה ומגבלת שהייה</li>
+          </ul>
+        </div>
+
+        <div class="intro-tile">
+          <h4>✏️ אופן מילוי</h4>
+          <ul>
+            <li>לחץ על כל סעיף כדי לפתוח — ניתן לדלג על סעיפים לא רלוונטיים</li>
+            <li>בחר ציון 1–5 (אפשר לשנות בכל עת)</li>
+            <li>סמן דגל אדום אם עלה משהו מהותי שמצריך בירור</li>
+            <li>הוסף הערות חופשיות — תשובות בולטות, התרשמות, סתירות</li>
+            <li>לא חייבים למלא הכל — הציון יחושב רק על סעיפים שדורגו</li>
+          </ul>
+        </div>
+
+        <div class="intro-tile">
+          <h4>📊 הניתוח האוטומטי</h4>
+          <ul>
+            <li>ציון משוקלל על כל הסעיפים שדורגו (לא 19 קבועים)</li>
+            <li>דגלים אדומים מופיעים בנפרד בסיכום ומשפיעים על ההמלצה</li>
+            <li>ויזה שפגה / קרובה לפקיעה יוצרת דגל אוטומטי</li>
+            <li>בסוף: החלטה סופית + אפשרות להדפסה / PDF</li>
+          </ul>
+        </div>
+
+        <div class="intro-tile">
+          <h4>🚩 מה הופך לדגל אדום?</h4>
+          <ul>
+            <li>תשובות כלליות ללא דוגמאות אמיתיות</li>
+            <li>סתירות בין תשובות שונות</li>
+            <li>חוסר הבנה במצבי חירום או תרופות</li>
+            <li>ויזה שפגה או קרובה לפקיעה</li>
+            <li>ממליצים לא זמינים או תשובות לא עקביות</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="privacy-bar">
+        <div class="privacy-icon">🔒</div>
+        <div class="privacy-text">
+          <strong>פרטיות ואבטחת מידע — תיקון 13 לחוק הגנת הפרטיות:</strong>
+          כל הנתונים שמוזנים בכלי זה <strong>נשמרים בדפדפן שלך בלבד</strong> ואינם נשלחים לאף שרת, מאגר מידע חיצוני או גוף שלישי.
+          סגירת הדפדפן או רענון הדף מוחקים את כל הנתונים לצמיתות.
+          בהתאם לתיקון 13 לחוק הגנת הפרטיות (התשמ"א–1981) ועדכוניו, <strong>האחריות לאופן השימוש במידע, שמירתו והעברתו מוטלת על המשתמש בכלי בלבד.</strong>
+          מומלץ להדפיס או לשמור כ-PDF מיד עם סיום הראיון אם ברצונך לשמור תיעוד.
+        </div>
+      </div>
+
+      <div class="disclaimer-bar">
+        <div class="disclaimer-icon">⚠️</div>
+        <div class="disclaimer-text">
+          <strong>הגבלת אחריות:</strong>
+          כלי זה מיועד לסייע במיקוד הראיון ואינו מהווה ייעוץ משפטי, ייעוץ תעסוקתי או המלצה מחייבת מכל סוג.
+          הניתוח האוטומטי מבוסס על הנתונים שהוזנו בלבד, ואינו מחליף שיקול דעת מקצועי.
+          לבדיקת סטטוס ויזה מדויק — יש להתייעץ עם לשכה פרטית מורשית מול רשות האוכלוסין וההגירה.
+          <strong>מפתחי הכלי אינם אחראים לכל החלטת העסקה, השמטת מידע או פרשנות שגויה של התוצאות.</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== פרטי מועמד ===== -->
+  <div class="card">
+    <div class="card-body">
+      <div class="section-title">📋 פרטי המועמד/ת</div>
+      <div class="grid-2">
+        <div class="field"><label>שם מלא</label><input id="f-name" type="text" placeholder="שם פרטי + משפחה"></div>
+        <div class="field"><label>גיל</label><input id="f-age" type="text" placeholder="גיל"></div>
+        <div class="field"><label>ארץ מוצא</label><input id="f-country" type="text" placeholder="מדינה"></div>
+        <div class="field"><label>שפות</label><input id="f-langs" type="text" placeholder="עברית, אנגלית, פיליפינית..."></div>
+        <div class="field"><label>טלפון</label><input id="f-phone" type="text" placeholder="050-XXXXXXX"></div>
+        <div class="field"><label>מספר דרכון</label><input id="f-passport" type="text" placeholder="לדוג׳ A12345678" style="text-transform:uppercase"></div>
+        <div class="field">
+          <label>שנים בארץ (ניתן להזין חצי שנה: 3.5)</label>
+          <input id="f-years" type="number" min="0" max="20" step="0.5" placeholder="לדוג׳ 3 או 5.5" oninput="updateVisaWarning()">
+        </div>
+        <div class="field">
+          <label>תוקף ויזה — תאריך פקיעה</label>
+          <input id="f-visa-expiry" type="date" oninput="updateVisaWarning()">
+          <div id="visa-warning" style="display:none;margin-top:8px;border-radius:9px;padding:10px 13px;font-size:13px;font-weight:600;line-height:1.7;"></div>
+        </div>
+        <div class="field"><label>תאריך ראיון</label><input id="f-date" type="date"></div>
+        <div class="field full"><label>שם המראיין</label><input id="f-interviewer" type="text" placeholder="שם מלא של המראיין"></div>
+        <div class="field full">
+          <label>אופן ראיון</label>
+          <select id="f-mode">
+            <option value="">בחר...</option>
+            <option>פרונטלי</option>
+            <option>טלפוני</option>
+            <option>וידאו / זום</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== שאלות (נוצרות דינמית) ===== -->
+  <div id="sections-container"><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק א' — מסמכים ובדיקות בסיס</div><div class="card" id="card-s1"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">1</div>
+        <div>
+          <div class="acc-title">סטטוס חוקי ומסמכים</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s1" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s1" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s1">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s1">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם יש לך ויזה בתוקף? אפשר לראות אותה?</li><li>איזה סוג אשרה יש לך ועד מתי בתוקף?</li><li>האם יש מגבלות על אזור עבודה / סוג עבודה?</li><li>האם יש לך דרכון זמין ומסמכים מזהים?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s1">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s1&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s1&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s1&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s1&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s1&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s1" onclick="toggleFlag(&#39;s1&#39;)">
+          <input type="checkbox" id="flag-s1" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s1&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s1" placeholder="כתוב כאן..." oninput="setNotes(&#39;s1&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s2"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">2</div>
+        <div>
+          <div class="acc-title">המלצות</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s2" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s2" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s2">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s2">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם יש לך לפחות 2 ממליצים?</li><li>ממי ההמלצות – משפחות, חברת סיעוד, מעסיק קודם?</li><li>מה היה משך ההעסקה אצל כל אחד?</li><li>למה הסתיימה כל עבודה?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s2">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s2&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s2&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s2&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s2&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s2&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s2" onclick="toggleFlag(&#39;s2&#39;)">
+          <input type="checkbox" id="flag-s2" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s2&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s2" placeholder="כתוב כאן..." oninput="setNotes(&#39;s2&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ב' — היכרות אישית ומוטיבציה</div><div class="card" id="card-s3"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">3</div>
+        <div>
+          <div class="acc-title">היכרות כללית</div>
+          <div class="acc-sub">5 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s3" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s3" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s3">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s3">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>ספר/י לי קצת על עצמך</li><li>כמה זמן את/ה עובד/ת בסיעוד?</li><li>באילו מסגרות עבדת קודם?</li><li>למה בחרת לעבוד עם קשישים?</li><li>מה חשוב לך בעבודה עם משפחה?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s3">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s3&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s3&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s3&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s3&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s3&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s3" onclick="toggleFlag(&#39;s3&#39;)">
+          <input type="checkbox" id="flag-s3" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s3&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s3" placeholder="כתוב כאן..." oninput="setNotes(&#39;s3&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s4"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">4</div>
+        <div>
+          <div class="acc-title">מניע ויציבות</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s4" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s4" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s4">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s4">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם את/ה מחפש/ת מקום לטווח ארוך?</li><li>מה חשוב לך כדי להישאר לאורך זמן?</li><li>מה גורם לך לעזוב מקום עבודה?</li><li>איך מתמודד/ת עם עומס וקושי?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s4">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s4&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s4&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s4&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s4&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s4&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s4" onclick="toggleFlag(&#39;s4&#39;)">
+          <input type="checkbox" id="flag-s4" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s4&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s4" placeholder="כתוב כאן..." oninput="setNotes(&#39;s4&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ג' — ניסיון מקצועי</div><div class="card" id="card-s5"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">5</div>
+        <div>
+          <div class="acc-title">ניסיון בטיפול</div>
+          <div class="acc-sub">5 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s5" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s5" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s5">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s5">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>עם איזה סוגי מטופלים עבדת?</li><li>טיפלת במטופל סיעודי מלא / מרותק למיטה?</li><li>טיפלת בחולה עם דמנציה / אלצהיימר / תוקפנות?</li><li>טיפלת בחולה אחרי ניתוח / שבר / קושי בהליכה?</li><li>ניסיון בהאכלה, רחצה, החלפות, השגחה?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s5">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s5&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s5&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s5&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s5&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s5&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s5" onclick="toggleFlag(&#39;s5&#39;)">
+          <input type="checkbox" id="flag-s5" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s5&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s5" placeholder="כתוב כאן..." oninput="setNotes(&#39;s5&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s6"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">6</div>
+        <div>
+          <div class="acc-title">ציוד ועבודה מעשית</div>
+          <div class="acc-sub">5 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s6" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s6" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s6">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s6">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם יודע/ת להשתמש בכיסא גלגלים?</li><li>השתמשת במנוף הרמה? יודע/ת העברות בטוחות ממיטה לכיסא?</li><li>מכיר/ה טיפול בחיתולים למבוגרים?</li><li>טיפלת בפצעי לחץ / מניעת פצעי לחץ?</li><li>יודע/ת לעקוב אחרי שתייה, אוכל ויציאות?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s6">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s6&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s6&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s6&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s6&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s6&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s6" onclick="toggleFlag(&#39;s6&#39;)">
+          <input type="checkbox" id="flag-s6" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s6&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s6" placeholder="כתוב כאן..." oninput="setNotes(&#39;s6&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s7"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">7</div>
+        <div>
+          <div class="acc-title">תרופות והשגחה</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s7" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s7" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s7">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s7">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>איך מתנהל/ת עם מתן תרופות?</li><li>מה עושים אם המטופל מסרב לקחת תרופה?</li><li>מבין/ה שאסור לשנות מינון ללא הוראה?</li><li>איך מוודא/ת שלא שוכחים תרופות?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s7">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s7&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s7&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s7&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s7&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s7&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s7" onclick="toggleFlag(&#39;s7&#39;)">
+          <input type="checkbox" id="flag-s7" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s7&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s7" placeholder="כתוב כאן..." oninput="setNotes(&#39;s7&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ד' — שאלות תרחיש</div><div class="card" id="card-s8"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">8</div>
+        <div>
+          <div class="acc-title">תרחיש: נפילה</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s8" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s8" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s8">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s8">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>אם המטופל נפל — מה תעשה מיד?</li><li>מה לא תעשה?</li><li>מתי תזעיק עזרה?</li><li>האם תעדכן את המשפחה מיד?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s8">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s8&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s8&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s8&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s8&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s8&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s8" onclick="toggleFlag(&#39;s8&#39;)">
+          <input type="checkbox" id="flag-s8" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s8&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s8" placeholder="כתוב כאן..." oninput="setNotes(&#39;s8&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s9"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">9</div>
+        <div>
+          <div class="acc-title">תרחיש: בלבול / דמנציה / תוקפנות</div>
+          <div class="acc-sub">3 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s9" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s9" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s9">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s9">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>אם המטופל מתבלבל, צועק או מתנגד — איך תגיב?</li><li>מה תעשה אם הוא לא מזהה אותך?</li><li>איך תנסה להרגיע בלי להיכנס לעימות?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s9">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s9&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s9&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s9&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s9&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s9&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s9" onclick="toggleFlag(&#39;s9&#39;)">
+          <input type="checkbox" id="flag-s9" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s9&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s9" placeholder="כתוב כאן..." oninput="setNotes(&#39;s9&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s10"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">10</div>
+        <div>
+          <div class="acc-title">תרחיש: סירוב לשתף פעולה</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s10" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s10" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s10">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s10">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>מה תעשה אם המטופל מסרב לאכול?</li><li>מה תעשה אם מסרב להתקלח?</li><li>מה תעשה אם לא מוכן לקום מהמיטה?</li><li>איך תנהג אם המטופל עקשן מאוד?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s10">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s10&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s10&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s10&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s10&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s10&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s10" onclick="toggleFlag(&#39;s10&#39;)">
+          <input type="checkbox" id="flag-s10" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s10&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s10" placeholder="כתוב כאן..." oninput="setNotes(&#39;s10&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s11"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">11</div>
+        <div>
+          <div class="acc-title">תרחיש: לילה וחירום</div>
+          <div class="acc-sub">3 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s11" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s11" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s11">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s11">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>מה תעשה אם המטופל מתעורר הרבה בלילה?</li><li>מה תעשה אם יש קוצר נשימה / חולשה / בלבול פתאומי?</li><li>מה תעשה אם המשפחה לא בבית ויש מצב חירום?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s11">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s11&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s11&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s11&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s11&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s11&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s11" onclick="toggleFlag(&#39;s11&#39;)">
+          <input type="checkbox" id="flag-s11" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s11&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s11" placeholder="כתוב כאן..." oninput="setNotes(&#39;s11&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ה' — תפיסת טיפול</div><div class="card" id="card-s12"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">12</div>
+        <div>
+          <div class="acc-title">תפיסת עבודה</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s12" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s12" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s12">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s12">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>מה הכי חשוב לדעתך ביחס עם מטופל?</li><li>מה חשוב יותר: מהירות או סבלנות?</li><li>איך בונים אמון עם מטופל?</li><li>איך שומרים על כבוד המטופל גם כשהוא תלוי באחרים?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s12">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s12&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s12&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s12&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s12&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s12&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s12" onclick="toggleFlag(&#39;s12&#39;)">
+          <input type="checkbox" id="flag-s12" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s12&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s12" placeholder="כתוב כאן..." oninput="setNotes(&#39;s12&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s13"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">13</div>
+        <div>
+          <div class="acc-title">סדר יום טיפולי</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s13" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s13" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s13">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s13">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>איך את/ה רואה סדר יום אידיאלי למטופל?</li><li>איך היית מארגן/ת בוקר, צהריים, ערב?</li><li>האם חשוב לך להוציא את המטופל לשמש / הליכה?</li><li>האם שם/ה לב לשתייה, אוכל, מצב רוח וניקיון?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s13">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s13&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s13&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s13&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s13&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s13&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s13" onclick="toggleFlag(&#39;s13&#39;)">
+          <input type="checkbox" id="flag-s13" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s13&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s13" placeholder="כתוב כאן..." oninput="setNotes(&#39;s13&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ו' — כישורים יומיומיים</div><div class="card" id="card-s14"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">14</div>
+        <div>
+          <div class="acc-title">ניהול הבית</div>
+          <div class="acc-sub">3 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s14" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s14" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s14">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s14">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם יודע/ת לבשל? אוכל רך / מותאם לקשיש?</li><li>האם יודע/ת לנקות ולשמור על סדר בסיסי?</li><li>האם יודע/ת לכבס, להחליף מצעים, לסדר סביבת מטופל?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s14">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s14&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s14&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s14&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s14&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s14&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s14" onclick="toggleFlag(&#39;s14&#39;)">
+          <input type="checkbox" id="flag-s14" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s14&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s14" placeholder="כתוב כאן..." oninput="setNotes(&#39;s14&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s15"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">15</div>
+        <div>
+          <div class="acc-title">התאמה תרבותית ואוכל</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s15" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s15" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s15">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s15">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>האם יש משהו מיוחד מבחינת אוכל שחשוב לך?</li><li>האם יש דברים שאינך אוכל/ת או מבשל/ת?</li><li>האם יש קושי עם בית ששומר כשרות / מנהגים מיוחדים?</li><li>מה גישתך לשמירת שבת אם זה רלוונטי לבית?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s15">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s15&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s15&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s15&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s15&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s15&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s15" onclick="toggleFlag(&#39;s15&#39;)">
+          <input type="checkbox" id="flag-s15" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s15&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s15" placeholder="כתוב כאן..." oninput="setNotes(&#39;s15&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ז' — שפה ותקשורת</div><div class="card" id="card-s16"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">16</div>
+        <div>
+          <div class="acc-title">שפה ויכולת תקשורת</div>
+          <div class="acc-sub">4 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s16" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s16" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s16">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s16">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>אילו שפות את/ה מדבר/ת?</li><li>האם מבין/ה עברית בסיסית?</li><li>מבחן קצר — מבקשים מהמועמד לומר: 'רוצה לאכול?', 'כואב לך?', 'בוא נלך לשירותים'</li><li>האם יכול/ה לקבל הוראות פשוטות בעברית?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s16">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s16&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s16&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s16&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s16&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s16&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s16" onclick="toggleFlag(&#39;s16&#39;)">
+          <input type="checkbox" id="flag-s16" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s16&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s16" placeholder="כתוב כאן..." oninput="setNotes(&#39;s16&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ח' — אישיות</div><div class="card" id="card-s17"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">17</div>
+        <div>
+          <div class="acc-title">התמודדות אישיות</div>
+          <div class="acc-sub">5 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s17" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s17" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s17">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s17">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>איך את/ה מתמודד/ת עם לחץ?</li><li>מה עושים כשקשה לך?</li><li>מה מרגיז אותך בעבודה?</li><li>איך מגיב/ה כשמטופל או בן משפחה מדבר לא יפה?</li><li>האם את/ה אדם סבלני? תן/תני דוגמה.</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s17">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s17&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s17&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s17&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s17&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s17&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s17" onclick="toggleFlag(&#39;s17&#39;)">
+          <input type="checkbox" id="flag-s17" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s17&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s17" placeholder="כתוב כאן..." oninput="setNotes(&#39;s17&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div class="card" id="card-s18"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">18</div>
+        <div>
+          <div class="acc-title">שאלת עומק</div>
+          <div class="acc-sub">3 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s18" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s18" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s18">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s18">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>מה הדבר הכי קשה שהיה לך בטיפול, ואיך התמודדת?</li><li>מה חשוב לך ביחס בין עובד/ת למשפחה?</li><li>ספר/י על מקרה שבו הרגשת שהצלחת עם מטופל — מה עשית?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s18">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s18&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s18&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s18&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s18&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s18&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s18" onclick="toggleFlag(&#39;s18&#39;)">
+          <input type="checkbox" id="flag-s18" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s18&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s18" placeholder="כתוב כאן..." oninput="setNotes(&#39;s18&#39;,this.value)"></textarea>
+      </div>
+    </div></div><div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: rgb(100, 116, 139); margin: 22px 0px 8px; padding: 0px 4px;">חלק ט' — תנאים וזמינות</div><div class="card" id="card-s19"><div class="acc-header">
+      <div class="acc-left">
+        <div class="acc-num">19</div>
+        <div>
+          <div class="acc-title">ציפיות ותנאים</div>
+          <div class="acc-sub">6 שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-s19" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-s19" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-s19">▼</span>
+      </div>
+    </div><div class="acc-body" id="body-s19">
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul><li>מה ציפיות השכר שלך?</li><li>האם יש ציפיות מיוחדות לגבי ימי מנוחה?</li><li>האם מוכן/ה לעבוד בלילות במידת הצורך?</li><li>האם חשוב לך חופש קבוע ביום מסוים?</li><li>מתי יכול/ה להתחיל?</li><li>האם מחפש/ת עבודה קבועה לטווח ארוך?</li></ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-s19">
+            <button class="score-btn" data-n="1" onclick="setScore(&#39;s19&#39;,1)">1</button><button class="score-btn" data-n="2" onclick="setScore(&#39;s19&#39;,2)">2</button><button class="score-btn" data-n="3" onclick="setScore(&#39;s19&#39;,3)">3</button><button class="score-btn" data-n="4" onclick="setScore(&#39;s19&#39;,4)">4</button><button class="score-btn" data-n="5" onclick="setScore(&#39;s19&#39;,5)">5</button>
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-s19" onclick="toggleFlag(&#39;s19&#39;)">
+          <input type="checkbox" id="flag-s19" onclick="event.stopPropagation()" onchange="toggleFlag(&#39;s19&#39;)">
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-s19" placeholder="כתוב כאן..." oninput="setNotes(&#39;s19&#39;,this.value)"></textarea>
+      </div>
+    </div></div></div>
+
+  <!-- ===== ממליצים ===== -->
+  <div class="card">
+    <div class="card-body">
+      <div class="section-title">📞 בדיקת ממליצים</div>
+      <div id="refs-container">
+      <div class="ref-box">
+        <div style="font-size:13px;font-weight:700;color:#64748b;margin-bottom:10px;">ממליץ 1</div>
+        <div class="ref-grid">
+          <div class="field"><label>שם הממליץ</label><input type="text" placeholder="שם מלא"></div>
+          <div class="field"><label>טלפון</label><input type="text" placeholder="050-XXXXXXX"></div>
+        </div>
+        <div class="field"><label>סיכום שיחה עם הממליץ</label><textarea rows="2" placeholder="כמה זמן עבד? מה טיפל? היה אמין? סיבת סיום? האם היו לוקחים שוב?"></textarea></div>
+      </div>
+    
+      <div class="ref-box">
+        <div style="font-size:13px;font-weight:700;color:#64748b;margin-bottom:10px;">ממליץ 2</div>
+        <div class="ref-grid">
+          <div class="field"><label>שם הממליץ</label><input type="text" placeholder="שם מלא"></div>
+          <div class="field"><label>טלפון</label><input type="text" placeholder="050-XXXXXXX"></div>
+        </div>
+        <div class="field"><label>סיכום שיחה עם הממליץ</label><textarea rows="2" placeholder="כמה זמן עבד? מה טיפל? היה אמין? סיבת סיום? האם היו לוקחים שוב?"></textarea></div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- ===== סיכום ===== -->
+  <div class="summary-card" id="summary-card">
+    <div class="summary-title">📊 לוח סיכום וניתוח אוטומטי</div>
+
+    <div class="summary-grid">
+      <div class="sum-box">
+        <div class="sum-lbl">ציון כולל</div>
+        <div class="sum-val" id="sum-score">—</div>
+      </div>
+      <div class="sum-box">
+        <div class="sum-lbl">אחוז התאמה</div>
+        <div class="sum-val" id="sum-pct">—</div>
+      </div>
+      <div class="sum-box" id="sum-flags-box">
+        <div class="sum-lbl">דגלים אדומים</div>
+        <div class="sum-val" id="sum-flags">0</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-lbl"><span>התאמה</span><span id="pct-lbl">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%;background:#4ade80"></div></div>
+    </div>
+
+    <div class="sum-box" style="margin-bottom:20px; text-align:center; padding:14px;">
+      <div class="sum-lbl">הערכת המערכת</div>
+      <div class="sum-verdict verdict-gray" id="sum-verdict">ממתין לנתונים...</div>
+    </div>
+
+    <div id="flags-detail" style="display:none"></div>
+
+    <div class="decision-wrap" style="margin-bottom:20px;">
+      <h3>החלטה סופית של המראיין</h3>
+      <div class="decision-btns">
+        <button class="dec-btn" data-dec="continue" onclick="setDecision(&#39;continue&#39;,this)">✅ ממשיכים בתהליך</button>
+        <button class="dec-btn" data-dec="careful" onclick="setDecision(&#39;careful&#39;,this)">⚠️ ממשיכים בזהירות</button>
+        <button class="dec-btn" data-dec="reject" onclick="setDecision(&#39;reject&#39;,this)">❌ לא מתאים – פוסלים</button>
+      </div>
+    </div>
+
+    <div class="summary-footer">
+      <div>
+        <div class="interviewer-sig">חתימת מראיין: <strong id="sig-name">________________</strong></div>
+        <div id="consent-stamp" style="font-size:11px;color:#475569;margin-top:6px;display:none;">
+          🔏 תנאי השימוש אושרו ב: <span id="consent-stamp-time"></span>
+        </div>
+      </div>
+      <button class="print-btn" onclick="window.print()">🖨️ הדפסה / שמור PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// =============================================
+// נתונים
+// =============================================
+const SECTIONS = [
+  {
+    id: 's1', part: "חלק א' — מסמכים ובדיקות בסיס",
+    title: "סטטוס חוקי ומסמכים",
+    questions: [
+      "האם יש לך ויזה בתוקף? אפשר לראות אותה?",
+      "איזה סוג אשרה יש לך ועד מתי בתוקף?",
+      "האם יש מגבלות על אזור עבודה / סוג עבודה?",
+      "האם יש לך דרכון זמין ומסמכים מזהים?"
+    ]
+  },
+  {
+    id: 's2', part: null,
+    title: "המלצות",
+    questions: [
+      "האם יש לך לפחות 2 ממליצים?",
+      "ממי ההמלצות – משפחות, חברת סיעוד, מעסיק קודם?",
+      "מה היה משך ההעסקה אצל כל אחד?",
+      "למה הסתיימה כל עבודה?"
+    ]
+  },
+  {
+    id: 's3', part: "חלק ב' — היכרות אישית ומוטיבציה",
+    title: "היכרות כללית",
+    questions: [
+      "ספר/י לי קצת על עצמך",
+      "כמה זמן את/ה עובד/ת בסיעוד?",
+      "באילו מסגרות עבדת קודם?",
+      "למה בחרת לעבוד עם קשישים?",
+      "מה חשוב לך בעבודה עם משפחה?"
+    ]
+  },
+  {
+    id: 's4', part: null,
+    title: "מניע ויציבות",
+    questions: [
+      "האם את/ה מחפש/ת מקום לטווח ארוך?",
+      "מה חשוב לך כדי להישאר לאורך זמן?",
+      "מה גורם לך לעזוב מקום עבודה?",
+      "איך מתמודד/ת עם עומס וקושי?"
+    ]
+  },
+  {
+    id: 's5', part: "חלק ג' — ניסיון מקצועי",
+    title: "ניסיון בטיפול",
+    questions: [
+      "עם איזה סוגי מטופלים עבדת?",
+      "טיפלת במטופל סיעודי מלא / מרותק למיטה?",
+      "טיפלת בחולה עם דמנציה / אלצהיימר / תוקפנות?",
+      "טיפלת בחולה אחרי ניתוח / שבר / קושי בהליכה?",
+      "ניסיון בהאכלה, רחצה, החלפות, השגחה?"
+    ]
+  },
+  {
+    id: 's6', part: null,
+    title: "ציוד ועבודה מעשית",
+    questions: [
+      "האם יודע/ת להשתמש בכיסא גלגלים?",
+      "השתמשת במנוף הרמה? יודע/ת העברות בטוחות ממיטה לכיסא?",
+      "מכיר/ה טיפול בחיתולים למבוגרים?",
+      "טיפלת בפצעי לחץ / מניעת פצעי לחץ?",
+      "יודע/ת לעקוב אחרי שתייה, אוכל ויציאות?"
+    ]
+  },
+  {
+    id: 's7', part: null,
+    title: "תרופות והשגחה",
+    questions: [
+      "איך מתנהל/ת עם מתן תרופות?",
+      "מה עושים אם המטופל מסרב לקחת תרופה?",
+      "מבין/ה שאסור לשנות מינון ללא הוראה?",
+      "איך מוודא/ת שלא שוכחים תרופות?"
+    ]
+  },
+  {
+    id: 's8', part: "חלק ד' — שאלות תרחיש",
+    title: "תרחיש: נפילה",
+    questions: [
+      "אם המטופל נפל — מה תעשה מיד?",
+      "מה לא תעשה?",
+      "מתי תזעיק עזרה?",
+      "האם תעדכן את המשפחה מיד?"
+    ]
+  },
+  {
+    id: 's9', part: null,
+    title: "תרחיש: בלבול / דמנציה / תוקפנות",
+    questions: [
+      "אם המטופל מתבלבל, צועק או מתנגד — איך תגיב?",
+      "מה תעשה אם הוא לא מזהה אותך?",
+      "איך תנסה להרגיע בלי להיכנס לעימות?"
+    ]
+  },
+  {
+    id: 's10', part: null,
+    title: "תרחיש: סירוב לשתף פעולה",
+    questions: [
+      "מה תעשה אם המטופל מסרב לאכול?",
+      "מה תעשה אם מסרב להתקלח?",
+      "מה תעשה אם לא מוכן לקום מהמיטה?",
+      "איך תנהג אם המטופל עקשן מאוד?"
+    ]
+  },
+  {
+    id: 's11', part: null,
+    title: "תרחיש: לילה וחירום",
+    questions: [
+      "מה תעשה אם המטופל מתעורר הרבה בלילה?",
+      "מה תעשה אם יש קוצר נשימה / חולשה / בלבול פתאומי?",
+      "מה תעשה אם המשפחה לא בבית ויש מצב חירום?"
+    ]
+  },
+  {
+    id: 's12', part: "חלק ה' — תפיסת טיפול",
+    title: "תפיסת עבודה",
+    questions: [
+      "מה הכי חשוב לדעתך ביחס עם מטופל?",
+      "מה חשוב יותר: מהירות או סבלנות?",
+      "איך בונים אמון עם מטופל?",
+      "איך שומרים על כבוד המטופל גם כשהוא תלוי באחרים?"
+    ]
+  },
+  {
+    id: 's13', part: null,
+    title: "סדר יום טיפולי",
+    questions: [
+      "איך את/ה רואה סדר יום אידיאלי למטופל?",
+      "איך היית מארגן/ת בוקר, צהריים, ערב?",
+      "האם חשוב לך להוציא את המטופל לשמש / הליכה?",
+      "האם שם/ה לב לשתייה, אוכל, מצב רוח וניקיון?"
+    ]
+  },
+  {
+    id: 's14', part: "חלק ו' — כישורים יומיומיים",
+    title: "ניהול הבית",
+    questions: [
+      "האם יודע/ת לבשל? אוכל רך / מותאם לקשיש?",
+      "האם יודע/ת לנקות ולשמור על סדר בסיסי?",
+      "האם יודע/ת לכבס, להחליף מצעים, לסדר סביבת מטופל?"
+    ]
+  },
+  {
+    id: 's15', part: null,
+    title: "התאמה תרבותית ואוכל",
+    questions: [
+      "האם יש משהו מיוחד מבחינת אוכל שחשוב לך?",
+      "האם יש דברים שאינך אוכל/ת או מבשל/ת?",
+      "האם יש קושי עם בית ששומר כשרות / מנהגים מיוחדים?",
+      "מה גישתך לשמירת שבת אם זה רלוונטי לבית?"
+    ]
+  },
+  {
+    id: 's16', part: "חלק ז' — שפה ותקשורת",
+    title: "שפה ויכולת תקשורת",
+    questions: [
+      "אילו שפות את/ה מדבר/ת?",
+      "האם מבין/ה עברית בסיסית?",
+      "מבחן קצר — מבקשים מהמועמד לומר: 'רוצה לאכול?', 'כואב לך?', 'בוא נלך לשירותים'",
+      "האם יכול/ה לקבל הוראות פשוטות בעברית?"
+    ]
+  },
+  {
+    id: 's17', part: "חלק ח' — אישיות",
+    title: "התמודדות אישיות",
+    questions: [
+      "איך את/ה מתמודד/ת עם לחץ?",
+      "מה עושים כשקשה לך?",
+      "מה מרגיז אותך בעבודה?",
+      "איך מגיב/ה כשמטופל או בן משפחה מדבר לא יפה?",
+      "האם את/ה אדם סבלני? תן/תני דוגמה."
+    ]
+  },
+  {
+    id: 's18', part: null,
+    title: "שאלת עומק",
+    questions: [
+      "מה הדבר הכי קשה שהיה לך בטיפול, ואיך התמודדת?",
+      "מה חשוב לך ביחס בין עובד/ת למשפחה?",
+      "ספר/י על מקרה שבו הרגשת שהצלחת עם מטופל — מה עשית?"
+    ]
+  },
+  {
+    id: 's19', part: "חלק ט' — תנאים וזמינות",
+    title: "ציפיות ותנאים",
+    questions: [
+      "מה ציפיות השכר שלך?",
+      "האם יש ציפיות מיוחדות לגבי ימי מנוחה?",
+      "האם מוכן/ה לעבוד בלילות במידת הצורך?",
+      "האם חשוב לך חופש קבוע ביום מסוים?",
+      "מתי יכול/ה להתחיל?",
+      "האם מחפש/ת עבודה קבועה לטווח ארוך?"
+    ]
+  }
+];
+
+// =============================================
+// State
+// =============================================
+const state = {
+  scores: {},     // { sId: { score, flag, notes } }
+  decision: null
+};
+
+// =============================================
+// Build sections
+// =============================================
+function buildSections() {
+  const container = document.getElementById('sections-container');
+  container.innerHTML = ''; // Clear existing content
+  let idx = 1;
+
+  SECTIONS.forEach(sec => {
+    // Part header
+    if (sec.part) {
+      const ph = document.createElement('div');
+      ph.style.cssText = 'font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#64748b;margin:22px 0 8px 0;padding:0 4px;';
+      ph.textContent = sec.part;
+      container.appendChild(ph);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'card-' + sec.id;
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'acc-header';
+    header.innerHTML = `
+      <div class="acc-left">
+        <div class="acc-num">${idx}</div>
+        <div>
+          <div class="acc-title">${sec.title}</div>
+          <div class="acc-sub">${sec.questions.length} שאלות מנחות</div>
+        </div>
+      </div>
+      <div class="acc-right">
+        <span class="badge-score" id="badge-score-${sec.id}" style="display:none">ציון: —</span>
+        <span class="badge-flag" id="badge-flag-${sec.id}" style="display:none">🚩 דגל</span>
+        <span class="arrow" id="arrow-${sec.id}">▼</span>
+      </div>
+    `;
+    header.addEventListener('click', () => toggleSection(sec.id));
+    card.appendChild(header);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'acc-body';
+    body.id = 'body-' + sec.id;
+
+    const qList = sec.questions.map(q => `<li>${q}</li>`).join('');
+
+    body.innerHTML = `
+      <div class="questions-box" style="margin-top:16px;">
+        <h4>נושאי שיחה מומלצים</h4>
+        <ul>${qList}</ul>
+      </div>
+
+      <div class="row-controls">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:#64748b;margin-bottom:8px;">דירוג התאמה</div>
+          <div class="score-btns" id="btns-${sec.id}">
+            ${[1,2,3,4,5].map(n => `<button class="score-btn" data-n="${n}" onclick="setScore('${sec.id}',${n})">${n}</button>`).join('')}
+          </div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:5px;">1 = לא מתאים &nbsp;•&nbsp; 5 = מצוין</div>
+        </div>
+
+        <label class="flag-row" id="flagrow-${sec.id}" onclick="toggleFlag('${sec.id}')">
+          <input type="checkbox" id="flag-${sec.id}" onclick="event.stopPropagation()" onchange="toggleFlag('${sec.id}')" />
+          <span>🚩 דגל אדום</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label>הערות, התרשמות ותשובות בולטות</label>
+        <textarea id="notes-${sec.id}" placeholder="כתוב כאן..." oninput="setNotes('${sec.id}',this.value)"></textarea>
+      </div>
+    `;
+    card.appendChild(body);
+    container.appendChild(card);
+    idx++;
+  });
+}
+
+// =============================================
+// Build refs
+// =============================================
+function buildRefs() {
+  const c = document.getElementById('refs-container');
+  [1,2].forEach(i => {
+    c.innerHTML += `
+      <div class="ref-box">
+        <div style="font-size:13px;font-weight:700;color:#64748b;margin-bottom:10px;">ממליץ ${i}</div>
+        <div class="ref-grid">
+          <div class="field"><label>שם הממליץ</label><input type="text" placeholder="שם מלא" /></div>
+          <div class="field"><label>טלפון</label><input type="text" placeholder="050-XXXXXXX" /></div>
+        </div>
+        <div class="field"><label>סיכום שיחה עם הממליץ</label><textarea rows="2" placeholder="כמה זמן עבד? מה טיפל? היה אמין? סיבת סיום? האם היו לוקחים שוב?"></textarea></div>
+      </div>
+    `;
+  });
+}
+
+// =============================================
+// Toggle
+// =============================================
+function toggleSection(id) {
+  const body  = document.getElementById('body-' + id);
+  const arrow = document.getElementById('arrow-' + id);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// =============================================
+// Score
+// =============================================
+function setScore(id, n) {
+  if (!state.scores[id]) state.scores[id] = { score: 0, flag: false, notes: '' };
+  state.scores[id].score = (state.scores[id].score === n) ? 0 : n; // toggle
+  renderSection(id);
+  recalc();
+}
+
+function setNotes(id, val) {
+  if (!state.scores[id]) state.scores[id] = { score: 0, flag: false, notes: '' };
+  state.scores[id].notes = val;
+  recalc();
+}
+
+function toggleFlag(id) {
+  if (!state.scores[id]) state.scores[id] = { score: 0, flag: false, notes: '' };
+  const cb = document.getElementById('flag-' + id);
+  state.scores[id].flag = cb.checked;
+  renderSection(id);
+  recalc();
+}
+
+// =============================================
+// Render one section badges
+// =============================================
+function renderSection(id) {
+  const s = state.scores[id] || { score: 0, flag: false, notes: '' };
+
+  // score buttons
+  const btns = document.querySelectorAll(`#btns-${id} .score-btn`);
+  btns.forEach(btn => {
+    const n = parseInt(btn.dataset.n);
+    btn.className = 'score-btn' + (s.score === n ? ` active-${n}` : '');
+  });
+
+  // badge score
+  const bs = document.getElementById('badge-score-' + id);
+  if (s.score > 0) {
+    bs.style.display = '';
+    bs.textContent = 'ציון: ' + s.score;
+  } else {
+    bs.style.display = 'none';
+  }
+
+  // badge flag
+  const bf = document.getElementById('badge-flag-' + id);
+  bf.style.display = s.flag ? '' : 'none';
+
+  // flag row style
+  const fr = document.getElementById('flagrow-' + id);
+  if (fr) fr.classList.toggle('active', s.flag);
+
+  // card border
+  const card = document.getElementById('card-' + id);
+  card.classList.toggle('flagged', s.flag);
+}
+
+// =============================================
+// Recalc summary
+// =============================================
+function recalc() {
+  let total = 0, max = 0, flags = 0;
+  const flagDetails = [];
+
+  // דגל/אזהרה אוטומטי לויזה
+  if (state.visaSeverity === 'danger') {
+    flags++;
+    flagDetails.push({ title: '⛔ בעיית ויזה / מגבלת שהייה', notes: (state.visaMsgs || []).join(' | ') });
+  } else if (state.visaSeverity === 'warn') {
+    flagDetails.push({ title: '⚠️ אזהרת ויזה', notes: (state.visaMsgs || []).join(' | '), isWarn: true });
+  }
+
+  SECTIONS.forEach(sec => {
+    const s = state.scores[sec.id];
+    if (s && s.score > 0) {
+      total += s.score;
+      max += 5;
+    }
+    if (s && s.flag) {
+      flags++;
+      flagDetails.push({ title: sec.title, notes: s ? s.notes : '' });
+    }
+  });
+
+  const pct = max === 0 ? 0 : Math.round((total / max) * 100);
+
+  // score display
+  document.getElementById('sum-score').innerHTML = max > 0 ? `${total}<span>/${max}</span>` : '—';
+  document.getElementById('sum-pct').innerHTML   = max > 0 ? `${pct}<span>%</span>` : '—';
+  document.getElementById('sum-flags').textContent = flags;
+
+  // progress
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('pct-lbl').textContent = pct + '%';
+
+  let barColor = '#4ade80';
+  if (pct < 50) barColor = '#f87171';
+  else if (pct < 70) barColor = '#fbbf24';
+  document.getElementById('progress-fill').style.background = barColor;
+
+  // flags box
+  const fb = document.getElementById('sum-flags-box');
+  fb.classList.toggle('danger', flags > 0);
+
+  // verdict
+  const vEl = document.getElementById('sum-verdict');
+  let vText = 'ממתין לנתונים...', vClass = 'verdict-gray';
+  if (max > 0) {
+    if (pct >= 80 && flags === 0)      { vText = '✅ מתאים מאוד';          vClass = 'verdict-green'; }
+    else if (pct >= 80 && flags > 0)   { vText = '⚠️ ציון גבוה אך יש דגלים — לבחון'; vClass = 'verdict-yellow'; }
+    else if (pct >= 65 && flags <= 1)  { vText = '🟡 מתאים עם זהירות';    vClass = 'verdict-yellow'; }
+    else if (pct >= 50)                { vText = '🔶 מתאים חלקית — שאלות פתוחות'; vClass = 'verdict-yellow'; }
+    else                               { vText = '❌ לא מתאים / סיכון';   vClass = 'verdict-red'; }
+  }
+  vEl.textContent = vText;
+  vEl.className = 'sum-verdict ' + vClass;
+
+  // flags detail
+  const fd = document.getElementById('flags-detail');
+  const warnOnlyItems = flagDetails.filter(f => f.isWarn);
+  const redFlagItems  = flagDetails.filter(f => !f.isWarn);
+  let fdHtml = '';
+
+  if (redFlagItems.length > 0) {
+    const items = redFlagItems.map(f =>
+      '<li><strong>' + f.title + '</strong>' +
+      (f.notes ? '<br><em style="font-size:12px;color:#94a3b8;font-style:normal;">' + f.notes + '</em>' : '') +
+      '</li>'
+    ).join('');
+    fdHtml += '<div class="flags-list"><h3>🚩 דגלים אדומים שעלו בראיון</h3><ul>' + items + '</ul></div>';
+  }
+  if (warnOnlyItems.length > 0) {
+    const wItems = warnOnlyItems.map(f =>
+      '<li><strong>' + f.title + '</strong>' +
+      (f.notes ? '<br><em style="font-size:12px;color:#94a3b8;font-style:normal;">' + f.notes + '</em>' : '') +
+      '</li>'
+    ).join('');
+    fdHtml += '<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:16px 18px;margin-bottom:18px;">' +
+              '<h3 style="font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:10px;">⚠️ אזהרות שדורשות בחינה</h3>' +
+              '<ul style="list-style:none;">' + wItems + '</ul></div>';
+  }
+
+  if (fdHtml) {
+    fd.innerHTML = fdHtml;
+    fd.style.display = '';
+  } else {
+    fd.style.display = 'none';
+  }
+
+  // interviewer sig
+  const name = document.getElementById('f-interviewer').value || '________________';
+  document.getElementById('sig-name').textContent = name;
+}
+
+// =============================================
+// Visa Logic
+// =============================================
+function updateVisaWarning() {
+  const expiryVal = document.getElementById('f-visa-expiry').value;
+  const yearsVal  = parseFloat(document.getElementById('f-years').value) || 0;
+  const warnEl    = document.getElementById('visa-warning');
+
+  if (!expiryVal && yearsVal === 0) {
+    warnEl.style.display = 'none';
+    state.visaSeverity = null;
+    state.visaMsgs = [];
+    recalc();
+    return;
+  }
+
+  const today  = new Date();
+  const expiry = expiryVal ? new Date(expiryVal) : null;
+  const totalMonthsInIsrael = Math.round(yearsVal * 12);
+
+  let msgs = [];
+  let severity = 'ok';
+
+  // -- בדיקת תוקף ויזה --
+  if (expiry) {
+    const diffDays = Math.ceil((expiry - today) / (1000*60*60*24));
+    if (diffDays < 0) {
+      msgs.push('⛔ הויזה פגה לפני ' + Math.abs(diffDays) + ' ימים — העסקה אסורה בחוק!');
+      severity = 'danger';
+    } else if (diffDays <= 30) {
+      msgs.push('🔴 הויזה פגה בעוד ' + diffDays + ' ימים בלבד — סכנת עבירה פלילית!');
+      severity = 'danger';
+    } else if (diffDays <= 90) {
+      const mLeft = Math.floor(diffDays / 30);
+      msgs.push('⚠️ הויזה פגה בעוד ' + diffDays + ' ימים (כ-' + mLeft + ' חודשים) — יש לבדוק חידוש לפני תחילת עבודה.');
+      if (severity !== 'danger') severity = 'warn';
+    } else {
+      const mLeft = Math.floor(diffDays / 30);
+      msgs.push('✅ הויזה בתוקף עוד כ-' + mLeft + ' חודשים (' + diffDays + ' ימים).');
+    }
+  }
+
+  // -- מגבלת 63 חודשים --
+  if (totalMonthsInIsrael > 0) {
+    const remaining63 = 63 - totalMonthsInIsrael;
+    if (totalMonthsInIsrael >= 63) {
+      msgs.push('⛔ שהה ' + totalMonthsInIsrael + ' חודשים בארץ — חצה את מגבלת 63 החודשים! נדרש אישור ועדה הומניטרית בלבד.');
+      severity = 'danger';
+    } else if (remaining63 <= 6) {
+      msgs.push('🔴 שהה ' + totalMonthsInIsrael + ' חודשים — נותרו רק ' + remaining63 + ' חודשים ממגבלת 63. יציבות לטווח ארוך בסיכון גבוה!');
+      if (severity !== 'danger') severity = 'danger';
+    } else if (remaining63 <= 12) {
+      msgs.push('⚠️ שהה ' + totalMonthsInIsrael + ' חודשים — נותרו ' + remaining63 + ' חודשים ממגבלת 63. לבחון התאמה לטווח ארוך.');
+      if (severity !== 'danger') severity = 'warn';
+    } else {
+      msgs.push('✅ שהה ' + totalMonthsInIsrael + ' חודשים בארץ — נותרו עוד ' + remaining63 + ' חודשים עד מגבלת 63.');
+    }
+
+    // -- מגבלת 51+ חודשים (עובד מחליף) --
+    if (totalMonthsInIsrael >= 51 && totalMonthsInIsrael < 63) {
+      msgs.push('⚠️ מעל 51 חודשים — ייתכן שיוכל לעבוד רק כ"עובד מחליף" זמני. נדרשת בקשה מיוחדת להעסקה קבועה.');
+      if (severity !== 'danger') severity = 'warn';
+    }
+  }
+
+  // -- עיצוב הקופסה --
+  let bg, border, color;
+  if (severity === 'danger') { bg='#fef2f2'; border='#fca5a5'; color='#991b1b'; }
+  else if (severity === 'warn') { bg='#fffbeb'; border='#fcd34d'; color='#92400e'; }
+  else { bg='#f0fdf4'; border='#86efac'; color='#14532d'; }
+
+  warnEl.style.display = 'block';
+  warnEl.style.background = bg;
+  warnEl.style.border = '1.5px solid ' + border;
+  warnEl.style.color = color;
+  warnEl.innerHTML = msgs.map(m => '<div style="margin-bottom:3px;">' + m + '</div>').join('');
+
+  state.visaSeverity = severity;
+  state.visaMsgs = msgs;
+  recalc();
+}
+
+// =============================================
+// Decision
+// =============================================
+function setDecision(key, btn) {
+  state.decision = state.decision === key ? null : key;
+  document.querySelectorAll('.dec-btn').forEach(b => {
+    const k = b.dataset.dec;
+    b.className = 'dec-btn' + (state.decision === k ? ` active-${k}` : '');
+  });
+}
+
+// =============================================
+// Consent Logic
+// =============================================
+function updateCheckState() {
+  // נותנים tick אחד לdebounce כדי שה-checkbox יתעדכן לפני הבדיקה
+  setTimeout(() => {
+    const cb1 = document.getElementById('cb-1').checked;
+    const cb2 = document.getElementById('cb-2').checked;
+    const cb3 = document.getElementById('cb-3').checked;
+
+    // עדכון סגנון כל שורה
+    document.getElementById('ci-1').classList.toggle('checked', cb1);
+    document.getElementById('ci-2').classList.toggle('checked', cb2);
+    document.getElementById('ci-3').classList.toggle('checked', cb3);
+
+    const btn = document.getElementById('consent-btn');
+    const ts  = document.getElementById('consent-timestamp');
+
+    if (cb1 && cb2 && cb3) {
+      btn.classList.add('ready');
+      btn.disabled = false;
+      ts.textContent = 'ניתן להמשיך — לחץ כדי לפתוח את הכלי';
+      ts.style.color = '#059669';
+    } else {
+      btn.classList.remove('ready');
+      btn.disabled = true;
+      const remaining = [cb1,cb2,cb3].filter(v => !v).length;
+      ts.textContent = 'נותרו ' + remaining + ' אישורים לסימון';
+      ts.style.color = '';
+    }
+  }, 0);
+}
+
+function acceptConsent() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('he-IL') + ' בשעה ' + now.toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'});
+
+  // שמירת timestamp להדפסה
+  state.consentTime = dateStr;
+
+  // הצגת timestamp בסיכום
+  document.getElementById('consent-stamp-time').textContent = dateStr;
+  document.getElementById('consent-stamp').style.display = 'block';
+
+  // הסרת ה-overlay
+  document.getElementById('consent-overlay').classList.add('hidden');
+  document.body.classList.remove('consent-locked');
+}
+
+// =============================================
+// Intro toggle
+// =============================================
+function toggleIntro() {
+  const body   = document.getElementById('intro-body');
+  const arrow  = document.getElementById('intro-arrow');
+  const toggle = document.getElementById('intro-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+// =============================================
+// Init
+// =============================================
+state.visaSeverity = null;
+state.visaMsgs = [];
+state.consentTime = null;
+
+// נועל גלילה עד לאישור
+document.body.classList.add('consent-locked');
+
+buildSections();
+buildRefs();
+
+// Listen for interviewer name change
+document.getElementById('f-interviewer').addEventListener('input', recalc);
+</script>
+<script defer="" src="./ראיון גיוס עובד זר_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;4edd5f8ec12a48cfa682ab8261b80a79&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+<veepn-lock-screen><template shadowrootmode="open"><style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none!important}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{appearance:auto}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{appearance:auto;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}@keyframes slide-in{0%{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}.gradient-blue{background:radial-gradient(106.41% 128.47% at 50.15% 128.47%,#23abff,#3066ff)}.gradient-green{background:radial-gradient(92.26% 118.88% at 50.15% .13%,#00c3c3,#00aab3)}.gradient-purple{background:radial-gradient(165.12% 115.56% at 50.15% .13%,#a15aff,#00a0eb)}.bg-blue{background-color:#f2f5ff}.bg-purple{background-color:#f7f0ff}.bg-green{background-color:#ebffed}.lock-screen{font-family:FigtreeVF,sans-serif;letter-spacing:normal;position:fixed;z-index:2147483638;right:24px;bottom:24px;width:327px;border-radius:24px;overflow:hidden;box-shadow:0 24px 32px #00000014;animation:slide-in .3s ease-in-out forwards}.lock-screen__content{position:relative;padding:24px 24px 64px}.lock-screen__close{position:absolute;top:16px;right:16px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;opacity:.5}.lock-screen__label{height:26px;width:fit-content;border-radius:50px;background-color:#fff3;padding-inline:16px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-size:12px;line-height:18px;margin:-8px auto 16px}.lock-screen__title{color:#fff;text-align:center;font-size:20px;line-height:28px;font-weight:600;margin-bottom:8px}.lock-screen__description{color:#f5f6f7;text-align:center;font-size:14px;line-height:20px}.lock-screen__description b{font-weight:600}.lock-screen__card{position:relative;z-index:1;margin-top:-44px;background-color:#fff;border-radius:24px;padding:32px 20px 20px}.lock-screen__inner{margin-bottom:24px}.lock-screen__submit{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:16px;height:40px;width:100%;border-radius:12px;padding-inline:16px;background-color:#f70;color:#fff;margin-bottom:16px}.lock-screen__skip{display:flex;align-items:center;justify-content:center;font-size:14px;line-height:20px;color:#82829c;margin-inline:auto}.price-card{border:1px solid #f2f2fc;background:linear-gradient(254.14deg,#fafbff .04%,#f5f8ff 100.04%);border-radius:24px;padding:24px 28px}.price-card__label{color:#4a5764;text-align:center;font-size:14px;line-height:20px;text-transform:uppercase;margin-bottom:16px}.price-card__price{display:flex;justify-content:center;align-items:flex-start;column-gap:2px;margin-bottom:12px}.price-card__currency{color:#515478;font-size:18px;line-height:28px}.price-card__number{color:#14142a;text-align:center;font-size:64px;line-height:54px}.price-card__wrap{display:flex;flex-direction:column}.price-card__decimal{color:#515478;font-size:18px;line-height:28px;font-weight:600}.price-card__period{color:#515478;font-size:14px;line-height:20px;margin-top:-6px}.price-card__discount{position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:12px}.price-card__discount-divider{position:absolute;z-index:0;top:50%;left:0;width:100%;height:1px;background-color:#dbe2f9;transform:translateY(-50%)}.price-card__discount-icon{position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}.price-card__discount-text{position:relative;z-index:2;color:#fff;font-size:12px;font-weight:600;line-height:18px}.price-card__features{display:flex;align-items:center;justify-content:center;column-gap:16px}.price-card__feature{color:#222e3a;font-size:14px;line-height:20px;display:flex;align-items:center;gap:6px}.price-card__feature:before{content:"";display:block;width:4px;height:4px;background-color:#20df9e;border-radius:50%;flex-shrink:0}.features-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.features-list__item{display:flex;flex-direction:column;align-items:center;gap:6px}.features-list__icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center}.features-list__text{color:#293a53;text-align:center;font-size:16px;line-height:24px;letter-spacing:-.1px}</style></template><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2) format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body><div scrible-ignore="" id="skribel__annotation_ignore_browserExtensionFlag" class="skribel__chromeExtension" style="display: none;"></div></html>
