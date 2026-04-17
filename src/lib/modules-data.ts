@@ -356,11 +356,12 @@ export const checklistItems: ChecklistCategory[] = [
 export const digitalTools = [
   {
     id: "salary-calculator",
-    title: "מחשבון שכר עובד זר",
-    description: "כלי לחישוב השכר החודשי של המטפל על כל מרכיביו והפקת דוח שכר",
+    title: "מחשבון שכר עובד זר (Hub2Care)",
+    description: "כלי לחישוב שכר חודשי, תשלומים והוצאות העסקת עובד זר לתקופת ההעסקה, כולל חישוב גמר חשבון",
     icon: "Calculator",
     isPaid: false,
-    toolUrl: "https://display-my-creation.lovable.app/",
+    isInternal: true,
+    toolUrl: "/salary-calculator",
   },
   {
     id: "expense-tracker",
