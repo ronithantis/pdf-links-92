@@ -32,14 +32,12 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
   const formUrl = hasUrl && resource.url ? normalizePublicPath(resource.url) : null;
   const isPdfGuide = isGuide && hasUrl && resource.url!.toLowerCase().endsWith(".pdf");
-
-  // PDF guides → open in PdfViewer dialog (like forms)
-  if (isPdfGuide) {
-    // fall through to the form-style dialog below by treating it as form-like
-  }
+  const isExternalGuide = isGuide && hasUrl && !isPdfGuide;
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [guideFullscreen, setGuideFullscreen] = useState(false);
 
   const handlePrint = () => {
     if (!formUrl) return;
@@ -113,6 +111,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   }
 
   return (
+    <>
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
       {isGuide && hasUrl ? (
         <div className="bg-gradient-to-br from-primary/10 to-accent/10 h-32 flex items-center justify-center">
@@ -184,6 +183,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                 מעבר לכלי
               </a>
             </Button>
+          ) : isExternalGuide ? (
+            <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => setGuideOpen(true)}>
+              <BookOpen className="h-3 w-3 ml-1" />
+              פתיחת מדריך
+            </Button>
           ) : (
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!} target="_blank" rel="noopener noreferrer">
@@ -195,6 +199,38 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
         )}
       </CardContent>
     </Card>
+    {isExternalGuide && (
+      <Dialog
+        open={guideOpen}
+        onOpenChange={(open) => {
+          setGuideOpen(open);
+          if (!open) setGuideFullscreen(false);
+        }}
+      >
+        <DialogContent
+          aria-describedby="guide-dialog-desc"
+          className={
+            guideFullscreen
+              ? "!fixed !inset-0 !translate-x-0 !translate-y-0 !left-0 !top-0 !max-w-none !w-screen !h-screen !rounded-none p-0 flex flex-col"
+              : "max-w-5xl w-[95vw] h-[85vh] p-0 flex flex-col"
+          }
+        >
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-muted/30">
+            <DialogHeader className="flex-1">
+              <DialogTitle className="text-base">{resource.title}</DialogTitle>
+              <DialogDescription id="guide-dialog-desc" className="sr-only">תצוגת מדריך</DialogDescription>
+            </DialogHeader>
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setGuideFullscreen(!guideFullscreen)} title="מסך מלא">
+              {guideFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+            </Button>
+          </div>
+          <div className="flex-1 overflow-hidden bg-background">
+            <iframe src={resource.url!} title={resource.title} className="w-full h-full border-0" />
+          </div>
+        </DialogContent>
+      </Dialog>
+    )}
+    </>
   );
 };
 
