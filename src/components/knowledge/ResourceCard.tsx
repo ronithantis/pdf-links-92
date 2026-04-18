@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2 } from "lucide-react";
+import { ExternalLink, Play, FileText, Wrench, Download, Printer, Maximize2, Minimize2, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,13 +23,20 @@ const normalizePublicPath = (url: string) => {
 };
 
 const ResourceCard = ({ resource }: { resource: Resource }) => {
-  const isVideo = resource.category === "videos";
+  const isGuide = resource.resource_type === "guide";
+  const isVideo = resource.category === "videos" && !isGuide;
   const isForm = resource.category === "forms";
   const isTool = resource.resource_type === "tool";
   const isPresentation = resource.category === "presentations";
   const hasUrl = resource.url && resource.url !== "#";
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
   const formUrl = hasUrl && resource.url ? normalizePublicPath(resource.url) : null;
+  const isPdfGuide = isGuide && hasUrl && resource.url!.toLowerCase().endsWith(".pdf");
+
+  // PDF guides → open in PdfViewer dialog (like forms)
+  if (isPdfGuide) {
+    // fall through to the form-style dialog below by treating it as form-like
+  }
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
