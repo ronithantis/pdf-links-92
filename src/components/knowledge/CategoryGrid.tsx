@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const categories = [
   { key: "presentations" as const, title: "מצגות", icon: FileText, description: "מצגות מקצועיות על כל הנושאים", color: "text-primary" },
-  { key: "videos" as const, title: "סרטונים", icon: Video, description: "סרטוני הדרכה והסבר", color: "text-accent" },
+  { key: "videos" as const, title: "מדריכים", icon: Video, description: "מדריכים יישומיים למטפלים", color: "text-accent" },
   { key: "forms" as const, title: "טפסים", icon: ClipboardList, description: "טפסים ומסמכים להורדה", color: "text-warm" },
   { key: "other" as const, title: "כלים נוספים", icon: MoreHorizontal, description: "משאבים וכלים נוספים", color: "text-success", linkTo: "/tools" },
 ];
