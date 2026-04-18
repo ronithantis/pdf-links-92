@@ -199,6 +199,38 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
         )}
       </CardContent>
     </Card>
+    {isExternalGuide && (
+      <Dialog
+        open={guideOpen}
+        onOpenChange={(open) => {
+          setGuideOpen(open);
+          if (!open) setGuideFullscreen(false);
+        }}
+      >
+        <DialogContent
+          aria-describedby="guide-dialog-desc"
+          className={
+            guideFullscreen
+              ? "!fixed !inset-0 !translate-x-0 !translate-y-0 !left-0 !top-0 !max-w-none !w-screen !h-screen !rounded-none p-0 flex flex-col"
+              : "max-w-5xl w-[95vw] h-[85vh] p-0 flex flex-col"
+          }
+        >
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-muted/30">
+            <DialogHeader className="flex-1">
+              <DialogTitle className="text-base">{resource.title}</DialogTitle>
+              <DialogDescription id="guide-dialog-desc" className="sr-only">תצוגת מדריך</DialogDescription>
+            </DialogHeader>
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setGuideFullscreen(!guideFullscreen)} title="מסך מלא">
+              {guideFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+            </Button>
+          </div>
+          <div className="flex-1 overflow-hidden bg-background">
+            <iframe src={resource.url!} title={resource.title} className="w-full h-full border-0" />
+          </div>
+        </DialogContent>
+      </Dialog>
+    )}
+    </>
   );
 };
 
