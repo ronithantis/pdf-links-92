@@ -111,6 +111,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   }
 
   return (
+    <>
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
       {isGuide && hasUrl ? (
         <div className="bg-gradient-to-br from-primary/10 to-accent/10 h-32 flex items-center justify-center">
