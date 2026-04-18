@@ -182,6 +182,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                 מעבר לכלי
               </a>
             </Button>
+          ) : isExternalGuide ? (
+            <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => setGuideOpen(true)}>
+              <BookOpen className="h-3 w-3 ml-1" />
+              פתיחת מדריך
+            </Button>
           ) : (
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!} target="_blank" rel="noopener noreferrer">
