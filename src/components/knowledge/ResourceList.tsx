@@ -15,7 +15,7 @@ interface ResourceListProps {
 
 const categoryLabels: Record<string, string> = {
   presentations: "מצגות",
-  videos: "סרטונים",
+  videos: "מדריכים",
   forms: "טפסים",
   other: "כלים נוספים",
 };
