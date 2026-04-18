@@ -51,7 +51,8 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
     downloadPdf(formUrl, resource.title + ".pdf");
   };
 
-  if (isForm) {
+  if (isForm || isPdfGuide) {
+    const Icon = isPdfGuide ? BookOpen : FileText;
     return (
       <>
         <button
@@ -59,7 +60,7 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           onClick={() => hasUrl && setFormOpen(true)}
           className={`flex items-center gap-3 p-3 rounded-lg border bg-card hover:shadow-sm transition-shadow group text-right w-full ${hasUrl ? "cursor-pointer" : "opacity-60 cursor-default"}`}
         >
-          <FileText className="h-5 w-5 text-primary shrink-0" />
+          <Icon className="h-5 w-5 text-primary shrink-0" />
           <span className="font-medium text-sm leading-tight flex-1 text-right">{resource.title}</span>
           {hasUrl && <Download className="h-4 w-4 text-muted-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />}
         </button>
@@ -113,7 +114,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow w-full">
-      {isVideo && hasUrl ? (
+      {isGuide && hasUrl ? (
+        <div className="bg-gradient-to-br from-primary/10 to-accent/10 h-32 flex items-center justify-center">
+          <BookOpen className="h-12 w-12 text-primary opacity-70" />
+        </div>
+      ) : isVideo && hasUrl ? (
         <div className="relative h-32 bg-muted/30 overflow-hidden">
         <iframe
             src={resource.url!.includes('drive.google.com') ? resource.url! : `${resource.url}?badge=0&autopause=0`}
@@ -182,8 +187,8 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
           ) : (
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>
               <a href={resource.url!} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="h-3 w-3 ml-1" />
-                {isVideo ? "צפייה" : isPresentation ? "פתיחת מצגת" : "פתיחה"}
+                {isGuide ? <BookOpen className="h-3 w-3 ml-1" /> : <ExternalLink className="h-3 w-3 ml-1" />}
+                {isGuide ? "פתיחת מדריך" : isVideo ? "צפייה" : isPresentation ? "פתיחת מצגת" : "פתיחה"}
               </a>
             </Button>
           )
