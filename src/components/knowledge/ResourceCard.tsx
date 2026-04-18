@@ -32,14 +32,12 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const isInternalLink = hasUrl && resource.url!.startsWith("/");
   const formUrl = hasUrl && resource.url ? normalizePublicPath(resource.url) : null;
   const isPdfGuide = isGuide && hasUrl && resource.url!.toLowerCase().endsWith(".pdf");
-
-  // PDF guides → open in PdfViewer dialog (like forms)
-  if (isPdfGuide) {
-    // fall through to the form-style dialog below by treating it as form-like
-  }
+  const isExternalGuide = isGuide && hasUrl && !isPdfGuide;
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [guideFullscreen, setGuideFullscreen] = useState(false);
 
   const handlePrint = () => {
     if (!formUrl) return;
