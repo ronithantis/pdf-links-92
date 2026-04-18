@@ -1,70 +1,50 @@
 
 
-# פיצ'ר חדשות ועדכונים — תוכנית מפורטת
+המשתמשת אישרה: מדריכים = רק 3 החדשים (רחצה, האכלה, החלפת חיתול). 2 הסרטונים נשארים תחת "מצגות" (סה"כ 21 מצגות).
 
-## סקירה
+## תוכנית ביצוע
 
-בניית מערכת חדשות מלאה בשלושה חלקים: מקטע בדף הבית, כפתור בסרגל הניווט עם dropdown, ודף חדשות ייעודי. הנתונים נטענים מ-Supabase חיצוני (לא מה-Cloud של הפרויקט).
+### 1. הוספת 3 מדריכים חדשים ל-DB
+INSERT ל-`knowledge_resources` עם `category='videos'` (קטגוריה זו מוצגת כ"מדריכים" ב-UI):
+- **מדריך האכלה** — `https://ronithantis.github.io/Feeding-Guide/`
+- **מדריך רחצה** — `https://ronithantis.github.io/Bathing-Guide-/`
+- **מדריך החלפת חיתול** — `/guides/diaper-change.pdf` (קובץ PDF שיועלה ל-public)
 
----
+כל אחד יקבל: `subcategory='מדריכים יישומיים'`, `resource_type='guide'`, `is_published=true`, `scenario_tags` רלוונטיים.
 
-## חלק 1 — חיבור לנתונים
+### 2. שמירת קובץ PDF
+העלאת `החלפת_חיתול_לאדם_סיעודי.pdf` ל-`public/guides/diaper-change.pdf`.
 
-### קובץ חדש: `src/lib/news-client.ts`
-- יצירת Supabase client נפרד שמתחבר ל-DB החיצוני (`bvcmokkgcpqysopspnez.supabase.co` עם ה-anon key שסופק)
-- המפתח הוא publishable key ולכן בטוח לשמור בקוד
-- פונקציות: `fetchLatestNews(limit)` ו-`fetchAllNews(category?)`
-- טבלה: `news_items`, שדות: `title`, `summary`, `category`, `source_url`, `source_name`, `is_new`, `published_at`
+### 3. עדכון `ResourceCard.tsx`
+מדריכים הם קישורים חיצוניים / PDF — לא וידאו. נוסיף טיפול ייעודי:
+- אם `resource_type='guide'` ו-URL חיצוני → כרטיס עם אייקון BookOpen וכפתור "פתיחת מדריך"
+- אם `resource_type='guide'` ו-URL הוא PDF → פתיחה ב-`PdfViewer` כמו טפסים (עם הורדה/הדפסה/מסך מלא)
 
----
+### 4. שילוב במודולים
+- **Module4Content.tsx** (דמנציה) — קישורים ל-3 המדריכים בסעיף טיפול יומיומי
+- **Module7Content.tsx** (היבטים קליניים) — מדריך האכלה ב-7.2 תזונה והידרציה, מדריך רחצה בסעיף רחצה
 
-## חלק 2 — רכיבי React
+### 5. שילוב ביועץ החכם
+עדכון `supabase/functions/smart-advisor/index.ts` — הוספת `KEYWORD_RULES` עבור:
+- "האכלה", "האכלה בכפית", "קושי באכילה" → מדריך האכלה
+- "רחצה", "מקלחת", "היגיינה" → מדריך רחצה
+- "חיתול", "החלפת חיתול", "incontinence" → מדריך החלפת חיתול
 
-### קובץ חדש: `src/components/news/NewsFeed.tsx`
-- מקטע חדשות לדף הבית — מציג 6 כרטיסיות אחרונות
-- כפתורי סינון לפי קטגוריה: הכל / ביטוח לאומי / עובדים זרים / בריאות / זכויות / המלצה
-- כל כרטיסייה כוללת:
-  - תגית "חדש" בצבע `#2a9d8f` (כש-`is_new=true`)
-  - תגית קטגוריה צבעונית
-  - כותרת, תקציר, שם מקור, קישור חיצוני
-- עיצוב בצבעי האתר: `#1d3557` ראשי, `#2a9d8f` הדגשה
+### 6. שילוב בתרחישים
+UPDATE `scenarios` table — הוספת המדריכים ל-`recommended_actions` של:
+- "רוצים לטפל בבית — האם זה ריאלי?"
+- "ההורה עובד ממוסד לבית"
+- "להגביר את רמת הטיפול"
+- "יש לנו עובד זר"
 
-### קובץ חדש: `src/components/news/NewsNavButton.tsx`
-- כפתור עגול עם אייקון פעמון וטקסט "עדכונים"
-- badge אדום עם מספר פריטים חדשים (`is_new=true`)
-- בלחיצה נפתח dropdown עם 6 הפריטים האחרונים
-- קישור "כל העדכונים" לדף `/news`
+### 7. חיפוש גלובלי
+ייקלט אוטומטית — `globalSearch` קורא מ-`knowledge_resources`, אין שינוי קוד נדרש.
 
----
-
-## חלק 3 — דף חדשות מלא
-
-### קובץ חדש: `src/pages/NewsPage.tsx`
-- דף בנתיב `/news` שמציג את כל הפריטים
-- אותו עיצוב כרטיסיות כמו בדף הבית
-- סינון לפי קטגוריה
-- טעינה מלאה מה-DB
-
----
-
-## חלק 4 — אינטגרציה
-
-### עדכון `src/pages/Index.tsx`
-- הוספת `<NewsFeed />` מיד אחרי ה-Hero section
-
-### עדכון `src/components/layout/Header.tsx`
-- הוספת `<NewsNavButton />` אחרי אייקון החיפוש בדסקטופ
-- הוספת קישור "עדכונים" בתפריט מובייל
-
-### עדכון `src/App.tsx`
-- הוספת route: `/news` → `NewsPage`
-
----
-
-## פרטים טכניים
-
-- ה-Supabase client החיצוני משתמש ב-publishable key — בטוח לשמור בקוד
-- לא נוגעים ב-client.ts של הפרויקט — client נפרד לחלוטין
-- שימוש ב-`@tanstack/react-query` לקאשינג ו-loading states
-- RTL מלא, רספונסיבי
+## קבצים שיעודכנו
+- DB: INSERT 3 רשומות ל-`knowledge_resources` + UPDATE `scenarios.recommended_actions`
+- `public/guides/diaper-change.pdf` (חדש)
+- `src/components/knowledge/ResourceCard.tsx`
+- `src/components/module-content/Module4Content.tsx`
+- `src/components/module-content/Module7Content.tsx`
+- `supabase/functions/smart-advisor/index.ts`
 
