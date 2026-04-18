@@ -157,6 +157,18 @@ export const Module6Content = ({ subId }: Module6ContentProps) => {
               "שילוב נוזלים ממזון: מרק, יוגורט, פירות (אם אין מגבלת סוכר/בליעה)",
             ]} />
           </div>
+
+          <InfoBox title="📖 מדריך מעשי" variant="tip">
+            <p className="mb-2">למדריך אינטראקטיבי מקיף עם טכניקות האכלה בטוחה, תנוחות נכונות והתאמת מרקמי מזון:</p>
+            <a
+              href="https://ronithantis.github.io/Feeding-Guide/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+            >
+              📘 פתיחת מדריך האכלה לאדם סיעודי ←
+            </a>
+          </InfoBox>
         </div>
       );
 
@@ -203,6 +215,17 @@ export const Module6Content = ({ subId }: Module6ContentProps) => {
               "תיעוד קצר: כמה פעמים ביום, האם היה כאב/ריח/דם – מקצר בירור רפואי",
             ]} />
           </div>
+
+          <InfoBox title="📖 מדריכים מעשיים" variant="tip">
+            <div className="space-y-2">
+              <a href="/guides/diaper-change.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                📘 מדריך החלפת חיתול לאדם סיעודי (PDF) ←
+              </a>
+              <a href="https://ronithantis.github.io/Bathing-Guide-/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                📘 מדריך רחצה לאדם סיעודי ←
+              </a>
+            </div>
+          </InfoBox>
         </div>
       );
 

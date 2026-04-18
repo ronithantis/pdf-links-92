@@ -191,6 +191,20 @@ export const Module7Content = ({ subId }: Module7ContentProps) => {
                 "לעצור את המשימה (למשל רחצה) ולחזור אליה מאוחר יותר",
                 "לבדוק כאב/עצירות/זיהום/תופעת תרופות – טריגרים שכיחים",
               ]} />
+
+              <InfoBox title="📖 מדריכים יישומיים להתמודדות יומיומית בדמנציה" variant="tip">
+                <div className="space-y-2">
+                  <a href="https://ronithantis.github.io/Bathing-Guide-/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                    📘 מדריך רחצה — התמודדות עם סירוב והתאמות לדמנציה ←
+                  </a>
+                  <a href="https://ronithantis.github.io/Feeding-Guide/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                    📘 מדריך האכלה — טכניקות בטוחות לאדם עם דמנציה ←
+                  </a>
+                  <a href="/guides/diaper-change.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                    📘 מדריך החלפת חיתול (PDF) ←
+                  </a>
+                </div>
+              </InfoBox>
             </InfoBox>
 
             <InfoBox title="ד. הזיות / אשליות" variant="warning">
