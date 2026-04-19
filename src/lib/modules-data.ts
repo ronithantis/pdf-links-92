@@ -409,7 +409,7 @@ export const digitalTools = [
     description: "כלי להערכה עצמית, הבנת היבטים חשובים והכנה לחתימה על חוזה העסקת עובד זר",
     icon: "Briefcase",
     isPaid: false,
-    toolUrl: "https://ronithantis.github.io/caregiver-contract-guide/",
+    toolUrl: "https://ronithantis.github.io/caregiver-agreement/",
   },
   {
     id: "daily-care",
