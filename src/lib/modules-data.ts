@@ -526,4 +526,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "/tools/worker-guide.html",
   },
+  {
+    id: "disability-tag-guide",
+    title: "מדריך להוצאת תו נכה לקשיש לא נייד",
+    description: "מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור קשיש מוגבל בניידות — תנאי זכאות, מסמכים נדרשים והגשת הבקשה",
+    icon: "ShieldCheck",
+    isPaid: false,
+    toolUrl: "https://ronithantis.github.io/tav-neche/",
+  },
 ];
