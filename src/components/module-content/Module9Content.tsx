@@ -102,16 +102,16 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/knowledge?resource=98bf8516-fb24-410a-a35d-ea5918f5b660" className="text-primary hover:underline inline-flex items-center gap-1">
+                <a href="https://drive.google.com/file/d/1NpPQoujsDcrRzdwy10dP7ttTm0rEsuZ3/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
                   <ExternalLink className="h-3.5 w-3.5" />
                   מצגת: העסקה ישירה מול חברת סיעוד
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/knowledge?resource=5a499f5e-0b73-4590-bc1c-32277123dfdd" className="text-primary hover:underline inline-flex items-center gap-1">
+                <a href="https://jzdqbcbp.gensparkspace.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
                   <ExternalLink className="h-3.5 w-3.5" />
                   מצגת: העסקת עובד זר וניהול ההעסקה
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/digital-tools#contract-explanation" className="text-primary hover:underline inline-flex items-center gap-1">
@@ -126,10 +126,10 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
                 </Link>
               </li>
               <li>
-                <Link to="/knowledge?resource=f00fcf19-0170-4d0d-8a86-aa17a47b83b1" className="text-primary hover:underline inline-flex items-center gap-1">
+                <a href="/forms/interview-guide-foreign-worker.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
                   <FileText className="h-3.5 w-3.5" />
                   טופס: מתווה לראיון עובד זר – שאלות מומלצות
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
