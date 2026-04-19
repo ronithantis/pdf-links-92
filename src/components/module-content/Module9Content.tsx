@@ -95,6 +95,45 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
             ]} />
           </InfoBox>
 
+          <div className="border rounded-lg p-4 bg-card">
+            <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              משאבים מומלצים להעמקה
+            </h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link to="/knowledge?resource=98bf8516-fb24-410a-a35d-ea5918f5b660" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  מצגת: העסקה ישירה מול חברת סיעוד
+                </Link>
+              </li>
+              <li>
+                <Link to="/knowledge?resource=5a499f5e-0b73-4590-bc1c-32277123dfdd" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  מצגת: העסקת עובד זר וניהול ההעסקה
+                </Link>
+              </li>
+              <li>
+                <Link to="/digital-tools#contract-explanation" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  כלי דיגיטלי: מדריך לחוזה העסקת עובד זר
+                </Link>
+              </li>
+              <li>
+                <Link to="/digital-tools#salary-calculator" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  כלי דיגיטלי: מחשבון שכר עובד זר
+                </Link>
+              </li>
+              <li>
+                <Link to="/knowledge?resource=f00fcf19-0170-4d0d-8a86-aa17a47b83b1" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <FileText className="h-3.5 w-3.5" />
+                  טופס: מתווה לראיון עובד זר – שאלות מומלצות
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           <p className="text-xs text-muted-foreground">* העלויות והנהלים נכונים לפברואר 2026 ועשויים להשתנות.</p>
         </div>
       );
