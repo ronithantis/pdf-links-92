@@ -95,6 +95,45 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
             ]} />
           </InfoBox>
 
+          <div className="border rounded-lg p-4 bg-card">
+            <h4 className="font-semibold mb-3 flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              משאבים מומלצים להעמקה
+            </h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="https://drive.google.com/file/d/1NpPQoujsDcrRzdwy10dP7ttTm0rEsuZ3/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  מצגת: העסקה ישירה מול חברת סיעוד
+                </a>
+              </li>
+              <li>
+                <a href="https://jzdqbcbp.gensparkspace.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  מצגת: העסקת עובד זר וניהול ההעסקה
+                </a>
+              </li>
+              <li>
+                <Link to="/digital-tools#contract-explanation" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  כלי דיגיטלי: מדריך לחוזה העסקת עובד זר
+                </Link>
+              </li>
+              <li>
+                <Link to="/digital-tools#salary-calculator" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  כלי דיגיטלי: מחשבון שכר עובד זר
+                </Link>
+              </li>
+              <li>
+                <a href="/forms/interview-guide-foreign-worker.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <FileText className="h-3.5 w-3.5" />
+                  טופס: מתווה לראיון עובד זר – שאלות מומלצות
+                </a>
+              </li>
+            </ul>
+          </div>
+
           <p className="text-xs text-muted-foreground">* העלויות והנהלים נכונים לפברואר 2026 ועשויים להשתנות.</p>
         </div>
       );
