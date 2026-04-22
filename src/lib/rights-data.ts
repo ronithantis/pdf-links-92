@@ -39,4 +39,21 @@ export const RIGHTS_DATA = {
   pension_employer: "6.5",
   pension_worker: "5.5",
   severance: "8.33",
+
+  // עובד זר בסיעוד — תעריפים נוספים (אפריל 2026, מקור: מטה הסיעוד / רשות האוכלוסין)
+  recreation_per_day: "418",
+  rest_day_premium: "439.74",
+  holiday_premium: "439.74",
+  hourly_overtime_125: "44.26",
+  hourly_overtime_150: "53.11",
+  hourly_rest_175: "61.95",
+  hourly_rest_200: "70.80",
+  recreation_days_y1: "5",
+  recreation_days_y2_3: "6",
+  recreation_days_y4_10: "7",
+  vacation_days_y1_5: "16",
+  sick_days_per_month: "1.5",
+  sick_days_max: "90",
+  holidays_per_year: "9",
+  weekly_rest_hours: "25",
 };
