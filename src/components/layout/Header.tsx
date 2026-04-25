@@ -57,14 +57,14 @@ const knowledgeHighlights: SearchItem[] = [
   {
     label: "גמר חשבון להעסקה ישירה",
     description: "מצגת — מה משלמים לעובד זר בפטירה, פיטורים או התפטרות (פיצויים, פנסיה, הבראה, חופשה)",
-    url: "/knowledge-center?tab=resources",
+    url: "https://drive.google.com/file/d/1HpjQfa4VIgS-I5cDI_FBWx0b4VQzLiE0/preview",
     source: "page",
     sourceLabel: "מצגת · מרכז הידע",
   },
   {
     label: "אבי/אימי נפטר — איך עושים גמר חשבון לעובד הזר?",
     description: "תרחיש מלא: חישוב פיצויים, הודעה מוקדמת, פדיון חופשה ודמי הבראה במקרה של פטירת המטופל",
-    url: "/knowledge-center?tab=scenarios",
+    url: "/knowledge-center?scenario=158377d8-80a1-48aa-9ab5-a334e8a907ad",
     source: "page",
     sourceLabel: "תרחיש · מרכז הידע",
   },
