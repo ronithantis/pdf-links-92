@@ -68,6 +68,63 @@ const knowledgeHighlights: SearchItem[] = [
     source: "page",
     sourceLabel: "תרחיש · מרכז הידע",
   },
+  // End-of-life: surface for keywords מוות, מת, נפטר, נפטרה, סוף החיים, פטירה, אבל, לוויה, שבעה
+  {
+    label: "סוף החיים — מוות, פטירה ואבל",
+    description: "פרק 11 המלא: השעות הראשונות לאחר מוות/פטירה, קבורה, לוויה, שבעה, גמר חשבון, צוואה, ירושה וניהול עיזבון. מת/נפטר/נפטרה",
+    url: "/module/chapter-11",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "ההורה נפטר – מה עושים בימים הראשונים?",
+    description: "תרחיש: צעדים מיידיים לאחר מוות/פטירה — הודעה, רישיון קבורה, לוויה, שבעה והודעות לגורמים. נפטר נפטרה מת",
+    url: "/knowledge-center?scenario=ff217c45-d921-4b71-95f1-a0144d6e82e7",
+    source: "page",
+    sourceLabel: "תרחיש · מרכז הידע",
+  },
+  {
+    label: "השעות הראשונות לאחר פטירה",
+    description: "מה עושים מיד כשההורה נפטר/נפטרה: קביעת מוות, הודעה למשפחה, רישיון קבורה והוצאת הגופה",
+    url: "/module/chapter-11?section=11.1",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "סידור הקבורה והלוויה",
+    description: "בחירת חלקת קבר, תיאום לוויה, פרסום הודעות אבל ולוגיסטיקה ביום הפטירה",
+    url: "/module/chapter-11?section=11.2",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "שבעה ומסורת אבלות",
+    description: "ארגון השבעה, חלוקת תפקידים במשפחה, גבולות בריאים וקבלת מנחמים לאחר מוות של הורה",
+    url: "/module/chapter-11?section=11.5",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "מענק פטירה ודמי קבורה",
+    description: "תנאי זכאות, מי משלם (ביטוח לאומי) וכיצד מגישים בקשה לאחר פטירה/מוות",
+    url: "/module/chapter-11?section=11.7",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "צוואה, ירושה וניהול עיזבון",
+    description: "חיפוש צוואה, צו קיום צוואה, צו ירושה ללא צוואה, וניהול עיזבון לאחר מוות/פטירת ההורה",
+    url: "/module/chapter-11?section=11.8",
+    source: "module",
+    sourceLabel: "פרק לימוד · סוף החיים",
+  },
+  {
+    label: "היבטים רוחניים ורגשיים בסוף החיים",
+    description: "התמודדות רגשית עם פרידה, מוות ואובדן — תמיכה למטופל ולמשפחה בסוף החיים",
+    url: "/knowledge-center?tab=resources",
+    source: "page",
+    sourceLabel: "מרכז הידע",
+  },
 ];
 
 const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
