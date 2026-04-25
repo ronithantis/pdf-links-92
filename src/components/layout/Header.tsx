@@ -52,6 +52,24 @@ const sitePages: SearchItem[] = [
   { label: "מילון מושגים", description: "הסבר מהיר למושגים בסיעוד וגיל שלישי", url: "/glossary", source: "page", sourceLabel: "דף באתר" },
 ];
 
+// Specific knowledge resources surfaced in global search
+const knowledgeHighlights: SearchItem[] = [
+  {
+    label: "גמר חשבון להעסקה ישירה",
+    description: "מצגת — מה משלמים לעובד זר בפטירה, פיטורים או התפטרות (פיצויים, פנסיה, הבראה, חופשה)",
+    url: "/knowledge-center?tab=resources",
+    source: "page",
+    sourceLabel: "מצגת · מרכז הידע",
+  },
+  {
+    label: "אבי/אימי נפטר — איך עושים גמר חשבון לעובד הזר?",
+    description: "תרחיש מלא: חישוב פיצויים, הודעה מוקדמת, פדיון חופשה ודמי הבראה במקרה של פטירת המטופל",
+    url: "/knowledge-center?tab=scenarios",
+    source: "page",
+    sourceLabel: "תרחיש · מרכז הידע",
+  },
+];
+
 const glossaryIndex: SearchItem[] = glossaryData.flatMap((cat) =>
   cat.terms.map((term) => ({
     label: term.name,
@@ -72,6 +90,7 @@ const toolsIndex: SearchItem[] = digitalTools.map((tool) => ({
 
 const searchIndex: SearchItem[] = [
   ...sitePages,
+  ...knowledgeHighlights,
   ...modules.flatMap((mod) => [
     { label: mod.title, description: mod.description, url: `/module/${mod.id}`, source: "module" as SearchSource, sourceLabel: "פרק לימוד" },
     ...mod.subModules.map((sub) => ({
