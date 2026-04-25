@@ -169,7 +169,12 @@ const Header = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && searchResults.length > 0) {
-                      navigate(searchResults[0].url);
+                      const u = searchResults[0].url;
+                      if (u.startsWith("http")) {
+                        window.open(u, "_blank", "noopener");
+                      } else {
+                        navigate(u);
+                      }
                       setSearchOpen(false);
                       setSearchQuery("");
                     }
@@ -192,7 +197,11 @@ const Header = () => {
                           key={i}
                           className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
                           onClick={() => {
-                            navigate(result.url);
+                            if (result.url.startsWith("http")) {
+                              window.open(result.url, "_blank", "noopener");
+                            } else {
+                              navigate(result.url);
+                            }
                             setSearchOpen(false);
                             setSearchQuery("");
                           }}
