@@ -57,14 +57,14 @@ const knowledgeHighlights: SearchItem[] = [
   {
     label: "גמר חשבון להעסקה ישירה",
     description: "מצגת — מה משלמים לעובד זר בפטירה, פיטורים או התפטרות (פיצויים, פנסיה, הבראה, חופשה)",
-    url: "/knowledge-center?tab=resources",
+    url: "https://drive.google.com/file/d/1HpjQfa4VIgS-I5cDI_FBWx0b4VQzLiE0/preview",
     source: "page",
     sourceLabel: "מצגת · מרכז הידע",
   },
   {
     label: "אבי/אימי נפטר — איך עושים גמר חשבון לעובד הזר?",
     description: "תרחיש מלא: חישוב פיצויים, הודעה מוקדמת, פדיון חופשה ודמי הבראה במקרה של פטירת המטופל",
-    url: "/knowledge-center?tab=scenarios",
+    url: "/knowledge-center?scenario=158377d8-80a1-48aa-9ab5-a334e8a907ad",
     source: "page",
     sourceLabel: "תרחיש · מרכז הידע",
   },
@@ -169,7 +169,12 @@ const Header = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && searchResults.length > 0) {
-                      navigate(searchResults[0].url);
+                      const u = searchResults[0].url;
+                      if (u.startsWith("http")) {
+                        window.open(u, "_blank", "noopener");
+                      } else {
+                        navigate(u);
+                      }
                       setSearchOpen(false);
                       setSearchQuery("");
                     }
@@ -192,7 +197,11 @@ const Header = () => {
                           key={i}
                           className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
                           onClick={() => {
-                            navigate(result.url);
+                            if (result.url.startsWith("http")) {
+                              window.open(result.url, "_blank", "noopener");
+                            } else {
+                              navigate(result.url);
+                            }
                             setSearchOpen(false);
                             setSearchQuery("");
                           }}
