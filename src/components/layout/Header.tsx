@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
+import { openPresentation } from "@/components/PresentationModal";
 import logo from "@/assets/logo.png";
 
 
@@ -240,8 +241,11 @@ const Header = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && searchResults.length > 0) {
-                      const u = searchResults[0].url;
-                      if (u.startsWith("http")) {
+                      const top = searchResults[0];
+                      const u = top.url;
+                      if (u.startsWith("/presentations/") && u.endsWith(".html")) {
+                        openPresentation(u, top.label);
+                      } else if (u.startsWith("http")) {
                         window.open(u, "_blank", "noopener");
                       } else {
                         navigate(u);
@@ -268,7 +272,9 @@ const Header = () => {
                           key={i}
                           className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
                           onClick={() => {
-                            if (result.url.startsWith("http")) {
+                            if (result.url.startsWith("/presentations/") && result.url.endsWith(".html")) {
+                              openPresentation(result.url, result.label);
+                            } else if (result.url.startsWith("http")) {
                               window.open(result.url, "_blank", "noopener");
                             } else {
                               navigate(result.url);
