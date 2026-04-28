@@ -62,6 +62,20 @@ const knowledgeHighlights: SearchItem[] = [
     sourceLabel: "מצגת · מרכז הידע",
   },
   {
+    label: "סימולציית עלות עובד זר בהעסקה ישירה",
+    description: "מצגת בחלון צף — כמה עולה להעסיק עובד זר? שכר, זכויות, יום מנוחה, ניכויים וסיכום תרחישים (אפריל 2026)",
+    url: "/presentations/foreign-worker-cost-simulator.html",
+    source: "page",
+    sourceLabel: "מצגת · מרכז הידע",
+  },
+  {
+    label: "כמה עולה / יעלה לי להעסיק עובד זר?",
+    description: "תרחיש מלא: סימולציית עלות חודשית להעסקה ישירה — כולל מחשבון, זכויות וניכויים",
+    url: "/knowledge-center?scenario=ea99afaa-ada5-45d2-b41b-0be66a758805",
+    source: "page",
+    sourceLabel: "תרחיש · מרכז הידע",
+  },
+  {
     label: "אבי/אימי נפטר — איך עושים גמר חשבון לעובד הזר?",
     description: "תרחיש מלא: חישוב פיצויים, הודעה מוקדמת, פדיון חופשה ודמי הבראה במקרה של פטירת המטופל",
     url: "/knowledge-center?scenario=158377d8-80a1-48aa-9ab5-a334e8a907ad",
