@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import PdfViewer, { downloadPdf, printPdf } from "@/components/PdfViewer";
+import { openPresentation } from "@/components/PresentationModal";
 
 interface Resource {
   id: string;
@@ -33,6 +34,8 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
   const formUrl = hasUrl && resource.url ? normalizePublicPath(resource.url) : null;
   const isPdfGuide = isGuide && hasUrl && resource.url!.toLowerCase().endsWith(".pdf");
   const isExternalGuide = isGuide && hasUrl && !isPdfGuide;
+  const isLocalHtmlPresentation =
+    isPresentation && hasUrl && resource.url!.startsWith("/") && resource.url!.toLowerCase().endsWith(".html");
 
   const [formOpen, setFormOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -160,7 +163,16 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
                   loading="lazy"
                 />
               )}
-              <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
+              {isLocalHtmlPresentation ? (
+                <button
+                  type="button"
+                  onClick={() => openPresentation(resource.url!, resource.title)}
+                  className="absolute inset-0 z-10"
+                  aria-label={`פתיחת ${resource.title}`}
+                />
+              ) : (
+                <a href={resource.url!} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
+              )}
             </div>
           );
         })()
@@ -187,6 +199,11 @@ const ResourceCard = ({ resource }: { resource: Resource }) => {
             <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => setGuideOpen(true)}>
               <BookOpen className="h-3 w-3 ml-1" />
               פתיחת מדריך
+            </Button>
+          ) : isLocalHtmlPresentation ? (
+            <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => openPresentation(resource.url!, resource.title)}>
+              <ExternalLink className="h-3 w-3 ml-1" />
+              פתיחת מצגת
             </Button>
           ) : (
             <Button variant="outline" size="sm" className="h-7 text-xs" asChild>

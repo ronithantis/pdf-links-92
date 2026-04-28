@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
+import { openPresentation } from "@/components/PresentationModal";
 import logo from "@/assets/logo.png";
 
 
@@ -60,6 +61,20 @@ const knowledgeHighlights: SearchItem[] = [
     url: "https://drive.google.com/file/d/1HpjQfa4VIgS-I5cDI_FBWx0b4VQzLiE0/preview",
     source: "page",
     sourceLabel: "מצגת · מרכז הידע",
+  },
+  {
+    label: "סימולציית עלות עובד זר בהעסקה ישירה",
+    description: "מצגת בחלון צף — כמה עולה להעסיק עובד זר? שכר, זכויות, יום מנוחה, ניכויים וסיכום תרחישים (אפריל 2026)",
+    url: "/presentations/foreign-worker-cost-simulator.html",
+    source: "page",
+    sourceLabel: "מצגת · מרכז הידע",
+  },
+  {
+    label: "כמה עולה / יעלה לי להעסיק עובד זר?",
+    description: "תרחיש מלא: סימולציית עלות חודשית להעסקה ישירה — כולל מחשבון, זכויות וניכויים",
+    url: "/knowledge-center?scenario=ea99afaa-ada5-45d2-b41b-0be66a758805",
+    source: "page",
+    sourceLabel: "תרחיש · מרכז הידע",
   },
   {
     label: "אבי/אימי נפטר — איך עושים גמר חשבון לעובד הזר?",
@@ -226,8 +241,11 @@ const Header = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && searchResults.length > 0) {
-                      const u = searchResults[0].url;
-                      if (u.startsWith("http")) {
+                      const top = searchResults[0];
+                      const u = top.url;
+                      if (u.startsWith("/presentations/") && u.endsWith(".html")) {
+                        openPresentation(u, top.label);
+                      } else if (u.startsWith("http")) {
                         window.open(u, "_blank", "noopener");
                       } else {
                         navigate(u);
@@ -254,7 +272,9 @@ const Header = () => {
                           key={i}
                           className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
                           onClick={() => {
-                            if (result.url.startsWith("http")) {
+                            if (result.url.startsWith("/presentations/") && result.url.endsWith(".html")) {
+                              openPresentation(result.url, result.label);
+                            } else if (result.url.startsWith("http")) {
                               window.open(result.url, "_blank", "noopener");
                             } else {
                               navigate(result.url);

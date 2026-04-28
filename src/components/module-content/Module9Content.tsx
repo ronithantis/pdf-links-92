@@ -1,5 +1,6 @@
-import { CheckCircle, AlertTriangle, Shield, Users, Home, Smartphone, FileText, Heart, ExternalLink } from "lucide-react";
+import { CheckCircle, AlertTriangle, Shield, Users, Home, Smartphone, FileText, Heart, ExternalLink, Presentation } from "lucide-react";
 import { Link } from "react-router-dom";
+import { openPresentation } from "@/components/PresentationModal";
 
 interface Module9ContentProps {
   subId: string;
@@ -199,6 +200,22 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
           <h3 className="text-xl font-bold">העסקת עובד/ת זר/ה</h3>
 
           <p>העסקת עובד זר היא אחת הפתרונות הנפוצים ביותר לטיפול מתמשך בבית. מדובר בתהליך הכולל כמה שלבים בירוקרטיים, אך בסיומו תוכלו לקבל מטפל צמוד ומסור שיעניק ליווי צמוד לאורך היממה.</p>
+
+          <div className="border rounded-lg p-4 bg-primary/5 border-primary/30 flex items-start gap-3">
+            <Presentation className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h4 className="font-semibold mb-1">סימולציית עלות עובד זר בהעסקה ישירה</h4>
+              <p className="text-sm text-muted-foreground mb-3">מצגת בחלון צף — כמה זה באמת עולה? שכר בסיס, זכויות סוציאליות, יום מנוחה, ניכויים מותרים וסיכום תרחישים (אפריל 2026).</p>
+              <button
+                type="button"
+                onClick={() => openPresentation("/presentations/foreign-worker-cost-simulator.html", "סימולציית עלות עובד זר בהעסקה ישירה")}
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+              >
+                <ExternalLink className="h-4 w-4" />
+                פתיחת המצגת בחלון צף
+              </button>
+            </div>
+          </div>
 
           <div>
             <h4 className="font-semibold mb-3">תנאי הזכאות:</h4>
