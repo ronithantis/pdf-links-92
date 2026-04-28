@@ -170,6 +170,7 @@ const KEYWORD_RULES: KeywordRule[] = [
     keywords: ["זכויות", "גמלת סיעוד", "ביטוח לאומי", "גמלה", "קצבה", "תביעת סיעוד", "זכויות עובד", "שכר מינימום", "חופשה שנתית", "פנסיה לעובד זר", "פיצויים"],
     tools: [
       { path: "/tools#foreign-worker-rights", label: "זכויות עובד זר – מחשבון ומדריך", reason: "כלי אינטראקטיבי לבדיקת זכויות עובד זר — שכר, חופשות, פנסיה ועוד" },
+      { path: "/presentations/foreign-worker-cost-simulator.html", label: "מצגת: סימולציית עלות עובד זר בהעסקה ישירה", reason: "פירוט מלא של זכויות סוציאליות חודשיות, ערך יום חופשה/חג, ניכויים מותרים וסיכום עלויות לעובד זר" },
       { path: "/knowledge-center", label: "מרכז הידע", reason: "מדריכים על זכויות וגמלאות" },
       { path: "/services", label: "מפת שירותים", reason: "גופים ציבוריים ועמותות שיכולים לסייע" },
       { path: "/tools#nursing-claim-guide", label: "מדריך להגשת תביעת סיעוד", reason: "מדריך שלב אחר שלב להגשת תביעה", isPaid: true },
