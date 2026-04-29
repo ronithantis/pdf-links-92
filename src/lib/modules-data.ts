@@ -524,7 +524,7 @@ export const digitalTools = [
     description: "כלי שמסביר לעובד הזר כל מה שצריך לדעת בהגיעו לארץ — זכויות, חובות, שגרה, תרבות ושפה",
     icon: "BookOpen",
     isPaid: false,
-    toolUrl: "/tools/worker-guide.html",
+    toolUrl: "https://ronithantis.github.io/worker-guide/",
   },
   {
     id: "disability-tag-guide",
