@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { modules, digitalTools } from "@/lib/modules-data";
 import { glossaryData } from "@/lib/glossary-data";
-import { openPresentation } from "@/components/PresentationModal";
+import { openPresentation, shouldOpenInModal } from "@/components/PresentationModal";
 import logo from "@/assets/logo.png";
 
 
@@ -82,6 +82,14 @@ const knowledgeHighlights: SearchItem[] = [
     url: "/knowledge-center?scenario=158377d8-80a1-48aa-9ab5-a334e8a907ad",
     source: "page",
     sourceLabel: "תרחיש · מרכז הידע",
+  },
+  // Recipes guide — opens in floating modal. Surface for: מתכונים, מזון, אוכל, בליעה, דיספגיה
+  {
+    label: "מתכונים לאדם סיעודי",
+    description: "מדריך מתכונים בחלון צף — מה נותנים לאכול, אוכל מזין, רעיונות לאדם שמתקשה בבליעה (דיספגיה), מרקמים מותאמים, ארוחות לאדם שלא רוצה לאכול",
+    url: "https://ronithantis.github.io/RECIPES/",
+    source: "page",
+    sourceLabel: "מדריך · מרכז הידע",
   },
   // End-of-life: surface for keywords מוות, מת, נפטר, נפטרה, סוף החיים, פטירה, אבל, לוויה, שבעה
   {
@@ -243,7 +251,7 @@ const Header = () => {
                     if (e.key === "Enter" && searchResults.length > 0) {
                       const top = searchResults[0];
                       const u = top.url;
-                      if (u.startsWith("/presentations/") && u.endsWith(".html")) {
+                      if (shouldOpenInModal(u)) {
                         openPresentation(u, top.label);
                       } else if (u.startsWith("http")) {
                         window.open(u, "_blank", "noopener");
@@ -272,7 +280,7 @@ const Header = () => {
                           key={i}
                           className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
                           onClick={() => {
-                            if (result.url.startsWith("/presentations/") && result.url.endsWith(".html")) {
+                            if (shouldOpenInModal(result.url)) {
                               openPresentation(result.url, result.label);
                             } else if (result.url.startsWith("http")) {
                               window.open(result.url, "_blank", "noopener");
