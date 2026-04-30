@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
-import { openPresentation } from "@/components/PresentationModal";
+import { openPresentation, shouldOpenInModal } from "@/components/PresentationModal";
 
 interface SiteTool {
   path: string;
@@ -163,7 +163,7 @@ const SmartAdvisor = () => {
                   {result.site_tools.map((tool, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="flex items-center gap-2 shrink-0">
-                        {tool.path.startsWith("/presentations/") && tool.path.endsWith(".html") ? (
+                        {shouldOpenInModal(tool.path) ? (
                           <button
                             type="button"
                             onClick={() => openPresentation(tool.path, tool.label)}
@@ -194,9 +194,9 @@ const SmartAdvisor = () => {
                             בתשלום
                           </Badge>
                         )}
-                        {(tool.path.startsWith("http") || (tool.path.startsWith("/presentations/") && tool.path.endsWith(".html"))) && (
+                        {(tool.path.startsWith("http") || shouldOpenInModal(tool.path)) && (
                           <Badge variant="outline" className="gap-1 text-[10px] px-1.5 py-0">
-                            {tool.path.startsWith("/presentations/") ? "מצגת" : "כלי חיצוני"}
+                            {shouldOpenInModal(tool.path) ? "מדריך" : "כלי חיצוני"}
                           </Badge>
                         )}
                       </div>
