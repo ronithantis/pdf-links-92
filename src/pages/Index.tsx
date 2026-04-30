@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { modules, digitalTools } from "@/lib/modules-data";
 import NeedsQuestionnaire from "@/components/NeedsQuestionnaire";
 import ChecklistSection from "@/components/ChecklistSection";
@@ -28,7 +27,6 @@ import {
   Heart,
   Building,
   Sunset,
-  Play,
   MessageSquare,
   Compass,
 } from "lucide-react";
@@ -89,33 +87,13 @@ const Index = () => {
             className="w-full h-auto block"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
-          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex flex-wrap items-center justify-center gap-3 px-4">
-              <Button size="lg" asChild>
+          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex items-center justify-center px-4">
+              <Button size="lg" asChild className="text-lg px-8 py-6">
                 <a href="#pathway">
                   התחילו מכאן
-                  <ArrowLeft className="h-4 w-4 mr-1" />
+                  <ArrowLeft className="h-5 w-5 mr-1" />
                 </a>
               </Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button size="sm" variant="secondary" className="text-sm">
-                    <Play className="h-4 w-4 ml-1" />
-                    צפו בסרטון פתיח
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl p-0 overflow-hidden">
-                  <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-                    <iframe
-                      src="https://player.vimeo.com/video/1159512126?badge=0&autopause=0&player_id=0&app_id=58479"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-                      title="סרטון פתיח"
-                    />
-                  </div>
-                </DialogContent>
-              </Dialog>
           </div>
         </div>
       </section>
