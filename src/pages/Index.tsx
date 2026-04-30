@@ -7,7 +7,6 @@ import NeedsQuestionnaire from "@/components/NeedsQuestionnaire";
 import ChecklistSection from "@/components/ChecklistSection";
 
 
-import heroVideo from "@/assets/hero-video.mp4";
 import {
   ArrowLeft,
   ClipboardCheck,
@@ -74,27 +73,14 @@ const Index = () => {
     <div>
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background">
-        <div className="relative w-full">
-          <video
-            src={heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            aria-label="מרכז הידע והכלים למשפחות מטפלות בהורה מבוגר"
-            className="w-full h-auto block"
-          />
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
-          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex items-center justify-center px-4">
-              <Button size="lg" asChild className="text-lg px-8 py-6">
-                <a href="#pathway">
-                  התחילו מכאן
-                  <ArrowLeft className="h-5 w-5 mr-1" />
-                </a>
-              </Button>
-          </div>
+      <section className="bg-background py-12">
+        <div className="container flex items-center justify-center">
+          <Button size="lg" asChild className="text-lg px-8 py-6">
+            <a href="#pathway">
+              התחילו מכאן
+              <ArrowLeft className="h-5 w-5 mr-1" />
+            </a>
+          </Button>
         </div>
       </section>
 
