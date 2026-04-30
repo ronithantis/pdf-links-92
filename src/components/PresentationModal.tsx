@@ -12,6 +12,18 @@ export const openPresentation = (url: string, title?: string) => {
   window.dispatchEvent(new CustomEvent("open-presentation", { detail: { url, title } }));
 };
 
+// External guides that should open inside the floating presentation modal
+// (instead of a new browser tab). Add new GitHub Pages guides here.
+const MODAL_EXTERNAL_GUIDES = [
+  "ronithantis.github.io/RECIPES",
+];
+
+export const shouldOpenInModal = (url: string): boolean => {
+  if (!url) return false;
+  if (url.startsWith("/presentations/") && url.endsWith(".html")) return true;
+  return MODAL_EXTERNAL_GUIDES.some((m) => url.includes(m));
+};
+
 const PresentationModal = () => {
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
