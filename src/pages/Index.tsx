@@ -8,7 +8,7 @@ import NeedsQuestionnaire from "@/components/NeedsQuestionnaire";
 import ChecklistSection from "@/components/ChecklistSection";
 
 
-import heroImage from "@/assets/hero-family.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 import {
   ArrowLeft,
   ClipboardCheck,
@@ -76,24 +76,20 @@ const Index = () => {
     <div>
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroImage} alt="בת מחבקת את הוריה המבוגרים" className="w-full h-full object-cover object-[30%_center]" />
-          <div className="absolute inset-0 bg-gradient-to-l from-background/95 via-background/75 to-background/40" />
-        </div>
-        <div className="relative container pt-48 pb-20 md:pt-64 md:pb-24">
-          <div className="max-w-2xl mr-auto pl-32 md:-translate-x-12 lg:-translate-x-20">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-tight mb-4">
-              מרכז הידע והכלים
-              <br />
-              <span className="text-primary">למשפחות מטפלות</span>
-              <br />
-              בהורה מבוגר
-            </h1>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8">
-              מרכז ידע מקיף, זכויות, כלים פרקטיים והכוונה מעשית.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
+      <section className="relative overflow-hidden bg-background">
+        <div className="relative w-full">
+          <video
+            src={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="מרכז הידע והכלים למשפחות מטפלות בהורה מבוגר"
+            className="w-full h-auto block"
+          />
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
+          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex flex-wrap items-center justify-center gap-3 px-4">
               <Button size="lg" asChild>
                 <a href="#pathway">
                   התחילו מכאן
@@ -102,7 +98,7 @@ const Index = () => {
               </Button>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size="sm" variant="ghost" className="text-sm text-muted-foreground">
+                  <Button size="sm" variant="secondary" className="text-sm">
                     <Play className="h-4 w-4 ml-1" />
                     צפו בסרטון פתיח
                   </Button>
@@ -120,7 +116,6 @@ const Index = () => {
                   </div>
                 </DialogContent>
               </Dialog>
-            </div>
           </div>
         </div>
       </section>
