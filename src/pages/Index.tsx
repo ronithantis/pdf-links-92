@@ -91,8 +91,29 @@ const Index = () => {
             className="w-full h-auto block"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
-          {/* "מה יש באתר" overlay button - bottom right */}
-          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10">
+          {/* Bottom-right overlay buttons: "מה יש באתר" + "אודות האתר- סרטון" */}
+          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10 flex items-center gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="sm" variant="secondary" className="shadow-lg text-sm">
+                  אודות האתר- סרטון
+                  <ArrowLeft className="h-4 w-4 mr-1" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl p-0 overflow-hidden">
+                <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+                  <iframe
+                    src="https://player.vimeo.com/video/1188476851?badge=0&autopause=0&player_id=0&app_id=58479"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    allowFullScreen
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                    title="ברוכים הבאים"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
             <Dialog>
               <DialogTrigger asChild>
                 <Button size="sm" variant="secondary" className="shadow-lg">
@@ -134,34 +155,13 @@ const Index = () => {
               </DialogContent>
             </Dialog>
           </div>
-          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex flex-wrap items-center justify-center gap-3 px-4">
-              <Button size="lg" asChild>
-                <a href="#pathway">
-                  התחילו מכאן
-                  <ArrowLeft className="h-4 w-4 mr-1" />
-                </a>
-              </Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button size="sm" variant="secondary" className="text-sm">
-                    מה תמצאו באתר
-                    <ArrowLeft className="h-4 w-4 mr-1" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl p-0 overflow-hidden">
-                  <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-                    <iframe
-                      src="https://player.vimeo.com/video/1188476851?badge=0&autopause=0&player_id=0&app_id=58479"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                      allowFullScreen
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-                      title="ברוכים הבאים"
-                    />
-                  </div>
-                </DialogContent>
-              </Dialog>
+          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex items-center justify-center px-4">
+            <Button size="lg" asChild>
+              <a href="#pathway">
+                הקליקו כאן להתחיל בניווט
+                <ArrowLeft className="h-4 w-4 mr-1" />
+              </a>
+            </Button>
           </div>
         </div>
       </section>
