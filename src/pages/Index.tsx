@@ -144,21 +144,20 @@ const Index = () => {
               <Dialog>
                 <DialogTrigger asChild>
                   <Button size="sm" variant="secondary" className="text-sm">
-                    <Play className="h-4 w-4 ml-1" />
                     מה תמצאו באתר
-                    <ArrowRight className="h-4 w-4 mr-1" />
+                    <ArrowLeft className="h-4 w-4 mr-1" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl p-0 overflow-hidden">
                   <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
                     <iframe
-                      src="https://google.com"
+                      src="https://player.vimeo.com/video/1188476851?badge=0&autopause=0&player_id=0&app_id=58479"
                       frameBorder="0"
-                      allow="autoplay; fullscreen"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                       allowFullScreen
                       referrerPolicy="strict-origin-when-cross-origin"
                       style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-                      title="מה תמצאו באתר"
+                      title="ברוכים הבאים"
                     />
                   </div>
                 </DialogContent>
