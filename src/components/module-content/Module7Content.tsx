@@ -35,10 +35,112 @@ export const Module7Content = ({ subId }: Module7ContentProps) => {
       return (
         <div className="space-y-6 text-foreground">
           <h3 className="text-xl font-bold">שלבי הדמנציה והשלכותיהם על היום-יום</h3>
-          
+
           <InfoBox title="עיקרון מנחה" variant="info">
             <p>המטרה היא להבין שה״התנהגות״ היא לעיתים ביטוי של בלבול, פחד, כאב או צורך – ולא ״קושי״ בלבד.</p>
           </InfoBox>
+
+          {/* === FAST scale === */}
+          <div className="space-y-4 border-t pt-6">
+            <h3 className="text-xl font-bold">הבנת שלבי הדמנציה: מדריך למדד FAST וזכויות החולה</h3>
+            <p className="text-sm leading-relaxed">
+              תהליך הירידה הקוגניטיבית בדמנציה ובאלצהיימר אינו ליניארי תמיד, אך עולם הרפואה משתמש במדדים מוסכמים כדי להבין היכן המטופל נמצא על ציר הזמן. אחד הכלים המרכזיים והמדויקים ביותר הוא סולם <strong>FAST (Functional Assessment Staging Tool)</strong>.
+            </p>
+
+            <InfoBox title="למה בכלל מבצעים מבחן להערכת שלבים?" variant="info">
+              <p className="mb-2">אבחון השלב בו נמצא היקיר שלכם אינו רק עניין של הגדרה רפואית; יש לו השלכות מעשיות קריטיות:</p>
+              <BulletList items={[
+                "התאמת הטיפול: הבנה מהן היכולות שנשמרו ומהן אלו שאבדו, כדי להעניק סיוע מבלי לפגוע בעצמאות שנותרה.",
+                "תכנון עתידי: היערכות לשינויים פיזיים (כמו אובדן שליטה על סוגרים או קשיי בליעה) לפני שהם הופכים למקרה חירום.",
+                "מיצוי זכויות: מוסדות המדינה (ביטוח לאומי, חברות ביטוח וקופות החולים) מסתמכים על הגדרות תפקודיות כדי לקבוע זכאות לקצבאות וסיוע.",
+              ]} />
+            </InfoBox>
+
+            <div>
+              <h4 className="font-semibold mb-3">פירוט שלבי מדד FAST</h4>
+              <p className="text-sm mb-3">הסולם נע בין תפקוד תקין (1) לבין דמנציה בשלב סופי (7).</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-muted">
+                      <th className="border p-2 text-right font-bold">שלב</th>
+                      <th className="border p-2 text-right font-bold">הגדרה קלינית</th>
+                      <th className="border p-2 text-right font-bold">משמעות תפקודית</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border p-2 font-semibold">1-3</td>
+                      <td className="border p-2">שלב טרום-דמנציה</td>
+                      <td className="border p-2">שכחה קלה, קושי במציאת מילים, אך תפקוד עצמאי מלא.</td>
+                    </tr>
+                    <tr>
+                      <td className="border p-2 font-semibold">4</td>
+                      <td className="border p-2">דמנציה קלה</td>
+                      <td className="border p-2">קושי במשימות מורכבות (תשלום חשבונות, תכנון ארוחה חגיגית).</td>
+                    </tr>
+                    <tr>
+                      <td className="border p-2 font-semibold">5</td>
+                      <td className="border p-2">דמנציה בינונית</td>
+                      <td className="border p-2">המטופל זקוק לעזרה בבחירת בגדים (התאמה לעונה/צבעים). לא יכול לשרוד ללא סיוע.</td>
+                    </tr>
+                    <tr>
+                      <td className="border p-2 font-semibold">6</td>
+                      <td className="border p-2">דמנציה בינונית-קשה</td>
+                      <td className="border p-2">עזרה ברחצה, הלבשה ושימוש בשירותים. בשלב זה מופיע לעיתים קרובות אובדן שליטה על סוגרים.</td>
+                    </tr>
+                    <tr>
+                      <td className="border p-2 font-semibold">7</td>
+                      <td className="border p-2">דמנציה קשה</td>
+                      <td className="border p-2">הגבלה בדיבור (מילים בודדות), אובדן יכולת הליכה, חוסר יכולת לחייך או לשבת ללא תמיכה.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-3">זכויות וסיוע בשלבים מתקדמים (שלב 6 ו-7)</h4>
+              <p className="text-sm mb-3">כאשר המטופל מוגדר בשלבים המתקדמים של מדד FAST, נפתחות דלתות לסיוע משמעותי יותר:</p>
+
+              <div className="space-y-3">
+                <InfoBox title="1. גמלת סיעוד (ביטוח לאומי)" variant="tip">
+                  <p>בשלבים אלו, המטופל בדרך כלל יקבל את הניקוד המקסימלי במבחן ה-ADL (תפקוד יומיומי), מה שמקנה זכאות לשעות טיפול רבות, אפשרות להעסקת עובד זר, או המרה של חלק מהשעות לקצבה כספית לציוד וטיפול.</p>
+                </InfoBox>
+
+                <InfoBox title="2. הוספיס בית וטיפול פליאטיבי" variant="tip">
+                  <p className="mb-2">אחת התרומות החשובות של מדד FAST היא הגדרת הזכאות להוספיס. מטופל בשלב <strong>7C ומעלה</strong> (אובדן יכולת הליכה עצמאית) זכאי לליווי של צוות פליאטיבי מטעם קופת החולים.</p>
+                  <p><strong>המטרה:</strong> מניעת סבל, איזון כאב וטיפול בסביבה הביתית המוכרת במקום אשפוזים חוזרים בבתי חולים.</p>
+                </InfoBox>
+
+                <InfoBox title="3. מינוי אפוטרופוס או הפעלת ייפוי כוח מתמשך" variant="warning">
+                  <p>אם לא נעשה זאת בשלבים המוקדמים, שלב 5-6 הוא לרוב "קו פרשת המים" שבו המטופל כבר אינו כשיר משפטית לקבל החלטות. זהו הזמן להפעיל מנגנונים משפטיים כדי לדאוג לרווחתו הכלכלית והרפואית.</p>
+                </InfoBox>
+
+                <InfoBox title="4. קוד סיעודי (משרד הבריאות)" variant="tip">
+                  <p>במידה והמשפחה מחליטה על מעבר למוסד סיעודי, המצב התפקודי (המוגדר דרך שלבי ה-FAST) הוא הקריטריון המרכזי לקבלת "קוד" – סיוע במימון האשפוז הסיעודי בהתאם להכנסות המשפחה.</p>
+                </InfoBox>
+              </div>
+            </div>
+
+            <InfoBox title="חשוב לזכור" variant="info">
+              <p>למרות שהטבלאות נראות טכניות, מאחוריהן נמצא אדם. האבחון נועד לשרת את איכות החיים שלו ושלכם, ולא רק להגדיר את המחלה.</p>
+            </InfoBox>
+
+            <InfoBox title="📚 מקורות נוספים במרכז הידע" variant="tip">
+              <div className="space-y-2">
+                <a href="/knowledge-center?resource=f7c4b9f6-607c-4470-8e09-ebe43b098bee" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                  📊 מצגת: התמודדות עם דמנציה ←
+                </a>
+                <a href="/knowledge-center?resource=444603fd-d3f8-452b-a0a6-eab2766fb39d" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                  📊 מצגת: התמודדות עם דמנציה בבית ←
+                </a>
+                <a href="https://ronithantis.github.io/RECIPES/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                  🍲 מדריך מתכונים לאדם סיעודי (כולל התאמות לדיספגיה) ←
+                </a>
+              </div>
+            </InfoBox>
+          </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             <div className="border rounded-lg p-4 bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800">
