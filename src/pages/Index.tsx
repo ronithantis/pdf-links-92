@@ -91,8 +91,8 @@ const Index = () => {
             className="w-full h-auto block"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
-          {/* Bottom-right overlay buttons: "מה יש באתר" + "אודות האתר- סרטון" */}
-          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-10 flex items-center gap-2">
+          {/* Bottom-right overlay buttons: visible on desktop only */}
+          <div className="hidden md:flex absolute bottom-6 right-6 z-10 items-center gap-2">
             <Dialog>
               <DialogTrigger asChild>
                 <Button size="sm" variant="secondary" className="shadow-lg text-sm">
@@ -163,6 +163,71 @@ const Index = () => {
               </a>
             </Button>
           </div>
+        </div>
+
+        {/* Mobile-only: secondary buttons displayed below the video */}
+        <div className="md:hidden mt-4 flex flex-row items-center justify-center gap-2 px-4">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm" variant="secondary" className="shadow text-sm flex-1">
+                אודות האתר- סרטון
+                <ArrowLeft className="h-4 w-4 mr-1" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl p-0 overflow-hidden">
+              <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+                <iframe
+                  src="https://player.vimeo.com/video/1188476851?badge=0&autopause=0&player_id=0&app_id=58479"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                  title="ברוכים הבאים"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm" variant="secondary" className="shadow text-sm flex-1">
+                <Info className="h-4 w-4 ml-1" />
+                מה יש באתר
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto" dir="rtl">
+              <div className="space-y-4 text-right pt-2">
+                <h3 className="text-xl font-bold">מטפלים בהורה או בן משפחה סיעודי?</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  פתאום מצאתם את עצמכם מתמודדים עם בירוקרטיה, זכויות, החלטות מורכבות וניהול יומיומי — בלי שמישהו באמת הסביר איך עושים את זה נכון?
+                </p>
+                <p className="text-sm leading-relaxed font-semibold">אתם לא לבד.</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  ברגעים כאלה, משפחות רבות נאלצות ללמוד תוך כדי תנועה, לחפש מידע מפוזר ולקבל החלטות תחת לחץ — מה שמוביל לא פעם לטעויות, בזבוז זמן ועומס רגשי גדול.
+                </p>
+                <p className="text-sm leading-relaxed">
+                  בדיוק בשביל זה יצרנו את <strong>hub2care</strong> — פלטפורמה אחת שמרכזת עבורכם את כל מה שצריך, משלב ההבנה ועד הביצוע.
+                </p>
+                <ul className="text-sm space-y-1.5 leading-relaxed">
+                  <li>🔹 בדיקת זכאות לסיעוד והכוונה לתביעות</li>
+                  <li>🔹 מחשבונים לניהול שכר עובד זר והוצאות טיפול</li>
+                  <li>🔹 מדריכים פשוטים וברורים לכל שלב בתהליך</li>
+                  <li>🔹 כלים לניהול ותיאום בין בני המשפחה</li>
+                  <li>🔹 צ'ק-ליסטים למצבי חירום והחלטות חשובות</li>
+                  <li>🔹 מאגר שירותים, ספקים ואנשי מקצוע</li>
+                </ul>
+                <div className="bg-muted/50 p-4 rounded-lg space-y-2">
+                  <p className="text-sm font-semibold">ואיך מתחילים?</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    מצגות ופרקי מידע, יועץ חכם לכל שאלה. אפשר להיכנס למרכז המידע וללמוד לפי שלבים, להשתמש בחיפוש כדי למצוא תשובה מהירה, להיכנס לכלים הדיגיטליים ולבחור כלי שיעזור לכם בפועל, או לגשת לתרחישים ולקבל המלצה מה כדאי לעשות במקרה שלכם, צעד אחר צעד.
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed font-medium text-primary">
+                  במקום לרדוף אחרי מידע — מקבלים סדר, שליטה ותוכנית פעולה ברורה במקום אחד.
+                </p>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 
