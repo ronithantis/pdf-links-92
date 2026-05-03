@@ -46,6 +46,9 @@ const sitePages: SearchItem[] = [
   { label: "חיפוש עובד זר", description: "מנוע חיפוש עובדים זרים", url: "/foreign-worker-search", source: "page", sourceLabel: "דף באתר" },
   { label: "מתווה שאלות לראיון עובד זר", description: "טופס מובנה עם שאלות מומלצות לראיון מועמד/ת לתפקיד מטפל/ת", url: "/forms", source: "page", sourceLabel: "טופס" },
   { label: "טפסים ומסמכים", description: "טפסים להורדה ומילוי", url: "/forms", source: "page", sourceLabel: "דף באתר" },
+  { label: "חוזה העסקה לעובד/ת מחליף/ה", description: "טופס PDF להורדה — חוזה העסקת עובדת מחליפה / עובד מחליף / עובדת זרה לתקופת חופשת העובד/ת הקבוע/ה", url: "/forms", source: "page", sourceLabel: "טופס" },
+  { label: "אישור קבלת שכר לעובד/ת מחליף/ה", description: "טופס אישור גמר תקופה ושכר ששולם לעובד/ת מחליף/ה — עובד זר זמני", url: "/forms", source: "page", sourceLabel: "טופס" },
+  { label: "העסקת עובד/ת מחליף/ה — מדריך מלא", description: "כל מה שצריך לדעת על העסקת עובדת מחליפה, עובד מחליף ועובדת זרה לתקופת חופשת העובדת הקבועה: שכר יומי, מנוחה, חוקיות, רישום בתאגיד וטפסים", url: "/module/chapter-6?section=6.2", source: "module", sourceLabel: "פרק 6 · כוח אדם" },
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
   
   { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },

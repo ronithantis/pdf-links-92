@@ -534,4 +534,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/tav-neche/",
   },
+  {
+    id: "caregiver-replacement",
+    title: "חוזה להעסקת עובד/ת מחליף/ה",
+    description: "כלי להכנה והפקה של חוזה להעסקת עובד/ת מחליף/ה בתקופת חופשת העובד/ת הקבוע/ה — תנאים, שכר יומי, מנוחה ואישור גמר תקופה",
+    icon: "FileSignature",
+    isPaid: false,
+    toolUrl: "https://ronithantis.github.io/caregiver-replacement/",
+  },
 ];

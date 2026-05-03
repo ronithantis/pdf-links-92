@@ -155,7 +155,7 @@ const Index = () => {
               </DialogContent>
             </Dialog>
           </div>
-          <div className="absolute inset-x-0 bottom-6 md:bottom-10 flex items-center justify-center px-4">
+          <div className="hidden md:flex absolute inset-x-0 bottom-10 items-center justify-center px-4">
             <Button size="lg" asChild>
               <a href="#pathway">
                 הקליקו כאן להתחיל בניווט
@@ -166,7 +166,14 @@ const Index = () => {
         </div>
 
         {/* Mobile-only: secondary buttons displayed below the video */}
-        <div className="md:hidden mt-4 flex flex-row items-center justify-center gap-2 px-4">
+        <div className="md:hidden mt-4 flex flex-col items-stretch gap-2 px-4">
+          <Button size="lg" asChild className="w-full">
+            <a href="#pathway">
+              הקליקו כאן להתחיל בניווט
+              <ArrowLeft className="h-4 w-4 mr-1" />
+            </a>
+          </Button>
+          <div className="flex flex-row items-center justify-center gap-2">
           <Dialog>
             <DialogTrigger asChild>
               <Button size="sm" variant="secondary" className="shadow text-sm flex-1">
@@ -228,6 +235,7 @@ const Index = () => {
               </div>
             </DialogContent>
           </Dialog>
+          </div>
         </div>
       </section>
 
