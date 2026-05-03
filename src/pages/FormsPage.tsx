@@ -18,6 +18,8 @@ const ALL_FORMS: Form[] = [
   { id: "9", title: "התחייבות מעסיק – עובד", filename: "form-09-employer-commitment-worker.pdf", category: "העסקת עובד זר" },
   { id: "10", title: "התחייבות מעסיק – רשות", filename: "form-10-employer-commitment-authority.pdf", category: "העסקת עובד זר" },
   { id: "33", title: "נספח היתר קטין", filename: "form-33-minor-permit-appendix.pdf", category: "העסקת עובד זר" },
+  { id: "37", title: "חוזה העסקה לעובד/ת מחליף/ה (עובד זמני)", filename: "form-37-temp-worker-employment-contract.pdf", category: "העסקת עובד זר" },
+  { id: "36", title: "אישור קבלת שכר לעובד/ת מחליף/ה (עובד זר זמני)", filename: "form-36-temp-worker-salary-confirmation.pdf", category: "העסקת עובד זר" },
   // ייפוי כוח
   { id: "5", title: "דוגמה לטופס ייפוי כוח מתמשך", filename: "form-04-power-of-attorney-example.pdf", category: "ייפוי כוח" },
   { id: "27", title: "ייפוי כוח מתמשך", filename: "form-27-lasting-power-of-attorney.pdf", category: "ייפוי כוח" },
