@@ -16,6 +16,7 @@ export const openPresentation = (url: string, title?: string) => {
 // (instead of a new browser tab). Add new GitHub Pages guides here.
 const MODAL_EXTERNAL_GUIDES = [
   "ronithantis.github.io/RECIPES",
+  "ronithantis.github.io/caregiver-replacement",
 ];
 
 export const shouldOpenInModal = (url: string): boolean => {
