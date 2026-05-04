@@ -217,7 +217,18 @@ const RightsView = () => (
         הזכות לשירותי עו״ס בגיל השלישי מעוגנת ב<strong>חוק השירותים הסוציאליים</strong> וב<strong>חוק הסיעוד</strong>. מטרתה להבטיח שהקשיש ומשפחתו לא יעמדו לבד מול אתגרי הגיל, הבריאות והבירוקרטיה. העו״ס היא הגורם המתכלל (Case Manager) שהופך את המערכת לנגישה ואנושית יותר.
       </Callout>
 
-      <ToolLink title='מצגת: תפקיד העובדת הסוציאלית בגיל השלישי' description='מצגת מקיפה — מה תפקיד העו״ס בקהילה, בקופ״ח, בבית חולים ובחברת סיעוד' linkText="← פתיחת המצגת" to="https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview" />
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-primary/20 bg-card shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><FileText className="h-5 w-5 text-primary" /></div>
+          <div>
+            <h4 className="text-sm font-bold">מצגת: תפקיד העובדת הסוציאלית בגיל השלישי</h4>
+            <p className="text-xs text-muted-foreground">מצגת מקיפה — תפקיד העו״ס בקהילה, בקופ״ח, בבית חולים ובחברת סיעוד</p>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-bold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+          ← פתיחת המצגת
+        </a>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <InfoCard icon={<Users className="h-5 w-5 text-primary" />} title="1. ליווי בקהילה (רשות מקומית)" description='ייעוץ ותמיכה (פנאי, מועדונים, מרכזי יום), הגנה על קשישים בסיכון מכוח החוק, וליווי חובה בסידור מוסדי כולל ביצוע התסקיר הסוציאלי הנדרש ל"קוד" משרד הבריאות.' footer="פנייה ליחידת הזקן בעירייה / מועצה" />
