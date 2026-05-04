@@ -212,6 +212,42 @@ const RightsView = () => (
         <InfoCard icon={<AlertTriangle className="h-5 w-5 text-destructive" />} title="אפוטרופסות" description="כשאין ייפוי כוח — בית המשפט ממנה אפוטרופוס. עדיף הרבה יותר לערוך ייפוי כוח מתמשך מראש." />
       </div>
 
+      <SubSection title="ז. הזכות לשירותי עובדת סוציאלית (עו״ס)" />
+      <Callout variant="info" title="זכות סטטוטורית">
+        הזכות לשירותי עו״ס בגיל השלישי מעוגנת ב<strong>חוק השירותים הסוציאליים</strong> וב<strong>חוק הסיעוד</strong>. מטרתה להבטיח שהקשיש ומשפחתו לא יעמדו לבד מול אתגרי הגיל, הבריאות והבירוקרטיה. העו״ס היא הגורם המתכלל (Case Manager) שהופך את המערכת לנגישה ואנושית יותר.
+      </Callout>
+
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-primary/20 bg-card shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><FileText className="h-5 w-5 text-primary" /></div>
+          <div>
+            <h4 className="text-sm font-bold">מצגת: תפקיד העובדת הסוציאלית בגיל השלישי</h4>
+            <p className="text-xs text-muted-foreground">מצגת מקיפה — תפקיד העו״ס בקהילה, בקופ״ח, בבית חולים ובחברת סיעוד</p>
+          </div>
+        </div>
+        <a href="https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-bold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+          ← פתיחת המצגת
+        </a>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <InfoCard icon={<Users className="h-5 w-5 text-primary" />} title="1. ליווי בקהילה (רשות מקומית)" description='ייעוץ ותמיכה (פנאי, מועדונים, מרכזי יום), הגנה על קשישים בסיכון מכוח החוק, וליווי חובה בסידור מוסדי כולל ביצוע התסקיר הסוציאלי הנדרש ל"קוד" משרד הבריאות.' footer="פנייה ליחידת הזקן בעירייה / מועצה" />
+        <InfoCard icon={<Activity className="h-5 w-5 text-primary" />} title="2. ליווי רפואי (קופ״ח / בית חולים)" description="עו״ס קופת חולים מסייעת בהתמודדות עם חולי כרוני, מיצוי זכויות וליווי שיקום בבית. עו״ס בית חולים מבטיחה רצף טיפולי ומתכננת את השחרור מהאשפוז." footer="פנייה דרך רופא המשפחה / הצוות הסיעודי במחלקה" />
+        <InfoCard icon={<Shield className="h-5 w-5 text-primary" />} title="3. פיקוח ובקרה (חוק הסיעוד)" description="לכל מקבל גמלת סיעוד מגיע פיקוח מקצועי. עו״ס מטעם חברת הסיעוד מבקרת בבית, מוודאת איכות טיפול, עמידת המטפל בדרישות, ושומרת על זכויות הקשיש. ממליצה על הגשת בקשה להחמרת מצב להגדלת שעות הסיעוד." footer="משויכת אוטומטית למקבלי גמלת סיעוד" />
+        <InfoCard icon={<Phone className="h-5 w-5 text-primary" />} title="4. ייעוץ ומידע (ביטוח לאומי)" description='"שירות הייעוץ לקשיש" של ביטוח לאומי — עובדות סוציאליות ומתנדבים שמסייעים במיצוי זכויות כספיות (קצבאות, גמלת סיעוד, מענקים והטבות) ובתמיכה רגשית להפגת בדידות.' footer="חיוג חינם *9696" />
+      </div>
+
+      <SubSection title="טבלת ריכוז: לאן פונים?" />
+      <StyledTable
+        headers={["הגורם המטפל", "עיקרי השירות", "דרך הגעה"]}
+        rows={[
+          ["עו״ס רווחה (רשות מקומית)", 'סידור מוסדי (קוד), הגנה על הקשיש, מועדונים', "פנייה ליחידת הזקן בעירייה/מועצה"],
+          ["עו״ס קופת חולים", "התאמת הבית, שיקום, זכויות רפואיות", "פנייה דרך רופא המשפחה"],
+          ["עו״ס חברת סיעוד", "פיקוח על המטפל, הדרכת המשפחה", "משויכת אוטומטית למקבלי גמלת סיעוד"],
+          ["עו״ס בית חולים", "תכנון שחרור מאשפוז, פתרונות חירום", "בקשה מהצוות הסיעודי במחלקה"],
+        ]}
+      />
+
       <SubSection title="שאלות נפוצות" />
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="e1"><AccordionTrigger>האם אפשר לקבל גמלת סיעוד בלי ביקור בית?</AccordionTrigger>

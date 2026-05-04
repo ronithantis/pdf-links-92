@@ -590,6 +590,30 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
                 "צוות רפואי (רופא ואחות) זמין ומבקר באופן קבוע",
               ]} />
             </div>
+
+            <div className="border rounded-lg p-4 bg-card">
+              <h4 className="font-semibold mb-3 flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                👩‍⚕️ העובדת הסוציאלית (עו״ס) — Case Manager של הקשיש
+              </h4>
+              <p className="text-sm mb-3">
+                הזכות לשירותי עו״ס היא <strong>זכות סטטוטורית</strong> המעוגנת בחוק השירותים הסוציאליים ובחוק הסיעוד. העו״ס היא הגורם המקצועי המתכלל שמטרתו להפוך את המערכת לנגישה ואנושית עבור הקשיש ומשפחתו, בארבעה צמתים מרכזיים:
+              </p>
+              <BulletList items={[
+                'עו״ס רווחה (רשות מקומית) — סידור מוסדי וביצוע התסקיר הסוציאלי הנדרש ל"קוד" משרד הבריאות, הגנה על הקשיש, מועדונים ומרכזי יום',
+                "עו״ס קופת חולים — התמודדות עם חולי כרוני, מיצוי זכויות רפואיות וליווי שיקום בבית",
+                "עו״ס בית חולים — תכנון השחרור מהאשפוז ופתרונות מיידיים לרצף טיפולי",
+                "עו״ס חברת סיעוד — ביקורי בית, פיקוח על איכות הטיפול, המלצה על הגדלת שעות סיעוד (החמרת מצב)",
+                'ביטוח לאומי — "שירות הייעוץ לקשיש" (*9696): מיצוי זכויות כספיות ותמיכה רגשית',
+              ]} />
+              <button
+                onClick={() => openPresentation('https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview', 'תפקיד העובדת הסוציאלית בגיל השלישי')}
+                className="mt-3 inline-flex items-center gap-2 text-primary font-medium hover:underline text-sm"
+              >
+                <Presentation className="h-4 w-4" />
+                מצגת: תפקיד העובדת הסוציאלית בגיל השלישי ←
+              </button>
+            </div>
           </div>
         </div>
       );

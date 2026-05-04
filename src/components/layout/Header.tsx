@@ -50,6 +50,7 @@ const sitePages: SearchItem[] = [
   { label: "אישור קבלת שכר לעובד/ת מחליף/ה", description: "טופס אישור גמר תקופה ושכר ששולם לעובד/ת מחליף/ה — עובד זר זמני", url: "/forms", source: "page", sourceLabel: "טופס" },
   { label: "העסקת עובד/ת מחליף/ה — מדריך מלא", description: "כל מה שצריך לדעת על העסקת עובדת מחליפה, עובד מחליף ועובדת זרה לתקופת חופשת העובדת הקבועה: שכר יומי, מנוחה, חוקיות, רישום בתאגיד וטפסים", url: "/module/chapter-6?section=6.2", source: "module", sourceLabel: "פרק 6 · כוח אדם" },
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
+  { label: "תפקיד העובדת הסוציאלית (עו\"ס) בגיל השלישי", description: "מצגת — הזכות לשירותי עו\"ס / עובדת סוציאלית / עובד סוציאלי בקהילה, בקופ\"ח, בבית חולים ובחברת סיעוד. ליווי, פיקוח, סידור מוסדי (קוד), מיצוי זכויות והגנה על הקשיש", url: "https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview", source: "page", sourceLabel: "מצגת · מרכז הידע" },
   
   { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
   { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },
