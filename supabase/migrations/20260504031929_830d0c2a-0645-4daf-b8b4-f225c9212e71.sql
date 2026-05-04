@@ -1,0 +1,4 @@
+INSERT INTO public.knowledge_resources (category, title, description, resource_type, url, subcategory, sort_order, is_published, scenario_tags)
+VALUES
+('forms', 'חוזה העסקה לעובד/ת מחליף/ה (עובד זר זמני)', 'חוזה העסקה לעובד זר זמני בתקופת חופשת העובד הקבוע', 'form', '/forms/form-37-temp-worker-employment-contract.pdf', 'העסקת עובד זר', 55, true, ARRAY['עובד מחליף','עובדת מחליפה','העסקת עובד מחליף','עובדת זרה לתקופת חופשה','חופשת עובד זר','אינטר ויזה']),
+('forms', 'אישור קבלת שכר לעובד/ת מחליף/ה (עובד זר זמני)', 'אישור קבלת תשלום וגמר התחשבנות לעובד מחליף בתום תקופת ההחלפה', 'form', '/forms/form-36-temp-worker-salary-confirmation.pdf', 'העסקת עובד זר', 56, true, ARRAY['עובד מחליף','עובדת מחליפה','אישור קבלת שכר','גמר התחשבנות מחליף','תשלום עובד מחליף']);

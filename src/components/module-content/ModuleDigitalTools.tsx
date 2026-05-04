@@ -32,7 +32,7 @@ const chapterToolMap: Record<string, string[]> = {
   ],
   "chapter-6": [
     "contract-explanation", "daily-care", "holiday-selector",
-    "med-tracker", "blue-folder", "caregiver-communicator", "printable-calendar", "interview-manager", "foreign-worker-rights", "worker-guide",
+    "med-tracker", "blue-folder", "caregiver-communicator", "printable-calendar", "interview-manager", "foreign-worker-rights", "worker-guide", "caregiver-replacement",
   ],
   "chapter-7": [
     "emergency-protocol",

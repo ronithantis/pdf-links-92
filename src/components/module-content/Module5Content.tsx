@@ -102,7 +102,12 @@ export const Module5Content = ({ subId }: SubModuleContentProps) => {
               "חסרונות: קושי בהפרדת גבולות, זכויות סוציאליות",
             ]} />
           </InfoBox>
+        </div>
+      );
 
+    case "6.6":
+      return (
+        <div className="space-y-5 text-foreground text-sm leading-relaxed">
           <SectionTitle icon={Users}>העסקת עובד/ת מחליף/ה בתקופת חופשת המטפל/ת הקבוע/ה</SectionTitle>
           <InfoBox variant="info">
             <p className="text-sm">
