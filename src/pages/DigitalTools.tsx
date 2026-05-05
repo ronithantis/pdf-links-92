@@ -8,7 +8,7 @@ import { digitalTools } from "@/lib/modules-data";
 import {
   Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature,
   Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase,
-  CalendarDays, ExternalLink, Maximize2, Minimize2, X, Compass, FolderOpen, ShieldAlert
+  CalendarDays, ExternalLink, Maximize2, Minimize2, X, Compass, FolderOpen, ShieldAlert, Info
 } from "lucide-react";
 
 const toolIcons: Record<string, React.ReactNode> = {
@@ -33,6 +33,7 @@ const DigitalTools = () => {
   const navigate = useNavigate();
   const [openTool, setOpenTool] = useState<typeof digitalTools[0] | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   useEffect(() => {
     if (location.hash) {
@@ -61,7 +62,13 @@ const DigitalTools = () => {
 
   return (
     <div className="container py-10">
-      <h1 className="text-3xl font-bold mb-2">כלים דיגיטליים</h1>
+      <div className="flex items-start justify-between gap-4 mb-2 flex-wrap">
+        <h1 className="text-3xl font-bold">כלים דיגיטליים</h1>
+        <Button variant="outline" size="sm" onClick={() => setAboutOpen(true)} className="gap-2">
+          <Info className="h-4 w-4" />
+          הסבר אודות הכלים
+        </Button>
+      </div>
       <p className="text-lg text-muted-foreground mb-10">כלים מעשיים לניהול הטיפול, חישובים ותכנון משפטי</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
@@ -150,6 +157,74 @@ const DigitalTools = () => {
           </DialogContent>
         </Dialog>
       )}
+
+      {/* About-tools dialog */}
+      <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
+        <DialogContent className="max-w-3xl w-[95vw] max-h-[85vh] overflow-y-auto" dir="rtl">
+          <DialogHeader>
+            <DialogTitle className="text-xl">הסבר אודות הכלים הדיגיטליים</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-6 text-sm leading-relaxed">
+            <section>
+              <h3 className="font-bold text-base text-primary mb-2">1. גיוס, חוזים וקליטת עובד</h3>
+              <p className="text-muted-foreground mb-2">ריכוז כלל הכלים הדרושים בשלב תחילת ההעסקה או החלפת מטפל.</p>
+              <ul className="list-disc pr-5 space-y-1">
+                <li><strong>ניהול ראיון לגיוס עובד זר:</strong> כלי להכנה וניהול ראיון עבודה עם מועמדים לתפקיד מטפל/ת.</li>
+                <li><strong>מדריך לעובד זר חדש:</strong> הסבר לעובד על זכויות, חובות, תרבות ושפה עם הגעתו לארץ.</li>
+                <li><strong>תאום ציפיות עם עובד זר:</strong> טופס מובנה לניסוח והפקת מסמך מוסכם בין המשפחה לעובד.</li>
+                <li><strong>מדריך לחוזה העסקת עובד זר:</strong> כלי להבנת היבטים חשובים לקראת חתימה על חוזה העסקה.</li>
+                <li><strong>חוזה להעסקת עובד/ת מחליף/ה:</strong> כלי להפקה וחתימה על חוזה לתקופת חופשת המטפל הקבוע.</li>
+                <li><strong>בחירת ימי חג לעובד זר:</strong> כלי לבחירת 9 ימי חג שנתיים והדפסתם עבור העובד.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="font-bold text-base text-primary mb-2">2. זכויות, כספים והטבות</h3>
+              <p className="text-muted-foreground mb-2">הכלים המעניקים מענה לדרישות החוק, מיצוי זכויות וניהול תקציב.</p>
+              <ul className="list-disc pr-5 space-y-1">
+                <li><strong>מדריך להוצאת תו נכה לקשיש לא נייד:</strong> מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור קשיש מוגבל בניידות.</li>
+                <li><strong>מחשבון שכר עובד זר (Hub2Care):</strong> חישוב שכר חודשי והוצאות העסקה, המבוסס על שכר מינימום של 6,247 ש"ח.</li>
+                <li><strong>זכויות עובד זר – מחשבון ומדריך:</strong> כלי אינטראקטיבי לבדיקת זכויות המטפל בשכר, חופשות ופנסיה.</li>
+                <li><strong>מחשבון גמר חשבון:</strong> חישוב מדויק של פיצויים, דמי הבראה וימי חופשה בסיום ההעסקה.</li>
+                <li><strong>מדריך להגשת תביעת סיעוד:</strong> ליווי שלב אחר שלב בהגשת תביעת הסיעוד, איסוף מסמכים והפקת דוחות.</li>
+                <li><strong>ניהול הוצאות הטיפול:</strong> מערכת למעקב אחר הוצאות בבית המטופל והפקת דוחות משפחתיים.</li>
+                <li><strong>מחשבון קוד סיעודי:</strong> כלי חיצוני (משרד הבריאות) להערכת רמת הסיעוד וגובה ההשתתפות העצמית.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="font-bold text-base text-primary mb-2">3. ניהול הטיפול השוטף</h3>
+              <p className="text-muted-foreground mb-2">כלים דיגיטליים המסייעים בתפעול היום-יומי ובקשר עם המטפל והמשפחה.</p>
+              <ul className="list-disc pr-5 space-y-1">
+                <li><strong>מעקב ודיווח יומי:</strong> מערכת לדיווח על משימות הטיפול ומצבו של המטופל בשפות שונות.</li>
+                <li><strong>ניהול ומעקב מתן תרופות:</strong> מערכת יומית להגדרת תרופות, סימון מתן ושליחת דוחות למשפחה.</li>
+                <li><strong>סנכרון הטיפול המשפחתי:</strong> מערכת לתכנון מטלות וחלוקת תפקידים בין בני המשפחה המטפלת.</li>
+                <li><strong>תקשורת מטפל-מטופל:</strong> כלי המשתמש בתמונות ובסמלים לגישור על פערי שפה בסיטואציות טיפוליות.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="font-bold text-base text-primary mb-2">4. תכנון משפטי ועתידי</h3>
+              <p className="text-muted-foreground mb-2">הסדרת הרצונות וההגנות המשפטיות של המטופל לטווח הארוך.</p>
+              <ul className="list-disc pr-5 space-y-1">
+                <li><strong>מדריך לייפוי כוח מתמשך:</strong> מדריך אינטראקטיבי המכין את המשפחה לקראת עריכת המסמך.</li>
+                <li><strong>כתיבת צוואה:</strong> כלי לניסוח טיוטת צוואה עם הדרכה שלב אחר שלב.</li>
+                <li><strong>מצפן חיים:</strong> כלי לתיעוד רצונות המטופל כחלופה לא פורמלית לייפוי כוח מתמשך.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="font-bold text-base text-primary mb-2">5. כלים נוספים</h3>
+              <p className="text-muted-foreground mb-2">קטגוריה המיועדת לכלים כלליים, כלי עזר לוגיסטיים וכלים חדשים שיצטרפו בעתיד.</p>
+              <ul className="list-disc pr-5 space-y-1">
+                <li><strong>תיק כחול:</strong> ניהול דיגיטלי מסודר של כלל המסמכים, התשלומים והאישורים במקום אחד.</li>
+                <li><strong>פרוטוקול חירום:</strong> כרטיס מטופל דיגיטלי הכולל נתונים רפואיים חיוניים לזמן חירום.</li>
+                <li><strong>לוח חודשי להדפסה:</strong> עריכה והדפסה של לוח חודשי עברי-לועזי עם תזכורות לאירועים חשובים.</li>
+              </ul>
+            </section>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
