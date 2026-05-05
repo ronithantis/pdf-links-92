@@ -599,13 +599,87 @@ export const Module9Content = ({ subId }: Module9ContentProps) => {
               <p className="text-sm mb-3">
                 הזכות לשירותי עו״ס היא <strong>זכות סטטוטורית</strong> המעוגנת בחוק השירותים הסוציאליים ובחוק הסיעוד. העו״ס היא הגורם המקצועי המתכלל שמטרתו להפוך את המערכת לנגישה ואנושית עבור הקשיש ומשפחתו, בארבעה צמתים מרכזיים:
               </p>
-              <BulletList items={[
-                'עו״ס רווחה (רשות מקומית) — סידור מוסדי וביצוע התסקיר הסוציאלי הנדרש ל"קוד" משרד הבריאות, הגנה על הקשיש, מועדונים ומרכזי יום',
-                "עו״ס קופת חולים — התמודדות עם חולי כרוני, מיצוי זכויות רפואיות וליווי שיקום בבית",
-                "עו״ס בית חולים — תכנון השחרור מהאשפוז ופתרונות מיידיים לרצף טיפולי",
-                "עו״ס חברת סיעוד — ביקורי בית, פיקוח על איכות הטיפול, המלצה על הגדלת שעות סיעוד (החמרת מצב)",
-                'ביטוח לאומי — "שירות הייעוץ לקשיש" (*9696): מיצוי זכויות כספיות ותמיכה רגשית',
-              ]} />
+
+              <div className="space-y-4">
+                <div>
+                  <h5 className="font-semibold text-sm mb-1">1. הזכות לליווי בקהילה (המחלקה לשירותים חברתיים ברשות המקומית)</h5>
+                  <p className="text-sm mb-2">כל קשיש בישראל זכאי לכתובת מקצועית ברשות המקומית מגוריו:</p>
+                  <BulletList items={[
+                    "ייעוץ ותמיכה — קבלת מידע על שירותי פנאי, מועדונים ומרכזי יום",
+                    "הגנה וביטחון — העו״ס פועלת מכוח חוק להגנה על קשישים במצבי סיכון, הזנחה או ניצול",
+                    'סידור מוסדי ("קוד" משרד הבריאות) — ליווי חובה בתהליך המעבר לבית אבות סיעודי, כולל ביצוע התסקיר הסוציאלי הנדרש לסבסוד המדינה',
+                  ]} />
+                </div>
+
+                <div>
+                  <h5 className="font-semibold text-sm mb-1">2. הזכות לליווי רפואי (קופות החולים ובתי החולים)</h5>
+                  <p className="text-sm mb-2">מערכת הבריאות מחויבת במתן מענה סוציאלי כחלק בלתי נפרד מהטיפול הרפואי:</p>
+                  <BulletList items={[
+                    "עו״ס קופת חולים — סיוע בהתמודדות עם חולי כרוני, מיצוי זכויות מול הקופה וליווי בתהליכי שיקום בבית",
+                    'עו״ס בבית חולים — הבטחת "רצף טיפולי", סיוע בתכנון השחרור מהאשפוז ומציאת פתרונות מיידיים לקשישים שאינם יכולים לשוב לביתם ללא עזרה',
+                  ]} />
+                </div>
+
+                <div>
+                  <h5 className="font-semibold text-sm mb-1">3. הזכות לפיקוח ובקרה (חוק הסיעוד)</h5>
+                  <p className="text-sm mb-2">קשישים המקבלים גמלת סיעוד זכאים לפיקוח מקצועי על הטיפול בביתם:</p>
+                  <BulletList items={[
+                    "ביקורי בית — העו״ס מטעם חברת הסיעוד מחויבת לבקר בבית הקשיש כדי לוודא שאיכות הטיפול נשמרת, שהמטפל עומד בדרישות ושזכויות הקשיש אינן נפגעות",
+                    "שינוי רמת זכאות — העו״ס היא הגורם המקצועי שיכול להמליץ על הגשת בקשה להחמרת מצב לצורך הגדלת שעות הסיעוד",
+                  ]} />
+                </div>
+
+                <div>
+                  <h5 className="font-semibold text-sm mb-1">4. הזכות לייעוץ ומידע (המוסד לביטוח לאומי)</h5>
+                  <p className="text-sm mb-2">המוסד מפעיל את "שירות הייעוץ לקשיש" (*9696), המבוסס על עובדות סוציאליות ומתנדבים:</p>
+                  <BulletList items={[
+                    "מיצוי זכויות כספיות — הכוונה לגבי קצבאות זקנה, גמלת סיעוד, מענקים והטבות נוספות",
+                    "תמיכה רגשית — מתן אוזן קשבת וסיוע בהפגת בדידות לקשישים ובני משפחותיהם",
+                  ]} />
+                </div>
+
+                <div>
+                  <h5 className="font-semibold text-sm mb-2">📋 טבלת ריכוז: לאן פונים?</h5>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm border-collapse">
+                      <thead>
+                        <tr className="bg-muted">
+                          <th className="border p-2 text-right">הגורם המטפל</th>
+                          <th className="border p-2 text-right">עיקרי השירות</th>
+                          <th className="border p-2 text-right">דרך הגעה</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border p-2 font-medium">עו״ס רווחה (רשות מקומית)</td>
+                          <td className="border p-2">סידור מוסדי (קוד), הגנה על הקשיש, מועדונים</td>
+                          <td className="border p-2">פנייה ליחידת הזקן בעירייה/מועצה</td>
+                        </tr>
+                        <tr className="bg-muted/30">
+                          <td className="border p-2 font-medium">עו״ס קופת חולים</td>
+                          <td className="border p-2">התאמת הבית, שיקום, זכויות רפואיות</td>
+                          <td className="border p-2">פנייה דרך רופא המשפחה</td>
+                        </tr>
+                        <tr>
+                          <td className="border p-2 font-medium">עו״ס חברת סיעוד</td>
+                          <td className="border p-2">פיקוח על המטפל, הדרכת המשפחה</td>
+                          <td className="border p-2">משויכת אוטומטית למקבלי גמלת סיעוד</td>
+                        </tr>
+                        <tr className="bg-muted/30">
+                          <td className="border p-2 font-medium">עו״ס בי״ח</td>
+                          <td className="border p-2">תכנון שחרור מאשפוז, פתרונות חירום</td>
+                          <td className="border p-2">בקשה מהצוות הסיעודי במחלקה</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <p className="text-sm bg-primary/5 border-r-4 border-primary p-3 rounded">
+                  <strong>שורה תחתונה:</strong> העובדת הסוציאלית היא הגורם המתכלל (Case Manager) שתפקידו להפוך את המערכת לנגישה ואנושית יותר עבור הקשיש ומשפחתו.
+                </p>
+              </div>
+
               <button
                 onClick={() => openPresentation('https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview', 'תפקיד העובדת הסוציאלית בגיל השלישי')}
                 className="mt-3 inline-flex items-center gap-2 text-primary font-medium hover:underline text-sm"
