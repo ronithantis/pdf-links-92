@@ -421,6 +421,11 @@ export const Module5Content = ({ subId }: SubModuleContentProps) => {
                   <ExternalLink className="h-3 w-3" />
                   ניהול ומעקב מתן תרופות
                 </Link>
+                <span className="text-muted-foreground text-xs">|</span>
+                <Link to="/tools#medicine-manager" className="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+                  <ExternalLink className="h-3 w-3" />
+                  תרופות – תזכורות עם תמונות לזיהוי
+                </Link>
               </div>
             </div>
           </div>

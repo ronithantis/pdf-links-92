@@ -543,4 +543,12 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/caregiver-replacement/",
   },
+  {
+    id: "medicine-manager",
+    title: "תרופות – תזכורות ומעקב כולל תמונות לזיהוי",
+    description: "כלי לניהול תרופות מרובות — תזכורות, תיעוד נטילה ותמונות לזיהוי חזותי של כל תרופה (חיוני להפחתת טעויות ולפיקוח על המטפל)",
+    icon: "ClipboardList",
+    isPaid: false,
+    toolUrl: "https://ronithantis.github.io/medicine-manager/",
+  },
 ];
