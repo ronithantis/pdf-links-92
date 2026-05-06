@@ -210,6 +210,7 @@ const KEYWORD_RULES: KeywordRule[] = [
     tools: [
       { path: "https://drive.google.com/file/d/1GwqCAPfS2-dkLTqJ9PXd63KNWJEkTRts/preview", label: "מצגת: מדריך לקוד סיעודי – אשפוז במוסד", reason: "מצגת מקיפה — מהו קוד סיעודי, זכאות, תהליך, מבחן הכנסות, מסמכים נדרשים ומימון אשפוז במוסד סיעודי או מחלקת תשושי נפש" },
       { path: "https://drive.google.com/file/d/1k_kfvnmM5M1lJA_SapxOmjs4bnKNN_ud/preview", label: "מצגת: מדריך למשפחה – דיור מוגן, בתי אבות ואשפוז", reason: "מצגת מקיפה על כל חלופות המגורים: דיור מוגן, בתי אבות, מחלקות סיעודיות ושיקום — כולל השוואת עלויות וצ׳קליסט לבחירה" },
+      { path: "https://cjtnsspg.gensparkspace.com/", label: "מצגת: מדריך למשפחה – דיור מוגן", reason: "מצגת ייעודית לבחירת דיור מוגן והתאמה למשפחה" },
       { path: "https://me.health.gov.il/nursing-calculator/", label: "מחשבון קוד סיעודי", reason: "כלי של משרד הבריאות להערכת רמת הסיעוד וגובה ההשתתפות העצמית" },
       { path: "/forms", label: "טופס בקשה למסגרת מוסדית – שחרור מבית חולים", reason: "טופס PDF להגשת בקשה לאשפוז במוסד סיעודי בעת שחרור מבית חולים" },
       { path: "/module/chapter-9", label: "פרק 9 — חלופות מגורים ואשפוז", reason: "המדריך המלא: מתי לשקול מעבר, סוגי מסגרות, מימון, תהליך בחירה וקליטה" },
