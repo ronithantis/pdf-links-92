@@ -52,6 +52,10 @@ const sitePages: SearchItem[] = [
   { label: "מעקב תרופות", description: "ניהול ומעקב אחר תרופות", url: "/med-tracker", source: "page", sourceLabel: "דף באתר" },
   { label: "תרופות – תזכורות ומעקב כולל תמונות לזיהוי", description: "כלי לניהול תרופות מרובות עם תזכורות ותמונות חזותיות של כל תרופה — מפחית טעויות, חיוני כשמטפל זר נותן תרופות, מתאים למצבי סירוב לקחת תרופה ולטיפול ביתי", url: "/tools#medicine-manager", source: "page", sourceLabel: "כלי דיגיטלי" },
   { label: "תפקיד העובדת הסוציאלית (עו\"ס) בגיל השלישי", description: "מצגת — הזכות לשירותי עו\"ס / עובדת סוציאלית / עובד סוציאלי בקהילה, בקופ\"ח, בבית חולים ובחברת סיעוד. ליווי, פיקוח, סידור מוסדי (קוד), מיצוי זכויות והגנה על הקשיש", url: "https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview", source: "page", sourceLabel: "מצגת · מרכז הידע" },
+  { label: "מדריך לקוד סיעודי – אשפוז במוסד", description: "מצגת מקיפה — קוד סיעודי, בית אבות, מוסד סיעודי, חלופות מגורים, מבחן הכנסות, השתתפות עצמית, מימון אשפוז במוסד סיעודי / תשושי נפש", url: "https://drive.google.com/file/d/1GwqCAPfS2-dkLTqJ9PXd63KNWJEkTRts/preview", source: "page", sourceLabel: "מצגת · מרכז הידע" },
+  { label: "מחשבון קוד סיעודי", description: "כלי משרד הבריאות — הערכת רמת סיעוד וגובה השתתפות עצמית למוסד סיעודי", url: "https://me.health.gov.il/nursing-calculator/", source: "tool", sourceLabel: "כלי חיצוני" },
+  { label: "טופס בקשה למסגרת מוסדית – שחרור מבית חולים", description: "טופס PDF להגשת בקשה לאשפוז במוסד סיעודי לאחר שחרור מבית חולים", url: "/forms", source: "page", sourceLabel: "טופס" },
+  { label: "היבטים קליניים וניהול הטיפול הפיסי", description: "מצגת — פצעי לחץ, תזונה ובליעה, ניהול הפרשות, רפואת שיניים שמיעה וראייה — מדריך קליני מקיף לניהול הטיפול בבית", url: "https://dtkqhgor.gensparkspace.com/", source: "page", sourceLabel: "מצגת · מרכז הידע" },
   
   { label: "צור קשר", description: "יצירת קשר עם הצוות", url: "/contact", source: "page", sourceLabel: "דף באתר" },
   { label: "אודות", description: "אודות האתר והצוות", url: "/about", source: "page", sourceLabel: "דף באתר" },

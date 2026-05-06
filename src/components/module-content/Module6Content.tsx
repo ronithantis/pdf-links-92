@@ -1,4 +1,4 @@
-import { AlertTriangle, CheckCircle, Droplets, Eye, Ear, SmilePlus } from "lucide-react";
+import { AlertTriangle, CheckCircle, Droplets, Eye, Ear, SmilePlus, Presentation, ExternalLink, BookOpen } from "lucide-react";
 
 interface Module6ContentProps {
   subId: string;
@@ -35,6 +35,21 @@ export const Module6Content = ({ subId }: Module6ContentProps) => {
       return (
         <div className="space-y-6 text-foreground">
           <h3 className="text-xl font-bold">מניעת פצעי לחץ</h3>
+
+          <div className="border rounded-lg p-4 bg-primary/5 border-primary/30">
+            <h4 className="font-semibold mb-2 flex items-center gap-2">
+              <Presentation className="h-5 w-5 text-primary" />
+              מצגת מלווה — היבטים קליניים וניהול הטיפול הפיסי
+            </h4>
+            <p className="text-sm text-muted-foreground mb-2">מצגת מקיפה לכל פרק ההיבטים הקליניים: פצעי לחץ, תזונה, הפרשות ובריאות הפה, השמיעה והראייה.</p>
+            <div className="flex flex-wrap gap-3 text-sm">
+              <a href="https://dtkqhgor.gensparkspace.com/" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline inline-flex items-center gap-1"><ExternalLink className="h-3.5 w-3.5" />פתיחת המצגת</a>
+              <a href="https://ronithantis.github.io/Bathing-Guide-/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1"><BookOpen className="h-3.5 w-3.5" />מדריך רחצה</a>
+              <a href="https://ronithantis.github.io/Feeding-Guide/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1"><BookOpen className="h-3.5 w-3.5" />מדריך האכלה</a>
+              <a href="/guides/diaper-change.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1"><BookOpen className="h-3.5 w-3.5" />מדריך החלפת חיתול</a>
+              <a href="https://ronithantis.github.io/RECIPES/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1"><BookOpen className="h-3.5 w-3.5" />מתכונים לאדם סיעודי</a>
+            </div>
+          </div>
           
           <InfoBox title="מהם פצעי לחץ?" variant="warning">
             <p>פצעי לחץ נוצרים כשיש לחץ מתמשך על אזור גרמי (מרפקים, עקבים, אגן, שכמות) הגורם לפגיעה בזרימת הדם וברקמות. מניעה היא "טיפול בסיסי" – זולה ויעילה.</p>
