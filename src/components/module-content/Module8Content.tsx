@@ -1,4 +1,60 @@
-import { CheckCircle, AlertTriangle, Home, Building, DollarSign, ClipboardList, MessageCircle, Users } from "lucide-react";
+import { CheckCircle, AlertTriangle, Home, Building, DollarSign, ClipboardList, MessageCircle, Users, Presentation, ExternalLink, FileText, Calculator } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const ResourcesPanel = () => (
+  <div className="border rounded-lg p-4 bg-primary/5 border-primary/30 space-y-2">
+    <h4 className="font-semibold flex items-center gap-2 text-primary">
+      <Presentation className="h-5 w-5" />
+      מצגות וכלים מלווים לפרק
+    </h4>
+    <ul className="space-y-1.5 text-sm">
+      <li>
+        <a href="https://drive.google.com/file/d/1GwqCAPfS2-dkLTqJ9PXd63KNWJEkTRts/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          מצגת: מדריך לקוד סיעודי – אשפוז במוסד
+        </a>
+        <span className="text-muted-foreground"> — זכאות, מבחן הכנסות, תהליך הקבלה ומימון</span>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1k_kfvnmM5M1lJA_SapxOmjs4bnKNN_ud/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          מצגת: מדריך למשפחה – דיור מוגן, בתי אבות ואשפוז
+        </a>
+      </li>
+      <li>
+        <a href="https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          מצגת: תפקיד העובדת הסוציאלית (עו"ס)
+        </a>
+        <span className="text-muted-foreground"> — תסקיר סוציאלי, סידור מוסדי וליווי המשפחה</span>
+      </li>
+      <li>
+        <a href="https://me.health.gov.il/nursing-calculator/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <Calculator className="h-3.5 w-3.5" />
+          מחשבון קוד סיעודי (משרד הבריאות)
+        </a>
+      </li>
+      <li>
+        <a href="/forms/form-28-institutional-care-request.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <FileText className="h-3.5 w-3.5" />
+          טופס: בקשה למסגרת מוסדית – שחרור מבית חולים
+        </a>
+      </li>
+      <li>
+        <Link to="/tools#emergency-protocol" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          כלי: פרוטוקול חירום – כרטיס מטופל לקליטה במוסד
+        </Link>
+      </li>
+      <li>
+        <Link to="/tools#blue-folder" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          כלי: תיק כחול – ריכוז מסמכים לקראת מעבר
+        </Link>
+      </li>
+    </ul>
+  </div>
+);
 
 interface Module8ContentProps {
   subId: string;
@@ -35,6 +91,8 @@ export const Module8Content = ({ subId }: Module8ContentProps) => {
       return (
         <div className="space-y-6 text-foreground">
           <h3 className="text-xl font-bold">מתי לשקול מעבר מהבית למסגרת?</h3>
+
+          <ResourcesPanel />
 
           <InfoBox title="עיקרון מנחה" variant="info">
             <p>המטרה אינה לוותר על הבית, אלא לבחור במסגרת שמספקת בטיחות, טיפול ואיכות חיים – כשהבית כבר לא מצליח לעשות זאת.</p>
