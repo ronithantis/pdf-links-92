@@ -22,6 +22,13 @@ const ResourcesPanel = () => (
         </a>
       </li>
       <li>
+        <a href="https://cjtnsspg.gensparkspace.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+          <ExternalLink className="h-3.5 w-3.5" />
+          מצגת: מדריך למשפחה – דיור מוגן
+        </a>
+        <span className="text-muted-foreground"> — בחירת דיור מוגן והתאמה למשפחה</span>
+      </li>
+      <li>
         <a href="https://drive.google.com/file/d/1pHX6tf6vWZrduScute9yUBVCy49U23yV/preview" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
           <ExternalLink className="h-3.5 w-3.5" />
           מצגת: תפקיד העובדת הסוציאלית (עו"ס)
