@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const ResourcesPanel = () => (
   <div className="border rounded-lg p-4 bg-primary/5 border-primary/30 space-y-2">
-    <h4 className="font-semibold flex items-center gap-2 text-primary">
-      <Presentation className="h-5 w-5" />
-      מצגות וכלים מלווים לפרק
+    <h4 className="font-bold text-base md:text-lg flex items-center gap-2 text-foreground">
+      <Presentation className="h-5 w-5 text-primary" />
+      לרשותכם בפרק זה מצגות וכלים מלווים:
     </h4>
     <ul className="space-y-1.5 text-sm">
       <li>
