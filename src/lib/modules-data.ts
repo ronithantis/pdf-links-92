@@ -365,6 +365,7 @@ export const digitalTools = [
     isPaid: false,
     isInternal: true,
     toolUrl: "/salary-calculator",
+    category: "rights",
   },
   {
     id: "expense-tracker",
@@ -373,6 +374,7 @@ export const digitalTools = [
     icon: "Wallet",
     isPaid: false,
     toolUrl: "https://elder-support-ledger.lovable.app/",
+    category: "rights",
   },
   {
     id: "nursing-claim-guide",
@@ -381,6 +383,7 @@ export const digitalTools = [
     icon: "ShieldCheck",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/harel-siud-guide/",
+    category: "rights",
   },
   {
     id: "final-settlement-calc",
@@ -389,6 +392,7 @@ export const digitalTools = [
     icon: "Receipt",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/gamar-cheshbon/",
+    category: "rights",
   },
   {
     id: "expectations-alignment",
@@ -397,6 +401,7 @@ export const digitalTools = [
     icon: "Handshake",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/careagree/",
+    category: "hiring",
   },
   {
     id: "family-sync",
@@ -405,6 +410,7 @@ export const digitalTools = [
     icon: "RefreshCw",
     isPaid: false,
     toolUrl: "https://familycaresync.lovable.app/",
+    category: "daily",
   },
   {
     id: "contract-explanation",
@@ -413,6 +419,7 @@ export const digitalTools = [
     icon: "Briefcase",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/caregiver-agreement/",
+    category: "hiring",
   },
   {
     id: "daily-care",
@@ -421,6 +428,7 @@ export const digitalTools = [
     icon: "ClipboardList",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/Daily-monitoring/",
+    category: "daily",
   },
   {
     id: "holiday-selector",
@@ -429,6 +437,7 @@ export const digitalTools = [
     icon: "CalendarDays",
     isPaid: false,
     toolUrl: "https://holiday-helper-multilingual.lovable.app/",
+    category: "hiring",
   },
   {
     id: "will-template",
@@ -437,6 +446,7 @@ export const digitalTools = [
     icon: "FileSignature",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/will-builder/",
+    category: "legal",
   },
   {
     id: "poa-guide",
@@ -445,6 +455,7 @@ export const digitalTools = [
     icon: "BookOpen",
     isPaid: false,
     toolUrl: "https://yipuy-koach-iota.vercel.app/",
+    category: "legal",
   },
   {
     id: "nursing-code-calculator",
@@ -454,6 +465,7 @@ export const digitalTools = [
     isPaid: false,
     isExternal: true,
     externalUrl: "https://me.health.gov.il/nursing-calculator/",
+    category: "rights",
   },
   {
     id: "life-compass",
@@ -462,6 +474,7 @@ export const digitalTools = [
     icon: "Compass",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/Matzpen-chaim/",
+    category: "legal",
   },
   {
     id: "med-tracker",
@@ -471,6 +484,7 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "/med-tracker",
     isInternal: true,
+    category: "daily",
   },
   {
     id: "blue-folder",
@@ -479,6 +493,7 @@ export const digitalTools = [
     icon: "FolderOpen",
     isPaid: false,
     toolUrl: "https://effulgent-liger-ffb340.netlify.app/",
+    category: "extra",
   },
   {
     id: "emergency-protocol",
@@ -487,6 +502,7 @@ export const digitalTools = [
     icon: "ShieldAlert",
     isPaid: false,
     toolUrl: "https://astonishing-pony-0b9a51.netlify.app/",
+    category: "extra",
   },
   {
     id: "caregiver-communicator",
@@ -495,6 +511,7 @@ export const digitalTools = [
     icon: "Handshake",
     isPaid: false,
     toolUrl: "https://effortless-empanada-30cdf9.netlify.app/",
+    category: "daily",
   },
   {
     id: "printable-calendar",
@@ -504,6 +521,7 @@ export const digitalTools = [
     isPaid: false,
     toolUrl: "/printable-calendar",
     isInternal: true,
+    category: "extra",
   },
   {
     id: "interview-manager",
@@ -512,6 +530,7 @@ export const digitalTools = [
     icon: "ClipboardList",
     isPaid: false,
     toolUrl: "/tools/interview-manager.html",
+    category: "hiring",
   },
   {
     id: "foreign-worker-rights",
@@ -520,6 +539,7 @@ export const digitalTools = [
     icon: "ShieldCheck",
     isPaid: false,
     toolUrl: "https://charming-duckanoo-b30851.netlify.app/",
+    category: "rights",
   },
   {
     id: "worker-guide",
@@ -528,6 +548,7 @@ export const digitalTools = [
     icon: "BookOpen",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/worker-guide/",
+    category: "hiring",
   },
   {
     id: "disability-tag-guide",
@@ -536,6 +557,7 @@ export const digitalTools = [
     icon: "ShieldCheck",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/tav-neche/",
+    category: "rights",
   },
   {
     id: "caregiver-replacement",
@@ -544,6 +566,7 @@ export const digitalTools = [
     icon: "FileSignature",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/caregiver-replacement/",
+    category: "hiring",
   },
   {
     id: "medicine-manager",
@@ -552,5 +575,34 @@ export const digitalTools = [
     icon: "ClipboardList",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/medicine-manager/",
+    category: "daily",
   },
 ];
+
+export const digitalToolCategories = [
+  {
+    id: "hiring",
+    title: "גיוס, חוזים וקליטת עובד",
+    description: "ריכוז כלל הכלים הדרושים בשלב תחילת ההעסקה או החלפת מטפל",
+  },
+  {
+    id: "rights",
+    title: "זכויות, כספים והטבות",
+    description: "הכלים המעניקים מענה לדרישות החוק, מיצוי זכויות וניהול תקציב",
+  },
+  {
+    id: "daily",
+    title: "ניהול הטיפול השוטף",
+    description: "כלים דיגיטליים המסייעים בתפעול היום-יומי ובקשר עם המטפל והמשפחה",
+  },
+  {
+    id: "legal",
+    title: "תכנון משפטי ועתידי",
+    description: "הסדרת הרצונות וההגנות המשפטיות של המטופל לטווח הארוך",
+  },
+  {
+    id: "extra",
+    title: "כלים נוספים",
+    description: "קטגוריה לכלים כלליים, כלי עזר לוגיסטיים וכלים חדשים שיצטרפו בעתיד",
+  },
+] as const;
