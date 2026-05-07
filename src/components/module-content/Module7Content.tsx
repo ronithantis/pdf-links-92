@@ -305,6 +305,9 @@ export const Module7Content = ({ subId }: Module7ContentProps) => {
                   <a href="/guides/diaper-change.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
                     📘 מדריך החלפת חיתול (PDF) ←
                   </a>
+                  <a href="/guides/diaper-change-interactive.html" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                    📖 מדריך החלפת חיתול — אינטראקטיבי (אקורדיון) ←
+                  </a>
                 </div>
               </InfoBox>
             </InfoBox>
