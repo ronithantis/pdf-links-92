@@ -146,6 +146,19 @@ const RightsView = () => (
         <InfoCard title="קצבת נכה בפרישה" description="קשיש שהיה נכה לפני גיל פרישה — זכאי לקצבת נכה. ייתכן שגבוהה מהרגילה — כדאי לבדוק." />
       </div>
 
+      <SubSection title="ג1. זכויות לאחר פטירה — מענק, שאירים, ירושה" />
+      <Callout variant="info" title="מדריך מלא: מה עושים לאחר פטירה">
+        ריכזנו עבורכם מדריך מקיף — מהשעות הראשונות (הודעת פטירה, רישיון קבורה, פינוי), דרך תעודת פטירה רשמית, מענק פטירה וקצבת שאירים, ועד צו ירושה / קיום צוואה וניהול עיזבון. <a href="/guides/after-death-guide.html" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold underline">לקריאה אונליין</a> · <a href="/guides/after-death-guide.pdf" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold underline">PDF להורדה</a> · <Link to="/module/burden-of-care#9.12" className="text-primary font-semibold underline">סעיף 9.12 באתר</Link>
+      </Callout>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <InfoCard icon={<DollarSign className="h-5 w-5 text-primary" />} title="מענק פטירה" description="10,514 ש״ח (החל מ-01.01.2026). משולם בדרך כלל אוטומטית לבן/בת הזוג של נפטר שקיבל קצבאות (כגון אזרח ותיק)." footer="הגוף המעניק: ביטוח לאומי *6050" />
+        <InfoCard icon={<Heart className="h-5 w-5 text-primary" />} title="קצבת שאירים" description="אלמן/ה ויתומים של תושב ישראל — קצבה חודשית. יש להגיש תביעה מסודרת — לא תמיד אוטומטי." footer="הגוף המעניק: ביטוח לאומי *6050" />
+        <InfoCard icon={<Building className="h-5 w-5 text-primary" />} title="קבורה בסיסית — חינם" description="כל תושב ישראל זכאי לקבורה בסיסית באזור מגוריו ללא עלות. שדרוגים, חלקה חריגה וקבורה אזרחית — בתשלום." footer="הגוף המעניק: ביטוח לאומי דרך חברה קדישא" />
+        <InfoCard icon={<FileText className="h-5 w-5 text-primary" />} title="תעודת פטירה רשמית" description="שונה מהודעת פטירה הרפואית. נדרשת לכל הליך כספי ומשפטי. ניתן להזמין בחינם אונליין ב-Gov.il." footer="הגוף המעניק: רשות האוכלוסין (משרד הפנים)" />
+        <InfoCard icon={<Scale className="h-5 w-5 text-primary" />} title="צו ירושה / קיום צוואה" description="לפעולה ברכוש הנפטר נדרש צו מהרשם לענייני ירושה. אם יש צוואה — צו קיום צוואה. אם אין — צו ירושה לפי דין." footer="הגוף המעניק: הרשם לענייני ירושה (משרד המשפטים)" />
+        <InfoCard icon={<DollarSign className="h-5 w-5 text-amber-500" />} title="איתור כספים: 'הר הכסף' ו'הר הביטוח'" description="אתרי משרד האוצר לאיתור חשבונות בנק, קופות גמל, קרנות השתלמות ופוליסות ביטוח של הנפטר." footer="הגוף המעניק: משרד האוצר — שירות חינמי" />
+      </div>
+
       <ToolLink title="הוצאת תו נכה לקשיש לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב — תנאי זכאות, מסמכים נדרשים והגשת בקשה לתו חניה לנכה" linkText="← למדריך הוצאת תו נכה" to="/tools#disability-tag-guide" />
 
       <SubSection title="ד. זכויות בריאות בגיל השלישי" />

@@ -978,6 +978,90 @@ export const Module8Content = ({ subId }: Module8ContentProps) => {
         </div>
       );
 
+    case "9.12":
+      return (
+        <div className="space-y-6 text-foreground">
+          <h3 className="text-xl font-bold">מה עושים לאחר פטירה — מדריך מלא ומקיף</h3>
+
+          <div className="border border-primary/30 bg-primary/5 rounded-lg p-4 space-y-2">
+            <h4 className="font-bold text-base flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
+              המדריך המלא להורדה ולקריאה
+            </h4>
+            <ul className="text-sm space-y-1.5">
+              <li>
+                <a href="/guides/after-death-guide.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  קריאה אונליין — מדריך מלא: מה עושים כשאדם נפטר בישראל
+                </a>
+              </li>
+              <li>
+                <a href="/guides/after-death-guide.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-flex items-center gap-1">
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  הורדת PDF מודפס
+                </a>
+              </li>
+            </ul>
+            <p className="text-xs text-muted-foreground">המדריך מלווה אתכם צעד-אחר-צעד מהשעות הראשונות ועד מימוש זכויות וניהול עיזבון.</p>
+          </div>
+
+          <div className="border rounded-lg p-4 bg-card space-y-2">
+            <h4 className="font-bold text-base">תקציר — שלבים מרכזיים</h4>
+            <ol className="text-sm space-y-1.5 list-decimal pr-5">
+              <li><strong>השעות הראשונות:</strong> רופא / מד"א (101) קובעים מוות ומנפיקים <strong>הודעת פטירה</strong>. במוות פתאומי או חשוד — לא להזיז את הגופה ולהזעיק משטרה (100).</li>
+              <li><strong>רישיון קבורה:</strong> מבית החולים או מלשכת הבריאות המחוזית. אסור לקבור בלי רישיון.</li>
+              <li><strong>פינוי:</strong> מד"א / חברה קדישא / חברת אמבולנסים מורשית.</li>
+              <li><strong>הלוויה וקבורה:</strong> חברה קדישא או גוף קבורה מוכר. כל תושב זכאי לקבורה בסיסית באזור מגוריו <strong>בחינם</strong> במימון ביטוח לאומי.</li>
+              <li><strong>שבעה:</strong> שבעה ימים מיום הקבורה, לפי המסורת.</li>
+              <li><strong>תעודת פטירה רשמית:</strong> מרשות האוכלוסין (משרד הפנים) — בחינם, אונליין ב-Gov.il. נדרשת לכל הליך משפטי וכספי.</li>
+              <li><strong>זכויות וכספים:</strong> מענק פטירה (10,514 ₪ החל מ-01.01.2026), קצבת שאירים, פנסיה, ביטוחי חיים, "הר הכסף" ו"הר הביטוח".</li>
+              <li><strong>ירושה ועיזבון:</strong> צו ירושה / צו קיום צוואה דרך הרשם לענייני ירושה.</li>
+            </ol>
+          </div>
+
+          <div className="border rounded-lg p-4 bg-amber-50 border-amber-200 space-y-2">
+            <h4 className="font-bold text-base flex items-center gap-2 text-amber-900">
+              <AlertTriangle className="h-5 w-5" />
+              חשוב להבחין: הודעת פטירה ≠ תעודת פטירה
+            </h4>
+            <p className="text-sm text-amber-900"><strong>הודעת פטירה</strong> היא מסמך רפואי שמנפיק רופא/פרמדיק במקום הפטירה. <strong>תעודת פטירה</strong> היא המסמך הרשמי של משרד הפנים — היא הנדרשת לבנקים, ביטוח, ירושה ועיזבון.</p>
+          </div>
+
+          <div className="border rounded-lg p-4 bg-card space-y-2">
+            <h4 className="font-bold text-base">צ'קליסט 30 הימים הראשונים</h4>
+            <ul className="text-sm space-y-1.5 list-disc pr-5">
+              <li>הזמנת תעודת פטירה רשמית במשרד הפנים (אונליין, ללא עלות)</li>
+              <li>הגשת בקשה לצו ירושה / צו קיום צוואה לרשם לענייני ירושה</li>
+              <li>בדיקת זכאות למענק פטירה ולקצבת שאירים בביטוח הלאומי</li>
+              <li>הקפאת אמצעי תשלום, כרטיסי אשראי והוראות קבע של הנפטר</li>
+              <li>איתור נכסים ב"הר הכסף" וב"הר הביטוח" (משרד האוצר)</li>
+              <li>פנייה לבנקים, חברות ביטוח וקרנות פנסיה — עם תעודת פטירה והצו</li>
+              <li>במקרה של מחלוקת בין יורשים או נכסים מורכבים — ייעוץ עו"ד מומחה לדיני משפחה וירושה</li>
+            </ul>
+          </div>
+
+          <div className="border rounded-lg p-4 bg-card space-y-2">
+            <h4 className="font-bold text-base">קישורים שימושיים</h4>
+            <ul className="text-sm space-y-1.5">
+              <li>• <a href="https://www.gov.il/he/service/post-death-accompaniment" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Gov.il — ליווי לאחר פטירה (צעד אחר צעד)</a></li>
+              <li>• <a href="https://www.gov.il/he/service/death_certificate" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Gov.il — הפקת תעודת פטירה רשמית</a></li>
+              <li>• <a href="https://www.gov.il/he/service/inheritance_order" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Gov.il — בקשה לצו ירושה</a> | <a href="https://www.gov.il/he/service/probate_order" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">צו קיום צוואה</a></li>
+              <li>• <a href="https://www.btl.gov.il/benefits/Survivors_%20Insurance/Pages/default.aspx" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ביטוח לאומי — שאירים ומענק פטירה</a></li>
+            </ul>
+          </div>
+
+          <div className="border rounded-lg p-4 bg-primary/5 border-primary/20 space-y-1.5">
+            <h4 className="font-bold text-base">קישורים מהאתר</h4>
+            <ul className="text-sm space-y-1">
+              <li>• <Link to="/module/burden-of-care#9.11" className="text-primary hover:underline">סעיף 9.11 — הוספיס בית והיערכות לסוף חיים</Link></li>
+              <li>• <Link to="/rights" className="text-primary hover:underline">זכויות הקשיש — קצבת שאירים, מענק פטירה והנחיות מקדימות</Link></li>
+            </ul>
+          </div>
+
+          <p className="text-center font-semibold text-base mt-4">שלא תדעו עוד צער</p>
+        </div>
+      );
+
     default:
       return (
         <div>
