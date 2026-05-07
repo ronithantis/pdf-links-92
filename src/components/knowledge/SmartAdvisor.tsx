@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, Loader2, CheckCircle2, BookOpen, ExternalLink, Lock, AlertTriangle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,7 +35,23 @@ const SmartAdvisor = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AdvisorResult | null>(null);
+  const [progressMsg, setProgressMsg] = useState<string>("");
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (!loading) {
+      setProgressMsg("");
+      return;
+    }
+    const stages: { delay: number; msg: string }[] = [
+      { delay: 0, msg: "מנתחים את המצב..." },
+      { delay: 2500, msg: "מחפשים משאבים ותרחישים רלוונטיים..." },
+      { delay: 6000, msg: "מסכמים לכם תשובה יסודית — עוד רגע..." },
+      { delay: 12000, msg: "כמעט סיימנו, מרכיבים את ההמלצות..." },
+    ];
+    const timers = stages.map((s) => setTimeout(() => setProgressMsg(s.msg), s.delay));
+    return () => timers.forEach(clearTimeout);
+  }, [loading]);
 
   const handleSubmit = async () => {
     if (!input.trim()) return;
@@ -83,7 +99,7 @@ const SmartAdvisor = () => {
           {loading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin ml-2" />
-              מנתחים את המצב...
+              {progressMsg || "מנתחים את המצב..."}
             </>
           ) : (
             <>
