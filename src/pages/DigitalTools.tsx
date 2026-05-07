@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { digitalTools } from "@/lib/modules-data";
+import { digitalTools, digitalToolCategories } from "@/lib/modules-data";
 import {
   Calculator, ClipboardList, RefreshCw, BookOpen, FileSignature,
   Lock, Wallet, ShieldCheck, Receipt, Handshake, Briefcase,
@@ -71,52 +71,65 @@ const DigitalTools = () => {
       </div>
       <p className="text-lg text-muted-foreground mb-10">כלים מעשיים לניהול הטיפול, חישובים ותכנון משפטי</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
-        {digitalTools.map((tool) => {
-          const hasUrl = !!(tool.toolUrl || tool.externalUrl);
-          const isExternal = !!(tool as any).isExternal;
-
+      <div className="space-y-12 max-w-5xl">
+        {digitalToolCategories.map((cat) => {
+          const toolsInCat = digitalTools.filter((t) => (t as any).category === cat.id);
+          if (toolsInCat.length === 0) return null;
           return (
-            <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md flex flex-col">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <span className="text-primary">{toolIcons[tool.icon]}</span>
-                  <div className="flex gap-1">
-                    {tool.isPaid && (
-                      <Badge variant="secondary" className="gap-1">
-                        <Lock className="h-3 w-3" /> בתשלום
-                      </Badge>
-                    )}
-                    {isExternal && (
-                      <Badge className="gap-1 bg-rose-500/10 text-rose-600 border-rose-200 hover:bg-rose-500/20">
-                        <ExternalLink className="h-3 w-3" /> כלי חיצוני
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                <CardTitle className="text-lg">{tool.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-1">
-                <p className="text-sm text-muted-foreground mb-4 flex-1">{tool.description}</p>
-                {isExternal ? (
-                  <Button
-                    onClick={() => handleOpenTool(tool)}
-                    className="w-full bg-rose-500 hover:bg-rose-600 text-white"
-                  >
-                    <ExternalLink className="h-4 w-4 ml-2" />
-                    מעבר לכלי חיצוני
-                  </Button>
-                ) : hasUrl ? (
-                  <Button onClick={() => handleOpenTool(tool)} className="w-full">
-                    פתיחת הכלי
-                  </Button>
-                ) : (
-                  <Button disabled className="w-full" variant="outline">
-                    {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
+            <section key={cat.id} id={`category-${cat.id}`}>
+              <div className="mb-4 border-r-4 border-primary pr-3">
+                <h2 className="text-2xl font-bold text-primary">{cat.title}</h2>
+                <p className="text-sm text-muted-foreground mt-1">{cat.description}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {toolsInCat.map((tool) => {
+                  const hasUrl = !!(tool.toolUrl || (tool as any).externalUrl);
+                  const isExternal = !!(tool as any).isExternal;
+                  return (
+                    <Card key={tool.id} id={tool.id} className="relative transition-all duration-300 hover:shadow-md flex flex-col">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <span className="text-primary">{toolIcons[tool.icon]}</span>
+                          <div className="flex gap-1">
+                            {tool.isPaid && (
+                              <Badge variant="secondary" className="gap-1">
+                                <Lock className="h-3 w-3" /> בתשלום
+                              </Badge>
+                            )}
+                            {isExternal && (
+                              <Badge className="gap-1 bg-rose-500/10 text-rose-600 border-rose-200 hover:bg-rose-500/20">
+                                <ExternalLink className="h-3 w-3" /> כלי חיצוני
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <CardTitle className="text-lg">{tool.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex flex-col flex-1">
+                        <p className="text-sm text-muted-foreground mb-4 flex-1">{tool.description}</p>
+                        {isExternal ? (
+                          <Button
+                            onClick={() => handleOpenTool(tool)}
+                            className="w-full bg-rose-500 hover:bg-rose-600 text-white"
+                          >
+                            <ExternalLink className="h-4 w-4 ml-2" />
+                            מעבר לכלי חיצוני
+                          </Button>
+                        ) : hasUrl ? (
+                          <Button onClick={() => handleOpenTool(tool)} className="w-full">
+                            פתיחת הכלי
+                          </Button>
+                        ) : (
+                          <Button disabled className="w-full" variant="outline">
+                            {tool.isPaid ? "בקרוב - בתשלום" : "בקרוב"}
+                          </Button>
+                        )}
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </section>
           );
         })}
       </div>
