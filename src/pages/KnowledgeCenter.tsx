@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,14 +14,29 @@ const KnowledgeCenter = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>({});
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // If ?scenario=ID is in URL, default to scenarios tab
   // If ?tab=scenarios or ?tab=advisor, use that
   const scenarioId = searchParams.get("scenario");
   const tabParam = searchParams.get("tab");
   const hideResources = tabParam === "scenarios" || tabParam === "advisor" || !!scenarioId;
-  const defaultTab = scenarioId ? "scenarios" : tabParam === "advisor" ? "advisor" : tabParam === "scenarios" ? "scenarios" : "resources";
+  const activeTab = useMemo(
+    () => (scenarioId ? "scenarios" : tabParam === "advisor" ? "advisor" : tabParam === "scenarios" ? "scenarios" : "resources"),
+    [scenarioId, tabParam]
+  );
+
+  const handleTabChange = (value: string) => {
+    const next = new URLSearchParams(searchParams);
+    if (value === "resources") {
+      next.delete("tab");
+      next.delete("scenario");
+    } else {
+      next.set("tab", value);
+      if (value !== "scenarios") next.delete("scenario");
+    }
+    setSearchParams(next, { replace: true });
+  };
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -49,7 +64,7 @@ const KnowledgeCenter = () => {
         </p>
       </div>
 
-      <Tabs defaultValue={defaultTab} dir="rtl">
+      <Tabs value={activeTab} onValueChange={handleTabChange} dir="rtl">
         <TabsList className={`w-full max-w-md mx-auto grid ${hideResources ? 'grid-cols-2' : 'grid-cols-3'}`}>
           {!hideResources && <TabsTrigger value="resources">משאבים</TabsTrigger>}
           <TabsTrigger value="scenarios">תרחישים</TabsTrigger>
