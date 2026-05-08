@@ -20,7 +20,13 @@ import ModuleDigitalTools from "@/components/module-content/ModuleDigitalTools";
 // Cross-chapter recommended presentations (shown at the top of selected chapters)
 const RECOMMENDED_PRESENTATIONS: Record<number, { url: string; title: string; note: string }[]> = {
   3: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "טיפול פליאטיבי בבית — רלוונטי לדמנציה מתקדמת ולשלב סוף החיים" }],
-  6: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "מתי מערך הטיפול הביתי משתלב עם צוות הוספיס וטיפול פליאטיבי" }],
+  6: [
+    { url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "מתי מערך הטיפול הביתי משתלב עם צוות הוספיס וטיפול פליאטיבי" },
+    { url: "https://drive.google.com/file/d/12tNLBPV1jX8-beWEbpxkVBa543QIPTAJ/preview", title: "זכויות עובדת זרה בהריון", note: "חופשת לידה, איסור פיטורים, דמי לידה והשלכות על המשך מערך הטיפול בבית" },
+  ],
+  8: [
+    { url: "https://drive.google.com/file/d/12tNLBPV1jX8-beWEbpxkVBa543QIPTAJ/preview", title: "זכויות עובדת זרה בהריון", note: "חובות המעסיק, ביטוח לאומי וזכויות העובדת — חיוני בניהול שוטף וגמר חשבון" },
+  ],
   9: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "מצגת מלווה לסעיף 9.11 — זכויות, קריטריונים, השוואת קופות ותהליך הצטרפות" }],
   11: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "רקע על הליווי הפליאטיבי בבית בשבועות והימים שלפני הפטירה" }],
 };
