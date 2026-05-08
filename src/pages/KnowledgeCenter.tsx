@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { BookOpen, ArrowLeft, Search } from "lucide-react";
+import { BookOpen, ArrowLeft, ArrowRight, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { modules } from "@/lib/modules-data";
 
@@ -34,6 +35,12 @@ const KnowledgeCenter = () => {
 
   return (
     <div className="container py-10 space-y-8">
+      <div>
+        <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
+          <ArrowRight className="h-4 w-4 ml-1" />
+          חזרה לדף הבית
+        </Button>
+      </div>
       <div className="text-center space-y-2">
         <h1 className="text-4xl font-bold">מרכז הידע</h1>
         <p className="text-base text-muted-foreground">
