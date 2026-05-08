@@ -385,7 +385,7 @@ const Header = () => {
         {/* Left side (RTL end): Smart Advisor CTA (desktop) */}
         <div className="hidden lg:flex items-center shrink-0 mr-auto">
           <Link
-            to="/knowledge-center?tab=advisor"
+            to="/advisor"
             className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             <MessageCircle className="h-4 w-4" />
@@ -396,7 +396,7 @@ const Header = () => {
         {/* Mobile: advisor CTA + hamburger (left side) */}
         <div className="flex items-center gap-2 lg:hidden mr-auto">
           <Link
-            to="/knowledge-center?tab=advisor"
+            to="/advisor"
             className="inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground"
           >
             <MessageCircle className="h-3.5 w-3.5" />
