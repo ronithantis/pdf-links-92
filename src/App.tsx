@@ -81,6 +81,7 @@ const App = () => (
             <Route path="/resources/presentations" element={<PresentationsHub />} />
             <Route path="/resources/presentations/:categorySlug" element={<PresentationCategoryPage />} />
             <Route path="/resources/:category" element={<ResourceCategoryPage />} />
+            <Route path="/advisor" element={<Advisor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
