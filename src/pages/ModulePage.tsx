@@ -2,7 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { modules } from "@/lib/modules-data";
-import { BookOpen, ArrowRight } from "lucide-react";
+import { BookOpen, ArrowRight, Presentation } from "lucide-react";
+import { openPresentation } from "@/components/PresentationModal";
 import { Module1Content } from "@/components/module-content/Module1Content";
 import { Module2Content } from "@/components/module-content/Module2Content";
 import { Module3Content } from "@/components/module-content/Module3Content";
@@ -15,6 +16,14 @@ import { Module9Content } from "@/components/module-content/Module9Content";
 import { Module10Content } from "@/components/module-content/Module10Content";
 import { Module11Content } from "@/components/module-content/Module11Content";
 import ModuleDigitalTools from "@/components/module-content/ModuleDigitalTools";
+
+// Cross-chapter recommended presentations (shown at the top of selected chapters)
+const RECOMMENDED_PRESENTATIONS: Record<number, { url: string; title: string; note: string }[]> = {
+  3: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "טיפול פליאטיבי בבית — רלוונטי לדמנציה מתקדמת ולשלב סוף החיים" }],
+  6: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "מתי מערך הטיפול הביתי משתלב עם צוות הוספיס וטיפול פליאטיבי" }],
+  9: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "מצגת מלווה לסעיף 9.11 — זכויות, קריטריונים, השוואת קופות ותהליך הצטרפות" }],
+  11: [{ url: "https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview", title: "הוספיס בית", note: "רקע על הליווי הפליאטיבי בבית בשבועות והימים שלפני הפטירה" }],
+};
 
 const ModulePage = () => {
   const { moduleId } = useParams<{ moduleId: string }>();
@@ -57,6 +66,27 @@ const ModulePage = () => {
         <h1 className="text-3xl font-bold mb-2">{mod.title}</h1>
         <p className="text-lg text-muted-foreground">{mod.description}</p>
       </div>
+
+      {RECOMMENDED_PRESENTATIONS[mod.partNumber]?.length > 0 && (
+        <div className="mb-6 rounded-lg border border-primary/30 bg-primary/5 p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Presentation className="h-4 w-4 text-primary" />
+            <span className="text-sm font-semibold text-primary">מצגת מומלצת לפרק זה</span>
+          </div>
+          <div className="space-y-2">
+            {RECOMMENDED_PRESENTATIONS[mod.partNumber].map((p) => (
+              <button
+                key={p.url}
+                onClick={() => openPresentation(p.url, p.title)}
+                className="w-full text-right rounded-md border bg-card hover:border-primary/50 hover:shadow-sm transition-all p-3"
+              >
+                <div className="text-sm font-medium text-foreground">מצגת: {p.title} ←</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{p.note}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <Accordion type="single" collapsible className="space-y-3">
         {mod.subModules.map((sub) => (
