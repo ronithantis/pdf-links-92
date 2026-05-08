@@ -16,8 +16,8 @@ const Footer = () => {
             <h4 className="font-semibold mb-3">קישורים מהירים</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">דף הבית</Link></li>
-              <li><Link to="/tools" className="text-muted-foreground hover:text-primary transition-colors">כלים דיגיטליים</Link></li>
-              <li><Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">שירותים לקשיש עד הבית</Link></li>
+              <li><Link to="/tools-resources" className="text-muted-foreground hover:text-primary transition-colors">כלים ומשאבים</Link></li>
+              <li><Link to="/services-community" className="text-muted-foreground hover:text-primary transition-colors">שירותים וקהילה</Link></li>
               <li><Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">אודות</Link></li>
               <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">צור קשר</Link></li>
               <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">תנאי שימוש</Link></li>
