@@ -557,6 +557,9 @@ export const digitalTools = [
     icon: "ShieldCheck",
     isPaid: false,
     toolUrl: "https://ronithantis.github.io/tav-neche/",
+    isExternal: true,
+    externalUrl: "https://ronithantis.github.io/tav-neche/",
+    hidden: true,
     category: "rights",
   },
   {
