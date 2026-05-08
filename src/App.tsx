@@ -36,6 +36,7 @@ import Scenarios from "./pages/Scenarios";
 import ResourceCategoryPage from "./pages/ResourceCategoryPage";
 import PresentationsHub from "./pages/PresentationsHub";
 import PresentationCategoryPage from "./pages/PresentationCategoryPage";
+import Advisor from "./pages/Advisor";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -80,6 +81,7 @@ const App = () => (
             <Route path="/resources/presentations" element={<PresentationsHub />} />
             <Route path="/resources/presentations/:categorySlug" element={<PresentationCategoryPage />} />
             <Route path="/resources/:category" element={<ResourceCategoryPage />} />
+            <Route path="/advisor" element={<Advisor />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
