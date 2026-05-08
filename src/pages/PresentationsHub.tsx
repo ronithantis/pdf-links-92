@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { supabase } from "@/integrations/supabase/client";
-import { presentationCategories, getCategoryById } from "@/lib/presentation-categories";
+import { presentationCategories } from "@/lib/presentation-categories";
 import ResourceCard from "@/components/knowledge/ResourceCard";
 
 const PresentationsHub = () => {
