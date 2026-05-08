@@ -145,7 +145,7 @@ const Index = () => {
             {["איך מבקשים גמלת סיעוד?", "מה הזכויות של עובד זר?", "איך מתמודדים עם דמנציה?"].map((q) => (
               <Link
                 key={q}
-                to={`/knowledge-center?tab=advisor&q=${encodeURIComponent(q)}`}
+                to={`/advisor?q=${encodeURIComponent(q)}`}
                 className="text-xs bg-card border border-border rounded-full px-3 py-1.5 hover:border-primary/50 transition-colors"
               >
                 {q}
