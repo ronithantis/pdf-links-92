@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
-import { IconUserSearch, IconBriefcase, IconHeartHandshake, IconArrowsExchange } from "@tabler/icons-react";
+import {
+  IconUserSearch,
+  IconBriefcase,
+  IconHeartHandshake,
+  IconArrowsExchange,
+  type Icon as TablerIcon,
+} from "@tabler/icons-react";
 
 interface ServiceCard {
   to: string;
   title: string;
   description: string;
   pills: string[];
-  Icon: React.ComponentType<{ size?: number; stroke?: number; className?: string }>;
+  Icon: TablerIcon;
   iconBg: string;
   iconColor: string;
 }
@@ -75,8 +81,7 @@ const ServicesCommunity = () => {
                   style={{ backgroundColor: card.iconBg }}
                   aria-hidden
                 >
-                  <Icon size={22} stroke={1.75} className="" />
-                  <style>{`[data-card="${card.to}"] svg { color: ${card.iconColor}; }`}</style>
+                  <Icon size={22} stroke={1.75} style={{ color: card.iconColor }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className="text-base font-medium text-foreground mb-1.5">{card.title}</h2>
