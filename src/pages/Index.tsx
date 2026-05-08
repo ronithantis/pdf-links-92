@@ -228,7 +228,7 @@ const Index = () => {
         <div className="container">
           <div className="flex items-end justify-between mb-6 max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold">כלים מובילים</h2>
-            <Link to="/tools-resources" className="text-sm text-primary hover:underline">
+            <Link to="/tools" className="text-sm text-primary hover:underline">
               לכל הכלים ←
             </Link>
           </div>
