@@ -36,6 +36,7 @@ import Scenarios from "./pages/Scenarios";
 import ResourceCategoryPage from "./pages/ResourceCategoryPage";
 import PresentationsHub from "./pages/PresentationsHub";
 import PresentationCategoryPage from "./pages/PresentationCategoryPage";
+import Advisor from "./pages/Advisor";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
