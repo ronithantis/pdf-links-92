@@ -33,6 +33,8 @@ const STATIC_LABELS: Record<string, string> = {
   "knowledge": "מרכז הידע",
   "suppliers": "ספקים",
   "module": "מרכז הידע",
+  "resources": "כלים ומשאבים",
+  "presentations": "מצגות",
 };
 
 const Breadcrumbs = () => {
