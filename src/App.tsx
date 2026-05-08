@@ -32,6 +32,7 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import GlossaryPage from "./pages/GlossaryPage";
 import ToolsResources from "./pages/ToolsResources";
 import ServicesCommunity from "./pages/ServicesCommunity";
+import Scenarios from "./pages/Scenarios";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -72,6 +73,7 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             
             <Route path="/glossary" element={<GlossaryPage />} />
+            <Route path="/scenarios" element={<Scenarios />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

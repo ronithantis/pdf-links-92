@@ -26,6 +26,7 @@ const STATIC_LABELS: Record<string, string> = {
   "terms": "תנאי שימוש",
   "privacy": "מדיניות פרטיות",
   "glossary": "מילון מושגים",
+  "scenarios": "זיהוי תרחיש",
   "technical-spec": "מפרט טכני",
   "premium": "Premium",
   "admin": "ניהול",

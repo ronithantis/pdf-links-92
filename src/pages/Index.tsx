@@ -41,7 +41,7 @@ const entryCards = [
     cta: "בחרו תרחיש",
     Icon: IconMessage2,
     iconBg: "hsl(var(--accent) / 0.1)",
-    to: "/knowledge-center?tab=scenarios",
+    to: "/scenarios",
   },
   {
     title: "מרכז הידע",
