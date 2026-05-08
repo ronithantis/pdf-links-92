@@ -881,7 +881,7 @@ const AdElai = () => {
                       <Button className="w-full text-white font-bold" style={{ background: TEAL }} onClick={resetForm}>הרשמה לשירות נוסף +</Button>
                     </div>
 
-                    <Button variant="outline" className="mt-3" onClick={() => setView("search")}>חזרה לדף הבית</Button>
+                    <Button variant="outline" className="mt-3" onClick={() => setView("search")}>חזרה לחיפוש</Button>
                   </div>
                 )}
               </div>
