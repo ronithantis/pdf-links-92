@@ -1,9 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { BookOpen, ArrowLeft, ArrowRight, Search } from "lucide-react";
+import { BookOpen, ArrowLeft, ArrowRight, Search, FileText, Presentation, BookMarked } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { modules } from "@/lib/modules-data";
+import { resourceCounts } from "@/lib/resource-counts";
 
 const KnowledgeCenter = () => {
   const navigate = useNavigate();
@@ -101,6 +102,40 @@ const KnowledgeCenter = () => {
         </div>
         <ArrowLeft className="h-5 w-5 text-muted-foreground" />
       </button>
+
+      {/* Resource library — light teal tint to distinguish from chapters & glossary */}
+      <div className="space-y-3 pt-2">
+        <div className="text-right">
+          <h2 className="text-lg font-semibold">ספריית משאבים</h2>
+          <p className="text-xs text-muted-foreground">תכנים מוכנים לעיון או הורדה</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {[
+            { to: "/resources/videos", icon: BookMarked, title: "מדריכים", desc: "מדריכים יישומיים למטפלים", count: resourceCounts.guides },
+            { to: "/resources/presentations", icon: Presentation, title: "מצגות", desc: "מצגות מקצועיות על כל הנושאים", count: resourceCounts.presentations },
+            { to: "/resources/forms", icon: FileText, title: "טפסים", desc: "טפסים ומסמכים להורדה", count: resourceCounts.forms },
+          ].map((r) => {
+            const Icon = r.icon;
+            return (
+              <button
+                key={r.to}
+                onClick={() => navigate(r.to)}
+                className="text-right rounded-xl p-4 hover:shadow-md transition-all flex flex-col gap-2 border border-border/40"
+                style={{ backgroundColor: "hsl(195, 55%, 92%)" }}
+              >
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-full bg-white/70 flex items-center justify-center">
+                    <Icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-semibold text-foreground">{r.title}</span>
+                </div>
+                <p className="text-xs text-foreground/70 leading-relaxed flex-1">{r.desc}</p>
+                <div className="text-xs text-foreground/60 pt-1">{r.count} פריטים ←</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
