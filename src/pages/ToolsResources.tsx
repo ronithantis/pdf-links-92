@@ -12,6 +12,7 @@ import {
   IconExternalLink,
   IconInfoCircle,
   IconSearch,
+  IconArrowRight,
   type Icon as TablerIcon,
 } from "@tabler/icons-react";
 import {
@@ -104,6 +105,12 @@ const ToolsResources = () => {
 
   return (
     <div className="container py-10 max-w-6xl">
+      <div className="mb-2">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <IconArrowRight size={16} stroke={1.75} />
+          חזרה לדף הבית
+        </Link>
+      </div>
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-2xl font-bold text-primary mb-2">כלים ומשאבים</h1>
