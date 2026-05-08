@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { modules } from "@/lib/modules-data";
-import { BookOpen } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 import { Module1Content } from "@/components/module-content/Module1Content";
 import { Module2Content } from "@/components/module-content/Module2Content";
 import { Module3Content } from "@/components/module-content/Module3Content";
