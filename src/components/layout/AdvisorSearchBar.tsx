@@ -15,8 +15,8 @@ const AdvisorSearchBar = ({ variant = "compact", placeholder }: Props) => {
     e.preventDefault();
     const trimmed = q.trim();
     const url = trimmed
-      ? `/knowledge-center?tab=advisor&q=${encodeURIComponent(trimmed)}`
-      : `/knowledge-center?tab=advisor`;
+      ? `/advisor?q=${encodeURIComponent(trimmed)}`
+      : `/advisor`;
     navigate(url);
     setQ("");
   };
