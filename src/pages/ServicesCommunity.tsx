@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { IconArrowRight } from "@tabler/icons-react";
 import {
   IconUserSearch,
   IconBriefcase,
@@ -59,6 +60,12 @@ const cards: ServiceCard[] = [
 const ServicesCommunity = () => {
   return (
     <div className="container py-10">
+      <div className="mb-2">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <IconArrowRight size={16} stroke={1.75} />
+          חזרה לדף הבית
+        </Link>
+      </div>
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-primary mb-2">שירותים וקהילה</h1>
         <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
