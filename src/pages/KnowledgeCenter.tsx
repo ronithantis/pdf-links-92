@@ -86,23 +86,6 @@ const KnowledgeCenter = () => {
         )}
       </div>
 
-      <button
-        onClick={() => navigate("/glossary")}
-        className="w-full flex items-center justify-between gap-4 rounded-xl p-5 hover:shadow-md transition-all text-right border border-border/40"
-        style={{ backgroundColor: "#F1EFE8" }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-white/70 flex items-center justify-center">
-            <BookOpen className="h-5 w-5 text-primary" />
-          </div>
-          <div>
-            <div className="text-sm font-semibold">מילון מושגים</div>
-            <div className="text-xs text-muted-foreground">הסבר מקצועי למונחים</div>
-          </div>
-        </div>
-        <ArrowLeft className="h-5 w-5 text-muted-foreground" />
-      </button>
-
       {/* Resource library — light teal tint to distinguish from chapters & glossary */}
       <div className="space-y-3 pt-2">
         <div className="text-right">
@@ -136,6 +119,23 @@ const KnowledgeCenter = () => {
           })}
         </div>
       </div>
+
+      <button
+        onClick={() => navigate("/glossary")}
+        className="w-full flex items-center justify-between gap-4 rounded-xl p-5 hover:shadow-md transition-all text-right border border-border/40"
+        style={{ backgroundColor: "#F1EFE8" }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-white/70 flex items-center justify-center">
+            <BookOpen className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold">מילון מושגים</div>
+            <div className="text-xs text-muted-foreground">הסבר מקצועי למונחים</div>
+          </div>
+        </div>
+        <ArrowLeft className="h-5 w-5 text-muted-foreground" />
+      </button>
     </div>
   );
 };
