@@ -1,5 +1,6 @@
 import { CheckCircle, AlertTriangle, Home, Building, DollarSign, ClipboardList, MessageCircle, Users, Presentation, ExternalLink, FileText, Calculator } from "lucide-react";
 import { Link } from "react-router-dom";
+import { openPresentation } from "@/components/PresentationModal";
 
 const ResourcesPanel = () => (
   <div className="border rounded-lg p-4 bg-primary/5 border-primary/30 space-y-2">
@@ -975,6 +976,14 @@ export const Module8Content = ({ subId }: Module8ContentProps) => {
               <li>• <Link to="/module/burden-of-care#9.6" className="text-primary hover:underline">סעיף 9.6 — מסלול מעבר מעשי וקליטה</Link></li>
             </ul>
           </InfoBox>
+
+          <button
+            onClick={() => openPresentation('https://drive.google.com/file/d/1sqJp5qQofBk1ZZ9Y9QGgPk3_ivLxHLh7/preview', 'הוספיס בית')}
+            className="mt-2 inline-flex items-center gap-2 text-primary font-medium hover:underline text-sm"
+          >
+            <Presentation className="h-4 w-4" />
+            מצגת מלווה: הוספיס בית ←
+          </button>
         </div>
       );
 
