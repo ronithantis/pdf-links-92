@@ -16,7 +16,12 @@ const KnowledgeCenter = () => {
   useEffect(() => {
     const tab = searchParams.get("tab");
     const scenario = searchParams.get("scenario");
-    if (tab === "advisor" || tab === "scenarios" || scenario) {
+    if (tab === "advisor") {
+      const qs = searchParams.toString();
+      navigate(`/advisor${qs ? `?${qs.replace(/(^|&)tab=advisor(&|$)/, "$1").replace(/^&|&$/g, "")}` : ""}`, { replace: true });
+      return;
+    }
+    if (tab === "scenarios" || scenario) {
       const qs = searchParams.toString();
       navigate(`/tools-resources${qs ? `?${qs}` : ""}`, { replace: true });
     }
