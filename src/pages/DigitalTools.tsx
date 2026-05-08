@@ -73,7 +73,7 @@ const DigitalTools = () => {
 
       <div className="space-y-12 max-w-5xl">
         {digitalToolCategories.map((cat) => {
-          const toolsInCat = digitalTools.filter((t) => (t as any).category === cat.id);
+          const toolsInCat = digitalTools.filter((t) => (t as any).category === cat.id && !(t as any).hidden);
           if (toolsInCat.length === 0) return null;
           return (
             <section key={cat.id} id={`category-${cat.id}`}>
@@ -195,7 +195,6 @@ const DigitalTools = () => {
               <h3 className="font-bold text-base text-primary mb-2">2. זכויות, כספים והטבות</h3>
               <p className="text-muted-foreground mb-2">הכלים המעניקים מענה לדרישות החוק, מיצוי זכויות וניהול תקציב.</p>
               <ul className="list-disc pr-5 space-y-1">
-                <li><strong>מדריך להוצאת תו נכה לקשיש לא נייד:</strong> מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור קשיש מוגבל בניידות.</li>
                 <li><strong>מחשבון שכר עובד זר (Hub2Care):</strong> חישוב שכר חודשי והוצאות העסקה, המבוסס על שכר מינימום של 6,443.85 ש"ח (אפריל 2026).</li>
                 <li><strong>זכויות עובד זר – מחשבון ומדריך:</strong> כלי אינטראקטיבי לבדיקת זכויות המטפל בשכר, חופשות ופנסיה.</li>
                 <li><strong>מחשבון גמר חשבון:</strong> חישוב מדויק של פיצויים, דמי הבראה וימי חופשה בסיום ההעסקה.</li>

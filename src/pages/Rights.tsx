@@ -159,7 +159,7 @@ const RightsView = () => (
         <InfoCard icon={<DollarSign className="h-5 w-5 text-amber-500" />} title="איתור כספים: 'הר הכסף' ו'הר הביטוח'" description="אתרי משרד האוצר לאיתור חשבונות בנק, קופות גמל, קרנות השתלמות ופוליסות ביטוח של הנפטר." footer="הגוף המעניק: משרד האוצר — שירות חינמי" />
       </div>
 
-      <ToolLink title="הוצאת תו נכה לקשיש לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב — תנאי זכאות, מסמכים נדרשים והגשת בקשה לתו חניה לנכה" linkText="← למדריך הוצאת תו נכה" to="/tools#disability-tag-guide" />
+      <ToolLink title="הוצאת תו נכה לקשיש לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב — תנאי זכאות, מסמכים נדרשים והגשת בקשה לתו חניה לנכה" linkText="← למדריך הוצאת תו נכה" to="https://ronithantis.github.io/tav-neche/" />
 
       <SubSection title="ד. זכויות בריאות בגיל השלישי" />
       <CheckList items={[
@@ -314,7 +314,7 @@ const RightsView = () => (
         <InfoCard title='נקודות זיכוי מס' description='עובד המטפל בהורה עם מוגבלות חמורה — עשוי להיות זכאי לנקודות זיכוי נוספות. יש לבדוק עם רו"ח.' />
       </div>
 
-      <ToolLink title="הוצאת תו נכה להורה לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור הורה מוגבל בניידות — תנאי זכאות, מסמכים והגשת בקשה" linkText="← למדריך הוצאת תו נכה" to="/tools#disability-tag-guide" />
+      <ToolLink title="הוצאת תו נכה להורה לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור הורה מוגבל בניידות — תנאי זכאות, מסמכים והגשת בקשה" linkText="← למדריך הוצאת תו נכה" to="https://ronithantis.github.io/tav-neche/" />
 
       <SubSection title="ג. שירותי תמיכה ומידע" />
       <ContactGrid contacts={[
@@ -865,20 +865,26 @@ const Callout = ({ variant, title, children }: { variant: "info" | "warning" | "
   );
 };
 
-const ToolLink = ({ title, description, linkText, to }: { title: string; description: string; linkText: string; to: string }) => (
-  <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-primary/20 bg-card shadow-sm">
-    <div className="flex items-center gap-3">
-      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><FileText className="h-5 w-5 text-primary" /></div>
-      <div>
-        <h4 className="text-sm font-bold">{title}</h4>
-        <p className="text-xs text-muted-foreground">{description}</p>
+const ToolLink = ({ title, description, linkText, to }: { title: string; description: string; linkText: string; to: string }) => {
+  const isExternal = to.startsWith("http");
+  const cls = "inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-bold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors";
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-primary/20 bg-card shadow-sm">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><FileText className="h-5 w-5 text-primary" /></div>
+        <div>
+          <h4 className="text-sm font-bold">{title}</h4>
+          <p className="text-xs text-muted-foreground">{description}</p>
+        </div>
       </div>
+      {isExternal ? (
+        <a href={to} target="_blank" rel="noopener noreferrer" className={cls}>{linkText}</a>
+      ) : (
+        <Link to={to} className={cls}>{linkText}</Link>
+      )}
     </div>
-    <Link to={to} className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-bold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
-      {linkText}
-    </Link>
-  </div>
-);
+  );
+};
 
 const CheckList = ({ items }: { items: { bold: string; text: string }[] }) => (
   <ul className="space-y-2">

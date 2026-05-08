@@ -232,6 +232,12 @@ const ToolsResources = () => {
                       {tool.external && <IconExternalLink size={12} stroke={1.75} className="text-muted-foreground" />}
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">{tool.description}</p>
+                    {tool.external && (
+                      <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-rose-300 bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-600">
+                        <IconExternalLink size={11} stroke={2} />
+                        כלי חיצוני
+                      </div>
+                    )}
                     <div className="mt-3 text-xs font-medium text-primary">{tool.cta} ←</div>
                   </>
                 );
