@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, type KeyboardEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Search, X, Shield, BookOpen, Layout, GraduationCap, Wrench, MessageCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -206,7 +206,7 @@ const searchIndex: SearchItem[] = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -232,7 +232,7 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setSearchOpen(false);
+        setMobileSearchOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -240,24 +240,127 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (searchOpen && inputRef.current) {
+    if (mobileSearchOpen && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [searchOpen]);
+  }, [mobileSearchOpen]);
+
+  const handleSelectResult = (url: string, label: string) => {
+    if (shouldOpenInModal(url)) {
+      openPresentation(url, label);
+    } else if (url.startsWith("http")) {
+      window.open(url, "_blank", "noopener");
+    } else {
+      navigate(url);
+    }
+    setMobileSearchOpen(false);
+    setSearchQuery("");
+  };
+
+  const ResultsDropdown = ({ widthClass }: { widthClass: string }) => (
+    <div className={`absolute top-10 right-0 ${widthClass} bg-popover border rounded-md shadow-lg z-50 max-h-80 overflow-y-auto`}>
+      {searchResults.length === 0 ? (
+        <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+          לא נמצאו תוצאות עבור "{searchQuery}"
+        </div>
+      ) : (
+        searchResults.map((result, i) => (
+          <button
+            key={i}
+            className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
+            onClick={() => handleSelectResult(result.url, result.label)}
+          >
+            <div className="flex items-center gap-2">
+              <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
+                result.source === "glossary"
+                  ? "bg-accent/20 text-accent-foreground"
+                  : result.source === "module"
+                  ? "bg-primary/10 text-primary"
+                  : result.source === "tool"
+                  ? "bg-warm/10 text-warm"
+                  : "bg-muted text-muted-foreground"
+              }`}>
+                {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
+                {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
+                {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
+                {result.source === "tool" && <Wrench className="h-2.5 w-2.5" />}
+                {result.sourceLabel}
+              </span>
+            </div>
+            <div className="font-medium mt-0.5">{result.label}</div>
+            <div className="text-xs text-muted-foreground truncate">{result.description}</div>
+          </button>
+        ))
+      )}
+    </div>
+  );
+
+  const onSearchKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && searchResults.length > 0) {
+      const top = searchResults[0];
+      handleSelectResult(top.url, top.label);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="HUB2CARE" className="h-9 w-9 object-contain" />
-          <div className="flex flex-col">
-            <span className="text-base font-bold text-primary leading-tight">מרכז הידע והכלים</span>
-            <span className="hidden text-xs text-muted-foreground sm:block">למשפחות מטפלות בהורה מבוגר</span>
-          </div>
-        </Link>
+      <div className="container flex h-16 items-center gap-4">
+        {/* Right side (RTL start): logo + site keyword search */}
+        <div className="flex items-center gap-3 shrink-0">
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="HUB2CARE" className="h-9 w-9 object-contain" />
+            <div className="flex flex-col">
+              <span className="text-base font-bold text-primary leading-tight">מרכז הידע והכלים</span>
+              <span className="hidden text-xs text-muted-foreground sm:block">למשפחות מטפלות בהורה מבוגר</span>
+            </div>
+          </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-1">
+          {/* Site keyword search — desktop: inline input; mobile: icon-only toggle */}
+          <div ref={searchRef} className="relative">
+            {/* Desktop inline */}
+            <div className="hidden lg:block relative">
+              <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={onSearchKeyDown}
+                placeholder="חיפוש..."
+                aria-label="חיפוש מילות מפתח באתר"
+                className="h-8 w-[190px] rounded-md border border-input bg-background pr-8 pl-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground"
+              />
+              {searchQuery.length >= 2 && <ResultsDropdown widthClass="w-96" />}
+            </div>
+            {/* Mobile icon toggle */}
+            <div className="lg:hidden">
+              {mobileSearchOpen ? (
+                <div className="flex items-center gap-1">
+                  <div className="relative">
+                    <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+                    <input
+                      ref={inputRef}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={onSearchKeyDown}
+                      placeholder="חיפוש..."
+                      className="h-8 w-44 rounded-md border border-input bg-background pr-7 pl-2 text-sm outline-none focus:ring-1 focus:ring-ring"
+                    />
+                  </div>
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setMobileSearchOpen(false); setSearchQuery(""); }}>
+                    <X className="h-4 w-4" />
+                  </Button>
+                  {searchQuery.length >= 2 && <ResultsDropdown widthClass="w-80" />}
+                </div>
+              ) : (
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setMobileSearchOpen(true)} aria-label="חיפוש">
+                  <Search className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Center: nav links (desktop) */}
+        <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
           {navItems.map((item) => (
             <Link
               key={item.to}
@@ -267,7 +370,6 @@ const Header = () => {
               {item.label}
             </Link>
           ))}
-
           {isAdmin && (
             <Link
               to="/admin/knowledge"
@@ -277,103 +379,21 @@ const Header = () => {
               ניהול
             </Link>
           )}
+        </nav>
 
-          {/* Global search (kept) */}
-          <div ref={searchRef} className="relative">
-            {searchOpen ? (
-              <div className="flex items-center gap-1">
-                <input
-                  ref={inputRef}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && searchResults.length > 0) {
-                      const top = searchResults[0];
-                      const u = top.url;
-                      if (shouldOpenInModal(u)) {
-                        openPresentation(u, top.label);
-                      } else if (u.startsWith("http")) {
-                        window.open(u, "_blank", "noopener");
-                      } else {
-                        navigate(u);
-                      }
-                      setSearchOpen(false);
-                      setSearchQuery("");
-                    }
-                  }}
-                  placeholder="חיפוש מהיר..."
-                  className="h-8 w-52 rounded-md border border-input bg-background px-3 text-sm outline-none focus:ring-1 focus:ring-ring"
-                />
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setSearchOpen(false); setSearchQuery(""); }}>
-                  <X className="h-4 w-4" />
-                </Button>
-                {searchQuery.length >= 2 && (
-                  <div className="absolute top-10 left-0 right-0 w-96 bg-popover border rounded-md shadow-lg z-50 max-h-80 overflow-y-auto">
-                    {searchResults.length === 0 ? (
-                      <div className="px-4 py-6 text-center text-sm text-muted-foreground">
-                        לא נמצאו תוצאות עבור "{searchQuery}"
-                      </div>
-                    ) : (
-                      searchResults.map((result, i) => (
-                        <button
-                          key={i}
-                          className="w-full text-right px-3 py-2.5 text-sm hover:bg-muted transition-colors border-b last:border-b-0"
-                          onClick={() => {
-                            if (shouldOpenInModal(result.url)) {
-                              openPresentation(result.url, result.label);
-                            } else if (result.url.startsWith("http")) {
-                              window.open(result.url, "_blank", "noopener");
-                            } else {
-                              navigate(result.url);
-                            }
-                            setSearchOpen(false);
-                            setSearchQuery("");
-                          }}
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
-                              result.source === "glossary" 
-                                ? "bg-accent/20 text-accent-foreground" 
-                                : result.source === "module" 
-                                ? "bg-primary/10 text-primary" 
-                                : result.source === "tool"
-                                ? "bg-warm/10 text-warm"
-                                : "bg-muted text-muted-foreground"
-                            }`}>
-                              {result.source === "glossary" && <BookOpen className="h-2.5 w-2.5" />}
-                              {result.source === "module" && <GraduationCap className="h-2.5 w-2.5" />}
-                              {result.source === "page" && <Layout className="h-2.5 w-2.5" />}
-                              {result.source === "tool" && <Wrench className="h-2.5 w-2.5" />}
-                              {result.sourceLabel}
-                            </span>
-                          </div>
-                          <div className="font-medium mt-0.5">{result.label}</div>
-                          <div className="text-xs text-muted-foreground truncate">{result.description}</div>
-                        </button>
-                      ))
-                    )}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setSearchOpen(true)}>
-                <Search className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-
-          {/* Smart Advisor CTA */}
+        {/* Left side (RTL end): Smart Advisor CTA (desktop) */}
+        <div className="hidden lg:flex items-center shrink-0 mr-auto">
           <Link
             to="/knowledge-center?tab=advisor"
-            className="ml-2 inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             <MessageCircle className="h-4 w-4" />
             יועץ חכם
           </Link>
         </div>
 
-        {/* Mobile: advisor CTA always visible + hamburger */}
-        <div className="flex items-center gap-2 lg:hidden">
+        {/* Mobile: advisor CTA + hamburger (left side) */}
+        <div className="flex items-center gap-2 lg:hidden mr-auto">
           <Link
             to="/knowledge-center?tab=advisor"
             className="inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground"
