@@ -70,8 +70,8 @@ const Index = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-background pt-4 md:pt-6">
-        <div className="relative w-full" style={{ maxHeight: "60vh" }}>
+      <section className="relative overflow-hidden bg-background">
+        <div className="relative w-full">
           <video
             src={heroVideo}
             autoPlay
@@ -80,7 +80,7 @@ const Index = () => {
             playsInline
             preload="metadata"
             aria-label="מרכז הידע והכלים למשפחות מטפלות בהורה מבוגר"
-            className="w-full h-auto block max-h-[60vh] object-cover"
+            className="w-full h-auto block"
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none h-1/3" />
           <div className="hidden md:flex absolute bottom-6 right-6 z-10 items-center gap-2">
