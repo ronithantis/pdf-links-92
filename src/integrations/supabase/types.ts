@@ -163,10 +163,12 @@ export type Database = {
           icon_name: string | null
           id: string
           is_published: boolean | null
+          presentation_category: string | null
           resource_type: string
           scenario_tags: string[] | null
           sort_order: number | null
           subcategory: string | null
+          tags: Json | null
           title: string
           updated_at: string | null
           url: string | null
@@ -178,10 +180,12 @@ export type Database = {
           icon_name?: string | null
           id?: string
           is_published?: boolean | null
+          presentation_category?: string | null
           resource_type?: string
           scenario_tags?: string[] | null
           sort_order?: number | null
           subcategory?: string | null
+          tags?: Json | null
           title: string
           updated_at?: string | null
           url?: string | null
@@ -193,10 +197,12 @@ export type Database = {
           icon_name?: string | null
           id?: string
           is_published?: boolean | null
+          presentation_category?: string | null
           resource_type?: string
           scenario_tags?: string[] | null
           sort_order?: number | null
           subcategory?: string | null
+          tags?: Json | null
           title?: string
           updated_at?: string | null
           url?: string | null
