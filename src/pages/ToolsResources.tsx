@@ -46,7 +46,7 @@ const featuredTools: FeaturedTool[] = [
     iconColor: "#3B6D11",
   },
   {
-    to: "/knowledge-center?tab=scenarios",
+    to: "/scenarios",
     title: "זיהוי תרחיש",
     description: "תארו מצב — קבלו המלצות מותאמות",
     cta: "בחרו מצב",
