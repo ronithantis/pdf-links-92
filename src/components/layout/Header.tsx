@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, type KeyboardEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Search, X, Shield, BookOpen, Layout, GraduationCap, Wrench, MessageCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -295,7 +295,7 @@ const Header = () => {
     </div>
   );
 
-  const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onSearchKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchResults.length > 0) {
       const top = searchResults[0];
       handleSelectResult(top.url, top.label);
