@@ -5,7 +5,7 @@
 import { digitalTools } from "@/lib/modules-data";
 
 const PRESENTATIONS_COUNT = 25;
-const GUIDES_COUNT = 5;
+const GUIDES_COUNT = 6;
 const FORMS_COUNT = 38;
 
 export const resourceCounts = {
