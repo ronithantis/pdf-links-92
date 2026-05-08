@@ -48,6 +48,10 @@ const SmartAdvisor = () => {
       const next = new URLSearchParams(searchParams);
       next.delete("q");
       setSearchParams(next, { replace: true });
+      // auto-submit so the user immediately sees the answer
+      setTimeout(() => {
+        handleSubmitWith(q);
+      }, 0);
     }
   }, [searchParams, setSearchParams]);
 
@@ -66,14 +70,14 @@ const SmartAdvisor = () => {
     return () => timers.forEach(clearTimeout);
   }, [loading]);
 
-  const handleSubmit = async () => {
-    if (!input.trim()) return;
+  const handleSubmitWith = async (text: string) => {
+    if (!text.trim()) return;
     setLoading(true);
     setResult(null);
 
     try {
       const { data, error } = await supabase.functions.invoke("smart-advisor", {
-        body: { message: input },
+        body: { message: text },
       });
 
       if (error) throw error;
@@ -89,6 +93,8 @@ const SmartAdvisor = () => {
       setLoading(false);
     }
   };
+
+  const handleSubmit = () => handleSubmitWith(input);
 
   return (
     <div className="space-y-6">
