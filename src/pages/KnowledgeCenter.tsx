@@ -1,109 +1,99 @@
-import { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
-import CategoryGrid from "@/components/knowledge/CategoryGrid";
-import ResourceList from "@/components/knowledge/ResourceList";
-import ScenarioExplorer from "@/components/knowledge/ScenarioExplorer";
-import SmartAdvisor from "@/components/knowledge/SmartAdvisor";
-import { useNavigate } from "react-router-dom";
-import { BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { BookOpen, ArrowLeft, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { modules } from "@/lib/modules-data";
 
 const KnowledgeCenter = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [counts, setCounts] = useState<Record<string, number>>({});
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState("");
 
-  // If ?scenario=ID is in URL, default to scenarios tab
-  // If ?tab=scenarios or ?tab=advisor, use that
-  const scenarioId = searchParams.get("scenario");
-  const tabParam = searchParams.get("tab");
-  const hideResources = tabParam === "scenarios" || tabParam === "advisor" || !!scenarioId;
-  const activeTab = useMemo(
-    () => (scenarioId ? "scenarios" : tabParam === "advisor" ? "advisor" : tabParam === "scenarios" ? "scenarios" : "resources"),
-    [scenarioId, tabParam]
-  );
-
-  const handleTabChange = (value: string) => {
-    const next = new URLSearchParams(searchParams);
-    if (value === "resources") {
-      next.delete("tab");
-      next.delete("scenario");
-    } else {
-      next.set("tab", value);
-      if (value !== "scenarios") next.delete("scenario");
-    }
-    setSearchParams(next, { replace: true });
-  };
-
+  // Backwards-compat: external links to ?tab=advisor / ?tab=scenarios / ?scenario=
+  // redirect to /tools-resources where those features now live.
   useEffect(() => {
-    const fetchCounts = async () => {
-      const { data } = await supabase
-        .from("knowledge_resources")
-        .select("category")
-        .eq("is_published", true);
-      if (data) {
-        const c: Record<string, number> = {};
-        data.forEach((r: any) => {
-          c[r.category] = (c[r.category] || 0) + 1;
-        });
-        setCounts(c);
-      }
-    };
-    fetchCounts();
-  }, []);
+    const tab = searchParams.get("tab");
+    const scenario = searchParams.get("scenario");
+    if (tab === "advisor" || tab === "scenarios" || scenario) {
+      const qs = searchParams.toString();
+      navigate(`/tools-resources${qs ? `?${qs}` : ""}`, { replace: true });
+    }
+  }, [searchParams, navigate]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return modules;
+    return modules.filter((m) => {
+      if (m.title.toLowerCase().includes(q)) return true;
+      if (m.description.toLowerCase().includes(q)) return true;
+      return m.subModules.some(
+        (s) => s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q)
+      );
+    });
+  }, [query]);
 
   return (
-    <div className="container py-10 space-y-10">
-      <div className="text-center space-y-3">
-        <h1 className="text-4xl font-bold">{hideResources ? "בואו נתחיל כאן מתיאור המצב" : "מרכז הידע"}</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          {hideResources ? "בחרו מתרחיש נפוץ או תארו תרחיש ליועץ החכם" : "מצגות, סרטונים, טפסים וכלים לליווי המשפחה המטפלת"}
+    <div className="container py-10 space-y-8">
+      <div className="text-center space-y-2">
+        <h1 className="text-4xl font-bold">מרכז הידע</h1>
+        <p className="text-base text-muted-foreground">
+          11 פרקי מידע מקיפים על טיפול בהורה מבוגר
         </p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={handleTabChange} dir="rtl">
-        <TabsList className={`w-full max-w-md mx-auto grid ${hideResources ? 'grid-cols-2' : 'grid-cols-3'}`}>
-          {!hideResources && <TabsTrigger value="resources">משאבים</TabsTrigger>}
-          <TabsTrigger value="scenarios">תרחישים</TabsTrigger>
-          <TabsTrigger value="advisor">יועץ חכם</TabsTrigger>
-        </TabsList>
+      <div className="max-w-md mx-auto relative">
+        <Search className="h-4 w-4 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="חיפוש בתוך הפרקים והנושאים..."
+          className="pr-9"
+        />
+      </div>
 
-        <div className="flex justify-center mt-3">
-          <Button
-            variant="outline"
-            size="sm"
-            className="gap-2"
-            onClick={() => navigate("/glossary")}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filtered.map((m) => (
+          <button
+            key={m.id}
+            onClick={() => navigate(`/module/${m.id}`)}
+            className="text-right bg-white border border-border/60 rounded-xl p-4 hover:shadow-md hover:border-primary/40 transition-all flex flex-col gap-2"
           >
-            <BookOpen className="h-4 w-4" />
-            מילון מושגים
-          </Button>
-        </div>
-
-        {!hideResources && (
-          <TabsContent value="resources" className="mt-8">
-            {selectedCategory ? (
-              <ResourceList category={selectedCategory} onBack={() => setSelectedCategory(null)} />
-            ) : (
-              <div className="space-y-8">
-                <CategoryGrid onSelect={setSelectedCategory} counts={counts} />
-                <ResourceList />
-              </div>
-            )}
-          </TabsContent>
+            <div className="flex items-center gap-2">
+              <span className="h-7 w-7 rounded-full bg-muted text-foreground/70 flex items-center justify-center text-xs font-semibold">
+                {m.partNumber}
+              </span>
+              <span className="text-xs text-muted-foreground">פרק {m.partNumber}</span>
+            </div>
+            <h3 className="text-sm font-medium leading-snug">{m.title}</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed flex-1">{m.description}</p>
+            <div className="text-xs text-muted-foreground/80 pt-1">
+              {m.subModules.length} נושאים ←
+            </div>
+          </button>
+        ))}
+        {filtered.length === 0 && (
+          <div className="col-span-full text-center text-sm text-muted-foreground py-8">
+            לא נמצאו פרקים תואמים לחיפוש
+          </div>
         )}
+      </div>
 
-        <TabsContent value="scenarios" className="mt-8">
-          <ScenarioExplorer initialScenarioId={scenarioId || undefined} />
-        </TabsContent>
-
-        <TabsContent value="advisor" className="mt-8">
-          <SmartAdvisor />
-        </TabsContent>
-      </Tabs>
+      <button
+        onClick={() => navigate("/glossary")}
+        className="w-full flex items-center justify-between gap-4 rounded-xl p-5 hover:shadow-md transition-all text-right border border-border/40"
+        style={{ backgroundColor: "#F1EFE8" }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-white/70 flex items-center justify-center">
+            <BookOpen className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold">מילון מושגים</div>
+            <div className="text-xs text-muted-foreground">הסבר מקצועי למונחים</div>
+          </div>
+        </div>
+        <ArrowLeft className="h-5 w-5 text-muted-foreground" />
+      </button>
     </div>
   );
 };
