@@ -153,7 +153,12 @@ const Index = () => {
             ))}
           </div>
           <button
-            onClick={() => setShowQuestionnaire(true)}
+            onClick={() => {
+              setShowQuestionnaire(true);
+              setTimeout(() => {
+                document.getElementById("needs-questionnaire")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 50);
+            }}
             className="mt-4 text-xs text-primary underline-offset-2 hover:underline"
           >
             או מלאו שאלון מיפוי צרכים מקיף ←
@@ -198,7 +203,7 @@ const Index = () => {
       </section>
 
       {showQuestionnaire && (
-        <section className="py-12 bg-background">
+        <section id="needs-questionnaire" className="py-12 bg-background scroll-mt-20">
           <div className="container">
             <h2 className="text-2xl font-bold text-center mb-2">שאלון מיפוי צרכים</h2>
             <p className="text-center text-muted-foreground mb-8 text-sm">
