@@ -169,7 +169,7 @@ const PresentationsHub = () => {
                           <button
                             type="button"
                             onClick={() => handleResourceClick(r)}
-                            className="w-full text-right rounded-md px-2 py-1.5 text-xs hover:bg-accent transition-colors"
+                            className="w-full text-right rounded-md px-2 py-1.5 text-xs hover:bg-primary/10 transition-colors"
                           >
                             <div className="font-medium text-foreground line-clamp-1">{r.title}</div>
                             {r.description && (
