@@ -47,6 +47,8 @@
     --warm-foreground: 0 0% 100%;
     --success: 152 55% 40%;
     --success-foreground: 0 0% 100%;
+
+    --brand-navy: 210 50% 23%;
   }
 
   .dark {
@@ -91,6 +93,8 @@
     --warm-foreground: 0 0% 100%;
     --success: 152 50% 35%;
     --success-foreground: 0 0% 100%;
+
+    --brand-navy: 210 50% 70%;
   }
 }
 
