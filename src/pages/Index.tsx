@@ -188,7 +188,16 @@ const Index = () => {
             );
             if (c.action === "questionnaire") {
               return (
-                <button key={c.title} onClick={() => setShowQuestionnaire(true)} className="text-right">
+                <button
+                  key={c.title}
+                  onClick={() => {
+                    setShowQuestionnaire(true);
+                    setTimeout(() => {
+                      document.getElementById("needs-questionnaire")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 50);
+                  }}
+                  className="text-right"
+                >
                   {inner}
                 </button>
               );
