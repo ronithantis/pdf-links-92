@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { modules } from "@/lib/modules-data";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 import { Module1Content } from "@/components/module-content/Module1Content";
 import { Module2Content } from "@/components/module-content/Module2Content";
 import { Module3Content } from "@/components/module-content/Module3Content";
@@ -53,10 +53,6 @@ const ModulePage = () => {
   return (
     <div className="container py-10">
       <div className="mb-6">
-        <Link to="/" className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1 mb-4">
-          <ArrowRight className="h-4 w-4" />
-          חזרה לדף הבית
-        </Link>
         <div className="text-sm text-muted-foreground mb-2">פרק {mod.partNumber}: {mod.partTitle}</div>
         <h1 className="text-3xl font-bold mb-2">{mod.title}</h1>
         <p className="text-lg text-muted-foreground">{mod.description}</p>

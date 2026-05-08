@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ResourceCard from "./ResourceCard";
 import { openPresentation, shouldOpenInModal } from "@/components/PresentationModal";
 
@@ -37,6 +37,19 @@ const SmartAdvisor = () => {
   const [result, setResult] = useState<AdvisorResult | null>(null);
   const [progressMsg, setProgressMsg] = useState<string>("");
   const { toast } = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Prefill from ?q= (e.g. coming from the global advisor search bar)
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q && q.trim()) {
+      setInput(q);
+      // remove ?q= so it isn't reused on remount
+      const next = new URLSearchParams(searchParams);
+      next.delete("q");
+      setSearchParams(next, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     if (!loading) {

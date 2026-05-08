@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap, Wrench } from "lucide-react";
+import { Menu, Search, X, Shield, BookOpen, Layout, GraduationCap, Wrench, MessageCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -22,6 +22,14 @@ const parts = [
   { number: 9, title: "חלופות מגורים ואשפוז", modules: modules.filter((m) => m.partNumber === 9) },
   { number: 10, title: "רווחת המטפל", modules: modules.filter((m) => m.partNumber === 10) },
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
+];
+
+const navItems: { label: string; to: string }[] = [
+  { label: "בית", to: "/" },
+  { label: "מרכז הידע", to: "/knowledge-center" },
+  { label: "כלים ומשאבים", to: "/tools-resources" },
+  { label: "שירותים וקהילה", to: "/services-community" },
+  { label: "צור קשר", to: "/contact" },
 ];
 
 type SearchSource = "page" | "module" | "glossary" | "tool";
@@ -239,8 +247,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background">
-      {/* Row 1: Logo + Quick Links */}
-      <div className="container flex h-14 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3">
           <img src={logo} alt="HUB2CARE" className="h-9 w-9 object-contain" />
           <div className="flex flex-col">
@@ -249,8 +256,29 @@ const Header = () => {
           </div>
         </Link>
 
+        {/* Desktop nav */}
         <div className="hidden lg:flex items-center gap-1">
-          {/* Quick Search */}
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+
+          {isAdmin && (
+            <Link
+              to="/admin/knowledge"
+              className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1"
+            >
+              <Shield className="h-3.5 w-3.5" />
+              ניהול
+            </Link>
+          )}
+
+          {/* Global search (kept) */}
           <div ref={searchRef} className="relative">
             {searchOpen ? (
               <div className="flex items-center gap-1">
@@ -333,47 +361,27 @@ const Header = () => {
               </Button>
             )}
           </div>
-          
-          <Link to="/rights" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            זכויות וחובות
+
+          {/* Smart Advisor CTA */}
+          <Link
+            to="/knowledge-center?tab=advisor"
+            className="ml-2 inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <MessageCircle className="h-4 w-4" />
+            יועץ חכם
           </Link>
-          <Link to="/knowledge-center" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            מרכז הידע
-          </Link>
-          <Link to="/give-take" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            קח ותן
-          </Link>
-          <Link to="/ad-elai" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            שירותים וציוד
-          </Link>
-          <Link to="/organizations" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            סיוע מעמותות
-          </Link>
-          <Link to="/tools" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            כלים דיגיטליים
-          </Link>
-          <Link to="/cognitive-training" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            תרגול קוגניטיבי
-          </Link>
-          <Link to="/foreign-worker-search" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            חיפוש עובד זר
-          </Link>
-          <Link to="/about" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            אודות
-          </Link>
-          <Link to="/contact" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            צור קשר
-          </Link>
-          {isAdmin && (
-            <Link to="/admin/knowledge" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
-              <Shield className="h-3.5 w-3.5" />
-              ניהול
-            </Link>
-          )}
         </div>
 
-        {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        {/* Mobile: advisor CTA always visible + hamburger */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            to="/knowledge-center?tab=advisor"
+            className="inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground"
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
+            יועץ חכם
+          </Link>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="lg:hidden">
             <Button variant="ghost" size="icon" aria-label="תפריט ניווט">
               <Menu className="h-6 w-6" />
@@ -382,90 +390,61 @@ const Header = () => {
           <SheetContent side="right" className="w-80 overflow-y-auto">
             <SheetTitle className="text-lg font-bold text-primary mb-4">תפריט ניווט</SheetTitle>
             <nav className="flex flex-col gap-4">
-              <Link to="/" onClick={() => setIsOpen(false)} className="text-base font-semibold text-primary">
-                דף הבית
-              </Link>
-              {parts.map((part) => (
-                <div key={part.number}>
-                  <h3 className="text-sm font-bold text-muted-foreground mb-2">פרק {part.number}: {part.title}</h3>
-                  {part.modules.map((mod) => (
-                    <Link
-                      key={mod.id}
-                      to={`/module/${mod.id}`}
-                      onClick={() => setIsOpen(false)}
-                      className="block py-2 px-3 text-sm hover:bg-muted rounded-md transition-colors"
-                    >
-                      {mod.title}
-                    </Link>
-                  ))}
-                </div>
-              ))}
-              <div className="border-t pt-3 space-y-1">
-                <Link to="/rights" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  זכויות וחובות
-                </Link>
-                <Link to="/knowledge-center" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  מרכז הידע
-                </Link>
-                <Link to="/give-take" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  קח ותן
-                </Link>
-                <Link to="/ad-elai" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  שירותים וציוד
-                </Link>
-                <Link to="/organizations" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  סיוע מעמותות
-                </Link>
-                <Link to="/tools" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  כלים דיגיטליים
-                </Link>
-                <Link to="/cognitive-training" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  תרגול קוגניטיבי
-                </Link>
-                <Link to="/foreign-worker-search" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  חיפוש עובד זר
-                </Link>
-                <Link to="/about" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
+              <div className="space-y-1">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  to="/about"
+                  onClick={() => setIsOpen(false)}
+                  className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md"
+                >
                   אודות
                 </Link>
-                <Link to="/contact" onClick={() => setIsOpen(false)} className="block text-sm font-medium py-2 px-3 hover:bg-muted rounded-md">
-                  צור קשר
-                </Link>
                 {isAdmin && (
-                  <Link to="/admin/knowledge" onClick={() => setIsOpen(false)} className="flex items-center gap-1 text-sm font-medium py-2 px-3 hover:bg-muted rounded-md text-primary">
+                  <Link
+                    to="/admin/knowledge"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-1 text-sm font-medium py-2 px-3 hover:bg-muted rounded-md text-primary"
+                  >
                     <Shield className="h-3.5 w-3.5" />
                     ניהול
                   </Link>
                 )}
               </div>
+              <div className="border-t pt-3">
+                <h3 className="text-xs font-bold text-muted-foreground mb-2 px-3">פרקי לימוד</h3>
+                {parts.map((part) => (
+                  <div key={part.number} className="mb-2">
+                    <h4 className="text-xs font-semibold text-muted-foreground mb-1 px-3">
+                      {part.number}. {part.title}
+                    </h4>
+                    {part.modules.map((mod) => (
+                      <Link
+                        key={mod.id}
+                        to={`/module/${mod.id}`}
+                        onClick={() => setIsOpen(false)}
+                        className="block py-1.5 px-5 text-xs hover:bg-muted rounded-md transition-colors"
+                      >
+                        {mod.title}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </nav>
           </SheetContent>
-        </Sheet>
-      </div>
-
-      {/* Row 2: Chapters Navigation (Desktop only) */}
-      <div className="hidden lg:block border-t border-border/50 bg-muted/30">
-        <div className="container py-1">
-          <nav className="flex flex-wrap items-center gap-0.5">
-            {parts.map((part) => {
-              const firstModule = part.modules[0];
-              if (!firstModule) return null;
-              return (
-                <Link
-                  key={part.number}
-                  to={`/module/${firstModule.id}`}
-                  className="flex items-center gap-1 text-xs font-medium h-7 px-1.5 rounded-md hover:bg-accent/20 transition-colors"
-                >
-                  <span className="w-4.5 h-4.5 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold min-w-[18px]">
-                    {part.number}
-                  </span>
-                  <span className="whitespace-nowrap">{part.title}</span>
-                </Link>
-              );
-            })}
-          </nav>
+          </Sheet>
         </div>
       </div>
+
     </header>
   );
 };

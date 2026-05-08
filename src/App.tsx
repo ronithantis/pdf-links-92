@@ -30,6 +30,8 @@ import TermsOfUsePage from "./pages/TermsOfUsePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 import GlossaryPage from "./pages/GlossaryPage";
+import ToolsResources from "./pages/ToolsResources";
+import ServicesCommunity from "./pages/ServicesCommunity";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/module/:moduleId" element={<ModulePage />} />
             
             <Route path="/tools" element={<DigitalTools />} />
+            <Route path="/tools-resources" element={<ToolsResources />} />
+            <Route path="/services-community" element={<ServicesCommunity />} />
             <Route path="/knowledge-center" element={<KnowledgeCenter />} />
             <Route path="/foreign-worker-search" element={<ForeignWorkerSearch />} />
             <Route path="/cognitive-training" element={<CognitiveTraining />} />
