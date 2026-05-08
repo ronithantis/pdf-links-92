@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, Search, X, Shield, BookOpen, FileText, Layout, GraduationCap, Wrench } from "lucide-react";
+import { Menu, Search, X, Shield, BookOpen, Layout, GraduationCap, Wrench, MessageCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -22,6 +22,14 @@ const parts = [
   { number: 9, title: "חלופות מגורים ואשפוז", modules: modules.filter((m) => m.partNumber === 9) },
   { number: 10, title: "רווחת המטפל", modules: modules.filter((m) => m.partNumber === 10) },
   { number: 11, title: "סוף החיים", modules: modules.filter((m) => m.partNumber === 11) },
+];
+
+const navItems: { label: string; to: string }[] = [
+  { label: "בית", to: "/" },
+  { label: "מרכז הידע", to: "/knowledge-center" },
+  { label: "כלים ומשאבים", to: "/tools-resources" },
+  { label: "שירותים וקהילה", to: "/services-community" },
+  { label: "צור קשר", to: "/contact" },
 ];
 
 type SearchSource = "page" | "module" | "glossary" | "tool";
