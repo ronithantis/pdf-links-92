@@ -73,7 +73,7 @@ const DigitalTools = () => {
 
       <div className="space-y-12 max-w-5xl">
         {digitalToolCategories.map((cat) => {
-          const toolsInCat = digitalTools.filter((t) => (t as any).category === cat.id);
+          const toolsInCat = digitalTools.filter((t) => (t as any).category === cat.id && !(t as any).hidden);
           if (toolsInCat.length === 0) return null;
           return (
             <section key={cat.id} id={`category-${cat.id}`}>
