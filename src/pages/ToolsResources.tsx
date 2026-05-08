@@ -86,8 +86,8 @@ interface LibraryCard {
 
 const libraryCards: LibraryCard[] = [
   { to: "/forms", title: "טפסים", description: "טפסים ומסמכים להורדה", count: resourceCounts.forms, Icon: IconFileText },
-  { to: "/knowledge-center?tab=resources", title: "מצגות", description: "מצגות מקצועיות על כל הנושאים", count: resourceCounts.presentations, Icon: IconPresentation },
-  { to: "/knowledge-center?tab=resources", title: "מדריכים", description: "מדריכים יישומיים למטפלים", count: resourceCounts.guides, Icon: IconBook2 },
+  { to: "/resources/presentations", title: "מצגות", description: "מצגות מקצועיות על כל הנושאים", count: resourceCounts.presentations, Icon: IconPresentation },
+  { to: "/resources/videos", title: "מדריכים", description: "מדריכים יישומיים למטפלים", count: resourceCounts.guides, Icon: IconBook2 },
 ];
 
 const ToolsResources = () => {
