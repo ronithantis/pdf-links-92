@@ -70,7 +70,7 @@ const Index = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-background">
+      <section className="relative overflow-hidden bg-background pt-4 md:pt-6">
         <div className="relative w-full" style={{ maxHeight: "60vh" }}>
           <video
             src={heroVideo}
