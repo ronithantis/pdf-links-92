@@ -159,7 +159,7 @@ const RightsView = () => (
         <InfoCard icon={<DollarSign className="h-5 w-5 text-amber-500" />} title="איתור כספים: 'הר הכסף' ו'הר הביטוח'" description="אתרי משרד האוצר לאיתור חשבונות בנק, קופות גמל, קרנות השתלמות ופוליסות ביטוח של הנפטר." footer="הגוף המעניק: משרד האוצר — שירות חינמי" />
       </div>
 
-      <ToolLink title="הוצאת תו נכה לקשיש לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב — תנאי זכאות, מסמכים נדרשים והגשת בקשה לתו חניה לנכה" linkText="← למדריך הוצאת תו נכה" to="/tools#disability-tag-guide" />
+      <ToolLink title="הוצאת תו נכה לקשיש לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב — תנאי זכאות, מסמכים נדרשים והגשת בקשה לתו חניה לנכה" linkText="← למדריך הוצאת תו נכה" to="https://ronithantis.github.io/tav-neche/" />
 
       <SubSection title="ד. זכויות בריאות בגיל השלישי" />
       <CheckList items={[
@@ -314,7 +314,7 @@ const RightsView = () => (
         <InfoCard title='נקודות זיכוי מס' description='עובד המטפל בהורה עם מוגבלות חמורה — עשוי להיות זכאי לנקודות זיכוי נוספות. יש לבדוק עם רו"ח.' />
       </div>
 
-      <ToolLink title="הוצאת תו נכה להורה לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור הורה מוגבל בניידות — תנאי זכאות, מסמכים והגשת בקשה" linkText="← למדריך הוצאת תו נכה" to="/tools#disability-tag-guide" />
+      <ToolLink title="הוצאת תו נכה להורה לא נייד" description="מדריך אינטראקטיבי שלב אחר שלב להוצאת תו חניה לנכה עבור הורה מוגבל בניידות — תנאי זכאות, מסמכים והגשת בקשה" linkText="← למדריך הוצאת תו נכה" to="https://ronithantis.github.io/tav-neche/" />
 
       <SubSection title="ג. שירותי תמיכה ומידע" />
       <ContactGrid contacts={[
