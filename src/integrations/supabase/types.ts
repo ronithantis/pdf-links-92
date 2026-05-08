@@ -203,6 +203,33 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          created_at: string
+          has_premium: boolean
+          id: string
+          premium_purchased_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          has_premium?: boolean
+          id: string
+          premium_purchased_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          has_premium?: boolean
+          id?: string
+          premium_purchased_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       scenarios: {
         Row: {
           actions_24h: Json | null
