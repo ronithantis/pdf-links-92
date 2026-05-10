@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-const COOKIE_NAME = 'hub2care_terms_v2';
+const COOKIE_NAME = 'hub2care_terms_v3';
 
 function getCookie(name: string): boolean {
   return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
@@ -74,21 +74,25 @@ export default function ConsentModal() {
           style={{ animation: 'consent-slideUp 0.35s ease' }}
         >
           <div className="text-xl font-bold text-foreground mb-3">
-            לפני שממשיכים — חשוב לדעת
+            לפני שממשיכים – חשוב לדעת
           </div>
 
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="max-h-40 overflow-y-auto border border-border rounded-lg p-4 text-sm text-muted-foreground leading-7 mb-2.5"
+            className="max-h-52 overflow-y-auto border border-border rounded-lg p-4 text-sm text-muted-foreground leading-7 mb-2.5"
           >
-            <strong className="text-foreground">hub2care מספקת מידע וכלים דיגיטליים לצרכי למידה ושימוש עצמי בלבד.</strong>
+            <strong className="text-foreground">hub2care מספקת מידע, תכנים וכלים דיגיטליים לצורכי למידה, הכוונה כללית ושימוש עצמי בלבד.</strong>
             <br /><br />
-            חלק מהתכנים נוצרו בסיוע טכנולוגיות AI — המידע נועד להכוונה כללית ואינו מחליף ייעוץ מקצועי. השימוש במידע הוא על אחריות המשתמש/ת.
+            חלק מהתכנים והשירותים באתר נוצרו או פועלים בסיוע טכנולוגיות בינה מלאכותית (AI). מידע זה עשוי לכלול אי-דיוקים, השמטות או להיות בלתי מותאם לנסיבות האישיות של כל משתמש/ת, ולכן <strong className="text-foreground">אינו מהווה תחליף לייעוץ משפטי, רפואי, סיעודי, פיננסי, ביטוחי, חשבונאי או מקצועי אחר</strong>.
             <br /><br />
-            כל מסמך שמופק דרך האתר — לרבות צוואה, ייפוי כוח, הסכם — הוא <strong className="text-foreground">טיוטה לצרכי מידע בלבד</strong> ואינו מחייב משפטית ללא בדיקת עורך/ת דין.
+            כל מסמך, טיוטה, תבנית, חישוב, סימולציה, שאלון, הכוונה או תוצר אחר המופק באמצעות האתר — לרבות צוואה, תיעוד רצונות, ייפוי כוח, מחשבונים, מדריכים או כלים להגשת תביעה — נועדו לצורכי מידע, הכנה והתרשמות בלבד, ואינם מהווים מסמך מחייב, ייעוץ מקצועי או תחליף לבדיקה פרטנית של איש מקצוע מוסמך.
             <br /><br />
-            האתר היא פלטפורמה בלבד לחיבור בין משתמשים ונותני שירות. המפעיל <strong className="text-foreground">אינו צד</strong> לשום עסקה בין משתמשים ואינו אחראי לאיכות גורמים שנמצאו דרך האתר.
+            האתר משמש כ<strong className="text-foreground">פלטפורמה טכנולוגית בלבד</strong>. מפעיל האתר אינו צד לכל עסקה, התקשרות או הסכמה בין משתמשים לבין נותני שירות, ואינו אחראי לטיב השירותים, לאיכותם, לזמינותם או לתוצאותיהם.
+            <br /><br />
+            האתר משתמש גם בקובצי Cookies ובטכנולוגיות דומות לצורך תפעול תקין, אבטחה, שמירת העדפות, מדידה ושיפור חוויית השימוש, כמפורט במדיניות הפרטיות.
+            <br /><br />
+            סימון התיבה מהווה אישור לכך שקראת, הבנת והסכמת לתנאי השימוש ולמדיניות הפרטיות של hub2care.
           </div>
 
           {showHint && (
@@ -111,11 +115,11 @@ export default function ConsentModal() {
               onChange={e => setChecked(e.target.checked)}
             />
             <label htmlFor="consent-cb" className="text-sm leading-relaxed cursor-pointer text-foreground">
-              סימון תיבה זו מהווה הסכמה ל
+              אני מאשר/ת כי קראתי והבנתי את{' '}
               <Link to="/terms" target="_blank" className="text-primary underline">תנאי השימוש</Link>
-              {' '}ול
+              {' '}ואת{' '}
               <Link to="/privacy" target="_blank" className="text-primary underline">מדיניות הפרטיות</Link>
-              {' '}של hub2care.
+              {' '}של hub2care, וכי ידוע לי שהאתר מספק מידע, תכנים וכלים דיגיטליים לצורכי למידה, הכוונה כללית ושימוש עצמי בלבד.
             </label>
           </div>
 
