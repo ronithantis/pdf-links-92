@@ -102,7 +102,9 @@ export default function ConsentModal() {
           )}
 
           {!showHint && (
-            <p className="text-sm text-muted-foreground mb-2.5">☝️ אשר/י שקראת והבנת את התנאים:</p>
+            <p className="text-sm text-muted-foreground mb-2.5">
+              אני מאשר/ת כי קראתי והבנתי את תנאי השימוש ואת מדיניות הפרטיות של hub2care, וכי ידוע לי שהאתר מספק מידע, תכנים וכלים דיגיטליים לצורכי למידה, הכוונה כללית ושימוש עצמי בלבד.
+            </p>
           )}
 
           <div className="flex items-start gap-3 mb-4">
