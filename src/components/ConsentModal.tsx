@@ -74,7 +74,7 @@ export default function ConsentModal() {
           style={{ animation: 'consent-slideUp 0.35s ease' }}
         >
           <div className="text-xl font-bold text-foreground mb-3">
-            לפני שממשיכים - חשוב לדעת
+            חשוב לדעת: לפני שממשיכים - חשוב לדעת
           </div>
 
           <div
