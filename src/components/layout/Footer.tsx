@@ -22,13 +22,15 @@ const Footer = () => {
               <li><Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">צור קשר</Link></li>
               <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">תנאי שימוש</Link></li>
               <li><Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">מדיניות פרטיות</Link></li>
+              <li><Link to="/accessibility-statement" className="text-muted-foreground hover:text-primary transition-colors">הצהרת נגישות</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-3">נגישות</h4>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              אתר זה עומד בתקן WCAG 2.1 AA. אם נתקלתם בבעיית נגישות, אנא{" "}
-              <Link to="/contact" className="text-primary hover:underline">צרו קשר</Link>.
+              האתר נמצא בתהליך התאמה לתקן ישראלי 5568 (WCAG 2.0 AA). לפרטים מלאים ראו{" "}
+              <Link to="/accessibility-statement" className="text-primary hover:underline">הצהרת נגישות</Link>{" "}
+              או <Link to="/contact" className="text-primary hover:underline">צרו קשר</Link>.
             </p>
           </div>
         </div>
