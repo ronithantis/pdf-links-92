@@ -28,6 +28,7 @@ import FormsPage from "./pages/FormsPage";
 import Rights from "./pages/Rights";
 import TermsOfUsePage from "./pages/TermsOfUsePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import AccessibilityStatement from "./pages/AccessibilityStatement";
 
 import GlossaryPage from "./pages/GlossaryPage";
 import ToolsResources from "./pages/ToolsResources";
@@ -75,6 +76,7 @@ const App = () => (
             <Route path="/rights" element={<Rights />} />
             <Route path="/terms" element={<TermsOfUsePage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
             
             <Route path="/glossary" element={<GlossaryPage />} />
             <Route path="/scenarios" element={<Scenarios />} />

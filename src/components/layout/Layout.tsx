@@ -18,6 +18,7 @@ const Layout = ({ children }: LayoutProps) => {
   const hideAdvisorBar = pathname === "/" || pathname.startsWith("/auth");
   return (
     <div className="min-h-screen flex flex-col" dir="rtl">
+      <a href="#main-content" className="skip-to-content">דלג לתוכן הראשי</a>
       <Header />
       <Breadcrumbs />
       {!hideAdvisorBar && (
@@ -27,7 +28,7 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         </div>
       )}
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1" tabIndex={-1}>{children}</main>
       <Footer />
       <AccessibilityMenu />
       <ConsentModal />
